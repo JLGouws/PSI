@@ -1,0 +1,203 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\AtBeginDocument{\hypersetup{pdfborder={0 0 0}}}
+
+\title{
+\textsc{Topic 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item 
+        The bead has velocity in the $\hat\phi$ direction of $\rho\omega$, leading to a kinetic energy term: $\frac{1}{2} m \omega^2 \rho^2$.
+        In the $\hat\rho$ direction, the velocity is simply $\dot\rho$, leading to a kinetc eneregy term: $\frac{1}{2} m \dot\rho^2$.
+        In the $z$ direction, the velocity is $\dot z$, but since the bead is constrained to the piece of wire, this velocity can be determined in terms of $\rho$.
+        Using the constraint equation results in:
+        \begin{align*}
+          \frac{dz}{dt} &= D_t\left[\alpha \rho^2 \right]\\
+                        &= 2 \alpha \rho D_t\left[\rho \right]\\
+                        &= 2 \alpha \rho \dot\rho \\
+                        &\Rightarrow T_z = \frac{1}{2} m 4 \alpha^2 \rho^2 \dot \rho^2
+        \end{align*}
+
+        If we choose $z=0$ as the point of zero potential, then:
+        \begin{equation*}
+          V = m g h = m g \alpha \rho^2
+        \end{equation*}
+
+        Combining this gives the Lagrangian of the system:
+        \begin{align*}
+          L &= T - V\\
+            &= \frac{1}{2} m \dot\rho^2 + \frac{1}{2} m \omega^2 \rho^2 + \frac{1}{2m}4 \alpha^2 \rho^2 \dot \rho^2 - mg \alpha \rho^2\\
+            &= \frac{1}{2} m \left(\left[1 + 4 \alpha^2 \rho^2\right]\dot\rho^2 + \rho^2\omega^2\right) - mg\alpha\rho^2
+        \end{align*}
+        This is a simplistic derivation that might run into problems with more complicated systems and coordinates.
+      \item
+        In this case the conserved charge is, since there is no explicit $z$ dependence and $\omega$ is constant:
+        \begin{align*}
+          Q_s &= \dot q^ip_i - L\\
+              &= \dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho - L \\
+              &= \frac{1}{2}\dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho - \frac{1}{2} m\omega \rho^2 \omega + m g \alpha \rho^2 \\
+              &= \frac{1}{2}\dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho + \frac{1}{2} m\omega \rho^2 \left(2 g \alpha - \omega^2\right) \\
+              &= \frac{1}{2}\dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho + \frac{1}{2} m\omega \rho^2\left(\omega_0^2  - \omega^2\right) \\
+              &= \frac{1}{2}\dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho + U_{\text{eff}}
+        \end{align*}
+        With $\omega_0 = \sqrt{2 g \alpha}$.
+      \item
+        \begin{center}
+          \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = center,
+                xlabel = \(\omega\),
+                ylabel = {\(U_\text{eff}\)},
+                ymax=4,
+                yticklabels={,,},
+                xticklabels={,,},
+                ticks=none,
+            ]
+            %Below the red parabola is defined
+            \addplot [
+                domain=-2.5:2.5, 
+                samples=100, 
+                color=red,
+            ]
+            {2 - x^2};
+    %         \addlegendentry{$U_\text{eff}$}
+            %Here the blue parabola is defined
+            \end{axis}
+          \end{tikzpicture}
+        \end{center}
+        
+        Intuitively:
+        \begin{itemize}
+          \item
+            when $\omega > \omega_0$ the bead will move upwards
+          \item
+            when $\omega = \omega_0$ the bead will stay still vertically
+          \item
+            when $\omega < \omega_0$ the bead will move down the wire
+        \end{itemize} 
+        \begin{enumerate}
+
+          \item
+            In this case
+          \item
+          \item
+        \end{enumerate}
+      \item
+        The energy is not conserved here as the motor is giving energy input into the system.
+        Thus we do not expect a conseved energy-like quantity to have the form of the total energy.
+        Mathematically they are not equivalent becuase the kinetic term is not a simple quadratic in the velocities.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        And the time it takes to traverse the wire is:
+        \begin{equation*}
+          T[y(x)] = \int_{y_A}^{y_B} (\dot y)^{-1} dy
+        \end{equation*}
+        $\dot y$ can be determined from the conservation of energy.
+        Along the bead's path, the conservation of the bead's energy constrains $\dot y$, $\dot x$ and $y$ so that:
+        \begin{equation*}
+          E = \frac{1}{2} m (\dot x^2 + \dot y^2) + m g y
+        \end{equation*}
+        Rerranging this:
+        \begin{align*}
+          \dot y^2 &= 2gy + \dot x^2 - \frac{2E}{m}\\
+                   &= 2gy + (x'\dot y)^2 - \frac{2E}{m}\\
+                   &= \frac{2gy + \frac{2E}{m}}{1 - x'^2}\\
+        \end{align*}
+        Substituting this into the time functional makes the $y$ dependence explicit:
+        \begin{equation*}
+          T[y(x)] = \int_{y_A}^{y_B} \frac{\sqrt{1 - x'^2}}{\sqrt{2gy}} dy
+        \end{equation*}
+      \item
+        In out time actional, there is an equivalent of a Lagragian:
+        \begin{equation*}
+          L(x, x', y) = \frac{\sqrt{1 - x'^2}}{\sqrt{2gy}}
+        \end{equation*}
+        $x$ is cyclical here, which implies that:
+        \begin{equation*}
+          \frac{\partial L}{\partial x'} = - \frac{2 x'}{2\sqrt{2gy(1 - x'^2)}}
+        \end{equation*}
+        Which gives:
+        \begin{equation*}
+          0 = \frac{d}{dy}\frac{\partial L}{\partial x'} = - \frac{4 x'gy(1 - x'^2)}{2\sqrt{2gy(1 - x'^2)}}
+        \end{equation*}
+        
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        Consider a variation of the form:
+        \begin{equation*}
+          q(t) \leadsto q(t) + \epsilon \tilde{\delta}^f_s q(t) = q(t) + \epsilon f(t) \tilde{\delta}_s q(t)
+        \end{equation*}
+        with $f(t_0) = f(t_1) = 0$.
+        Now the velocity varies as:
+        \begin{equation*}
+          \dot q(t) \leadsto \dot q(t) + \epsilon \tilde{\delta}^f_s \dot q(t) 
+        \end{equation*}
+        With:
+        \begin{equation*}
+          \dot\tilde{\delta}^f_s q(t) = \dot f \tilde{\delta}_s q + f(t) \tilde{\delta}_s q
+        \end{equation*}
+        The variation in the Lagrangian now is:
+        \begin{align*}
+          \tilde{\delta}_s^f L &= \frac{\partial L}{\partial q^i} \tilde{\delta}_s^fq^i + \frac{\partial L}{\partial \dot q^i} \tilde{\delta}_s^f\dot q^i\\
+                               &= \frac{\partial L}{\partial q^i} f(t)\tilde{\delta}_sq^i + \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i + \frac{\partial L}{\partial \dot q^i} f(t) \frac{d}{dt}{\delta}_s q^i\\
+                               &= \left[\frac{\partial L}{\partial q^i} + \frac{d}{dt}\left(\frac{\partial L}{\partial \dot q^i} f(t)\right)\right] \tilde{\delta}_s q^i + \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i
+        \end{align*}
+        The Euler-Lagrange equations are evident in the first bracket and $f(t)$ is constant under variations of trajectories; therefore, this term will fall to zero for the physical trajectory.
+        The second term is the only term left in the action's variation:
+        \begin{equation*}
+          \tilde{delta}_s^f S = \int_{t_0}
+        \end{equation*}
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
