@@ -26,10 +26,26 @@
 %\addbibresource{references.bib}
 
 
-\AtBeginDocument{\hypersetup{pdfborder={0 0 0}}}
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
 
 \title{
-\textsc{Topic 1}
+\textsc{CM Homework 1}
 }
 \author{\textsc{J L Gouws}
 }
@@ -72,106 +88,242 @@
         Combining this gives the Lagrangian of the system:
         \begin{align*}
           L &= T - V\\
-            &= \frac{1}{2} m \dot\rho^2 + \frac{1}{2} m \omega^2 \rho^2 + \frac{1}{2m}4 \alpha^2 \rho^2 \dot \rho^2 - mg \alpha \rho^2\\
+            &= \frac{1}{2} m \dot\rho^2 + \frac{1}{2} m \omega^2 \rho^2 + \frac{1}{2}m4 \alpha^2 \rho^2 \dot \rho^2 - mg \alpha \rho^2\\
             &= \frac{1}{2} m \left(\left[1 + 4 \alpha^2 \rho^2\right]\dot\rho^2 + \rho^2\omega^2\right) - mg\alpha\rho^2
         \end{align*}
         This is a simplistic derivation that might run into problems with more complicated systems and coordinates.
+        A better approach would be to do it interms of rectangular coordiates(the basis vectors are fixed throughout space) and have a constraint equation with a Lagrange multiplier, and doing a change of coordinates.
       \item
-        In this case the conserved charge is, since there is no explicit $z$ dependence and $\omega$ is constant:
+        This Lagrangian has no explicit time dependence, and so there will be a conserved quantity that is ``canonically conjugate'' to time, which is just the generalized energy:
         \begin{align*}
           Q_s &= \dot q^ip_i - L\\
               &= \dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho - L \\
-              &= \frac{1}{2}\dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho - \frac{1}{2} m\omega \rho^2 \omega + m g \alpha \rho^2 \\
-              &= \frac{1}{2}\dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho + \frac{1}{2} m\omega \rho^2 \left(2 g \alpha - \omega^2\right) \\
-              &= \frac{1}{2}\dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho + \frac{1}{2} m\omega \rho^2\left(\omega_0^2  - \omega^2\right) \\
-              &= \frac{1}{2}\dot\rho m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho + U_{\text{eff}}
+              &= \frac{1}{2} m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho^2 - \frac{1}{2} m\omega \rho^2 \omega + m g \alpha \rho^2 \\
+              &= \frac{1}{2} m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho^2 + \frac{1}{2} m\omega \rho^2 \left(2 g \alpha - \omega^2\right) \\
+              &= \frac{1}{2} m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho^2 + \frac{1}{2} m\omega \rho^2\left(\omega_0^2  - \omega^2\right) \\
+              &= \frac{1}{2} m \left(1 + 4 \alpha^2 \rho^2\right)\dot\rho^2 + U_{\text{eff}}
         \end{align*}
         With $\omega_0 = \sqrt{2 g \alpha}$.
-      \item
-        \begin{center}
-          \begin{tikzpicture}
-            \begin{axis}[
-                axis lines = center,
-                xlabel = \(\omega\),
-                ylabel = {\(U_\text{eff}\)},
-                ymax=4,
-                yticklabels={,,},
-                xticklabels={,,},
-                ticks=none,
-            ]
-            %Below the red parabola is defined
-            \addplot [
-                domain=-2.5:2.5, 
-                samples=100, 
-                color=red,
-            ]
-            {2 - x^2};
-    %         \addlegendentry{$U_\text{eff}$}
-            %Here the blue parabola is defined
-            \end{axis}
-          \end{tikzpicture}
-        \end{center}
+      \item 
+%        $\quad$\\
+%        \begin{center}
+%          \begin{tikzpicture}
+%            \begin{axis}[
+%                axis lines = center,
+%                xlabel = \(\omega\),
+%                ylabel = {\(U_\text{eff}\)},
+%                ymax=4,
+%                yticklabels={,,},
+%                xticklabels={,,},
+%                ticks=none,
+%            ]
+%            %Below the red parabola is defined
+%            \addplot [
+%                domain=-2.5:2.5, 
+%                samples=100, 
+%                color=red,
+%            ]
+%            {2 - x^2};
+%    %         \addlegendentry{$U_\text{eff}$}
+%            %Here the blue parabola is defined
+%            \end{axis}
+%          \end{tikzpicture}
+%          \begin{tikzpicture}
+%            \begin{axis}[
+%                    xlabel = \(\rho\),
+%                    ylabel = {\(\omega\)},
+%                    zlabel = {\(U_\text{eff}\)},
+%                    yticklabels={,,},
+%                    xticklabels={,,},
+%                    zticklabels={,,},
+%                    ticks=none,
+%              ]
+%                \addplot3 [
+%                    surf,
+%                    faceted color=blue,
+%                    samples=15,
+%                    domain=0:9,y domain=-5:5,
+%                  ] {x^2*(3 - y^2)};
+%            \end{axis}
+%          \end{tikzpicture} 
+%        \end{center}
         
-        Intuitively:
-        \begin{itemize}
-          \item
-            when $\omega > \omega_0$ the bead will move upwards
-          \item
-            when $\omega = \omega_0$ the bead will stay still vertically
-          \item
-            when $\omega < \omega_0$ the bead will move down the wire
-        \end{itemize} 
         \begin{enumerate}
+          \item
+            $\quad$\\
+            \begin{center}
+              \begin{tikzpicture}
+                \begin{axis}[
+                    axis lines = center,
+                    xlabel = \(\rho\),
+                    ylabel = {\(U_\text{eff}\)},
+                    ymax=4,
+                    yticklabels={,,},
+                    xticklabels={,,},
+                    ticks=none,
+                ]
+                %Below the red parabola is defined
+                \addplot [
+                    domain=0:2.5, 
+                    samples=100, 
+                    color=red,
+                ]
+                {x^2};
+                \end{axis}
+              \end{tikzpicture}
+            \end{center}
+              Here, the potential term is a positive parabola.
+              The easiest way to visualize this is imagine that the wire is stationary in the gravitaional field.
+              For some initial conditions there will be a $\rho_{\text{max}}$ that $\rho$ cannot increase beyond--for the energy to remain constant $\dot \rho$ must decrease when $\rho$ increases, and eventually $\dot \rho$ must become zero.
+              When the bead has zero velocity in the $\rho$ direction it will fall down the wire and $\dot \rho$ will increase while $\rho$ decreases.
+              With $\rho$ decreasing, it will eventually become zero, and all the particle's energy will be purely kinetic.
+              The bead will move past the origin and swing back to ``$-\rho_{\text{max}}$" and the cycle will continue.
+              The bead essentially oscillates on the wire--it can be seen that the bead's generalized energy looks more or less like that of a simple harmonice oscillator with a slight perturbation connecting $\rho$ and $\dot \rho$.
 
           \item
-            In this case
+            $\quad$\\
+            \begin{center}
+              \begin{tikzpicture}
+                \begin{axis}[
+                    axis lines = center,
+                    xlabel = \(\rho\),
+                    ylabel = {\(U_\text{eff}\)},
+                    ymax=4,
+                    yticklabels={,,},
+                    xticklabels={,,},
+                    ticks=none,
+                ]
+                %Below the red parabola is defined
+                \addplot [
+                    domain=0:2.5, 
+                    samples=100, 
+                    color=red,
+                ]
+                {-x^2};
+                \end{axis}
+              \end{tikzpicture}
+            \end{center}
+
+            In this case, as the bead falls down the potential, $\rho$ increases, and the bead heads off to infinity.
+            It might be possible(probably but cannot be sure without an explicit check of the system's integrability) to start with $\rho \dot \rho$ negative and small enough that the bead will move down and change direction before crossing $\rho = 0$ and then heading off to $\rho \to \pm \infty$.
+            Essentially trying to climb the hill of the potential, failling and rolling back down the hill.
+            If the initial velocity is great enough, the bead might swing past $\rho = 0$ and head off to the infinity on the side of the wire opposite to where it started.
+
           \item
-          \item
+            $\quad$\\
+            \begin{center}
+              \begin{tikzpicture}
+                \begin{axis}[
+                    axis lines = center,
+                    xlabel = \(\rho\),
+                    ylabel = {\(U_\text{eff}\)},
+                    ymax=4,
+                    yticklabels={,,},
+                    xticklabels={,,},
+                    ticks=none,
+                ]
+                %Below the red parabola is defined
+                \addplot [
+                    domain=0:2.5, 
+                    samples=100, 
+                    color=red,
+                ]
+                {0};
+                \end{axis}
+              \end{tikzpicture}
+            \end{center}
+            Here, the potential term is zero.
+            More specifically, the potential and generalized energy are completely indepedent of the gravitaional strength parameter $g$.
+            This implies that we can imagine the bead on the wire in free space.
+            One option for the bead's trajectory is to stay stationary at a given point $\rho$ for eternity.
+            Another option is for the bead to move in a monotonous direction along the wire and move towards infinity increasingly slowly.
+            This point is a bifurcation in the system.
         \end{enumerate}
       \item
         The energy is not conserved here as the motor is giving energy input into the system.
         Thus we do not expect a conseved energy-like quantity to have the form of the total energy.
-        Mathematically they are not equivalent becuase the kinetic term is not a simple quadratic in the velocities.
+        Mathematically they are not equivalent because the kinetic term is not a simple quadratic in the velocities.
     \end{enumerate}
   \item
     \begin{enumerate}
       \item
-        And the time it takes to traverse the wire is:
+        The time it takes to traverse the wire is:
         \begin{equation*}
-          T[y(x)] = \int_{y_A}^{y_B} (\dot y)^{-1} dy
+          T[x(y)] = \int_{y_A}^{y_B} (\dot y)^{-1} dy
         \end{equation*}
         $\dot y$ can be determined from the conservation of energy.
         Along the bead's path, the conservation of the bead's energy constrains $\dot y$, $\dot x$ and $y$ so that:
         \begin{equation*}
-          E = \frac{1}{2} m (\dot x^2 + \dot y^2) + m g y
+          0 = \frac{1}{2} m (\dot x^2 + \dot y^2) - m g y = \frac{1}{2} m (x'^2 + 1) \dot y^2 - m g y
         \end{equation*}
         Rerranging this:
         \begin{align*}
-          \dot y^2 &= 2gy + \dot x^2 - \frac{2E}{m}\\
-                   &= 2gy + (x'\dot y)^2 - \frac{2E}{m}\\
-                   &= \frac{2gy + \frac{2E}{m}}{1 - x'^2}\\
+                      & \dot y^2 = \frac{2gy}{1 + x'^2}\\
+          \Rightarrow & \dot y = \frac{\sqrt{2gy}}{\sqrt{1 + x'^2}}\\
         \end{align*}
         Substituting this into the time functional makes the $y$ dependence explicit:
         \begin{equation*}
-          T[y(x)] = \int_{y_A}^{y_B} \frac{\sqrt{1 - x'^2}}{\sqrt{2gy}} dy
+          T[y(x)] = \int_{y_A}^{y_B} \frac{\sqrt{1 + x'^2}}{\sqrt{2gy}} dy
         \end{equation*}
       \item
-        In out time actional, there is an equivalent of a Lagragian:
+        In the time actional, there is an equivalent of a Lagragian:
         \begin{equation*}
-          L(x, x', y) = \frac{\sqrt{1 - x'^2}}{\sqrt{2gy}}
+          L(x, x', y) = \frac{\sqrt{1 + x'^2}}{\sqrt{2gy}}
         \end{equation*}
         $x$ is cyclical here, which implies that:
         \begin{equation*}
-          \frac{\partial L}{\partial x'} = - \frac{2 x'}{2\sqrt{2gy(1 - x'^2)}}
+          \frac{\partial L}{\partial x'} = \frac{x'}{\sqrt{2gy(1 + x'^2)}}
         \end{equation*}
-        Which gives:
+        is conserved with changing $y$ or:
         \begin{equation*}
-          0 = \frac{d}{dy}\frac{\partial L}{\partial x'} = - \frac{4 x'gy(1 - x'^2)}{2\sqrt{2gy(1 - x'^2)}}
+          0 = \frac{d}{dy}\frac{\partial L}{\partial x'} \Rightarrow \frac{x'}{\sqrt{2gy(1 + x'^2)}} = Q
         \end{equation*}
+        Since the derivative is a total derivative in $y$ and $x(y)$.
+        The following algebra ensues(some of it might be superfluous since there are squaring and square-rooting steps):
+        \begin{align*}
+                      & Q = - \frac{x'}{\sqrt{2gy(1 + x'^2)}}\\
+          \Rightarrow & x'^2  = 2Q^2gy(1 + x'^2)\\
+          \Rightarrow & x'^2  = \frac{2Q^2gy}{1 - 2Q^2gy}\\
+          \Rightarrow & \frac{dx}{dy}  = \frac{\sqrt{y}}{\sqrt{1/2Q^2g - y}}
+        \end{align*}
+        This equation is separable so it can be integrated to get:
+        \begin{align*}
+          x = \int_{x_A}^{x}d\mathtt{x} + x_A = \int_{y_A}^{y}\frac{\sqrt{\mathtt{y}}}{\sqrt{1/2Q^2g - \mathtt{y}}} d \mathtt{y} + x_A
+        \end{align*}
+        This integral can be solved with the substitution $y = \frac{1}{2Q^2g}\sin^2\frac{\theta}{2}$:\footnote{I got stuck here and cheated by looking at \href{https://www.ucl.ac.uk/~ucahmto/latex_html/chapter2_latex2html/node7.html}{this link}}
+        \begin{align*}
+             \int_{y_A}^{y}\frac{\sqrt{\mathtt{y}}}{\sqrt{1/2Q^2g - \mathtt{y}}} d \mathtt{y} + x_A
+          &= \int_{\theta_A}^{\theta}\frac{\sin(\theta/2)}{\cos(\theta/2)} \frac{1}{2Q^2g} \sin \frac{\theta}{2} \cos \frac{\theta}{2} d {\theta} + x_A\\
+          &= \frac{1}{2Q^2g} \int_{\theta_A}^{\theta}\sin^2(\theta/2) d {\theta} + x_A\\
+          &= \frac{1}{2Q^2g}\frac{1}{2}\left(\theta - \sin \theta \right) - \frac{1}{Q^2g}\frac{1}{2}\left(\theta_A - \sin \theta_A \right) + x_A\\
+          &= \frac{a}{2}\left(\theta - \sin \theta \right)
+        \end{align*}
+        Where $a = \frac{1}{2Q^2 g}$, and the dependence on the conserved quantity is clear, and $y$ is:
+        \begin{equation*}
+          y = \frac{1}{2Q^2g}\sin^2\frac{\theta}{2} = \frac{a}{2}(1 - \cos \theta)
+        \end{equation*}
+        Determining $a$ in terms of $x_a, x_b, y_a, y_b$:
+        \begin{align*}
+          x_B - x_A = \frac{a}{2} \left(\theta_B - \theta_A +\sin \theta_A -\sin\theta_B\right)
+        \end{align*}
+        And:
+        \begin{equation*}
+          \theta_{*} = 2\sin^{-1}\left(\sqrt{\frac{ y_{*}}{a}}\right)
+        \end{equation*}
+        So that:
+        \begin{align*}
+          x_B - x_A &= \frac{a}{2} \left[2\sin^{-1}\sqrt{\frac{ y_{B}}{a}} - 2\sin^{-1}\sqrt{\frac{ y_{A}}{a}} + \sin\left(2\sin^{-1}\left(\sqrt{\frac{ y_{A}}{a}}\right)\right) + \sin\left(2\sin^{-1}\left(\sqrt{\frac{ y_{B}}{a}}\right)\right)\right] \\
+                    &= a \left[\sin^{-1}\sqrt{\frac{ y_{B}}{a}} - \sin^{-1}\sqrt{\frac{ y_{A}}{a}} + \sqrt{\frac{ y_{A}}{a}}\cos\left(\sin^{-1}\left(\sqrt{\frac{ y_{A}}{a}}\right)\right)\right. \\
+                    &\qquad \qquad \left. - \sqrt{\frac{ y_{B}}{a}}\cos\left(\sin^{-1}\left(\sqrt{\frac{ y_{B}}{a}}\right)\right)\right] \\
+                    &= a \left[\sin^{-1}\sqrt{\frac{ y_{B}}{a}} - \sin^{-1}\sqrt{\frac{ y_{A}}{a}} + \sqrt{\frac{ y_{A}}{a}}\sqrt{1 - \frac{ y_{A}}{a}} - \sqrt{\frac{ y_{B}}{a}}\sqrt{1 - \frac{ y_{B}}{a}}\right] \\
+        \end{align*}
+        And this is an implicit relation for $a$ in terms of the coordinates.
         
     \end{enumerate}
   \item
     \begin{enumerate}
+      \item
+        Noted.
       \item
         Consider a variation of the form:
         \begin{equation*}
@@ -184,19 +336,52 @@
         \end{equation*}
         With:
         \begin{equation*}
-          \dot\tilde{\delta}^f_s q(t) = \dot f \tilde{\delta}_s q + f(t) \tilde{\delta}_s q
+          \tilde{\delta}^f_s \dot q(t) = \dot f \tilde{\delta}_s q + f(t) \tilde{\delta}_s \dot q
         \end{equation*}
         The variation in the Lagrangian now is:
         \begin{align*}
           \tilde{\delta}_s^f L &= \frac{\partial L}{\partial q^i} \tilde{\delta}_s^fq^i + \frac{\partial L}{\partial \dot q^i} \tilde{\delta}_s^f\dot q^i\\
-                               &= \frac{\partial L}{\partial q^i} f(t)\tilde{\delta}_sq^i + \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i + \frac{\partial L}{\partial \dot q^i} f(t) \frac{d}{dt}{\delta}_s q^i\\
-                               &= \left[\frac{\partial L}{\partial q^i} + \frac{d}{dt}\left(\frac{\partial L}{\partial \dot q^i} f(t)\right)\right] \tilde{\delta}_s q^i + \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i
+                               &= \frac{\partial L}{\partial q^i} f(t)\tilde{\delta}_sq^i + \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i + \frac{\partial L}{\partial \dot q^i} f(t) {\delta}_s \dot q^i\\
+                               &= f(t)\left(\frac{\partial L}{\partial q^i} \tilde{\delta}_sq^i + \frac{\partial L}{\partial \dot q^i} {\delta}_s \dot q^i\right) + \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i \\
+                               &= f(t)\left(\tilde{\delta}_sL \right) + \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i \\
+                               &= f(t)\frac{d}{dt} R_s + \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i \\
+                               &= \frac{d}{dt}\left(f(t) R_s\right) - R_s \dot f+ \frac{\partial L}{\partial \dot q^i} \dot f \tilde{\delta}_s q^i \\
+                               &= \frac{d}{dt}\left(f(t) R_s\right) + \left(\frac{\partial L}{\partial \dot q^i}\tilde{\delta}_s q^i - R_s\right)\dot f\\
+                               &= \frac{d}{dt}\left(f(t) R_s\right) + Q_s \dot f\\
         \end{align*}
-        The Euler-Lagrange equations are evident in the first bracket and $f(t)$ is constant under variations of trajectories; therefore, this term will fall to zero for the physical trajectory.
-        The second term is the only term left in the action's variation:
-        \begin{equation*}
-          \tilde{delta}_s^f S = \int_{t_0}
-        \end{equation*}
+        Now the variation in the action is:
+        \begin{align*}
+          \tilde{\delta}_s^fS &= \int_{t_0}^{t_1} \frac{d}{dt}\left(f(t) R_s\right) + Q_s \dot f dt\\
+                             &= \left.f(t) R_s\right|_{t_0}^{t_1} + \int_{t_0}^{t_1}Q_s \dot f dt\\
+                             &= \int_{t_0}^{t_1} dt Q_s \dot f
+        \end{align*}
+        Where the first integral vanishes owing to $f$'s boundary conditions.
+      \item
+        On shell, the action's variation goes to zero:
+        \begin{align*}
+          0 &= \int_{t_0}^{t_1} dtQ_s \dot f\\
+            &= \int_{f_0}^{f_1} df Q_s \\
+            &= \left.fQ_s \right|_{t_0}^{t_1} + \int_{t_0}^{t_1} f \frac{dQ_s}{dt} dt \\
+            &= \int_{t_0}^{t_1} f \frac{dQ_s}{dt} dt
+        \end{align*}
+        Since $f$ is an arbitrary function, integral being identically zero implies:
+        \begin{align*}
+          \frac{dQ_s}{dt} = 0
+        \end{align*}
+      \item
+        The time translation symmetry is $\tilde{\delta}_s^f q = f \dot q$:
+        \begin{align*}
+          \tilde{\delta}_s^f S = 
+          \int_{t_0}^{t_1} dt \tilde{\delta}_s^f L %&= \int_{t_0}^{t_1} dt- \frac{\partial V}{\partial q} \tilde{\delta}_s^fq^i + m \dot q \tilde{\delta}_s^f\dot q^i\\
+                               &= \int_{t_0}^{t_1} dt \left[ - \frac{\partial V}{\partial q} f(t) \dot q^i + m \dot q \dot f \dot q + m \dot q f(t) \ddot  q^i\right]\\
+                               &= \int_{t_0}^{t_1} dt \left[ - \frac{d V}{d t} f(t) + m \dot q ^2\dot f  + m \dot q f(t) \ddot  q^i\right]\\
+                               &= \int_{t_0}^{t_1} dt \left[V \dot f  + \frac{1}{2}m \dot q^2 \dot f  + \frac{d}{dt} \left(\frac{1}{2}m\dot q^2 f(t) \right)- \frac{d}{dt} \left(Vf\right)\right]\\
+                               &= \int_{t_0}^{t_1} dt \left(V   + \frac{1}{2}m \dot q^2\right) \dot f
+        \end{align*}
+        The total time derivative terms go to zero upon integration because $f(t_1) = f(t_0) = 0$, and what is left is the conserved energy times $\dot f$.
+        Note that this only works because the potential has no explicit time dependence.
+        This derivation is a nice way to see that time dependent potentials do not conserve energy.
+
     \end{enumerate}
 \end{enumerate}
 

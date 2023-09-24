@@ -1,0 +1,316 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\title{
+\textsc{QM Homework 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item 
+        The time evolution of the position operator in the Heisenberg picture is:
+        \begin{align*}
+          \frac{d}{d t}      x &= \frac{i}{\hbar}\left[H, x\right]\\
+                               &= \frac{i}{\hbar}\left[\frac{ p^2}{2m}, x\right]\\
+                               &= \frac{i}{2m\hbar}\left( p\left[ p, x\right] + \left[ p, x\right]  p\right)\\
+                               &= \frac{i}{2m\hbar}\left(-2 i \hbar p\right)\\
+                               &= \frac{ p}{m}
+        \end{align*}
+        Note also that:
+        \begin{align*}
+          \frac{d}{d t}      p &= \frac{i}{\hbar}\left[H, p\right]\\
+                               &= \frac{i}{\hbar}\left[\frac{1}{2} m\omega^2 x^2, p\right]\\
+                               &= \frac{m\omega^2 i}{2\hbar}\left[ x^2, p\right]\\
+                               &= \frac{m\omega^2 i}{2\hbar}\left( 2 i \hbar x \right)\\
+                               &= -\omega^2 x
+        \end{align*}
+        So that:
+        \begin{align*}
+          \frac{d^2}{d t^2} x &= \frac{1}{m}\frac{d}{dt}\hat p\\
+                                   &= \omega^2 x
+        \end{align*}
+        This equation is exactly the classical simple harmonic oscillator with solution:
+        \begin{equation*}
+          x(t) = A \cos (\omega t) + B \sin (\omega t)
+        \end{equation*}
+        The coefficients can be seen by taking the derivative of $x$ and setting $t$ to zero:
+        \begin{equation*}
+          x(t) =  \cos (\omega t) x(0) + \frac{\sin(\omega t)}{m \omega} p(0)
+        \end{equation*}
+      \item
+        The correlation can now be written explicitly:
+        \begin{equation*}
+          C(t) = \langle x(t) x(0) \rangle = \langle \cos (\omega t) x^2(0) + \frac{\sin(\omega t)}{m \omega} x(0) p(0)\rangle - i \hbar \frac{\sin(\omega t)}{m \omega}
+        \end{equation*}
+        At $t = 0$ the oscillator must coincide with t a Schr\"odinger picture that has the wave function:\footnote{\url{https://en.wikipedia.org/wiki/Quantum_harmonic_oscillator}}
+        \begin{equation*}
+          \psi_0(x) = \left(\frac{m \omega}{\pi \hbar}\right) ^{1/4} e^{ - \frac{m \omega x^2}{2 \hbar}}
+        \end{equation*}
+        Now:
+        \begin{align*}
+          C(t) &= \cos (\omega t) \left(\frac{m \omega}{\pi \hbar}\right) ^{1/2} \int x^2 dx e^{ - \frac{m \omega x^2}{\hbar}}\\
+               & \qquad + \left(\frac{m \omega}{\pi \hbar} \right)^{1/2}\frac{\sin(\omega t)}{m \omega} \int dx e^{ - \frac{m \omega x^2}{ 2 \hbar}} x \left(-i \hbar\frac{\partial}{\partial x}\right) e^{ - \frac{m \omega x^2}{ 2 \hbar}} - i \hbar \frac{\sin(\omega t)}{m \omega}\\
+               &= \cos (\omega t) \left(\frac{m \omega}{\pi \hbar}\right) ^{1/2} \int x^2 dx e^{ - \frac{m \omega x^2}{\hbar}}\\
+               &\qquad + i \left(\frac{m \omega}{\pi \hbar} \right)^{1/2} \sin(\omega t) \int dx e^{ - \frac{m \omega x^2}{ \hbar}} x^2    - i \hbar \frac{\sin(\omega t)}{m \omega}\\
+               &= e^{i \omega t} \left(\frac{m \omega}{\pi \hbar}\right) ^{1/2} \int x^2 dx e^{ - \frac{m \omega x^2}{\hbar}} - i \hbar \frac{\sin(\omega t)}{m \omega}\\
+               &= e^{i \omega t} \left(\frac{m \omega}{\pi \hbar}\right) ^{1/2}\frac{1}{2}\sqrt{\left(\frac{\hbar ^3\pi}{m^3 \omega^3}\right)}  - i \hbar \frac{\sin(\omega t)}{m \omega}\\
+               &= e^{i \omega t} \frac{\hbar}{ 2 m \omega}  - i \hbar \frac{\sin(\omega t)}{m \omega}\\
+               &=  \frac{\hbar}{ 2 m \omega}e^{-i \omega t} 
+        \end{align*}
+  \end{enumerate}
+  \item
+    The single particle operators are, for $x$:
+    \begin{align*}
+      \sigma_{x}^{1} = \sigma_x \otimes I_2 =
+                       \left(\begin{matrix}
+                        0 &  1 & 0 &  0\\
+                        1 &  0 & 0 &  0\\
+                        0 &  0 & 0 &  1\\
+                        0 &  0 & 1 &  0
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{x}^{2} = I_2 \otimes \sigma_x = 
+                      \left(\begin{matrix}
+                        0 &  0 & 0 &  1\\
+                        0 &  0 & 1 &  0\\
+                        0 &  1 & 0 &  0\\
+                        1 &  0 & 0 &  0
+                      \end{matrix} \right)
+    \end{align*}
+    For $y$:
+    \begin{align*}
+      \sigma_{y}^{1} = 
+                       \left(\begin{matrix}
+                        0 & -i & 0 &  0\\
+                        i &  0 & 0 &  0\\
+                        0 &  0 & 0 & -i\\
+                        0 &  0 & i &  0
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{y}^{2} =  
+                      \left(\begin{matrix}
+                        0 &  0 & 0 & -i\\
+                        0 &  0 & i &  0\\
+                        0 & -i & 0 &  0\\
+                        i &  0 & 0 &  0
+                      \end{matrix} \right)
+    \end{align*}
+    And for $z$:
+    \begin{align*}
+      \sigma_{z}^{1} =                       
+                       \left(\begin{matrix}
+                        1 &  0 & 0 &  0\\
+                        0 & -1 & 0 &  0\\
+                        0 &  0 & 1 &  0\\
+                        0 &  0 & 0 & -1
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{z}^{2} =  
+                       \left(\begin{matrix}
+                        0 &  0 & 1 &  0\\
+                        0 &  0 & 0 & -1\\
+                        1 &  0 & 0 &  0\\
+                        0 & -1 & 0 &  0
+                      \end{matrix} \right)
+    \end{align*}
+    For the first matrix measuring $\sigma_x$:
+    \begin{align*}
+      \sigma_{xx} &= \sigma_x \otimes I_2 +  I_2 \otimes \sigma_x\\
+                  &= \sigma_x^1 + \sigma_x^2\\
+                  &=
+                      \left( \begin{matrix}
+                        0 & 1 & 0 & 0\\
+                        1 & 0 & 0 & 0\\
+                        0 & 0 & 0 & 1\\
+                        0 & 0 & 1 & 0
+                      \end{matrix} \right)
+                      +
+                      \left( \begin{matrix}
+                        0 & 0 & 0 & 1\\
+                        0 & 0 & 1 & 0\\
+                        0 & 1 & 0 & 0\\
+                        1 & 0 & 0 & 0
+                      \end{matrix} \right)\\
+                  &=  
+                      \left(\begin{matrix}
+                        0 & 1 & 0 & 1\\
+                        1 & 0 & 1 & 0\\
+                        0 & 1 & 0 & 1\\
+                        1 & 0 & 1 & 0
+                      \end{matrix} \right)
+    \end{align*}
+    and also:
+    \begin{align*}
+      \sigma_{xy} =   \left(\begin{matrix}
+                        0 &  1 & 0 & -i\\
+                        1 &  0 & i &  0\\
+                        0 & -i & 0 &  1\\
+                        i &  0 & 1 &  0
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{xz} =   \left(\begin{matrix}
+                        0 &  1 & 1 &  0\\
+                        1 &  0 & 0 & -1\\
+                        1 &  0 & 0 &  1\\
+                        0 & -1 & 1 &  0
+                      \end{matrix} \right)
+    \end{align*}
+    For $y$ in the first index:
+    \begin{align*}
+      \sigma_{yx} =   \left(\begin{matrix}
+                        0 & -i & 0 &  1\\
+                        i &  0 & 1 &  0\\
+                        0 &  1 & 0 & -i\\
+                        1 &  0 & i &  0
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{yy} =   \left(\begin{matrix}
+                        0 & -i & 0 & -i\\
+                        i &  0 & i &  0\\
+                        0 & -i & 0 & -i\\
+                        i &  0 & i &  0
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{yz} =   \left(\begin{matrix}
+                        0 & -i & 1 &  0\\
+                        i &  0 & 0 & -1\\
+                        1 &  0 & 0 & -i\\
+                        0 & -1 & i &  0
+                      \end{matrix} \right)
+    \end{align*}
+    For $z$ in the first index:
+    \begin{align*}
+      \sigma_{zx} =   \left(\begin{matrix}
+                        1 &  0 & 0 &  1\\
+                        0 & -1 & 1 &  0\\
+                        0 &  1 & 1 &  0\\
+                        1 &  0 & 0 & -1
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{zy} =   \left(\begin{matrix}
+                        1 &  0 & 0 & -i\\
+                        0 & -1 & i &  0\\
+                        0 & -i & 1 &  0\\
+                        i &  0 & 0 & -1
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{zy} =   \left(\begin{matrix}
+                        1 &  0 & 1 &  0\\
+                        0 & -1 & 0 & -1\\
+                        1 &  0 & 1 &  0\\
+                        0 & -1 & 0 & -1
+                      \end{matrix} \right)
+    \end{align*}
+  \item
+    The path integral is more explicitly:
+    \begin{align*}
+      \int D[q(t)] e^{\frac{i}{\hbar} S[q, \dot q, t]} &=\lim_{N \to \infty, \Delta t\to 0} \left(\frac{m}{2 \pi i \hbar \Delta t}\right)^{N / 2}\prod_{i = 1}^{N - 1} \int  dq_i \exp\left\{\frac{i}{\hbar}\int dt L(q, \dot q, t)\right\}\\
+                                                       &=\lim_{N \to \infty, \Delta t \to 0}\left(\frac{m}{2 \pi i \hbar \Delta t}\right)^{N / 2} \prod_{i = 1}^{N - 1}\int  dq_i \exp\left\{\frac{i}{\hbar}\sum_{i = 1}^{N}\int_{t_{i-1}}^{t_i} dt \frac{1}{2} m \dot q^2\right\}
+    \end{align*}
+    Now, the integral in the exponent is over a very short time interval so the argument will be approximately constant over this time period.
+    More specifically:
+    \begin{equation*}
+      \dot x \leadsto \frac{q_i - q_{i - 1}}{\Delta t}
+    \end{equation*}
+    Now:
+    \begin{align*}
+      \int D[q(t)] e^{\frac{i}{\hbar} S[q, \dot q, t]} &=\lim_{N \to \infty, \Delta t \to 0}\left(\frac{m}{2 \pi i \hbar \Delta t}\right)^{N / 2} \prod_{i = 1}^{N}\int dq_i \exp\left\{\frac{i}{\hbar}\sum_{i = 1}^{N}\frac{1}{2} m \left(\frac{q_i - q_{i - 1}}{\Delta t}\right)^2 \int_{t_{i-1}}^{t_i} dt \right\}\\
+                                                       &=\lim_{N \to \infty, \Delta t \to 0}\left(\frac{m}{2 \pi i \hbar \Delta t}\right)^{N / 2} \prod_{i = 1}^{N}\int dq_i \exp\left\{\frac{im}{2\hbar\Delta t}\sum_{i = 1}^{N}\left(q_i - q_{i - 1}\right)^2 \right\}
+    \end{align*}
+    Now note that\footnote{I used the integral identity from the tutorial, but it is wrong in the tutorial. This is the actual relation that I got from this \href{https://en.wikipedia.org/wiki/Common_integrals_in_quantum_field_theory}{Wikipedia page}}:
+    \begin{align*}
+      I(k) \coloneqq&\int_{-\infty}^\infty dq_k \exp\left\{\frac{im}{2\hbar \Delta t}\left(q_{k+1} - q_{k}\right)^2 + \frac{im}{2\hbar k\Delta t}\left(q_{k} - q_{0}\right)^2\right\} \\
+                                                                                                                        =& \int_{-\infty}^\infty dq_i \exp\left\{\frac{im(k + 1)}{2\hbar k \Delta t} q_{k}^2 -\frac{im}{\hbar k\Delta t} (kq_{k + 1} + q_{0}) q_k + \frac{im}{2\hbar k\Delta t} \left(q_{0}^2 + k q_{k + 1}^2\right) \right\}\\
+                                                                                                                        =& \left(\frac{2 \pi i \hbar  k\Delta t}{ m (k + 1)}\right)^{1/2}\exp\left\{\left[-i \frac{m(kq_{k + 1} + q_{0})^2}{2\hbar k(k + 1)\Delta t} \right]\right\}  \exp\left\{\frac{im}{2\hbar k  \Delta t}\left(k q_{k + 1}^2 + q_{0}^2\right)\right\} \\
+                                                                                                                        =& \left(\frac{2 \pi i \hbar  k\Delta t}{ m (k + 1)}\right)^{1/2}\exp\left\{\frac{im}{2 \hbar k (k + 1) \Delta t}\left[\left(k q_{k + 1}^2 + q_{0}^2\right)(k + 1) - (kq_{k + 1} + q_{0})^2 \right]\right\}\\
+                                                                                                                        =& \left(\frac{2 \pi i \hbar  \Delta t}{ m }\right)^{1/2}\left(\frac{k}{k+1}\right)^{1/2}\exp\left\{\frac{im}{2 \hbar  (k + 1) \Delta t}\left(q_{k + 1} - q_{0}\right)^2\right\}
+%                                                                                                                        =& \left(\frac{2 \pi i \hbar (k + 1)\Delta t}{2 m}\right)^{1/2}e^{ \frac{im(q_{i + 1} - q_{i-1})^2}{2\hbar\cdot 2\Delta t} }  
+    \end{align*}
+    This integral can be expanded recursively:
+    \begin{align*}
+      I(k) &= \int_{-\infty}^\infty dq_k \exp\left\{\frac{im}{2\hbar \Delta t}\left(q_{k+1} - q_{k}\right)^2\right\} \left(\frac{2 \hbar i \Delta t}{m}\right)^{-1/2}\left( \frac{k - 1}{k}\right)^{-1/2}I(k-1) \\
+           &= \int_{-\infty}^\infty dq_k \exp\left\{\frac{im}{2\hbar \Delta t}\left(q_{k+1} - q_{k}\right)^2\right\}\left(\frac{2 \hbar i \Delta t}{m}\right)^{-1/2}\left( \frac{k - 1}{k}\right)^{-1/2}\\
+           &\qquad\times \int_{-\infty}^\infty dq_{k-1}\exp\left\{\frac{im}{2\hbar \Delta t}\left(q_{k} - q_{k-1}\right)^2 + \frac{im}{2\hbar (k-1)\Delta t}\left(q_{k-1} - q_{0}\right)^2\right\}\\
+           &= \int_{-\infty}^\infty dq_k \int_{-\infty}^\infty dq_{k-1}\exp\left\{\frac{im}{2\hbar \Delta t}\left(q_{k+1} - q_{k}\right)^2 + \frac{im}{2\hbar \Delta t}\left(q_{k} - q_{k-1}\right)^2\right\}\\
+           &\qquad \times \left(\frac{2 \hbar i \Delta t}{m}\right)^{-2/2}\left( \frac{k - 2}{k}\right)^{-1/2} I(k - 2)
+    \end{align*}
+    And this recursion process can be continued down to $I(1)$ with the result:
+    \begin{align}
+      I(k) &= \prod_{j = 2}^{k}\left(\int_{-\infty}^\infty dq_j\right) \exp\left\{\frac{im}{2\hbar \Delta t}\sum_{i = 2}^{k}\left(q_{i+1} - q_{i}\right)^2 \right\} \nonumber\\
+           &\qquad \times \left(\frac{2 \hbar i \Delta t}{m}\right)^{-(k - 1)/2}\left( \frac{2}{k}\right)^{-1/2} I(1) \nonumber \\
+           &= \left(\frac{2 \hbar i \Delta t}{m}\right)^{-(k - 1)/2}\left(\frac{1}{k}\right)^{-1/2} \prod_{j = 2}^{k}\left(\int_{-\infty}^\infty dq_j\right) \exp\left\{\frac{im}{2\hbar \Delta t}\sum_{i = 2}^{k}\left(q_{j+1} - q_{j}\right)^2 \right\} \nonumber\\
+           &\qquad \times \int_{-\infty}^\infty dq_1 \exp\left\{\frac{im}{2\hbar \Delta t}\left(q_{2} - q_{1}\right)^2 + \frac{im}{2\hbar \Delta t}\left(q_{1} - q_{0}\right)^2\right\} \nonumber\\
+           &= \left(\frac{2 \hbar i \Delta t}{m}\right)^{-(k - 1)/2}\left(\frac{1}{k}\right)^{-1/2} \prod_{j = 1}^{k}\left(\int_{-\infty}^\infty dq_j\right) \exp\left\{\frac{im}{2\hbar \Delta t}\sum_{j = 1}^{k + 1}\left(q_{j} - q_{j - 1}\right)^2 \right\}\label{eq:pathint}\\
+           &=\left(\frac{2 \pi i \hbar  \Delta t}{ m }\right)^{1/2}\left(\frac{k}{k+1}\right)^{1/2}\exp\left\{\frac{im}{2 \hbar  (k + 1) \Delta t}\left(q_{k + 1} - q_{0}\right)^2\right\} \nonumber
+    \end{align}
+    The integral in Eq.~\ref{eq:pathint} is the integral that appears in the path integral for the propagator with $k = N-1$:
+    \begin{align*}
+      &\prod_{j = 1}^{N - 1}\left(\int_{-\infty}^\infty dq_j\right) \exp\left\{\frac{im}{2\hbar \Delta t}\sum_{j = 1}^{N}\left(q_{j} - q_{j - 1}\right)^2 \right\} \\
+      &\qquad =  \left(\frac{2 \pi i \hbar  \Delta t}{ m }\right)^{(N - 1)/2} \left(\frac{1}{N}\right)^{1/2}\exp\left\{\frac{im}{2 \hbar  t}\left(q_{A} - q_{B}\right)^2\right\} \nonumber
+    \end{align*}
+    Where $t \equiv N \Delta t$. This expression determines the path integral for the amplitude to find a particle in state $q_A$ at $q_B$.
+    Now:
+    \begin{align*}
+      \int D[q(t)] e^{\frac{i}{\hbar} S[q, \dot q, t]} &=\lim_{N \to \infty, \Delta t \to 0}\left(\frac{m}{2 \pi i \hbar N \Delta t}\right)^{1 / 2}  \exp\left\{\frac{im}{2 \hbar  t}\left(q_{A} - q_{B}\right)^2\right\}\\
+                                                       &=\left(\frac{m}{2 \pi i \hbar t}\right)^{1 / 2}  \exp\left\{\frac{im}{2 \hbar  t}\left(q_{A} - q_{B}\right)^2\right\}
+    \end{align*}
+  \item
+    My circuit can be found at this \href{https://quantum-computing.ibm.com/composer/files/new?initial=N4IgdghgtgpiBcIBSAZA4gewK4HcDOAtAAoDKAkgEwAMFAzCADQgCOEeUCIA8kQKIByARQCCJALIACCgDoqAbgA6YAJZgAxgBssAExgSFLGBuUAjAIzTVag4rBLmAJxgBzCcwDaFALq21T12ruACw\%2BSgAWbu5UoWAADgAUscoSAPQStACUkdG\%2BWInJabQMEgRJxWUSVFke0cUeZjERNTGwbFhO2V4lAHwSgTlKjCC6eH7KsQAuyhhgnCAAvkA}{link}.
+    The circuit consists of a Hadamard gate that works as a beam splitter.
+    A phase shifter follows and then a controlled U gate.
+    The U gate is currently being used as a Y rotation gate--only the first argument should be changed, but a U gate was chosen to allow flexibility.
+    The "interference" pattern goes away when the theta parameter of the U gate is set to $\pi$ and the $\left|P_0 \right\rangle$ and $\left\|P_1 \right\rangle$ states become orthogonal.
+\end{enumerate}
+
+\end{document}

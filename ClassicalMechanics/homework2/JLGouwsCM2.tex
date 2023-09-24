@@ -1,0 +1,369 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{CM Homework 2}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item 
+        When $u$ goes to zero, $v'$ should go to $v$ so the coefficient of $v$ is $+$.
+        If $v$ is zero then in the moving $K'$ the object will move backwards with $-u$.
+        In the limit as $u$ goes to $-c$ and $v$ goes to $c$, a plus sign in the denominator would result in $v'$ going to infinity which is not physical.
+        But a minus sing would result in $(c + c) / 2$ in the limit, as expected.
+      \item
+        The infinitesmal displacement of the object in the $K'$ frame is $d{\bf x'} = {\bf v'}dt' = {\bf v'}_{\parallel} dt' + {\bf v'}_{\perp}dt' = d {\bf x}'_\parallel + d {\bf x}'_\perp$. Where:
+        \begin{equation*}
+          {\bf v'}_{\parallel} dt' = d {\bf x}'_\parallel \qquad {\bf v'}_{\perp}dt' = d {\bf x}'_\perp
+        \end{equation*}
+        Which is justified because we are working in a flat space.
+        The infinitesmal displacement of the object in the $K$ frame is ${\bf v}dt = {\bf v}_{\parallel} dt + {\bf v}_{\perp}dt$.
+        \begin{equation*}
+          {\bf v}_{\parallel} dt = d {\bf x}_\parallel \qquad {\bf v}_{\perp}dt = d {\bf x}_\perp
+        \end{equation*}
+        Now under the Lorentz transformation, only the parallel directions are affected:
+        \begin{align}
+          d {\bf x}'_\parallel &= \gamma (u) (d {\bf x}_\parallel - {\bf u} dt) \label{eq:x1}\\
+          d {\bf x}'_\perp &= d {\bf x}_\perp \label{eq:x2}\\
+          d t' &= \gamma (u) (d t - \frac{{\bf u}}{c^2} \cdot d{\bf x}_\parallel)   \label{eq:x3}
+        \end{align}
+        Note that:
+        \begin{align}
+          d t' &= \gamma(u) (dt - \frac{u^2}{c^2} dt - \gamma(u)^{-1}\frac{{\bf u}}{c^2} \cdot d {\bf x}'_\parallel) \nonumber\\
+               &= \gamma(u) (\gamma(u)^{-2} dt - \gamma(u)^{-1}\frac{{\bf u}}{c^2} \cdot d {\bf x}'_\parallel)\nonumber\\
+          \Rightarrow & dt = \gamma(u) (dt' + \frac{{\bf u}}{c^2} \cdot d {\bf x}'_\parallel) \label{eq:x4}
+        \end{align}
+        For $v_\perp$ divide Eq.~\ref{eq:x1} by Eq.~\ref{eq:x3}:
+        \begin{align*}
+          {\bf v}'_\parallel = \frac{d {\bf x}'_\parallel}{d t'}  &= \frac{\gamma (u) (d {\bf x}_\parallel - {\bf u} dt)}{\gamma (u) (d t - \frac{\bf u}{c^2}\cdot d{\bf x}_\parallel)}\\
+                                                                  &= \frac{{\bf v}_\parallel - {\bf u} }{1 - \frac{\bf u}{c^2} \cdot {\bf v}}\\
+                                                      \Rightarrow &= {\bf v}'_\parallel + {\bf u}
+        \end{align*}
+        For $v_\perp$ divide Eq.~\ref{eq:x2} by Eq.~\ref{eq:x4}:
+        \begin{align*}
+          {\bf v}_\perp = \frac{d {\bf x}_\perp}{d t} &= \frac{d {\bf x}'_\perp}{\gamma(u) (dt' + \frac{{\bf u}}{c^2} \cdot d {\bf x}'_\parallel)}\\
+                                                      &= \frac{{\bf v}'_\perp}{\gamma (u) (1 + \frac{{\bf u}}{c^2}\cdot {\bf v}'_\parallel)}\\
+                                                      &= \frac{{\bf v}'_\perp}{\gamma (u) (1 + \frac{{\bf u}\cdot {\bf v}'}{c^2})}
+        \end{align*}
+      \item 
+        Let $v$ be the velocity vector for the light in the $K$ frame. Then:
+        \begin{align*}
+          {\bf u} \cdot {\bf v} = u c \cos \theta & = \frac{{\bf u} \cdot {\bf v'} + 1}{1 + \frac{{\bf u} \cdot {\bf v'}}{c^2}}\\
+                                                  & = \frac{uc \cos \theta ' + u^2}{1 + \frac{u \cos \theta '}{c}}\\
+                                      \Rightarrow &\cos\theta = \frac{\cos \theta '+\frac{u}{c}}{1 + \frac{u}{c} \cos\theta ' }
+        \end{align*}
+      \item
+        \begin{align*}
+          {\bf v} &= {\bf v}_\parallel + {\bf v}_\perp\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left( {\bf u} + {\bf v'}_\parallel + \gamma^{-1}(  u) {\bf v}'_\perp\right)\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left( {\bf u} + {\bf v'} - {\bf v'}_\perp + \gamma^{-1}(  u) {\bf v}'_\perp\right)\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} + \left(\gamma^{-1}(  u) - 1\right) {\bf v}'_\perp\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} + \left(\gamma^{-1}(  u) - 1\right) \left({\bf v}' - \frac{{\bf u}\cdot{\bf v}'}{u^2} {\bf u}\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} - \frac{1}{u^2}\left(\gamma^{-1}(  u) - 1\right) \left(({\bf u}\cdot{\bf v}'){\bf u} - u^2{\bf v}'\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} - \frac{1}{u^2}\left(\gamma^{-1}(  u) - 1\right) {\bf u} \times \left({\bf u} \times {\bf v}'\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} - \frac{c^2}{u^2}\left(\gamma^{-1}(  u) - 1\right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} - \frac{c^2}{u^2}\left(\frac{\gamma (1 - \gamma)}{\gamma^{2}( u)} \right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} - \frac{c^2}{u^2}\left(\frac{\gamma (1 - \gamma)}{\frac{1}{1 - \frac{u^2}{c^2}}} \right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} + \left(\frac{\gamma (1 - \gamma)}{\frac{-\frac{u^2}{c^2}}{1 - \frac{u^2}{c^2}}} \right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} + \left(\frac{\gamma (1 - \gamma)}{ 1 - \frac{1}{1 - \frac{u^2}{c^2}}} \right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} + \left(\frac{\gamma (1 - \gamma)}{ 1 - \gamma^2} \right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
+                  &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} + \left(\frac{\gamma(u) }{ 1 + \gamma(u)} \right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
+        \end{align*}
+      \item
+        The 4 velocity is a contravariant 4-vector so it transforms as:
+        \begin{align*}
+          v'^\mu &= \tensor{\Lambda}{^{\mu}_\nu} v^\nu\\
+          v^\mu &= \tensor{\left(\Lambda^{-1}\right)}{^{\mu}_\nu} v^\nu
+        \end{align*}
+        Now, this transform can be performed for an arbitary frame with no convenient axis, but that will result in impractically copius algebra. $K$'s axes here will simply be the ones such that:
+        \begin{equation*}
+          u = \left(
+                cu^0, u, 0, 0
+              \right)
+        \end{equation*}
+        Where $u^0$ is the ratio rate of time passing in frame $K$ with respect to propper time.
+        Under these conditions the Lorentz transform with this boost in the ${\bf u}$ direction is:
+        \begin{equation*}
+          \Lambda = \left(\begin{matrix}
+                      \gamma          &         -\gamma u / cu^0 & 0 & 0\\ 
+                      -\gamma u / cu^0 & \gamma                 & 0 & 0\\ 
+                      0               & 0                      & 1 & 0\\ 
+                      0               & 0                      & 0 & 1
+                    \end{matrix}\right)
+        \end{equation*}
+        And the inverse of this matrix is a matrix such that $\Lambda^{-1}\Lambda = 1$. To this end see that:
+        Now let $u = u / u^0$ which is just the magnitude of ${\bf u}$ in the $K$ frame, technically $u_0 = 1$ since the $K$ frame is the rest frame.
+        \begin{equation*}
+          \gamma^2 - \frac{u^2}{c^2} \gamma ^2 = \gamma^2(1 - \frac{u^2}{c^2}) = \gamma^2 (\gamma^{-2}) = 1
+        \end{equation*}
+        To this end, the matrix
+        \begin{equation*}
+          \Lambda^{-1} = \left(\begin{matrix}
+                      \gamma         &        \gamma u / c & 0 & 0\\ 
+                      \gamma u / c & \gamma                & 0 & 0\\ 
+                      0              & 0                     & 1 & 0\\ 
+                      0              & 0                     & 0 & 1
+                    \end{matrix}\right)
+        \end{equation*}
+        Is the inverse which is the Lorentz transform for $u = (cu^0, - u, 0, 0)$.
+        Now:
+        \begin{align*}
+          v &= \Lambda^{-1} v'\\
+            & = \left(\begin{matrix}
+                      \gamma         &        \gamma u / c & 0 & 0\\ 
+                      \gamma u / c & \gamma                & 0 & 0\\ 
+                      0              & 0                     & 1 & 0\\ 
+                      0              & 0                     & 0 & 1
+                    \end{matrix}\right)
+                  \left(\begin{matrix}
+                    c v'^0    \\
+                    v'^1    \\
+                    v'^2 \\
+                    v'^3
+                  \end{matrix}\right)\\
+            &=              \left(\begin{matrix}
+                                c\gamma (v'^0   + u v'^1/ c^2) \\ 
+                                \gamma (u v'^0 + v'^1)   \\ 
+                                v'^2                \\ 
+                                v'^3
+                            \end{matrix}\right)\\
+            &=
+                  \left(\begin{matrix}
+                    c v^0  \\
+                    v^1    \\
+                    v^2    \\
+                    v^3
+                  \end{matrix}\right)
+        \end{align*}
+        Now to find the velocity measured in frame $K$ the spacial components (derivatives with respect to proper time) must be divided by the ratio of local time to proper time (the vectors first component except for the factor of $c$).
+        Note that $v^1$ and $v'^1$ are the components parallel to ${\bf u}$ by the choice of reference frame, and the other components are parallel.
+        \begin{align*}
+                \left(\begin{matrix}
+                    c   \\
+                    {\bf v}   
+                  \end{matrix}\right)
+            =       
+                  \left(\begin{matrix}
+                    c   \\
+                    v^1/v^0    \\
+                    v^2/v^0   \\
+                    v^3/v^0
+                  \end{matrix}\right)
+            &=              \left(\begin{matrix}
+                                c \\ 
+                                \gamma (u v'^0 + v'^1)/\left[ \gamma (v'^0   + u v'^1/ c^2)\right]   \\ 
+                                v'^2 / \gamma (v'^0   + u v'^1/ c^2)/\left[ \gamma (v'^0   + u v'^1/ c^2)\right]              \\ 
+                                v'^3 / \gamma (v'^0   + u v'^1/ c^2)/\left[ \gamma (v'^0   + u v'^1/ c^2)\right]
+                            \end{matrix}\right)\\
+            &=              \left(\begin{matrix}
+                                c \\ 
+                                (u  + v'^1/v'^0)/\left[ (1  + u \frac{v'^1}{v'0}/ c^2)\right]   \\ 
+                                v'^2 /v'^0/\left[ \gamma (1   + u \frac{v'^1}{v'0}/ c^2)\right]              \\ 
+                                v'^3 /v'^0/\left[ \gamma (1   + u \frac{v'^1}{v'0}/ c^2)\right]
+                            \end{matrix}\right)\\
+        \end{align*}
+        Notice that:
+        \begin{equation*}
+          u \frac{v'^1}{v'^0} = {\bf u} \cdot {\bf v}'
+        \end{equation*}
+        and $v'^j/v'^0$ are just the components of the local three velocity ${\bf v}'$ of moving body.
+      \item
+        The non-associativity relates to the Leibniz rule.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        Note that ${\bf v} \times {\bf v} = 0$, which gives:
+        \begin{align*}
+          \delta {\bf v}' &= (-{\bf v}) \oplus ({\bf v + \delta v})\\
+                          &= \frac{1}{1 - \frac{ v^2 - {\bf v}\cdot \delta {\bf v}}{c^2}} \left( \delta {\bf v} + \frac{\gamma(v)}{1 + \gamma(v)} \frac{- {\bf v}}{c} \times \left(\frac{- {\bf v}}{c} \times \delta {\bf v}\right)\right)\\
+                          &= \frac{1}{1 - \frac{ v^2 - {\bf v}\cdot \delta {\bf v}}{c^2}}\left[ \delta {\bf v}_\parallel + \delta {\bf v}_\perp + \frac{\gamma(v)}{1 + \gamma(v)}\frac{1}{c^2} \left({\bf v}({\bf v} \cdot \delta {\bf v}) - \delta {\bf v}({\bf v} \cdot {\bf v})\right)\right]\\
+                          &= \frac{1}{1 - \frac{ v^2 - {\bf v}\cdot \delta {\bf v}}{c^2}}\left[ \delta {\bf v}_\parallel + \delta {\bf v}_\perp - \frac{\gamma(v)}{1 + \gamma(v)}\frac{v^2}{c^2} \left(\delta {\bf v}({\bf v} \cdot {\bf v}) - {\bf v}({\bf v} \cdot \delta {\bf v}) )\right)\right]\\
+                          &= \frac{1}{1 - \frac{ v^2 - {\bf v}\cdot \delta {\bf v}}{c^2}}\left[ \delta {\bf v}_\parallel + \delta {\bf v}_\perp - \frac{\gamma(v)}{1 + \gamma(v)}\frac{v^2}{c^2} \delta {\bf v}_\perp\right]\\
+                          &= \frac{1}{1 - \frac{ v^2 - {\bf v}\cdot \delta {\bf v}}{c^2}}\left[ \delta {\bf v}_\parallel + \delta {\bf v}_\perp - (1 - \gamma(v)^{-1}) \delta {\bf v}_\perp\right]\\
+                          &= \frac{1}{1 - \frac{ v^2 - {\bf v}\cdot \delta {\bf v}}{c^2}}\left[ \delta {\bf v}_\parallel +  \gamma(v)^{-1} \delta {\bf v}_\perp\right]\\
+        \end{align*}
+        The front factor in the last expression can be expanded about $\gamma(v)^2$:
+        \begin{align*}
+          \frac{1}{1 - \frac{ v^2 - {\bf v}\cdot \delta {\bf v}}{c^2}} &= \frac{1}{1 - \frac{ v^2 }{c^2} - \frac{{\bf v}\cdot \delta {\bf v}}{c^2}}\\
+                                                                       &\approx \frac{1}{1 - \frac{ v^2 }{c^2} } - \frac{1}{\left(1 - \frac{ v^2 }{c^2}\right)^2 }\left(- \frac{{\bf v}\cdot \delta {\bf v}}{c^2}\right)\\
+                                                                       &= \gamma(v)^2 + \gamma(v)^4 \frac{{\bf v}\cdot \delta {\bf v}}{c^2}
+        \end{align*}
+        Thus:
+        \begin{align*}
+          \delta {\bf v}' &= \gamma(v)^2 \delta {\bf v}_\parallel +  \gamma(v) \delta {\bf v}_\perp
+        \end{align*}
+      \item
+        The problem is best solved(?) if basis vectors are chosen such that ${\bf v} = (v, 0, 0)$ where $v$ is the length of ${\bf v}$.
+        In this case ${\bf \delta v} = ( \delta v_\parallel, \delta v_2, \delta v_2)$.
+        But now the reference frame can be rotated about ${\bf v}$ so that ${\bf \delta v} = ( \delta v_\parallel, \delta v_\perp, 0)$.
+        Now, the problem at hand essentially has two space dimensions.\footnote{Mathematica was not available at the time of writing this, and there was a necesity to avoid extra computation.}
+        For $B({\bf v + \delta v})$:
+        \begin{align*}
+          \psi''_1 &= \tanh^{-1}(v + \delta v) \\
+                  &= \frac{1}{2}\left(\ln(1 + v + \delta v_\parallel) - \ln(1 - v - \delta v_\parallel)\right)\\
+                  &= \frac{1}{2}\left(\ln(1 + v) - \ln(1 - v)\right) + \frac{\delta v_\parallel}{2}\left(\frac{1}{1 + v} + \frac{1}{1 - v}\right) + \mathcal{O}(\delta v_\parallel^2)\\
+                  &= \psi_1 + \frac{\delta v_\parallel}{2}\left(\frac{2}{1 - v^2}\right) + \mathcal{O}(\delta v_\parallel^2)\\
+                  &= \psi_1 + \gamma^2 \delta v_\parallel + \mathcal{O}(\delta v_\parallel^2)\\
+        \end{align*}
+        Similarly:
+        \begin{align*}
+          \psi''_2 &= \tanh^{-1}(\delta v_\perp) \\
+                  &= \frac{1}{2}\left(\ln(1 + \delta v_\perp) - \ln(1 - \delta v_\perp)\right)\\
+                  &= \frac{1}{2}\left(\ln(1) - \ln(1)\right) + \frac{\delta v_\perp}{2}\left(1 + 1\right) + \mathcal{O}(\delta v_\perp^2)\\
+                  &= \delta v_\perp + \mathcal{O}(\delta v_\perp^2)
+        \end{align*}
+        And $\psi''_3 = 0$.
+        For $B(-{\bf v})$:
+        \begin{align*}
+          \tanh^{-1}(-v )
+                  &= \frac{1}{2}\left(\ln(1 - v ) - \ln(1 + v )\right)\\
+                  &= - \frac{1}{2}\left(\ln(1 + v ) - \ln(1 - v )\right)\\
+                  &= - \psi_1
+        \end{align*}
+        Only keeping the terms of order $\delta v_*$ and using the BCH formula:
+        \begin{equation*}
+          \exp (A) \exp(B) = \exp(A + B + \frac{1}{2}[A, B] + \frac{1}{12}[A, [A, B]] + ...)
+        \end{equation*}
+        Now isolating the exponents and inserting the boosts:
+        \begin{align*}
+          &\psi_1 K_1 + \gamma^2 \delta v_\parallel K_1 + \delta v_\perp K_2 - \psi_1 K_1 + \frac{1}{2} \left[\gamma^2 \delta v_\parallel K_1 - \delta v_\perp K_2, \psi_1 K_1\right]\\
+          =&  \gamma^2\delta v_\parallel K_1 +  \delta v_\perp K_2  - \frac{1}{2} \left[ \delta v_\perp K_2, \psi_1 K_1\right]\\
+          =&  \gamma^2\delta v_\parallel K_1 +  \delta v_\perp K_2  + \frac{1}{2} \delta v_\perp \psi_1 J_3\\
+        \end{align*}
+        \begin{align*}
+          &\exp\left\{\psi_1 K_1 + \gamma^2 \delta v_\parallel K_1 + \delta v_\perp K_2 \right\}\\
+          &\exp\left\{\delta v_\perp K_2 + \psi_1 K_1 + \gamma^2 \delta v_\parallel K_1 \right\}\\
+          &\exp\left\{\delta v_\perp K_2 + \frac{1}{2}\delta v_\perp\psi_1 J_3\right\} \exp\left\{\psi_1 K_1 + \gamma^2 \delta v_\parallel K_1 \right\}\\
+        \end{align*}
+        \begin{align*}
+          B({\bf v} + \delta {\bf v}) =
+          \left(
+        \begin{matrix}
+          \tilde \gamma    &-\tilde\gamma (v + \delta v_\parallel)/c                   &-\tilde\gamma \delta v_\perp/c                   &0  \\                  
+          -\tilde\gamma (v + \delta v_\parallel)/c       &1+(\tilde\gamma-1)\frac{(v + \delta v_\parallel)^2}  {\tilde v^2}&  (\tilde\gamma-1)\frac{(v + \delta v_\parallel)\delta v_\perp}{\tilde v^2}&  0   \\
+        -\tilde\gamma v_\perp/c&  (\tilde\gamma-1)\frac{(v + \delta v_\parallel)\delta v_\perp}{\tilde v^2}&1+(\tilde\gamma-1)\frac{\delta v_\perp^2}{\tilde v^2}&  0                              \\
+          0                                             &  0                             & 0 & 1                               
+        \end{matrix}
+          \right)
+        \end{align*}
+        Where:
+        \begin{align*}
+          \tilde\gamma &= \gamma(|{\bf v} + \delta {\bf v}|)\\
+                       &= \frac{1}{\sqrt{1 - v^2 - 2 v \delta v_\parallel }}\\
+                       &= \gamma(v) + v \delta v_\parallel \frac{1}{\sqrt{1 - v^2 }^3} + \mathcal{O}(\delta v_\parallel^2)\\
+                       &= \gamma(v) + v \delta v_\parallel \gamma^3 + \mathcal{O}(\delta v_\parallel^2)
+        \end{align*}
+        And:
+        \begin{equation*}
+          \tilde v^2 = |{\bf v} + \delta {\bf v}|^2 = (v + \delta v_\parallel)^2 + \delta v_\perp^2 = (v + \delta v_\parallel)^2
+        \end{equation*}
+        \begin{align*}
+          B({\bf v} + \delta {\bf v}) &=
+          \left(
+        \begin{matrix}
+          \tilde \gamma    &-\tilde\gamma (v + \delta v_\parallel)/c                   &-\tilde\gamma \delta v_\perp/c                   &0  \\                  
+          -\tilde\gamma (v + \delta v_\parallel)/c       &   \tilde\gamma                                                  &  (\tilde\gamma-1)\frac{\delta v_\perp}{(v + \delta v_\parallel)}&  0   \\
+          -\tilde\gamma \delta v_\perp/c&  (\tilde\gamma-1)\frac{\delta v_\perp}{(v + \delta v_\parallel)}               &  1                               & 0\\
+          0                                             &  0                             & 0 & 1                               
+        \end{matrix}
+          \right)\\
+          &=
+          \left(
+        \begin{matrix}
+          \gamma + v \delta v_\parallel \gamma^3    &- (\gamma v + v^2 \delta v_\parallel \gamma^3 + \gamma\delta v_\parallel)/c                   &-\gamma \delta v_\perp/c                   &0  \\                  
+          - (\gamma v + v^2 \delta v_\parallel \gamma^3 + \gamma\delta v_\parallel)/c &   \gamma + v \delta v_\parallel \gamma^3                      &  (\gamma-1)\frac{\delta v_\perp}{v}&  0   \\
+          -\gamma \delta v_\perp/c&  (\gamma-1)\frac{\delta v_\perp}{v}               &  1                               & 0\\
+          0                                             &  0                             & 0 & 1                               
+        \end{matrix}
+          \right)
+        \end{align*}
+        For $B({\bf v + \delta v})$:
+        \begin{align*}
+          B(-\mathbf{v}) =
+          \left(
+          \begin{matrix}
+          \gamma       & \gamma v/c                     &0                               &0                                \\
+          \gamma v  /c &   \gamma                       &0                               &0                                \\
+          0            &0                               &1                               &0                                \\
+          0            &0                               &0                               &1
+          \end{matrix}
+          \right)
+        \end{align*}
+
+        \begin{align*}
+          B(-{\bf v}) = 
+        \end{align*}
+      \item
+        Boosts do not form a subgroup of the Lorentz group.
+        The combination of two boosts is a boost times a rotation.
+        Therefore, boosts do not satisfy the property of groups that requires the group to be closed under the combination operation.
+      \item
+      \item
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
