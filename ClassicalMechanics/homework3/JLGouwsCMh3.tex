@@ -1,0 +1,582 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{CM Homework 3}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        \begin{enumerate}
+          \item
+            The Maxwell's equations for the vector potential are:
+            \begin{align*}
+              \Box A_\nu -\nabla_\nu\nabla^\mu A_mu &= - 4 \pi j_\nu\\
+              \nabla_\mu A^\mu &= \Gamma
+            \end{align*}
+          \item 
+            For the Lorentz gauge, $A_\mu \leadsto A_\mu + \nabla_\mu \xi$ such that Maxwell's equations simplify to:
+            \begin{align*}
+              \Box A_\mu &= -4 \pi j_\mu\\
+              \nabla_\mu A^\mu &= 0
+            \end{align*}
+        \end{enumerate}
+
+      \item
+        For the second equation:
+        \begin{align*}
+          0 = \nabla_\nu A^\nu &= \eta^{\mu\nu} a_\mu\frac{\partial}{\partial x^{\nu}} \exp(ik_\nu x^\nu)\\
+                           &= \eta^{\mu\nu} a_\mu \exp(ik_\nu x^\nu)i k_\nu\\
+                           &= (\mathbf{a} \cdot \mathbf{k} - \omega \phi) \exp(ik_\nu x^\nu)\\
+                           &\Rightarrow \mathbf{a} \cdot \mathbf{k} = \omega \phi
+        \end{align*}
+        For the first equation:
+        \begin{align*}
+          0 = \Box A_\mu  &= \nabla^\nu \nabla_\nu A_\mu\\
+                          &= \eta^{\rho\nu}\nabla_\rho \nabla_\nu A_\mu\\
+                          &= \eta^{\rho\nu}\nabla_\rho a_\mu \exp(ik_\mu x^\mu) i k_\nu \\
+                          &= - \eta^{\rho\nu} a_\mu \exp(ik_\mu x^\mu) k_\nu k_\rho \\
+%                          &= \left(-\frac{\partial^2}{\partial t^2} + \frac{\partial }{\partial x^i \partial x_i}\right) a_\mu \exp(ik_\mu x^\mu)\\
+                          &= a_\mu (\omega^2 - |\mathbf{k}|^2)\exp(ik_\mu x^\mu)
+        \end{align*}
+        Now one posibility for the coefficients to solve the equation is for each component of $a$ to be zero, this is trivial since there is not potential at all so not of interest.
+        Thus the interesting condition is:
+        \begin{align*}
+          \omega^2 = |\mathbf{k}|^2
+        \end{align*}
+      \item
+        The electromagnetic stress tensor is required from the potential:
+        \begin{align*}
+          \tensor{F}{_\mu_\nu} &= \nabla_\mu A_\nu - \nabla_\nu A_\mu\\
+                               &= ik_\mu a_\nu \exp(ik_\rho x^\rho) - ik_\nu a_\mu\exp(ik_\rho x^\rho)\\
+                               &= i(k_\mu a_\nu - k_\nu a_\mu) \exp(ik_\rho x^\rho)
+        \end{align*}
+        Now for the electric field:
+        \begin{align*}
+          E^i = \tensor{F}{_i_0} &= i(k_i a_0 - k_0 a_i) \exp[ik_\rho x^\rho]\\
+                                 &= - i(k^i \phi + \omega a^i) \exp[i(-\omega t + \mathbf{k}\cdot \mathbf{x})]\\
+        \end{align*}
+        Now dotting this with $\mathbf{n} = \mathbf{k} / k$ and noting no appearance of the metric since this is the spacelike hypersurface:
+        \begin{align*}
+          \mathbf{E} \cdot \mathbf{n} =  E^i k_i / k &=  - i(k^i k_i\omega + \omega a^i k_i) \exp[ik_\rho x^\rho] / k\\
+                                                     &=  - i(|\mathbf{k}|^2 \phi + \omega \mathbf{a} \cdot \mathbf{k}) \exp[ik_\rho x^\rho] / k\\
+                                                     &=  - i(\omega^2 \phi + \omega^2 \phi) \exp[ik_\rho x^\rho] / k\\
+                                                     &= 0
+        \end{align*}
+        For the magnetic flux density:
+        \begin{align*}
+                      & \tensor{\epsilon}{^i^j_k} B^k = \tensor{F}{_i_j} \\
+          \Rightarrow & \tensor{\epsilon}{^i^j^k}\tensor{\epsilon}{^i^j_l} B^l = \tensor{\epsilon}{^i^j^k} \tensor{F}{_i_j} \\
+          \Rightarrow & 2\delta^k_l B^l = \tensor{\epsilon}{^i^j^k} \tensor{F}{_i_j} \\
+          \Rightarrow & B^k = \frac{1}{2}\tensor{\epsilon}{^i^j^k} \tensor{F}{_i_j} 
+        \end{align*}
+        Now, calculating the components of the flux density is easier:
+        \begin{align*}
+          B^k &= \frac{1}{2}\tensor{\epsilon}{^i^j^k} \tensor{F}{_i_j} \\
+              &= \frac{1}{2}\tensor{\epsilon}{^i^j^k} \left[i(k_i a_j - k_j a_i) \exp(ik_\rho x^\rho)\right] \\
+%              &= \frac{i}{2}\exp(ik_\rho x^\rho)\left[\tensor{\epsilon}{^i^j^k} k_i a_j + \tensor{\epsilon}{^j^i^k}k_j a_i) \right] \\
+%              &= \frac{i}{2}\exp(ik_\rho x^\rho)\left[\tensor{\epsilon}{^i^j^k} k_i a_j + \tensor{\epsilon}{^i^j^k}k_i a_j) \right] \\
+              &= i\tensor{\epsilon}{^i^j^k} k_i a_j \exp(ik_\rho x^\rho) 
+        \end{align*}
+        Now:
+        \begin{align*}
+          \mathbf{B} \cdot \mathbf{n} =  B^i k_i / k &= \frac{1}{2}\tensor{\epsilon}{^j^k^i} \left[i(k_j a_k - k_k a_j) \exp(ik_\rho x^\rho)\right] k_i / k\\
+                                                     &= \frac{i}{2}\exp(ik_\rho x^\rho) \left[\tensor{\epsilon}{^j^k^i}k_j a_k k_i - \tensor{\epsilon}{^j^k^i} k_k a_j k_i \right]/k \\
+                                                     &= \frac{i}{2}\exp(ik_\rho x^\rho) \left[\tensor{\epsilon}{^j^k^i}k_j a_k k_i - \tensor{\epsilon}{^k^i^j} k_i a_k k_j \right]/k \\
+                                                     &= \frac{i}{2}\exp(ik_\rho x^\rho) \left[\tensor{\epsilon}{^j^k^i}k_j a_k k_i - \tensor{\epsilon}{^j^k^i} k_i a_k k_j \right]/k \\
+                                                     &= 0 
+        \end{align*}
+        Now for the cross product:
+        \begin{align*}
+          \mathbf{B} \times \mathbf{n} &= \tensor{\epsilon}{^i^j_k} B^k k_j / k \\
+                                       &= \tensor{F}{_i_j} k_j / k \\
+                                       &= i(k_i a_j - k_j a_i) \exp(ik_\rho x^\rho) k_j / k \\
+                                       &= i(k_i \mathbf{a}\cdot \mathbf{k} - |\mathbf{k}|^2 a_i) \exp(ik_\rho x^\rho) / k \\
+                                       &= i(k_i \omega \phi - \omega^2 a_i) \exp(ik_\rho x^\rho) / \omega \\
+                                       &= i(k_i \phi - \omega a_i) \exp(ik_\rho x^\rho)\\
+                                       &= E_i
+        \end{align*}
+      \item
+        Now $A^\mu$ becomes $(0, \mathbf{A})$: so that:
+        \begin{align*}
+          E^i   &= - i(k^i \phi + \omega a^i) \exp[i(-\omega t + \mathbf{k}\cdot \mathbf{x})]\\
+                &= - i\omega a^i \exp[i(-\omega t + \mathbf{k}\cdot \mathbf{x})]\\
+                &=  a^i \frac{\partial}{\partial t} \exp[i(-\omega t + \mathbf{k}\cdot \mathbf{x})]\\
+        \end{align*}
+        Which in vector form is
+        \begin{align*}
+          \mathbf{E} = \dot{\mathbf{ A}}
+        \end{align*}
+        and:
+        \begin{align*}
+          \mathbf{B} = \mathbf{n} \times \mathbf{E} = \mathbf{n} \times \dot{\mathbf{ A}}
+        \end{align*}
+      \item
+        Note that:
+        \begin{align*}
+          \frac{\partial}{\partial t} \varepsilon &= \mathbf{E} \cdot \frac{\partial \mathbf{E}}{\partial t} + \mathbf{B} \cdot \frac{\partial \mathbf{B}}{\partial t}\\
+        \end{align*}          
+        And using Maxwell's equations:
+        \begin{align*}
+          \nabla \cdot \mathbf{S} &=
+          \nabla \cdot \left(\mathbf{E} \times \mathbf{B} \right) \\
+                                                  &= (\nabla \times \mathbf{E}) \cdot \mathbf{B} - \mathbf{E} \cdot (\nabla \times \mathbf{B})\\
+                                                  &= - \mathbf{B} \cdot \partial_t \mathbf{B} - \mathbf{E} \cdot \partial_t \mathbf{E} \\
+                                                  &= - \partial_t \varepsilon
+        \end{align*}          
+        In this sense, the Poynting vector is the current associated with the energy $\epsilon$ (charge).
+        The Poynting vector describes the instantaneous flow of energy out of a surface.
+      \item
+        This is just the rate of change of the total energy out of some bounding surface:
+        \begin{align*}
+          P = \frac{d E}{dt} &= - \frac{d}{dt} \int_V d^3x \epsilon\\
+                             &= - \int_V d^3x \partial_t \epsilon\\
+                             &= \int_V d^3x \nabla \cdot \mathbf{S}\\
+                             &= \int_{\partial V} d \mathbf{a} \cdot \mathbf{S} d
+        \end{align*}
+        For a sphere:
+        \begin{align*}
+          d \mathbf{a} = \vec{s} R^2 \sin \theta d \theta  d \psi
+        \end{align*}
+        Where $\vec{s}$ is a unit vector normal to the sphere, an not:
+        \begin{align*}
+          P &= R^2\int_{\partial V} \vec{s} \cdot \mathbf{S}  \sin \theta d \theta  d \psi
+        \end{align*}
+      \item
+        The Poynting vector here is:
+        \begin{align*}
+          \mathbf{S} &=
+          \dot{\mathbf{A}} \times \left(\mathbf{n} \times \dot{\mathbf{A}}\right) \\
+                                                  &= |\dot {\mathbf{A}}|^2\mathbf{n} - \left(\dot{\mathbf{A}} \cdot \mathbf{n}\right) \dot{\mathbf{A}}\\
+                                                  &= |{\mathbf{E}}|^2\mathbf{n} - \left(\mathbf{E} \cdot \mathbf{n}\right) \dot{\mathbf{A}}\\
+                                                  &= |{\mathbf{E}}|^2\mathbf{n} 
+        \end{align*}          
+        but note that since $\mathbf{n} \cdot \dot{\mathbf{A}} = 0$ and $\mathbf{n}| = 1$:
+        \begin{align*}
+          |\mathbf{B}|^2 = |\dot{\mathbf{A}} \times \mathbf{n}|^2 = |\dot{\mathbf{A}}|^2 = |\mathbf{E}|^2
+        \end{align*}
+        Thus,
+        \begin{align*}
+          \mathbf{S} 
+                  &= \left(\frac{1}{2}|{\mathbf{E}}|^2 + \frac{1}{2}|{\mathbf{B}}|^2 \right)\mathbf{n} \\
+                  &= \varepsilon\mathbf{n} 
+        \end{align*}          
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        Looking at the denomenator of the integrand:
+        \begin{align*}
+          \frac{1}{|\mathbf{r} - \mathbf{r}'|} &= \frac{1}{|\mathbf{r}|^2 + |\mathbf{r}'|^2 - 2|\mathbf{r}||\mathbf{r}'|\cos \theta}\\
+                                               &= \frac{1}{|\mathbf{r}|^2} - \frac{2 |\mathbf{r}'| - 2|\mathbf{r}|}{|\mathbf{r}|^4} + \mathcal{O}(\mathbf{r}'^2)
+        \end{align*}
+        
+        Since $|\mathbf{r}| \gg |\mathbf{r}'|$ only the first term is significant, and
+        \begin{align*}
+          \frac{1}{|\mathbf{r} - \mathbf{r}'|} &\approx \frac{1}{|\mathbf{r}|^2}
+        \end{align*}
+        And the potential becomes:
+        \begin{equation*}
+          \mathbf{A}(t, \mathbf{r}) \approx \frac{1}{|r|} \int d^3 r' \mathbf{j}(t_R, \mathbf{r}')
+        \end{equation*}
+      \item
+        Taylor expanding:
+        \begin{align*}
+          |\mathbf{r} - \mathbf{r}'| &= \sqrt{|\mathbf{r}|^2 + |\mathbf{r}'|^2 - 2 \mathbf{r} \cdot \mathbf{r}'}\\
+                                     &= \sqrt{|\mathbf{r}|^2 + |\mathbf{r}'|^2 - 2 |\mathbf{r}| |\mathbf{r}'| \cos \theta}\\
+                                     &= \sqrt{|\mathbf{r}|^2} + \frac{|\mathbf{r}'|^2}{\sqrt{|\mathbf{r}|^2}} - \frac{|\mathbf{r}| |\mathbf{r}'| \cos \theta}{\sqrt{|\mathbf{r}|^2}} + \mathcal{O}\left(\frac{1}{|\mathbf{r}|^2}\right)\\
+                                     &\approx |\mathbf{r}|  - \mathbf{n}_\mathbf{r} \cdot \mathbf{r}'
+        \end{align*}
+        Now, the retarded time becomes:
+        \begin{align*}
+          t_R &\approx t - |\mathbf{r}|  + \mathbf{n}_\mathbf{r} \cdot \mathbf{r}'\\
+              &=       t'  + \mathbf{n}_\mathbf{r} \cdot \mathbf{r}'
+        \end{align*}
+        Now the current can be approximated:
+        \begin{align*}
+          \mathbf{j}(t_R) &\approx \mathbf{j}(t' + \mathbf{n}_\mathbf{r} \cdot \mathbf{r}')\\
+                          &\approx \mathbf{j}(t')  + \frac{d \mathbf{j}}{dt'}(t') \mathbf{n}_\mathbf{r} \cdot \mathbf{r}'
+        \end{align*}
+        Upon substituting these expressions into the expression for the vector potential:
+        \begin{align*}
+          \mathbf{A}(t,\mathbf{r}) &\approx \frac{1}{|\mathbf{r}|} \int d^3r' \left(\mathbf{j}(t')  + \frac{d \mathbf{j}}{dt'}(t') \mathbf{n}_\mathbf{r} \cdot \mathbf{r}'\right)\\
+                                   &=       \frac{1}{|\mathbf{r}|} \int d^3r' \mathbf{j}(t')  + \frac{1}{|\mathbf{r}|} \int d^3r'\frac{d \mathbf{j}}{dt'}(t') (\mathbf{n}_\mathbf{r} \cdot \mathbf{r}')\\
+                                   &=       \frac{1}{|\mathbf{r}|} \int d^3r' \mathbf{j}(t')  + \frac{1}{|\mathbf{r}|} \frac{\partial }{\partial t'}\int d^3r'(\mathbf{n}_\mathbf{r} \cdot \mathbf{r}') \mathbf{j}(t') 
+        \end{align*}
+      \item
+        Only taking the first part of the vector potential:
+        \begin{align*}
+          \mathbf{A}(t,\mathbf{r}) &= \frac{1}{|\mathbf{r}|} \int d^3r' \mathbf{j}(t') \\
+                                   &= \frac{1}{|\mathbf{r}|} \int d^3r' \mathbf{j} \cdot \nabla'(\mathbf{r}') \\
+                                   &= -\frac{1}{|\mathbf{r}|} \int d^3r' \nabla' \cdot \mathbf{j} \mathbf{r}' + \int \mathbf{r'} \mathbf{j} \cdot d \mathbf{a}\\
+                                   &= \frac{1}{|\mathbf{r}|} \int d^3r' \dot \rho \mathbf{r}'  \\
+                                   &= \frac{1}{|\mathbf{r}|} \frac{\partial}{\partial t}\int d^3r' \rho \mathbf{r}'  \\
+                                   &= \frac{\dot{\mathbf{d}}}{|\mathbf{r}|}
+        \end{align*}
+        Where we used the fact that there are no currents just outside the region where the charges are contained.
+        With
+        \begin{equation*}
+          \dot{\mathbf{d}} = \int d^3r' \rho \mathbf{r}'
+        \end{equation*}
+
+        For some point charges the charge density is:
+        \begin{equation*}
+          \rho = \sum_\alpha e_\alpha \delta^{(3)}(\mathbf{r} - \mathbf{r}_\alpha)
+        \end{equation*}
+        And the dipole moment becomes:
+        \begin{align*}
+          \dot{\mathbf{d}}(t') &= \sum_\alpha e_\alpha \int d^3r'\delta^{(3)}(\mathbf{r}' - \mathbf{r}'_\alpha)  \mathbf{r}'\\
+                               &= \sum_\alpha e_\alpha \mathbf{r}'_\alpha
+        \end{align*}
+      \item
+        The Poynting vector for the dipole radiation is:
+        \begin{align*}
+          \mathbf{S} &= \mathbf{E} \times \mathbf{B}\\
+                     &= \dot{\mathbf{A}} \times \left(\mathbf{n} \times \dot{\mathbf{A}}\right)\\
+                     &= \left(\dot{\mathbf{A}}\right)^2\mathbf{n} - \left(\mathbf{n} \cdot \dot{\mathbf{A}}\right) \dot{\mathbf{A}}
+        \end{align*}
+        Where $\mathbf{n}$ is the direction of the radiation, which will approximately be: $\mathbf{r}/|\mathbf{r}|$ in the large $r$ limit.
+        Now to find the power dissipated by dipole accross a surface, the most convenient surface is a sphere of radius $r$, and the coordinates are chosen such that $\dot{\mathbf{A}}$ is along the $z$-axis.
+        The coordinate system is chosen so that the angle btween $\vec{s} = \mathbf{r}/\mathbf{r}$ and $\dot{\mathbf{A}}$ is simply $\theta$.
+        Then:
+        \begin{align*}
+          P &= r^2\int_{S^2} \vec{s} \cdot \mathbf{S} \sin\theta d\theta d \psi\\
+            &= r^2\int_{S^2} \mathbf{n} \cdot \left[\left(\dot{\mathbf{A}}\right)^2\mathbf{n} - \left(\mathbf{n} \cdot \dot{\mathbf{A}}\right) \dot{\mathbf{A}} \right]\sin\theta d\theta d \psi\\
+            &= r^2\int_{S^2} \left[\left(\dot{\mathbf{A}}\right)^2 - \left(\mathbf{n} \cdot \dot{\mathbf{A}}\right)^2  \right]\sin\theta d\theta d \psi\\
+            &= r^2\left|\dot{\mathbf{A}}\right|^2\int_{S^2} \sin\theta d\theta d \psi - r^2\int_{S^2}\left|\dot{\mathbf{A}}\right|^2\cos^2\theta \sin\theta d\theta d \psi\\
+            &= r^2\left|\dot{\mathbf{A}}\right|^2 4\pi - 2\pi r^2\left|\dot{\mathbf{A}}\right|^2\left.\frac{\cos^3\theta}{3}\right|_0^\pi \\
+            &= r^2\left|\dot{\mathbf{A}}\right|^2 4\pi - 2\pi r^2\left|\dot{\mathbf{A}}\right|^2\frac{2}{3} \\
+            &= 4\pi r^2\left(\left|\dot{\mathbf{A}}\right|^2  - \left|\dot{\mathbf{A}}\right|^2\frac{1}{3}\right)
+        \end{align*}
+        Now along the surface of constant $\left|\mathbf{r}\right|$:
+        \begin{equation*}
+          \dot{\mathbf{A}} = \frac{d}{dt'} \frac{\dot{\mathbf{d}}(t')}{|\mathbf{r}|} = \frac{\ddot{\mathbf{d}}(t')}{|\mathbf{r}|}
+        \end{equation*}
+        Using this in the expression for $P$:
+        \begin{align*}
+          P = 4\pi \frac{2}{3} |\ddot{\mathbf{d}}(t')|^2
+        \end{align*}
+      \item
+        \begin{align*}
+          \ddot{\mathbf{d}}(t') = \sum_{\alpha = 1}^{N} e_\alpha \ddot{\mathbf{r}}'_\alpha
+        \end{align*}
+        But, Newton's second law gives $\mathbf{F} = m\ddot{\mathbf{r}}$, and the force on the charge labelled by $\beta$ charge is (in a convenient choice of units):
+        \begin{align*}
+          & \mathbf{F}_\alpha= \sum_{\beta = 1, \beta \neq \alpha}^N \frac{e_\alpha e_\beta}{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}\\
+          \Rightarrow & \ddot{\mathbf{r}}_{\alpha} = \sum_{\beta = 1, \beta \neq \alpha }^N \frac{e_\alpha e_\beta}{m_\alpha|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} = \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}
+        \end{align*}
+        Where $k$ is the ratio of acharge to mass and $\hat{\mathbf{r}}_{\alpha\beta} = \frac{\mathbf{r}_\alpha - \mathbf{r}_\beta}{|\mathbf{r}_\alpha - \mathbf{r}_\beta|}$.
+      \item
+        \begin{enumerate}
+          \item
+            The integral expression for the power essentialy defines the flux of the field $\mathbf{S}$, but the flux of a field produced by a contained source does not depend on the geometry of the surface, just as in Gauss' law.
+            Thus, the power not depending on the radius of the surface is natural.
+          \item
+            This formula for the power depends on the second derivative of the dipole moment.
+            For a few dicrete charges, the charge of each does not depend on time, so the time dependence comes from the position of the charge $\mathbf{r}'_\alpha$ and the second derivative of this gives the charge's acceleration.
+            Thus, if the charge has no acceleration, it does not radiate any power.
+          \item
+            Now for the dipole term:
+            \begin{align*}
+              \ddot{\mathbf{d}}(t') &= \sum_{\alpha = 1}^{N} e_\alpha \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}\\
+                                    &= \sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}\\
+    %                                &= \frac{1}{2}\sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} + \frac{1}{2}\frac{1}{2}\sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}\\
+    %                                &=\frac{1}{2} \sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} + \frac{1}{2} \sum_{\beta= 1}^{N} \sum_{\alpha = 1, \beta \neq \alpha }^N \frac{k e_\beta e_\alpha }{|\mathbf{r}_\beta - \mathbf{r}_\alpha|^2} \hat{\mathbf{r}}_{\beta\alpha}\\ 
+    %                                &= \sum_{\alpha = 1}^{N} \sum_{\beta = 1}^{\alpha - 1} \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} + \sum_{\alpha = 1}^{N} \sum_{\beta = \alpha + 1}^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}\\
+    %                                &= \sum_{\beta = 1}^{N -1} \sum_{\alpha = 1}^{\beta + 1} \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} + \sum_{\alpha = 1}^{N} \sum_{\beta = \alpha + 1}^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}\\
+            \end{align*}
+            Notice that the sum here is the sum of all off diagonal entries in an $N \times N$ matrix.
+            This sum can be done over the rows or the columns first:
+            \begin{equation*}
+              \sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} = \sum_{\beta = 1}^{N} \sum_{\alpha = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}
+            \end{equation*}
+            Thus after splitting the sum, and in the second line relabelling the indices in the second sum:
+            \begin{align*}
+              \ddot{\mathbf{d}}(t') &= \frac{1}{2}\sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} + \frac{1}{2}\sum_{\beta = 1}^{N} \sum_{\alpha = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}\\
+                                    &= \frac{1}{2}\sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} + \frac{1}{2}\sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\beta e_\alpha}{|\mathbf{r}_\beta - \mathbf{r}_\alpha|^2} \hat{\mathbf{r}}_{\beta\alpha}\\
+                                    &= \frac{1}{2}\sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} - \frac{1}{2}\sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\beta e_\alpha}{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}\\
+                                    &= 0
+            \end{align*}
+          \item
+            A system where all the charges have the same charge to mass ratio is a bit artificial, because all the charges will have the same sign of there charge.
+            This is not typical of a natural system, because a bunch of charges of the same sign will tend to disperse without an external force holding them together.            
+            Also not many particles have the same charge to mass ratio unless they are the same type of particle and typically different types of particles group together.
+        \end{enumerate}
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+      For the second integral in the expression for $\mathbf{A}$ in component form:
+      \begin{align}
+        \int d^3r' j^i {r'}^j n_j &= \int j^i  {r'}^j n_j + \frac{1}{2}j^j n_j{r'}^i - \frac{1}{2}j^j n_j{r'}^i d^3r' \nonumber \\
+                                   &= \int j^i  {r'}^j n_j + \frac{1}{2}j^j n_j{r'}^i - \frac{1}{2}j^j n_j{r'}^i d^3r' \nonumber\\
+                                   &=\frac{1}{2} \int j^i  {r'}^j n_j + j^j n_j{r'}^id^3r' + \frac{1}{2}\int j^i  {r'}^j n_j - j^j n_j{r'}^i d^3r' \label{eq:vecPot}
+      \end{align}
+      For the first integral in in Eq.~\ref{eq:vecPot}:
+      \begin{align*}
+%        \frac{1}{2} \int j^i  {r'}^j n_j + j^j n_j{r'}^id^3r' &= \frac{1}{2} \int j^i  {r'}^j n_j d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%                                                              &= \frac{1}{2} \int j^k  {r'}^j n_j \partial_k {r'}^i d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%                                                              &= \frac{1}{2} \int {r'}^i \partial_k(j^k  {r'}^j n_j)   d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%                                                              &= -\frac{1}{2} \int {r'}^i \nabla \cdot \mathbf{j}  {r'}^j n_j + {r'}^i j^k n_j \partial'_k {r'}^jd^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j + {r'}^i j^j n_j d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j d^3r' + \frac{1}{2} \int j^j n_j({r'}^i + 1)d^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j + {r'}^i j^j n_j d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j d^3r' +  \int j^j n_j{r'}^id^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j d^3r' +  n_j\int j^j {r'}^i d^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j d^3r' +  n_j\int j^k \partial_k{r'}^j {r'}^l\partial_l{r'}^i d^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j d^3r' +  n_j\int j^j {r'}^k\partial'_k {r'}^i d^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j d^3r' +  n_j\int j^k {r'}^i\partial_k d^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho {r'}^i {r'}^j n_j d^3r' +  n_j\int j^j {r'}^k \partial_k {r'}^i d^3r'\\
+        \frac{1}{2} \int_{V'} j^i  {r'}^j n_j + j^j n_j{r'}^id^3r' &= \frac{1}{2} \int_{V'} j^i  {r'}^j n_j d^3r' + \frac{1}{2} \int_{V'} j^j n_j{r'}^id^3r'\\
+                                                              &= \frac{1}{2} n_j\int_{V'} j^k  {r'}^j \partial_k {r'}^i d^3r' + \frac{1}{2} n_j\int j^k {r'}^i\partial_k {r'}^j d^3r'\\
+                                                              &= \frac{1}{2} n_j\int_{V'} j^k  {r'}^j \partial_k {r'}^i  +  j^k {r'}^i\partial_k {r'}^j d^3r'\\
+                                                              &= \frac{1}{2} n_j\int_{V'} j^k  ({r'}^j\partial'_k {r'}^i  +  {r'}^i\partial'_k {r'}^j) d^3r'\\
+                                                              &= \frac{1}{2} n_j\int_{V'} j^k \partial'_k ({r'}^j {r'}^i) d^3r'\\
+                                                              &= \frac{1}{2} n_j\int_{V'} \partial'_k (j^k {r'}^j {r'}^i) d^3r' - n_j\int_{V'} (\partial'_k j^k) {r'}^j {r'}^i d^3r'\\
+                                                              &= \frac{1}{2} n_j\int_{\partial V'} \partial'_k n_k j^k {r'}^j {r'}^i d^3r' + n_j\int_{V'} \dot \rho {r'}^j {r'}^i d^3r'  \\
+                                                              &= \frac{1}{2} \int_{V'} \dot \rho n_j{r'}^j {r'}^i d^3r'\\
+                                                              &= \frac{1}{2} \frac{\partial}{\partial t} \int_{V'} \rho n_j{r'}^j {r'}^i d^3r'\\
+                                                              &= \frac{1}{6} \frac{\partial}{\partial t} \left[\int_{V'} 3 \rho {r'}^j {r'}^i d^3r'\right]n_j\\
+                                                              &:= \frac{1}{6} \frac{\partial}{\partial t} Q \mathbf{n} 
+%        \frac{1}{2} \int j^i  {r'}^j n_j + j^j n_j{r'}^id^3r' &= \frac{1}{2} \int j^i  {r'}^j n_j d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%                                                              &= \frac{1}{2} \int j^k  {r'}^j n_j \partial_k {r'}^i d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%                                                              &= -\frac{1}{2} \int (\partial_k j^k)  {r'}^j n_j {r'}^i d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+%                                                              &= \frac{1}{2} \int \dot \rho  {r'}^j n_j {r'}^i d^3r' + \frac{1}{2} \int j^j n_j{r'}^id^3r'\\
+      \end{align*}
+      With
+      \begin{equation*}
+        Q^{ij} = \int_{V'} 3 \rho {r'}^j {r'}^i d^3r'
+      \end{equation*}
+      Which in the discrete form becomes:
+      \begin{equation*}
+        Q^{ij} = \sum_\alpha 3 e_\alpha {r'}^i_\alpha {r'}^j_\alpha 
+      \end{equation*}
+      Missing the term $\delta^{ij}r^2$ which makes the tensor traceless, maybe this happens with a specific coordinate choice or by exploiting gauge freedom.
+
+      After writing the second integral in vector form:
+      \begin{align*}
+        \frac{1}{2}\int \mathbf{j}  (\mathbf{n}\cdot \mathbf{r'}) - (\mathbf{j}\cdot \mathbf{n})\mathbf{r'} d^3r'
+      \end{align*}
+      looking at it for too much time, one sees the triple product structure:
+      \begin{align*}
+        \int d^3r' j^i {r'}^j n_j &= \frac{1}{2}\int (\mathbf{n} \times (\mathbf{j} \times \mathbf{r}'))^i d^3r'\\
+                                  &= \frac{1}{2}\left[\int \mathbf{r}' \times \mathbf{j}d^3r' \right]\times \mathbf{n}
+      \end{align*}
+      and define:
+      \begin{equation*}
+         \mathbf{m} = \frac{1}{2}\int \mathbf{r}' \times \mathbf{j}d^3r'
+      \end{equation*}
+      In the discrete case for a single charge:
+      \begin{equation*}
+        \mathbf{j}_{\text{q}} = q \mathbf{v} \leadsto \mathbf{j} = \sum_\alpha e_\alpha \delta^{3}(\mathbf{x} - \mathbf{x}_\alpha)\mathbf{v}_\alpha
+      \end{equation*}
+      So that:
+      \begin{equation*}
+         \mathbf{m} = \frac{1}{2}\sum_\alpha e_\alpha\mathbf{r}'_\alpha \times \mathbf{v}_\alpha
+      \end{equation*}
+
+      \item
+        The Poynting vector is again:
+        \begin{align*}
+          \mathbf{S} &= \mathbf{E} \times \mathbf{B}\\
+                     &= \dot{\mathbf{A}} \times \left(\mathbf{n} \times \dot{\mathbf{A}}\right)\\
+                     &= \left(\dot{\mathbf{A}}\right)^2\mathbf{n} - \left(\mathbf{n} \cdot \dot{\mathbf{A}}\right) \dot{\mathbf{A}}
+        \end{align*}
+        Writing $\dot{\mathbf{A}}$ in index notation:
+        \begin{equation*}
+          \dot{A}^i = \frac{1}{r} \left(\ddot{d}^i + \frac{\dddot{Q}^{ij}n_j}{6} + \tensor{\epsilon}{^i_j_k}\dot m^j n^k\right)
+        \end{equation*}
+        And $\mathbf{n} \times \dot{\mathbf{A}} $:
+        \begin{align*}
+          \langle n_i n_j\rangle = \frac{1}{3}\delta_{ij}
+        \end{align*}
+        \begin{align*}
+          \langle n_i n_jn_kn_l\rangle = \frac{1}{15}(\delta_{ij}\delta_{kl} + \delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk})
+        \end{align*}
+        \begin{equation*}
+          \tensor{\epsilon}{^i_j_k}n^j \dot {A}^k = \frac{1}{r} \tensor{\epsilon}{^i_j_k}n^j  \left(\ddot{d}^j + \frac{\dddot{Q}^{jl}n_l}{6} + \tensor{\epsilon}{^j_l_m}\dot m^l n^m\right)
+        \end{equation*}
+        Now:
+        And $\dot{\mathbf{A}} \times (\mathbf{n} \times \dot{\mathbf{A}})$:
+        And $\dot{\mathbf{A}}^2$:
+        \begin{align*}
+          &\frac{1}{r^2}\left(\ddot{d}^i + \frac{\dddot{Q}^{ij}n_j}{6} + \tensor{\epsilon}{^i_j_k}\ddot m^j n^k\right) \left(\ddot{d}_i + \frac{\tensor{\dddot{Q}}{_i^k}n_k}{6} + \tensor{\epsilon}{_i_l_m}\ddot m^l n^m\right)\\
+          = &\frac{1}{r^2}\left(\ddot{d} \cdot \ddot{d} + \frac{\dddot{Q}^{ij}n_j}{6} \frac{\tensor{\dddot{Q}}{_i^k}n_k}{6} + \tensor{\epsilon}{^i_j_k}\dot m^j n^k \tensor{\epsilon}{_i_l_m}\dot m^l n^m\right) \\
+            &\quad + \frac{1}{r^2}\left(\frac{\ddot{d}^i \dddot{Q}^{ij}n_j}{3} + \frac{ \tensor{\epsilon}{_i_l_m}\dddot{Q}^{ij}n_j \ddot m^l n^m}{6} + \frac{ \tensor{\epsilon}{^i_j_k}\tensor{\dddot{Q}}{_i^l}n_l \ddot m^j n^k}{6} \right)\\
+          = &\frac{1}{r^2}\left(\ddot{d} \cdot \ddot{d} + \frac{\dddot{Q}^{ij}n_j}{6} \frac{\tensor{\dddot{Q}}{_i^k}n_k}{6} + \tensor{\epsilon}{^i_j_k}\dot m^j n^k \tensor{\epsilon}{_i_l_m}\dot m^l n^m\right) \\
+            &\quad + \frac{1}{r^2}\left(\frac{\ddot{d}^i \dddot{Q}^{ij}n_j}{3} + \frac{ \tensor{\epsilon}{^i_l_m}\dddot{Q}^{ij}n_j \ddot m^l n^m}{3}  \right)
+        \end{align*}
+        And $\mathbf{n} \cdot \mathbf{n} = 1$ so this value must be integrated over a sphere.
+        For which the quanitity
+        \begin{align*}
+          \langle n_i n_j\rangle %= \frac{1}{3}\delta_{ij}
+        \end{align*}
+        is required.
+        Look at the function:
+        \begin{equation*}
+          z(\mathbf{r}) = \int_{S^2} d \Omega e^{n^i r_i} = \int_{S^2} d \Omega e^{r \cos \theta}= 2 \pi \frac{e^{r} - e^{-r}}{r} = 4 \pi\left(1 +\frac{r^ir_i}{6}+\frac{(r^ir_i)^2}{120}\right) + \mathcal{O}(r^6)
+        \end{equation*}
+        And note:
+        \begin{equation*}
+          \left.\frac{\partial}{\partial r_i}z(\mathbf{r})\right|_{r = 0} = \int_{S^2} n_i d \Omega \quad \text{and} \quad \left.\frac{\partial}{\partial r_i}\frac{\partial}{\partial r_j}z(\mathbf{r})\right|_{r = 0} = \int_{S^2} n_i n_j d \Omega
+        \end{equation*}
+        Now:
+        \begin{equation*}
+          \frac{\partial}{\partial r_i}z(\mathbf{r}) = 4 \pi\left(\frac{r^i}{3}+\frac{2(r^jr_j)2r^i}{120}\right) + \mathcal{O}(r^5)
+        \end{equation*}
+        And for $\mathbf{r} = 0$ this vanishes, but:
+        \begin{equation*}
+          \frac{\partial}{\partial r_j}\frac{\partial}{\partial r_i}z(\mathbf{r}) = 4 \pi\left(\frac{\delta^{ij}}{3}+\frac{(r^jr_j)\delta^{ij}}{30}+\frac{r^jr^i}{15}\right) + \mathcal{O}(r^4)
+        \end{equation*}
+        And evaluated at $\mathbf{r} = 0$ gives:
+        \begin{equation*}
+          \int_{S^2} d \Omega = 4 \pi\left(\frac{\delta^{ij}}{3}\right)
+        \end{equation*}
+        \begin{align*}
+          \langle\dot A^2\rangle
+          = &\frac{4\pi}{r^2}\left(\ddot{\mathbf{d}} \cdot \ddot{\mathbf{d}} + \frac{\dddot{Q}^{ij}\tensor{\dddot{Q}}{_i^k} \delta^{jk}}{108} + \frac{\tensor{\epsilon}{^i_j_k}\tensor{\epsilon}{_i_l_m}\dot m^j \dot m^l \delta^{mk}}{9}\right) \\
+            &\quad + \frac{4\pi}{r^2}\left(\frac{ \tensor{\epsilon}{^i_l_m}\dddot{Q}^{ij}\delta^{jm} \dot m^l}{9} \right)\\
+          = &\frac{4\pi}{r^2}\left(\ddot{\mathbf{d}} \cdot \ddot{\mathbf{d}} + \frac{\dddot{\mathbf{Q}}:\dddot{\mathbf{Q}}}{108} + \frac{\tensor{\epsilon}{^i_j_k}\tensor{\epsilon}{_i_l_k}\dot m^j \dot m^l}{3}\right) \\
+            &\quad + \frac{4\pi}{r^2}\left(\frac{ \tensor{\epsilon}{^i_l_m}\dddot{Q}^{im} \ddot m^l}{9} \right)\\
+        \end{align*}
+        For the last term, $\tensor{\epsilon}{^i_l_m}$ is antisymmetric in $i$ and $m$, but $Q$ is symmetric in those indices, so the term is zero.
+        \begin{align*}
+          \langle\dot A^2\rangle
+          = &\frac{4\pi}{r^2}\left(\ddot{\mathbf{d}} \cdot \ddot{\mathbf{d}} + \frac{\dddot{\mathbf{Q}}:\dddot{\mathbf{Q}}}{108} + \frac{2 \delta^{jl}\ddot m^j \ddot m^l}{3}\right) \\
+          = &\frac{4\pi}{r^2}\left(\ddot{\mathbf{d}} \cdot \ddot{\mathbf{d}} + \frac{\dddot{\mathbf{Q}}:\dddot{\mathbf{Q}}}{108} + \frac{2}{3}\ddot{\mathbf{ m}}\cdot \ddot{\mathbf{ m}}\right) \\
+          = &\frac{4\pi}{r^2}\left(\ddot{\mathbf{d}} \cdot \ddot{\mathbf{d}} + \frac{\dddot{\mathbf{Q}}:\dddot{\mathbf{Q}}}{108} + \frac{2}{3}\ddot{\mathbf{ m}}\cdot \ddot{\mathbf{ m}}\right) 
+        \end{align*}
+        And $\dot{\mathbf{A}} \cdot \mathbf{n}$:
+        \begin{align*}
+          \dot{A}^in_i = \frac{1}{r^2}\left(\ddot{d}^in_i + \frac{\tensor{\dddot{Q}}{^i^j}n_in_j}{6}\right)
+        \end{align*}
+        Then
+        \begin{align*}
+          (\dot{A}^in_i)^2 &= \frac{1}{r^2}\left(\ddot{d}^in_i + \frac{\tensor{\dddot{Q}}{^i^j}n_in_j}{6}\right)\left(\ddot{d}^ln_l + \frac{\tensor{\dddot{Q}}{^k^l}n_kn_l}{6}\right)\\
+                           &= \frac{1}{r^2}\left(\ddot{d}^in_i \ddot{d}^ln_l + 2\ddot{d}^in_i\frac{\tensor{\dddot{Q}}{^k^l}n_kn_l}{6} + \frac{\tensor{\dddot{Q}}{^i^j}n_in_j\tensor{\dddot{Q}}{^k^l}n_kn_l}{36}\right)
+        \end{align*}
+        To integrate this over the sphere, the following are needed:
+        \begin{equation*}
+          \left.\frac{\partial}{\partial r_k}\frac{\partial}{\partial r_j}\frac{\partial}{\partial r_i}z(\mathbf{r})\right|_{r = 0} = \int_{S^2} n_i n_j n_k d \Omega\quad \text{and} \quad \left.\frac{\partial}{\partial r_l}\frac{\partial}{\partial r_k}\frac{\partial}{\partial r_j}\frac{\partial}{\partial r_i}z(\mathbf{r})\right|_{r = 0} = \int_{S^2} n_i n_j n_k n_l d \Omega
+        \end{equation*}
+        Now:
+        \begin{equation*}
+          \frac{\partial}{\partial r_k}\frac{\partial}{\partial r_j}\frac{\partial}{\partial r_i}z(\mathbf{r}) = 4 \pi\left(\frac{r^k\delta^{ij}}{30}+\frac{\delta^{jk}r^i + r^j\delta^{ik}}{30}\right) + \mathcal{O}(r^3)
+        \end{equation*}
+        Which is zero for $\mathbf{r} = 0$, but differentiating again gives:
+        Integrating this over the sphere gives:
+        \begin{equation*}
+          \frac{\partial}{\partial r_l}\frac{\partial}{\partial r_k}\frac{\partial}{\partial r_j}\frac{\partial}{\partial r_i}z(\mathbf{r}) = 4 \pi\left(\frac{\delta^{lk}\delta^{ij}}{15}+\frac{\delta^{jk}\delta^{il} + \delta^{jl}\delta^{ik}}{15}\right) + \mathcal{O}(r^2)
+        \end{equation*}
+        Which gives for $\mathbf{r} = 0$:
+        \begin{equation*}
+          \int_{S^2} d\Omega n_i n_jn_kn_l = \frac{4\pi}{15}(\delta_{ij}\delta_{kl} + \delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk})
+        \end{equation*}
+        \begin{align*}
+          \int(\dot{A}^in_i)^2 d\Omega &= \frac{1}{r^2}\left(\ddot{d}^in_i + \frac{\tensor{\dddot{Q}}{^i^j}n_in_j}{6}\right)\left(\ddot{d}^ln_l + \frac{\tensor{\dddot{Q}}{^k^l}n_kn_l}{6}\right)\\
+                                       &= \frac{1}{r^2}\left(\frac{1}{3}\ddot{d}^i \ddot{d}^l\delta_{il} + \frac{\tensor{\dddot{Q}}{^i^j}\tensor{\dddot{Q}}{^k^l}}{36}\frac{1}{15}(\delta_{ij}\delta_{kl} + \delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk})\right)
+        \end{align*}
+        Notice that since the quadrupole moment is traceless so that:
+        \begin{align*}
+          \tensor{\dddot{Q}}{^i^j}\tensor{\dddot{Q}}{^k^l} \delta_{ij} \delta_{kl} = 0
+        \end{align*}
+        Which gives:
+        \begin{align*}
+          \int(\dot{A}^in_i)^2 d\Omega &= \frac{1}{r^2}\left(\frac{1}{3}\ddot{d}^i \ddot{d}^l\delta_{il} + \frac{1}{15}\frac{\tensor{\dddot{Q}}{^i^j}\tensor{\dddot{Q}}{^i^j} + \tensor{\dddot{Q}}{^i^j}\tensor{\dddot{Q}}{^j^i}}{36}\right)\\
+                                       &= \frac{1}{r^2}\left(\frac{1}{3}\ddot{d}^i \ddot{d}^l\delta_{il} + \frac{2}{15}\frac{\tensor{\dddot{Q}}{^i^j}\tensor{\dddot{Q}}{^i^j}}{36}\right)\\
+                                       &= \frac{1}{r^2}\left(\frac{1}{3}\ddot{\mathbf{d}}^i \cdot \ddot{\mathbf{d}}^l + \frac{1}{15}\frac{\dddot{\mathbf{Q}}:\dddot{\mathbf{Q}}}{18}\right)
+        \end{align*}
+        And subtracting this from the other term and multiplying by $r^2$ to get the power results in:
+        \begin{equation*}
+          P = 4\pi \left(\frac{2}{3}\ddot{\mathbf{d}} \cdot \ddot{\mathbf{d}} + \frac{\dddot{\mathbf{Q}}:\dddot{\mathbf{Q}}}{180} + \frac{2}{3}\ddot{\mathbf{ m}}\cdot \ddot{\mathbf{ m}}\right) 
+        \end{equation*}
+
+      \item
+        \begin{align*}
+          \dot{\mathbf{m}}^i &= \frac{1}{2} \sum_\alpha e_\alpha (\mathbf{r}_\alpha \times \dot{\mathbf{v}}_\alpha)^i + \frac{1}{2} \sum_\alpha e_\alpha (\dot{\mathbf{r}_\alpha} \times \mathbf{v}_\alpha)^i\\
+                             &= \frac{1}{2} \sum_\alpha e_\alpha (\mathbf{r}_\alpha \times \mathbf{a}_\alpha)^i + \frac{1}{2} \sum_\alpha e_\alpha (\mathbf{v}_\alpha \times \mathbf{v}_\alpha)^i\\
+                             &= \frac{1}{2} \sum_\alpha e_\alpha (\mathbf{r}_\alpha \times \mathbf{a}_\alpha)^i 
+        \end{align*}
+
+        And for a closed system of charges
+            \begin{equation*}
+              \sum_{\alpha = 1}^{N} \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta} = \sum_{\beta = 1}^{N} \sum_{\alpha = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta }{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} \hat{\mathbf{r}}_{\alpha\beta}
+            \end{equation*}
+        \begin{align*}
+          \dot{\mathbf{m}}^i &= \frac{1}{2} \sum_\alpha \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta}{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^2} (\mathbf{r}_\alpha \times \hat{\mathbf{r}}_{\alpha\beta})^i \\
+                             &= \frac{1}{2} \sum_\alpha \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta}{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^3} (\mathbf{r}_\alpha \times (\mathbf{r}_{\alpha} - \mathbf{r}_{\beta}))^i \\
+                             &= -\frac{1}{2} \sum_\alpha \sum_{\beta = 1, \beta \neq \alpha }^N \frac{k e_\alpha e_\beta}{|\mathbf{r}_\alpha - \mathbf{r}_\beta|^3} (\mathbf{r}_\alpha \times \mathbf{r}_{\beta})^i 
+        \end{align*}
+        Now the cross product is antisymmetric in $\alpha$ and $\beta$, but the factor infront of it is symmetric.
+        Thus, summing over the indices gives zero as can be shown in the same way as was done for the electric dipole.
+        The quadrupole moment probably survives with all it's time derivatives.
+
+    \end{enumerate}
+  \item
+    I worked alone, but got help from Jackie. Thanks for the hint about the spherical integrals.
+\end{enumerate}
+
+\end{document}

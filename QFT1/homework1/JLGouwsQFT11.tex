@@ -1,0 +1,295 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usetikzlibrary{intersections}
+\usepackage{tkz-euclide}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tensor}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+\allowdisplaybreaks
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdfpagemode=FullScreen,
+    }
+
+\title{
+\textsc{QT Homework 2}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[compat=1.1.0]{tikz-feynman}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+%\feynmandiagram [horizontal=a to b] {
+%  i1 -- [plain] a -- [plain] i2,
+%  a -- [plain] b,
+%  f1 -- [plain] b -- [plain] f2,
+%};
+
+\begin{enumerate}
+  \item
+\begin{enumerate}
+  \item
+    If
+    \begin{equation*}
+      \tensor{\Lambda}{^{\mu}_\nu} = \delta^\mu_\nu + \tensor{\omega}{^\mu_\nu}
+    \end{equation*}
+    Then a vector tansforms as:
+    \begin{equation*}
+      {x'}^\mu = \tensor{\Lambda}{^{\mu}_\nu} x^\nu = x^\mu + \tensor{\omega}{^\mu_\nu} x^\nu
+    \end{equation*}
+    Then we want the length of the vector to be preserved under the.
+    \begin{align*}
+      {x}^\mu{x}_\mu = {x'}^\mu{x'}_\mu  &= (x^\mu + \tensor{\omega}{^\mu_\nu} x^\nu) (x_\mu + \tensor{\omega}{_\mu^\nu} x_\nu)\\
+                                         &= x^\mu x_\mu + x_\mu \tensor{\omega}{^\mu_\nu} x^\nu + x^\mu \tensor{\omega}{_\mu^\nu} x_\nu\\
+                                         &\Rightarrow 0 = x_\mu \tensor{\omega}{^\mu_\nu} x^\nu + x^\mu \tensor{\omega}{_\mu^\nu} x_\nu\\
+                                         &\Rightarrow 0 = x_\mu \tensor{\omega}{^\mu_\nu} x^\nu + x^\nu \tensor{\omega}{_\nu^\mu} x_\mu\\
+                                         &\Rightarrow 0 = x_\mu (\tensor{\omega}{^\mu_\nu} + \tensor{\omega}{_\nu^\mu}) x^\nu\\
+                                         &\Rightarrow 0 = \omega_{\mu\nu} +  \omega_{\mu\nu}\\
+                                         &\Rightarrow \omega_{\mu\nu} = -\omega_{\nu\mu}
+    \end{align*}
+  \item
+    The expectation values of observables should be the same:
+    \begin{align*}
+      \langle \psi | O | \phi \rangle  &= \langle \psi | U^\dagger U O U^\dagger U | \phi \rangle = \langle \psi' |  U O U^\dagger | \phi' \rangle\\
+                                      &= \langle \psi' | O' | \phi' \rangle\\
+                                      &\Rightarrow O' = U O U^\dagger
+    \end{align*}
+  \item
+    We know that, writing things a bit more explicitly:
+    \begin{equation*}
+      U(\Lambda, a)U(\delta + \omega, \epsilon) U^\dagger(\Lambda, a)= U(\Lambda, a)U(\delta + \omega, \epsilon) U(T^{-1}(\Lambda, a)) = U(T(\Lambda, a)T(\delta + \omega, \epsilon)T^{-1}(\Lambda, a))
+    \end{equation*}
+    Now we can see how $T(\Lambda, a)T(\delta + \omega, \epsilon)T^{-1}(\Lambda, a)$ operates on $x$:
+    \begin{align*}
+      T(\Lambda, a)T(\delta + \omega, \epsilon)T^{-1}(\Lambda, a)x &\leadsto \tensor{T(\Lambda, a)}{^\alpha_\beta}\tensor{T(\delta + \omega, \epsilon)}{^\beta_\gamma}\tensor{T^{-1}(\Lambda, a)}{^\gamma_\delta}x^\delta\\
+                                                                   &= \tensor{T(\Lambda, a)}{^\alpha_\beta}\tensor{T(\delta + \omega, \epsilon)}{^\beta_\gamma}\left[\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}x^\delta - \tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}a^\delta\right]\\
+                                                                   &= \tensor{T(\Lambda, a)}{^\alpha_\beta}\left[\tensor{\left(\Lambda^{-1}\right)}{^\beta_\delta}x^\delta - \tensor{\left(\Lambda^{-1}\right)}{^\beta_\delta}a^\delta \right.\\
+                                                                   &\qquad + \left.\tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}x^\delta - \tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}a^\delta + \epsilon^\beta\right]\\
+                                                                   &= \tensor{T(\Lambda, a)}{^\alpha_\beta}\left[\tensor{\left(\Lambda^{-1}\right)}{^\beta_\delta}x^\delta - \tensor{\left(\Lambda^{-1}\right)}{^\beta_\delta}a^\delta \right.\\
+                                                                   &\qquad + \left. \tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}x^\delta - \tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}a^\delta + \epsilon^\beta\right]\\
+                                                                   &= \tensor{\Lambda}{^\alpha_\beta}\tensor{\left(\Lambda^{-1}\right)}{^\beta_\delta}x^\delta - \tensor{\Lambda}{^\alpha_\beta}\tensor{\left(\Lambda^{-1}\right)}{^\beta_\delta}a^\delta + \tensor{\Lambda}{^\alpha_\beta}\tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}x^\delta \\
+                                                                   &\qquad   - \tensor{\Lambda}{^\alpha_\beta}\tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}a^\delta + \tensor{\Lambda}{^\alpha_\beta}\epsilon^\beta + a^\alpha\\
+                                                                   &= \delta{^\alpha_\delta}x^\delta - \delta{^\alpha_\delta}a^\delta + \tensor{\Lambda}{^\alpha_\beta}\tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}x^\delta \\
+                                                                   &\qquad - \tensor{\Lambda}{^\alpha_\beta}\tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}a^\delta + \tensor{\Lambda}{^\alpha_\beta}\epsilon^\beta + a^\alpha\\
+                                                                   &= \delta{^\alpha_\delta}x^\delta + \tensor{\Lambda}{^\alpha_\beta}\tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}x^\delta \\
+                                                                   &\qquad - \tensor{\Lambda}{^\alpha_\beta}\tensor{\omega}{^\beta_\gamma}\tensor{\left(\Lambda^{-1}\right)}{^\gamma_\delta}a^\delta + \tensor{\Lambda}{^\alpha_\beta}\epsilon^\beta\\
+                                                                   &= T(\delta +\Lambda \omega \Lambda^{-1},\Lambda \epsilon - \Lambda \omega \Lambda^{-1})
+    \end{align*}
+    Hence:
+    \begin{equation*}
+      U(\Lambda, a)U(\delta + \omega, \epsilon) U^\dagger(\Lambda, a) = U(\delta +\Lambda \omega \Lambda^{-1},\Lambda \epsilon - \Lambda \omega \Lambda^{-1}a)
+    \end{equation*}
+  \item
+    \begin{align*}
+      U(\Lambda, a) U(\delta + \omega, \epsilon) U^\dagger(\Lambda, a) = \mathbf{1} + \frac{i}{2} \omega_{\mu\nu}U(\Lambda, a) J^{\mu\nu} U^{\dagger}(\Lambda, a) + i\epsilon_\mu U(\Lambda, a)P^\mu U^\dagger(\Lambda, a)
+    \end{align*}
+    But this is equal to:
+    \begin{align*}
+        & U(\delta +\Lambda \omega \Lambda^{-1},\Lambda \epsilon - \Lambda \omega \Lambda^{-1}a)\\
+      = & \delta^\alpha_\beta + \frac{i}{2} \tensor{\Lambda}{_\alpha^\gamma} \tensor{\omega}{_\gamma_\delta}\tensor{(\Lambda^{-1})}{^\delta_\epsilon} J^{\alpha\epsilon} + i\tensor{\Lambda}{_\nu^\mu} \epsilon_\mu P^\nu - i\tensor{\Lambda}{_\alpha^\gamma}\tensor{\omega}{_\gamma_\delta}\tensor{(\Lambda^{-1})}{^\delta_\epsilon} a^\epsilon P^\alpha\\
+      = & \delta^\alpha_\beta + \frac{i}{2} \tensor{\Lambda}{_\alpha^\gamma} \tensor{\omega}{_\gamma_\delta}\tensor{\Lambda}{_\epsilon^\delta} J^{\alpha\epsilon} + i\tensor{\Lambda}{_\nu^\mu} \epsilon_\mu P^\nu - i\tensor{\Lambda}{_\alpha^\gamma}\tensor{\omega}{_\gamma_\delta}\tensor{\Lambda}{_\epsilon^\delta} a^\epsilon P^\alpha
+    \end{align*}
+    Since $\omega$ and $\epsilon$ are arbitrary:
+    \begin{align*}
+      \omega_{\mu\nu}U(\Lambda, a) J^{\mu\nu} U^{\dagger}(\Lambda, a) &= \tensor{\Lambda}{_\rho^\mu} \tensor{\Lambda}{_\sigma^\nu} \omega_{\mu\nu}J^{\rho\sigma} - 2\tensor{\Lambda}{_\rho^\mu}\tensor{\Lambda}{_\sigma^\nu} \omega_{\mu\nu} a^\sigma P^\rho\\
+                                                                      &= \tensor{\Lambda}{_\rho^\mu} \tensor{\Lambda}{_\sigma^\nu} \omega_{\mu\nu}J^{\rho\sigma} + \tensor{\Lambda}{_\rho^\mu}\tensor{\Lambda}{_\sigma^\nu} \omega_{\nu\mu} a^\sigma P^\rho - \tensor{\Lambda}{_\rho^\mu}\tensor{\Lambda}{_\sigma^\nu} \omega_{\mu\nu} a^\sigma P^\rho\\
+                                                                      &= \tensor{\Lambda}{_\rho^\mu} \tensor{\Lambda}{_\sigma^\nu} \omega_{\mu\nu}J^{\rho\sigma} + \tensor{\Lambda}{_\sigma^\nu}\tensor{\Lambda}{_\rho^\mu} \omega_{\mu\nu} a^\rho P^\sigma - \tensor{\Lambda}{_\rho^\mu}\tensor{\Lambda}{_\sigma^\nu} \omega_{\mu\nu} a^\sigma P^\rho\\
+                                                                      &= \tensor{\Lambda}{_\rho^\mu} \tensor{\Lambda}{_\sigma^\nu} \omega_{\mu\nu}(J^{\rho\sigma} + a^\rho P^\sigma - a^\sigma P^\rho)
+    \end{align*}
+    This must hold for any $\omega$, thus:
+    \begin{align*}
+      U(\Lambda, a) J^{\mu\nu} U^{\dagger}(\Lambda, a) &= \tensor{\Lambda}{_\rho^\mu} \tensor{\Lambda}{_\sigma^\nu} (J^{\rho\sigma} + a^\rho P^\sigma - a^\sigma P^\rho)\\
+    \end{align*}
+    And similarly for $P$:
+    \begin{align*}
+      U(\Lambda, a) P^{\mu} U^{\dagger}(\Lambda, a) = \tensor{\Lambda}{_\nu^\mu} P^\nu
+    \end{align*}
+  \item
+% \mathbf{1} + \frac{i}{2} \omega_{\mu\nu} J^{\mu\nu} + i\epsilon_\mu P^\mu 
+    For the $P$ one:
+    \begin{align*}
+      & U(\Lambda, a) P^{\mu} = \tensor{\Lambda}{_\nu^\mu}U P^\nu(\Lambda, a)\\
+      \Rightarrow & (\mathbf{1} + \frac{i}{2} \omega_{\nu\xi} J^{\nu\xi} + i\epsilon_\nu P^\nu) P^\mu = (\delta^\mu_\nu + \tensor{\omega}{_\nu^\mu} )P^\nu (\mathbf{1} + \frac{i}{2} \omega_{\mu\xi} J^{\mu\xi} + i\epsilon_\mu P^\mu)\\
+      \Rightarrow & P^\mu+ \frac{i}{2} \omega_{\nu\xi} J^{\nu\xi}P^\mu + i\epsilon_\nu P^\nu P^\mu  = (P^\mu + \tensor{\omega}{_\nu^\mu}P^\nu ) (\mathbf{1} + \frac{i}{2} \omega_{\mu\xi} J^{\mu\xi} + i\epsilon_\mu P^\mu)\\
+      \Rightarrow & \frac{i}{2} \omega_{\nu\xi} J^{\nu\xi}P^\mu + i\epsilon_\nu P^\nu P^\mu  =  \frac{i}{2} \omega_{\nu\xi} P^\mu J^{\nu\xi} + i\epsilon_\nu P^\mu P^\nu  + \tensor{\omega}{_\nu^\mu}P^\nu\\
+    \end{align*}
+    Since $\omega$ and $\epsilon $ independent and arbitrary:
+    \begin{equation*}
+      i\epsilon_\nu (P^\nu P^\mu - P^\mu P^\nu) = 0 \Rightarrow [P^\mu, P^\nu] = 0
+    \end{equation*}
+    And:
+    \begin{align*}
+                  & \frac{i}{2} \omega_{\nu\xi} J^{\nu\xi}P^\mu =  \frac{i}{2} \omega_{\nu\xi} P^\mu J^{\nu\xi} + \tensor{\omega}{_\nu^\mu}P^\nu\\
+      \Rightarrow & i \omega_{\nu\xi} (J^{\nu\xi}P^\mu - P^\mu J^{\nu\xi}) = 2\eta^{\mu\xi}\tensor{\omega}{_\nu_\xi}P^\nu\\
+      \Rightarrow & i \omega_{\nu\xi} (J^{\nu\xi}P^\mu - P^\mu J^{\nu\xi}) = \eta^{\mu\xi}\tensor{\omega}{_\nu_\xi}P^\nu - \eta^{\mu\xi}\tensor{\omega}{_\xi_\nu}P^\nu\\
+      \Rightarrow & i \omega_{\nu\xi} [J^{\nu\xi},P^\mu] = \eta^{\mu\xi}\tensor{\omega}{_\nu_\xi}P^\nu - \eta^{\mu\nu}\tensor{\omega}{_\nu_\xi}P^\xi\\
+      \Rightarrow & i [J^{\nu\xi},P^\mu] = \eta^{\mu\xi}P^\nu - \eta^{\mu\nu}P^\xi\\
+    \end{align*}
+    Now expanding the other relation:
+    \begin{align*}
+      U(\Lambda, a) J^{\mu\nu}  &= (\mathbf{1} + \frac{i}{2} \omega_{\zeta\xi} J^{\zeta\xi} + i\epsilon_\xi P^\xi)J^{\mu\nu}\\
+                                &= J^{\mu\nu} + \frac{i}{2} \omega_{\zeta\xi} J^{\zeta\xi}J^{\mu\nu} + i\epsilon_\xi P^\xi J^{\mu\nu}
+    \end{align*}
+    And:
+    \begin{align*}
+        & \tensor{\Lambda}{_\rho^\mu} \tensor{\Lambda}{_\sigma^\nu} (J^{\rho\sigma} + \epsilon^\rho P^\sigma - \epsilon^\sigma P^\rho) U(\Lambda, a)\\
+      = & (\delta{_\rho^\mu} +\tensor{\omega}{_\rho^\mu}) (\delta {_\sigma^\nu} + \tensor{\omega}{_\sigma^\nu}) (J^{\rho\sigma} + \epsilon^\rho P^\sigma - \epsilon^\sigma P^\rho) (\mathbf{1} + \frac{i}{2} \omega_{\zeta\xi} J^{\zeta\xi} + i\epsilon_\xi P^\xi)\\
+      = & J^{\mu\nu} + \epsilon^\mu P^\nu - \epsilon^\nu P^\mu + \frac{i}{2} \omega_{\zeta\xi} J^{\mu\nu} J^{\zeta\xi} + i\epsilon_\xi J^{\mu\nu}  P^\xi + \tensor{\omega}{_\rho^\mu}J^{\rho\nu} + \tensor{\omega}{_\sigma^\nu}J^{\mu\sigma} + \mathcal{O}(\epsilon \omega)%(\delta{_\rho^\mu} + \tensor{\omega}{_\rho^\mu}) (\delta {_\sigma^\nu} + \tensor{\omega}{_\sigma^\nu}) (J^{\rho\sigma} + \epsilon^\rho P^\sigma - \epsilon^\sigma P^\rho) (\mathbf{1} + \frac{i}{2} \omega_{\zeta\xi} J^{\zeta\xi} + i\epsilon_\xi P^\xi)\\
+    \end{align*}
+    And looking at the terms with $\omega$ coefficients:
+    \begin{align*}
+                  & \frac{i}{2} \omega_{\zeta\xi} J^{\zeta\xi}J^{\mu\nu} = \frac{i}{2} \omega_{\zeta\xi} J^{\mu\nu} J^{\zeta\xi} + \tensor{\omega}{_\rho^\mu}J^{\rho\nu} + \tensor{\omega}{_\sigma^\nu}J^{\mu\sigma}\\
+      \Rightarrow & i \omega_{\zeta\xi} (J^{\zeta\xi}J^{\mu\nu} - J^{\mu\nu} J^{\zeta\xi}) = 2\tensor{\omega}{_\rho^\mu}J^{\rho\nu} + 2\tensor{\omega}{_\sigma^\nu}J^{\mu\sigma}\\
+      \Rightarrow & i \omega_{\zeta\xi} (J^{\zeta\xi}J^{\mu\nu} - J^{\mu\nu} J^{\zeta\xi}) = 2\eta^{\mu\xi}\tensor{\omega}{_\zeta_\xi}J^{\zeta\nu} + 2\eta^{\nu\xi}\tensor{\omega}{_\zeta_\xi}J^{\mu\zeta}\\
+      \Rightarrow & i \omega_{\zeta\xi} (J^{\zeta\xi}J^{\mu\nu} - J^{\mu\nu} J^{\zeta\xi}) = \eta^{\mu\xi}\tensor{\omega}{_\zeta_\xi}J^{\zeta\nu} - \eta^{\mu\xi}\tensor{\omega}{_\xi_\zeta}J^{\zeta\nu} + \eta^{\nu\xi}\tensor{\omega}{_\zeta_\xi}J^{\mu\zeta} - \eta^{\nu\xi}\tensor{\omega}{_\xi_\zeta}J^{\mu\zeta}\\
+      \Rightarrow & i \omega_{\zeta\xi} [J^{\zeta\xi},J^{\mu\nu}]  = \tensor{\omega}{_\zeta_\xi}(\eta^{\mu\xi}J^{\zeta\nu} - \eta^{\mu\zeta}J^{\xi\nu} + \eta^{\nu\xi}J^{\mu\zeta} - \eta^{\nu\zeta}J^{\mu\xi})\\
+      \Rightarrow & i[J^{\zeta\xi},J^{\mu\nu}]  = \eta^{\mu\xi}J^{\zeta\nu} - \eta^{\mu\zeta}J^{\xi\nu} + \eta^{\nu\xi}J^{\mu\zeta} - \eta^{\nu\zeta}J^{\mu\xi}
+    \end{align*}
+%    Note that:
+%    \begin{align*}
+%      i [J^{\zeta\xi},J^{\mu\nu}] = 2\eta^{\mu\xi}J^{\zeta\nu} + 2\eta^{\nu\xi}J^{\mu\zeta} = 2\eta^{\alpha\xi}(\delta^\mu_\alpha J^{\zeta\nu} + \delta^\nu_\alpha J^{\mu\zeta})
+%    \end{align*}
+%    And for spacial indices:
+  \item
+    Since $J^{\mu\nu}$ is multiplied by an antisymmetric matrix, it can be taken as antisymmetric itself because only the antisymmetric part will contribute to the Lorentz transform.
+    Calling $J_1 = J^{23}$, $J_2 = J^{31}$ and $J_3 = J^{12}$:
+    Then:
+    \begin{equation*}
+      \tensor{\epsilon}{^i^j^s} J_s = J^{ij} \Rightarrow \tensor{\epsilon}{_i_j_k}\tensor{\epsilon}{^i^j^s} J_s = \tensor{\epsilon}{_i_j_k}J^{ij} \Rightarrow 2 \delta_{sk} J_s = \tensor{\epsilon}{_i_j_k}J^{ij} \Rightarrow J_k = \frac{1}{2}\tensor{\epsilon}{_i_j_k}J^{ij}
+    \end{equation*}
+    Now taking the spatial part of the commutator:
+    \begin{align*}
+      i [J^{ij},J^{kl}] 
+                        &= 2\eta^{k j} J^{il} + 2\eta^{l j}J^{ki}\\
+%                        &= -2\delta^{m j}(\delta^k_m J^{il} + \delta^l_m J^{ki})\\
+%                        &= -\tensor{\varepsilon}{_n_p^m} \tensor{\varepsilon}{_n_p^j}(\delta^k_m J^{il} + \delta^l_m J^{ki})\\
+%                        &= -\tensor{\varepsilon}{_n_p^k} \tensor{\varepsilon}{_n_p^j} J^{il} -\tensor{\varepsilon}{_n_p^l} \tensor{\varepsilon}{_n_p^j}  J^{ki}\\
+%                        &= -\tensor{\varepsilon}{_n_p^k} \tensor{\varepsilon}{_n_p^j} J^{il} -\tensor{\varepsilon}{_n_p^l} \tensor{\varepsilon}{_n_p^j}  J^{ki}\\
+%                        &= \tensor{\varepsilon}{_n_p^k} \tensor{\varepsilon}{_n_p^j} J^{li} -\tensor{\varepsilon}{_n_p^l} \tensor{\varepsilon}{_n_p^j}  J^{ki}\\
+                        &= -2(\delta^{kj} J^{il} + \delta^{lj} J^{ki})\\
+                        &= -2(\delta^{kj} J^{il} - \delta^{lj} J^{ik})\\
+                        &= -2(\delta^{kj}\delta^{nl}  - \delta^{lj}\delta^{nk} )J^{in}\\
+                        &= -2(\delta^{jk}\delta^{nl}  - \delta^{jl}\delta^{nk} )J^{in}\\
+                        &= -2\epsilon^{jnq}\epsilon^{klq}J^{in}\\
+                        &\Rightarrow i [\epsilon_{rij} J^{ij},J^{kl}] = -2\epsilon_{rij}\epsilon^{jnq}\epsilon^{klq}J^{in}\\
+                        &\Rightarrow i [\epsilon_{rij} J^{ij},J^{kl}] = -2\epsilon_{rij}\epsilon^{nqj}\epsilon^{klq}J^{in}\\
+                        &\Rightarrow i [\epsilon_{rij} J^{ij},J^{kl}] = -2(\delta^{rn}\delta^{iq}  - \delta^{rq}\delta^{in} )\epsilon^{klq}J^{in}\\
+                        &\Rightarrow i [\epsilon_{rij} J^{ij},J^{kl}] = -2\epsilon^{klq}J^{qr}\\
+                        &\Rightarrow i [\epsilon_{rij} J^{ij},J^{kl}] = 2\epsilon^{klq}J^{rq}
+    \end{align*}
+    The last three steps follow from the symmetry of $\delta$(contraction of a symmetric and antisymmetric tensor is zero) and the anitsymmetry of $J$.
+    \begin{align*}
+                      i [\epsilon_{rij} J^{ij},\epsilon_{pkl} J^{kl}] &= 2\epsilon^{pkl}\epsilon^{klq}J^{rq}\\
+                                                                      &= 4\delta^{pq} J^{rq}\\
+                                                                      &= 4 J^{rp}\\
+                                                                      &= 2 (J^{rp} - J^{pr})\\
+                                                                      &= 2 (\delta^{rs}\delta^{pt} - \delta^{rt}\delta^{ps})J^{st}\\
+                                                                      &= 2 \epsilon^{rpq}\epsilon^{stq}J^{st}\\
+                                                                      &= 2 \epsilon^{rpq}\epsilon^{qst}J^{st}
+%      \Rightarrow i [J^{ij},J^{kl}]
+%      i[J^{ij},J^{kl}]  &= \eta^{kj}J^{il} - \eta^{ki}J^{jl} + \eta^{lj}J^{ki} - \eta^{li}J^{kj}\\
+%      i[J^{ij},J^{kl}]  &= \delta^{kj}J^{il} - \delta^{ki}J^{jl} + \delta^{lj}J^{ki} - \delta^{li}J^{kj}\\
+%      i[J^{ij},J^{kl}]  &= (\delta^{kj}\delta^{ni} - \delta^{ki}\delta^{nj})J^{nl} + (\delta^{lj}\delta ^{ni} - \delta^{li}\delta^{nj})J^{kn}\\
+%      i[J^{ij},J^{kl}]  &= (\epsilon^{knp}\epsilon^{jip})J^{nl} + (\epsilon^{lnp}\epsilon^{jip})J^{kn}\\
+%      \Rightarrow & i[\epsilon^{rij}J^{ij},J^{kl}]  = (\epsilon^{knp}\epsilon^{rij}\epsilon^{jip})J^{nl} + (\epsilon^{lnp}\epsilon^{rij}\epsilon^{jip})J^{kn}\\
+%      \Rightarrow & i[\epsilon^{rij}J^{ij},J^{kl}]  = 2\epsilon^{knr}J^{nl} + 2\epsilon^{lnr}J^{kn}\\
+%      \Rightarrow & i[\epsilon^{rij}J^{ij},\epsilon^{qkl}J^{kl}]  = 2\epsilon^{knr}\epsilon^{qkl}J^{nl} + 2\epsilon^{qkl}\epsilon^{lnr}J^{kn}\\
+    \end{align*}
+    And after multiplying each side by $1/4$:
+    \begin{align*}
+          i \left[\frac{1}{2}\epsilon^{rij} J^{ij},\frac{1}{2}\epsilon^{pkl} J^{kl}\right] = \frac{1}{2} \epsilon^{rpq}\epsilon^{qst}J^{st}
+          \Rightarrow [J^r,J^p] = -i\epsilon^{rpq}J_q
+    \end{align*}
+    I did this problem in this way first, but it didn't seem as convincing.
+    Now for the case where one of $J^{23}, J^{31}, J^{12}$ is commuted with itself:
+    \begin{align*}
+      [J^{ij},J^{ij}]  &= -i(-\delta^{ij}J^{ij} + \delta^{ii}J^{jj} - \delta^{jj}J^{ii} + \delta^{ji}J^{ij})\\
+                       &= -i(-\delta^{ij}J^{ij} + 0 - 0 + \delta^{ij}J^{ij})\\
+                       &= 0 
+    \end{align*}
+    And with each other, for $i\neq j$ and $j \neq k$ (otherwise equation gives $0=0$):
+    \begin{align*}
+%      \Rightarrow & i[J^{ij},J^{jk}]  = \eta^{jj}J^{ik} - \eta^{ji}J^{jk} + \eta^{kj}J^{ji} - \eta^{ki}J^{jj}
+      [J^{ij},J^{jk}]  &= -i(-\delta^{jj}J^{ik} + \delta^{ji}J^{jk} - \delta^{kj}J^{ji} + \delta^{ki}J^{jj})\\
+                       &= i J^{ik}\\
+                       &= - i J^{ki}
+    \end{align*}
+%%    Or:
+%%    \begin{align*}
+%%%      \Rightarrow & i[J^{ij},J^{jk}]  = \eta^{jj}J^{ik} - \eta^{ji}J^{jk} + \eta^{kj}J^{ji} - \eta^{ki}J^{jj}
+%%      [J^{lm},J^{mn}] = - i J^{ln}
+%%      \Rightarrow [\epsilon_{ilm}J^{lm},\epsilon_{jmn}J^{mn}] = - i \epsilon_{ilm}\epsilon_{jmn}J^{ln} = - i \epsilon_{ijk}\epsilon_{kln}J^{ln}
+%%    \end{align*}
+    Which gives the identity, because even permutations of $\{ij\}, \{jk\}, \{ki\}$ give the factor $-i$, for example:
+    \begin{align*}
+      [J_{1},J_{2}] = [J_{23},J_{31}] = - i J_{12} = - i J_{3}
+    \end{align*}
+    and odd permutations, give the other sign, which is evident in switching the order of terms in the commutator:
+    \begin{align*}
+      [J^{ij},J^{jk}] = -[J^{jk},J^{ij}] = - i J^{ki} \Rightarrow [J^{jk},J^{ij}] = i J^{ki}
+    \end{align*}
+    For which an explicit example is:
+    \begin{align*}
+      [J_{1},J_{3}] = [J_{23},J_{12}] = i J_{31} = i J_{2}
+    \end{align*}
+  \item
+    Using the Leibniz rule to compute the commutator:
+    \begin{align*}
+      [P^2, P^\nu] = [\eta_{\mu\xi}P^\mu P^\xi, P^\nu] = \eta_{\mu\xi}[P^\mu P^\xi, P^\nu] = \eta_{\mu\xi}[P^\mu , P^\nu] P^\xi + \eta_{\mu\xi}P^\mu[ P^\xi, P^\nu] = 0 + 0 = 0
+    \end{align*}
+    And:
+    \begin{align*}
+      i[\eta_{\lambda\xi}P^\lambda P^\xi, J^{\mu\nu}] &= i\eta_{\lambda\xi}[P^\lambda P^\xi, J^{\mu\nu}]\\
+                                                      &= i\eta_{\lambda\xi}[P^\lambda P^\xi, J^{\mu\nu}]\\
+                                                      &= i\eta_{\lambda\xi}([P^\lambda, J^{\mu\nu}] P^\xi + P^\lambda [P^\xi, J^{\mu\nu}] )\\
+                                                      &= i\eta_{\lambda\xi}(\eta^{\lambda\mu}P^\nu P^\xi - \eta^{\lambda\nu}P^\mu P^\xi + \eta^{\xi\mu} P^\lambda P^{\nu} - \eta^{\xi\nu} P^\lambda P^{\mu})\\
+                                                      &= i(\delta^{\mu}_\xi P^\nu P^\xi - \delta^{\nu}_\xi P^\mu P^\xi + \delta^{\mu}_\lambda P^\lambda P^{\nu} - \delta^{\nu}_\lambda P^\lambda P^{\mu})\\
+                                                      &= i( P^\nu P^\mu -  P^\mu P^\nu + P^\mu P^{\nu} -  P^\nu P^{\mu})\\
+                                                      &= 0 
+    \end{align*}
+\end{enumerate}
+\item
+  I worked alone for this homework.
+\end{enumerate}
+
+\end{document}

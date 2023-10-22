@@ -108,42 +108,80 @@
                &= e^{i \omega t} \frac{\hbar}{ 2 m \omega}  - i \hbar \frac{\sin(\omega t)}{m \omega}\\
                &=  \frac{\hbar}{ 2 m \omega}e^{-i \omega t} 
         \end{align*}
+        For finding the expectation value for $C$ in the ground state:
+        \begin{align*}
+          \langle 0 |C(t) |0 \rangle =  \cos (\omega t) \langle 0 | x(0)^2 | 0 \rangle + \frac{\sin(\omega t)}{m \omega} \langle 0 | p(0) x(0)| 0 \rangle
+        \end{align*}
+        For the simple harmonic oscillator the position and momentum operators can be written in terms of the ladder operators:
+        \begin{equation*}
+          x = \sqrt{\frac{\hbar}{2 m \omega}} (a^\dagger + a) \qquad p = i \sqrt{\frac{\hbar m \omega}{2}} (a^\dagger - a)
+        \end{equation*}
+        For a product of these two operators to have a nonzero ground state expection value, we need the ladder operators to appear in the combination $a a^\dagger$.
+        Now:
+        \begin{align*}
+          \langle 0 |C(t) |0 \rangle &=  \cos (\omega t) \langle 0 | x(0)^2 | 0 \rangle + \frac{\sin(\omega t)}{m \omega} \langle 0 | p(0) x(0)| 0 \rangle\\
+                                     &=  \cos (\omega t) \langle 0 | \frac{\hbar}{2 m \omega} a a^\dagger | 0 \rangle + \frac{\sin(\omega t)}{m \omega} \langle 0 |\left( -i\frac{\hbar}{2} a a^\dagger \right) |0 \rangle\\
+                                     &=  \frac{\hbar}{2 m \omega}\cos (\omega t) \langle 1 |   1 \rangle + -i\frac{\hbar}{2m \omega}\sin(\omega t) \langle 1    |1 \rangle\\
+                                     &=  \frac{\hbar}{ 2 m \omega}e^{-i \omega t} 
+        \end{align*}
+        
   \end{enumerate}
   \item
+    I did the previous question with ladder operators thanks to your explanation! So, thank you for that. I hope I got the products correct for this question.
+    The Pauli matrices are (in a representation where $|z = 1\rangle = (1, 0)^T$ and $|z = -1\rangle = (0, 1)^T$):
+    \begin{align*}
+      \sigma_{x} = 
+                       \left(\begin{matrix}
+                        0 &  1 \\
+                        1 &  0
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{y} = 
+                       \left(\begin{matrix}
+                        0 & -i \\
+                        i &  0
+                      \end{matrix} \right)
+                      \qquad
+      \sigma_{z} = 
+                       \left(\begin{matrix}
+                        1 &  0 \\
+                        0 & -1
+                      \end{matrix} \right)
+    \end{align*}
     The single particle operators are, for $x$:
     \begin{align*}
       \sigma_{x}^{1} = \sigma_x \otimes I_2 =
                        \left(\begin{matrix}
-                        0 &  1 & 0 &  0\\
-                        1 &  0 & 0 &  0\\
+                        0 &  0 & 1 &  0\\
                         0 &  0 & 0 &  1\\
-                        0 &  0 & 1 &  0
+                        1 &  0 & 0 &  0\\
+                        0 &  1 & 0 &  0
                       \end{matrix} \right)
                       \qquad
       \sigma_{x}^{2} = I_2 \otimes \sigma_x = 
                       \left(\begin{matrix}
-                        0 &  0 & 0 &  1\\
-                        0 &  0 & 1 &  0\\
                         0 &  1 & 0 &  0\\
-                        1 &  0 & 0 &  0
+                        1 &  0 & 0 &  0\\
+                        0 &  0 & 0 &  1\\
+                        0 &  0 & 1 &  0
                       \end{matrix} \right)
     \end{align*}
     For $y$:
     \begin{align*}
       \sigma_{y}^{1} = 
                        \left(\begin{matrix}
-                        0 & -i & 0 &  0\\
-                        i &  0 & 0 &  0\\
+                        0 &  0 &-i &  0\\
                         0 &  0 & 0 & -i\\
-                        0 &  0 & i &  0
+                         i&  0 & 0 &  0\\
+                        0 &  i & 0 &  0
                       \end{matrix} \right)
                       \qquad
       \sigma_{y}^{2} =  
                       \left(\begin{matrix}
-                        0 &  0 & 0 & -i\\
-                        0 &  0 & i &  0\\
-                        0 & -i & 0 &  0\\
-                        i &  0 & 0 &  0
+                        0 &  -i & 0 &  0\\
+                        i&  0 & 0 &  0\\
+                        0 &  0 & 0 &-i\\
+                        0 &  0 &i &  0
                       \end{matrix} \right)
     \end{align*}
     And for $z$:
@@ -151,17 +189,17 @@
       \sigma_{z}^{1} =                       
                        \left(\begin{matrix}
                         1 &  0 & 0 &  0\\
-                        0 & -1 & 0 &  0\\
-                        0 &  0 & 1 &  0\\
+                        0 &  1 & 0 &  0\\
+                        0 &  0 &-1 &  0\\
                         0 &  0 & 0 & -1
                       \end{matrix} \right)
                       \qquad
       \sigma_{z}^{2} =  
                        \left(\begin{matrix}
-                        0 &  0 & 1 &  0\\
-                        0 &  0 & 0 & -1\\
                         1 &  0 & 0 &  0\\
-                        0 & -1 & 0 &  0
+                        0 & -1 & 0 &  0\\
+                        0 &  0 & 1 &  0\\
+                        0 &  0 & 0 & -1
                       \end{matrix} \right)
     \end{align*}
     For the first matrix measuring $\sigma_x$:
@@ -170,86 +208,86 @@
                   &= \sigma_x^1 + \sigma_x^2\\
                   &=
                       \left( \begin{matrix}
+                        0 & 0 & 1 & 0\\
+                        0 & 0 & 0 & 1\\
+                        1 & 0 & 0 & 0\\
+                        0 & 1 & 0 & 0
+                      \end{matrix} \right)
+                      +
+                      \left( \begin{matrix}
                         0 & 1 & 0 & 0\\
                         1 & 0 & 0 & 0\\
                         0 & 0 & 0 & 1\\
                         0 & 0 & 1 & 0
-                      \end{matrix} \right)
-                      +
-                      \left( \begin{matrix}
-                        0 & 0 & 0 & 1\\
-                        0 & 0 & 1 & 0\\
-                        0 & 1 & 0 & 0\\
-                        1 & 0 & 0 & 0
                       \end{matrix} \right)\\
                   &=  
                       \left(\begin{matrix}
-                        0 & 1 & 0 & 1\\
-                        1 & 0 & 1 & 0\\
-                        0 & 1 & 0 & 1\\
-                        1 & 0 & 1 & 0
+                        0 & 1 & 1 & 0\\
+                        1 & 0 & 0 & 1\\
+                        1 & 0 & 0 & 1\\
+                        0 & 1 & 1 & 0
                       \end{matrix} \right)
     \end{align*}
     and also:
     \begin{align*}
       \sigma_{xy} =   \left(\begin{matrix}
-                        0 &  1 & 0 & -i\\
-                        1 &  0 & i &  0\\
-                        0 & -i & 0 &  1\\
-                        i &  0 & 1 &  0
+                        0 & -i & 1 &  0\\
+                        i &  0 & 0 &  1\\
+                        1 &  0 & 0 & -i\\
+                        0 &  1 & i &  0
                       \end{matrix} \right)
                       \qquad
       \sigma_{xz} =   \left(\begin{matrix}
-                        0 &  1 & 1 &  0\\
-                        1 &  0 & 0 & -1\\
-                        1 &  0 & 0 &  1\\
-                        0 & -1 & 1 &  0
+                        1 &  0 & 1 &  0\\
+                        0 & -1 & 0 &  1\\
+                        1 &  0 & 1 &  0\\
+                        0 &  1 & 0 & -1
                       \end{matrix} \right)
     \end{align*}
     For $y$ in the first index:
     \begin{align*}
       \sigma_{yx} =   \left(\begin{matrix}
-                        0 & -i & 0 &  1\\
-                        i &  0 & 1 &  0\\
-                        0 &  1 & 0 & -i\\
-                        1 &  0 & i &  0
+                        0 &  1 &-i &  0\\
+                        1 &  0 & 0 & -i\\
+                        i &  0 & 0 &  1\\
+                        0 &  i & 1 &  0
                       \end{matrix} \right)
                       \qquad
       \sigma_{yy} =   \left(\begin{matrix}
-                        0 & -i & 0 & -i\\
-                        i &  0 & i &  0\\
-                        0 & -i & 0 & -i\\
-                        i &  0 & i &  0
+                        0 & -i &-i &  0\\
+                        i &  0 & 0 & -i\\
+                        i &  0 & 0 & -i\\
+                        0 &  i & i &  0
                       \end{matrix} \right)
                       \qquad
       \sigma_{yz} =   \left(\begin{matrix}
-                        0 & -i & 1 &  0\\
-                        i &  0 & 0 & -1\\
-                        1 &  0 & 0 & -i\\
-                        0 & -1 & i &  0
+                        1 &  0 &-i &  0\\
+                        0 & -1 & 0 & -i\\
+                        i &  0 & 1 &  0\\
+                        0 &  i & 0 & -1
                       \end{matrix} \right)
     \end{align*}
     For $z$ in the first index:
     \begin{align*}
       \sigma_{zx} =   \left(\begin{matrix}
-                        1 &  0 & 0 &  1\\
-                        0 & -1 & 1 &  0\\
-                        0 &  1 & 1 &  0\\
-                        1 &  0 & 0 & -1
+                        1 &  1 & 0 &  0\\
+                        1 &  1 & 0 &  0\\
+                        0 &  0 &-1 &  1\\
+                        0 &  0 & 1 & -1
                       \end{matrix} \right)
                       \qquad
       \sigma_{zy} =   \left(\begin{matrix}
-                        1 &  0 & 0 & -i\\
-                        0 & -1 & i &  0\\
-                        0 & -i & 1 &  0\\
-                        i &  0 & 0 & -1
+                        1 & -i & 0 &  0\\
+                        i &  1 & 0 &  0\\
+                        0 &  0 &-1 & -i\\
+                        0 &  0 & i & -1
                       \end{matrix} \right)
                       \qquad
-      \sigma_{zy} =   \left(\begin{matrix}
-                        1 &  0 & 1 &  0\\
-                        0 & -1 & 0 & -1\\
-                        1 &  0 & 1 &  0\\
-                        0 & -1 & 0 & -1
+      \sigma_{zz} =   \left(\begin{matrix}
+                        2 &  0 & 0 &  0\\
+                        0 &  0 & 0 &  0\\
+                        0 &  0 & 0 &  0\\
+                        0 &  0 & 0 & -2
                       \end{matrix} \right)
     \end{align*}
   \item
@@ -261,7 +299,7 @@
     Now, the integral in the exponent is over a very short time interval so the argument will be approximately constant over this time period.
     More specifically:
     \begin{equation*}
-      \dot x \leadsto \frac{q_i - q_{i - 1}}{\Delta t}
+      \dot q \leadsto \frac{q_i - q_{i - 1}}{\Delta t}
     \end{equation*}
     Now:
     \begin{align*}

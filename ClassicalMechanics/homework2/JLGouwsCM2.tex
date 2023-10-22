@@ -73,7 +73,7 @@
     \begin{enumerate}
       \item 
         When $u$ goes to zero, $v'$ should go to $v$ so the coefficient of $v$ is $+$.
-        If $v$ is zero then in the moving $K'$ the object will move backwards with $-u$.
+        If $v$ is zero then in the moving $K'$ frame the object will move backwards with $-u$.
         In the limit as $u$ goes to $-c$ and $v$ goes to $c$, a plus sign in the denominator would result in $v'$ going to infinity which is not physical.
         But a minus sing would result in $(c + c) / 2$ in the limit, as expected.
       \item
@@ -98,11 +98,14 @@
                &= \gamma(u) (\gamma(u)^{-2} dt - \gamma(u)^{-1}\frac{{\bf u}}{c^2} \cdot d {\bf x}'_\parallel)\nonumber\\
           \Rightarrow & dt = \gamma(u) (dt' + \frac{{\bf u}}{c^2} \cdot d {\bf x}'_\parallel) \label{eq:x4}
         \end{align}
-        For $v_\perp$ divide Eq.~\ref{eq:x1} by Eq.~\ref{eq:x3}:
+        Using this, Eq.~\ref{eq:x1} can also be inverted:\footnote{This is working out the inverse Lorentz transform, which seemed to defeat the point of doing the part with the four vector. There is no clear way to answer the question without inverting the transform, however.}
+        \begin{align}
+          d {\bf x}_\parallel = \gamma (u) (d {\bf x}'_\parallel + {\bf u} dt) \label{ex:vpara}
+        \end{align}
+        For $v_\parallel$ divide Eq.~\ref{ex:vpara} by Eq.~\ref{eq:x3}:
         \begin{align*}
-          {\bf v}'_\parallel = \frac{d {\bf x}'_\parallel}{d t'}  &= \frac{\gamma (u) (d {\bf x}_\parallel - {\bf u} dt)}{\gamma (u) (d t - \frac{\bf u}{c^2}\cdot d{\bf x}_\parallel)}\\
-                                                                  &= \frac{{\bf v}_\parallel - {\bf u} }{1 - \frac{\bf u}{c^2} \cdot {\bf v}}\\
-                                                      \Rightarrow &= {\bf v}'_\parallel + {\bf u}
+          {\bf v}_\parallel = \frac{d {\bf x}_\parallel}{d t}  &= \frac{\gamma (u) (d {\bf x}'_\parallel - {\bf u} dt')}{\gamma (u) (d t' + \frac{\bf u}{c^2}\cdot d{\bf x}'_\parallel)}\\
+                                                                  &= \frac{{\bf v}'_\parallel + {\bf u}' }{1 + \frac{\bf u}{c^2} \cdot {\bf v}'}\\
         \end{align*}
         For $v_\perp$ divide Eq.~\ref{eq:x2} by Eq.~\ref{eq:x4}:
         \begin{align*}
@@ -110,6 +113,7 @@
                                                       &= \frac{{\bf v}'_\perp}{\gamma (u) (1 + \frac{{\bf u}}{c^2}\cdot {\bf v}'_\parallel)}\\
                                                       &= \frac{{\bf v}'_\perp}{\gamma (u) (1 + \frac{{\bf u}\cdot {\bf v}'}{c^2})}
         \end{align*}
+        As required.
       \item 
         Let $\mathbf{c}$ be the velocity vector for the light in the $K$ frame. 
         Then the speed squared in the $K$ frame is:
@@ -148,6 +152,60 @@
                   &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} + \left(\frac{\gamma (1 - \gamma)}{ 1 - \gamma^2} \right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
                   &= \frac{1}{1 + \frac{{\bf u} \cdot {\bf v}'}{c^2}} \left[ {\bf u} + {\bf v'} + \left(\frac{\gamma(u) }{ 1 + \gamma(u)} \right) \frac{\bf u}{c} \times \left(\frac{\bf u}{c} \times {\bf v}'\right)\right]\\
         \end{align*}
+        The non-linearity in $\mathbf{u}$ is pretty clear because there is a double cross product, but this will be worked out to first order in $\frac{1}{c^2}$ later.
+        The fraction with the Lorentz factor to lowest non-trivial order is:
+        \begin{align*}
+          \gamma (1 + \gamma)^{-1} &= \left(1 +\frac{1}{2}\frac{u^2}{c^2} + \mathcal{O}(1/c^3)\right)\left(\frac{1}{2} - \frac{1}{2}(-\frac{1}{2}(-u^2/c^2))+ \mathcal{O}(1/c^3)\right)\\
+                                &\approx \left(1 +\frac{1}{2}\frac{u^2}{c^2}\right)\left(\frac{1}{2} - \frac{1}{4}u^2/c^2\right)\\
+                                &= \frac{1}{2} -\frac{1}{8}\frac{u^4}{c^4}
+        \end{align*}
+        And this term is multliplying a term in $\frac{1}{c^2}$, so only ther first term is required.
+        Also for the  front most factor:
+        \begin{align*}
+          \frac{1}{1 + \frac{\mathbf{u}\cdot\mathbf{v'}}{c^2}} = 1 - \frac{\mathbf{u} \cdot \mathbf{v'}}{c^2} + \mathcal{O}(1/c^3)
+        \end{align*}
+        the second term is of order $1/c^2$ so it will only mutltiply the sum of the velocities and not the cross product term.
+        Combining these results in:
+        \begin{equation*}
+          \mathbf{u}\oplus \mathbf{v'} \approx \mathbf{u} + \mathbf{v}' + \frac{1}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}
+        \end{equation*}
+        Now for linearity:
+        \begin{align*}
+          (\lambda \mathbf{u})\oplus (\lambda \mathbf{v'}) &\approx \lambda\mathbf{u} + \lambda \mathbf{v}' + \frac{\lambda^3}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \lambda^3\mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \lambda^3\mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}\\
+                                                           &=      \lambda\left(\mathbf{u} + \mathbf{v}' + \frac{\lambda^2}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \lambda^2\mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \lambda^2\mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}\right)\\
+                                                           &\neq \lambda(\mathbf{u}\oplus \mathbf{v'})
+        \end{align*}
+        For commutavity:
+      \begin{align*}
+          \mathbf{v'}\oplus \mathbf{u} \approx \mathbf{v}' + \mathbf{u} + \frac{1}{2c^2}\mathbf{v'}\times(\mathbf{v'} \times \mathbf{u}) - \mathbf{v}'\frac{\mathbf{v'}\cdot\mathbf{u}}{c^2} - \mathbf{u}\frac{\mathbf{v'}\cdot\mathbf{u}}{c^2}
+      \end{align*}
+      But:
+      \begin{equation*}
+        \mathbf{v'}\times(\mathbf{v'} \times \mathbf{u}) \propto  v'^2 u \qquad \text{and} \qquad (\mathbf{u}\times \mathbf{u} \times \mathbf{v'}) \propto u^2 v
+      \end{equation*}
+      The resulting vectors have different lengths in general, and cannot be equal.
+      This result implies that this addition operator is not commutative.
+      Checking associativity at the first nontrivial order in $\frac{1}{c}$:
+        \begin{align*}
+          (\mathbf{u}\oplus \mathbf{v'})\oplus \mathbf{w'} &\approx \mathbf{u} + \mathbf{v}' + \frac{1}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}\\
+                                                           & \quad + \mathbf{w'} +\frac{1}{2c^2} (\mathbf{u} + \mathbf{v}') \times \left[(\mathbf{u} + \mathbf{v}') \times \mathbf{w'}\right]\\
+                                                           &= \mathbf{u} + \mathbf{v}' + \frac{1}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}\\
+                                                           & \quad + \mathbf{w'} +\frac{1}{2c^2} (\mathbf{u} + \mathbf{v}') \times \left[\mathbf{u} \times \mathbf{w'} + \mathbf{v}'\times \mathbf{w'} \right]\\
+                                                           &= \mathbf{u} + \mathbf{v}' + \frac{1}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}\\
+                                                           & \quad + \mathbf{w'} +\frac{1}{2c^2} (\mathbf{u} \times \mathbf{u} \times \mathbf{w'} + \mathbf{v}'\times \mathbf{v}'\times \mathbf{w'}) 
+        \end{align*}
+        And:
+        \begin{align*}
+          \mathbf{u}\oplus (\mathbf{v'}\oplus \mathbf{w'}) &\approx \mathbf{u} + \mathbf{v}' + \mathbf{w}' + \frac{1}{2c^2}\mathbf{v'}\times(\mathbf{v'} \times \mathbf{w'}) - \mathbf{v}'\frac{\mathbf{v}'\cdot\mathbf{w}'}{c^2} - \mathbf{w}'\frac{\mathbf{v}'\cdot\mathbf{w}'}{c^2}\\
+                                                           & \quad + \frac{1}{2c^2} \mathbf{u} \times \left[\mathbf{u}  \times (\mathbf{v'} + \mathbf{w'})\right]\\
+                                                           &= \mathbf{u} + \mathbf{v}' + \mathbf{w}' + \frac{1}{2c^2}\mathbf{v'}\times(\mathbf{v'} \times \mathbf{w'}) - \mathbf{v}'\frac{\mathbf{v}'\cdot\mathbf{w}'}{c^2} - \mathbf{w}'\frac{\mathbf{v}'\cdot\mathbf{w}'}{c^2}\\
+                                                           & \quad + \frac{1}{2c^2} \left[\mathbf{u} \times \mathbf{u}\times \mathbf{v'} +  \mathbf{u}\times \mathbf{u} \times \mathbf{w}'\right]
+        \end{align*}
+        The question of associativity comes down to:
+        \begin{equation*}
+          \mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} + \mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} \stackrel{?}{=} \mathbf{v}'\frac{\mathbf{v}'\cdot\mathbf{w}'}{c^2} + \mathbf{w}'\frac{\mathbf{v}'\cdot\mathbf{w}'}{c^2}
+        \end{equation*}
+        One side depends on $\mathbf{w}'$ and the other one does not so these are not equal in general.
       \item
         The 4 velocity is a contravariant 4-vector so it transforms as:
         \begin{align*}
@@ -246,42 +304,15 @@
           u \frac{v'^1}{v'^0} = {\bf u} \cdot {\bf v}'
         \end{equation*}
         and $v'^j/v'^0$ are just the components of the local three velocity ${\bf v}'$ of moving body.
-        The non-linearity in $\mathbf{u}$ is pretty clear because there is a double cross product.
-        The fraction with the Lorentz factor to lowest non-trivial order is:
-        \begin{align*}
-          \gamma (1 + \gamma)^{-1} &= \left(1 +\frac{1}{2}\frac{u^2}{c^2} + \mathcal{O}(1/c^3)\right)\left(\frac{1}{2} - \frac{1}{2}(-\frac{1}{2}(-u^2/c^2))+ \mathcal{O}(1/c^3)\right)\\
-                                &\approx \left(1 +\frac{1}{2}\frac{u^2}{c^2}\right)\left(\frac{1}{2} - \frac{1}{4}u^2/c^2\right)\\
-                                &= \frac{1}{2} -\frac{1}{8}\frac{u^4}{c^4}
-        \end{align*}
-        And this term is multliplying a term in $\frac{1}{c^2}$, so only ther first term is required.
-        Also:
-        \begin{align*}
-          \frac{1}{1 + \frac{\mathbf{u}\cdot\mathbf{v'}}{c^2}} = 1 - \frac{\mathbf{u} \cdot \mathbf{v'}}{c^2} + \mathcal{O}(1/c^3)
-        \end{align*}
-        \begin{equation*}
-          \mathbf{u}\oplus \mathbf{v'} \approx \mathbf{u} + \mathbf{v}' + \frac{1}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}
-        \end{equation*}
-        Now for linearity:
-        \begin{align*}
-          (\lambda \mathbf{u})\oplus (\lambda \mathbf{v'}) &\approx \lambda\mathbf{u} + \lambda \mathbf{v}' + \frac{\lambda^3}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \lambda^3\mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \lambda^3\mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}\\
-                                                           &=      \lambda\left(\mathbf{u} + \mathbf{v}' + \frac{\lambda^2}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \lambda^2\mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \lambda^2\mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2}\right)\\
-                                                           &\neq \lambda(\mathbf{u})\oplus ( \mathbf{v'})
-        \end{align*}
-        For commutavity:
-      \begin{align*}
-          \mathbf{v'}\oplus \mathbf{u} \approx \mathbf{v}' + \mathbf{u} + \frac{1}{2c^2}\mathbf{v'}\times(\mathbf{v'} \times \mathbf{u}) - \mathbf{v}'\frac{\mathbf{v'}\cdot\mathbf{u}'}{c^2} - \mathbf{u}\frac{\mathbf{v'}\cdot\mathbf{u}}{c^2}
-      \end{align*}
-      But:
-      \begin{equation*}
-        \mathbf{v'}\times(\mathbf{v'} \times \mathbf{u}) \propto  v'^2 u \qquad \text{and} \qquad \mathbf{u}\times \mathbf{u} \times \mathbf{v'}) \propto u^2 v
-      \end{equation*}
-      So these are not equal and the addition operator does not commute.
-        \begin{align*}
-          (\mathbf{u}\oplus \mathbf{v'})\oplus \mathbf{w'} \approx \mathbf{u} + \mathbf{v}' + \frac{1}{2c^2}\mathbf{u}\times(\mathbf{u} \times \mathbf{v}') - \mathbf{u}\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} - \mathbf{v}'\frac{\mathbf{u}\cdot\mathbf{v}'}{c^2} + \mathbf{w'}
-        \end{align*}
       \item
-
-        The non-associativity relates to the Leibniz rule.
+        The composition of multiple velocities relates to boosting a boost and the question then comes down to:
+        The question then becomes is the boost of a boost another boost?
+        \begin{equation*}
+          B(\mathbf{v}) B(\mathbf{w}) \stackrel{?}{=} B(\mathbf{v} \oplus \mathbf{w})
+        \end{equation*}
+        The general answer is no, unless the boosts are along collinear directions.
+        This boils down to the Lorentz lie group being a closed and connected group that has both pure boosts and rotations.
+        Thus the velocity composition operator does not define a group operation because subgroup of pure Lorentz boosts is not closed.
     \end{enumerate}
   \item
     \begin{enumerate}
@@ -306,6 +337,7 @@
         \begin{align*}
           \delta {\bf v}' &= \gamma(v)^2 \delta {\bf v}_\parallel +  \gamma(v) \delta {\bf v}_\perp
         \end{align*}
+        After dropping terms of higher order in $\delta$.
       \item
         The problem is best solved(?) if basis vectors are chosen such that ${\bf v} = (v, 0, 0)$ where $v$ is the length of ${\bf v}$.
         In this case ${\bf \delta v} = ( \delta v_\parallel, \delta v_2, \delta v_2)$.
@@ -528,5 +560,48 @@
         Which is off by a minus sign, but the dependences look good.
     \end{enumerate}
 \end{enumerate}
+\appendix
+\section{The product of a shifted boost and it's inverse}
+
+I started working on this and I thought it was a bit instructive, but I could not get a clear answer.
+
+        For $B({\bf v + \delta v})$:
+        \begin{align*}
+          \psi''_1 &= \tanh^{-1}(v + \delta v) \\
+                  &= \frac{1}{2}\left(\ln(1 + v + \delta v_\parallel) - \ln(1 - v - \delta v_\parallel)\right)\\
+                  &= \frac{1}{2}\left(\ln(1 + v) - \ln(1 - v)\right) + \frac{\delta v_\parallel}{2}\left(\frac{1}{1 + v} + \frac{1}{1 - v}\right) + \mathcal{O}(\delta v_\parallel^2)\\
+                  &= \psi_1 + \frac{\delta v_\parallel}{2}\left(\frac{2}{1 - v^2}\right) + \mathcal{O}(\delta v_\parallel^2)\\
+                  &= \psi_1 + \gamma^2 \delta v_\parallel + \mathcal{O}(\delta v_\parallel^2)\\
+        \end{align*}
+        Similarly:
+        \begin{align*}
+          \psi''_2 &= \tanh^{-1}(\delta v_\perp) \\
+                  &= \frac{1}{2}\left(\ln(1 + \delta v_\perp) - \ln(1 - \delta v_\perp)\right)\\
+                  &= \frac{1}{2}\left(\ln(1) - \ln(1)\right) + \frac{\delta v_\perp}{2}\left(1 + 1\right) + \mathcal{O}(\delta v_\perp^2)\\
+                  &= \delta v_\perp + \mathcal{O}(\delta v_\perp^2)
+        \end{align*}
+        And $\psi''_3 = 0$.
+        For $B(-{\bf v})$:
+        \begin{align*}
+          \tanh^{-1}(-v )
+                  &= \frac{1}{2}\left(\ln(1 - v ) - \ln(1 + v )\right)\\
+                  &= - \frac{1}{2}\left(\ln(1 + v ) - \ln(1 - v )\right)\\
+                  &= - \psi_1
+        \end{align*}
+        Only keeping the terms of order $\delta v_*$ and using the BCH formula:
+        \begin{equation*}
+          \exp (A) \exp(B) = \exp(A + B + \frac{1}{2}[A, B] + \frac{1}{12}\left([A, [A, B]] + [B, [B, A]]\right) + ...)
+        \end{equation*}
+        Now isolating the exponents and inserting the basis vectors, but only looking at the first commutator:
+        \begin{align*}
+          &\psi_1 K_1 + \gamma^2 \delta v_\parallel K_1 + \delta v_\perp K_2 - \psi_1 K_1 + \frac{1}{2} \left[\gamma^2 \delta v_\parallel K_1 - \delta v_\perp K_2, \psi_1 K_1\right]\\
+          =&  \gamma^2\delta v_\parallel K_1 +  \delta v_\perp K_2  - \frac{1}{2} \left[ \delta v_\perp K_2, \psi_1 K_1\right]\\
+          =&  \gamma^2\delta v_\parallel K_1 +  \delta v_\perp K_2  + \frac{1}{2} \delta v_\perp \psi_1 J_3
+        \end{align*}
+        It is now clear that there is a rotation around the $3$ axis that results from the boost basis vectors not commuting.
+        There are many terms like this in order $\delta v_\perp$ alternating on the basis $K_2$ and $J_3$.
+        The factor in front of $K_2$ probably comes to $\cosh \psi_1$, but the $J_3$ cofactor might look a bit wierd.
+        Working it out would probably be done using \href{https://en.wikipedia.org/wiki/Baker\%E2\%80\%93Campbell\%E2\%80\%93Hausdorff_formula}{Dynkin's formula} and combinatorial analyis since certain combination of $J_3$, $K_1$ and $K_2$ will give specific terms and the sum can split.
+        That being said, working it out explicity is probably quite heavy going.
 
 \end{document}
