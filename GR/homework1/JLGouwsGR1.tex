@@ -1,0 +1,189 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{GR Homework 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item 
+        The first index of $F$ must be raised to evaluate the differential equation:
+        \begin{align*}
+          \tensor{F}{^\mu_\nu} = \eta^{\mu\rho} F_{\rho\nu}
+        \end{align*}
+        This only has two non-zero components:
+        \begin{align*}
+          \tensor{F}{^0_1} = \eta^{00} F_{01} = - F_{01} = E \qquad \text{and} \qquad \tensor{F}{^1_0} = \eta^{11} F_{10} = F_{10} = E
+        \end{align*}
+
+        Now the proper velocity and acceleration of the particle is:
+        \begin{equation*}
+          u^\mu = \frac{d x^\mu}{d \tau} = (\cosh(g \tau), \sinh(g \tau), 0, 0) \Rightarrow \frac{d u^\mu}{d \tau} = (g \sinh(g \tau), g\cosh(g \tau), 0, 0)
+        \end{equation*}
+        Now if $\tau$ is the proper time for this trajectory $u^\mu u_\mu  = 1$:
+        \begin{align*}
+          \eta^{\mu\nu}u_\mu u_\nu = (-\cosh(g \tau), \sinh(g \tau), 0, 0)^T (\cosh(g \tau), \sinh(g \tau), 0, 0) = \sinh^2(g\tau) - \cosh^2(g \tau) = -1
+        \end{align*}
+        As required.
+        Now using the expression in the Lorentz force equation yeilds:
+        Now:
+        \begin{align*}
+          k\tensor{F}{^\mu_\nu}v^\nu = (Ek\sinh(g \tau), Ek\cosh(g \tau), 0, 0)
+        \end{align*}
+        Thus we can see that this trajectory satisfies the Lorentz force law provided:
+        \begin{equation*}
+          g = Ek
+        \end{equation*}
+      \item
+        \begin{equation*}
+          a^\mu = (g \sinh(g \tau), g\cosh(g \tau), 0, 0) \Rightarrow a_\mu = \eta_{\mu\nu}a^\nu = (-g \sinh(g \tau), g\cosh(g \tau), 0, 0)
+        \end{equation*}
+        And now taking the inner product:
+        \begin{equation*}
+          a^\mu a_\mu = -g^2 \sinh^2(g \tau) + g^2\cosh^2(g \tau) = g^2
+        \end{equation*}
+      \item 
+        \begin{align*}
+          ds^2 &= -dt^2 + dx^2 + d\rho^2 + \rho^2d\phi^2\\
+               &= -\left(\frac{dt}{dT}\right)^2dT^2 + \left(\frac{dx}{dX}\right)^2 dX^2 + d\rho^2 + \rho^2d\phi^2\\
+        \end{align*}
+        Now:
+        \begin{equation*}
+          \frac{d t}{dT} = \frac{d}{dT} \left(\frac{1}{g} + X\right) \sinh(gT) = \left(1 + gX\right) \cosh(gT) + \frac{d X}{dT} \sinh(gT)
+        \end{equation*}
+        And:
+        \begin{equation*}
+          \frac{d x}{dX} = \frac{d}{dX} \left(\frac{1}{g} + X\right) \cosh(gT) =  \cosh(gT) + \left(1 + gX\right) \sinh(gT) \frac{dT}{dX}
+        \end{equation*}
+        And using these in the expression for the metric:
+        \begin{align*}
+          ds^2  &= -\left(\left(1 + gX\right) \cosh(gT) + \frac{d X}{dT} \sinh(gT)\right)^2dT^2\\
+                &\qquad + \left(\cosh(gT) + \left(1 + gX\right) \sinh(gT) \frac{dT}{dX}\right)^2 dX^2 + d\rho^2 + \rho^2d\phi^2\\
+                &= -\left(1 + gX\right)^2 \cosh^2(gT)dT^2 - \left(1 + gX\right) \cosh(gT) \sinh(gT)dXdT - \sinh^2(gT) dX^2\\
+                &\qquad + \cosh^2(gT)dX^2 + \cosh(gT)\left(1 + gX\right) \sinh(gT) dT dX + \left(1 + gX\right)^2 \sinh^2(gT) dT^2\\
+                &\qquad \quad + d\rho^2 + \rho^2d\phi^2\\
+                &= -\left(1 + gX\right)^2 (\cosh^2(gT) - \sinh^2(gT))dT^2  + (\cosh^2(gT) - \sinh^2(gT)) dX^2 + d\rho^2 + \rho^2d\phi^2\\
+                &= -\left(1 + gX\right)^2 dT^2  +  dX^2 + d\rho^2 + \rho^2d\phi^2
+        \end{align*}
+    \end{enumerate}
+
+  \item
+    \begin{enumerate}
+      \item
+      \item
+        \begin{align*}
+          R^\nu u_\nu = (x^\nu - \gamma^\nu)u_\nu
+        \end{align*}
+        \begin{align*}
+          R_\nu u^\nu &= (t - t_Q, x - x_Q, y, z)^T g (-x_Q, t_Q, 0, 0)\\
+                      &= g(-t x_Q + t_Qx_Q +x t_Q - x_Qt_Q)\\
+                      &= g(x t_Q -t x_Q)
+        \end{align*}
+        Thus combining:
+        \begin{align*}
+          A^\mu = - \frac{Q g (-x_Q, t_Q, 0, 0)}{g(x t_Q -t x_Q)} = \frac{Q  (-x_Q, t_Q, 0, 0)}{t x_Q - x t_Q} = \frac{Q}{\xi} (-x_Q, t_Q, 0, 0)
+        \end{align*}
+      \item
+        \begin{equation*}
+          t_Q = t - \sqrt{\rho^2 + (x - x_Q)^2}
+        \end{equation*}
+        Now using this in the expression for $x_Q$:
+        \begin{align*}
+          x_Q^2 &= L^2 + \left(t - \sqrt{\rho^2 + (x - x_Q)^2}\right)^2\\
+                &= L^2 + t^2 + \rho^2 + (x - x_Q)^2 - 2 t \sqrt{\rho^2 + (x - x_Q)^2}\\
+                &= L^2 + t^2 + \rho^2 + x^2 - 2x_Qx + x_Q^2 - 2 t \sqrt{\rho^2 + (x - x_Q)^2}
+        \end{align*}
+        Rearranging and squaring this:
+        \begin{align*}
+                      & 2x_Qx - L^2 - t^2 - \rho^2 - x^2 = -2 t \sqrt{\rho^2 + (x - x_Q)^2}\\
+          \Rightarrow & x_Qx - (L^2 + t^2 + \rho^2 + x^2)/2 = - t \sqrt{\rho^2 + (x - x_Q)^2}\\
+          \Rightarrow & x_Q^2x^2 - x_Qx (L^2 + t^2 + \rho^2 + x^2) + (L^2 + t^2 + \rho^2 + x^2)^2/4 = t^2 (\rho^2 + (x - x_Q)^2)\\
+          \Rightarrow & x_Q^2x^2 - x_Qx (L^2 + t^2 + \rho^2 + x^2) + (L^2 + t^2 + \rho^2 + x^2)^2/4 = t^2 \rho^2 + t^2 x^2 - 2 t^2x_Qx + t^2x_Q^2\\
+          \Rightarrow & x_Q^2(x^2 - t^2) + x_Qx (2t^2 - (L^2 + t^2 + \rho^2 + x^2)) + (L^2 + t^2 + \rho^2 + x^2)^2/4 = t^2 \rho^2 + t^2 x^2 \\
+          \Rightarrow & x_Q^2(x^2 - t^2) - x_Qx (L^2 - t^2 + \rho^2 + x^2) + (L^2 + t^2 + \rho^2 + x^2)^2/4 = t^2 \rho^2 + t^2 x^2 \\
+          \Rightarrow & x_Q^2(x^2 - t^2) - x_Qx \delta + (L^2 + t^2 + \rho^2 + x^2)^2/4 = t^2 \rho^2 + t^2 x^2 \\
+        \end{align*}
+        And now solving for $x_Q$:
+        \begin{align*}
+          x_Q   &= \frac{x\delta \pm \left[x^2\delta^2 - ((L^2 + t^2 + \rho^2 + x^2)^2 - 4 t^2 ( \rho^2 + x^2)) (x^2 - t^2)\right]^{1/2}}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm \left[x^2\delta^2 - \left[(L^2 + t^2 + \rho^2 + x^2)^2 - 4 t^2 ( \rho^2 + x^2)\right] (x^2 - t^2)\right]^{1/2}}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm \left[x^2\delta^2 - \left[(L^2 + t^2 + \rho^2 + x^2)^2 - 4 t^2 (\rho^2 + x^2 + L^2) + 4t^2L^2\right] (x^2 - t^2)\right]^{1/2}}{2(x^2 - t^2)}\\
+%                &= \frac{x\delta \pm \left[x^2\delta^2 - \left[L^4 + t^4 + \rho^4 + x^4 + 2 L^2 t^2 + 2 L^2 x^2 + 2 L^2 \rho^2 - 2 t^2\rho^2 - 2t^2 x^2 + 2 \rho^2 x^2\right] (x^2 - t^2)\right]^{1/2}}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm \left[x^2\delta^2 - \left(\delta^2 + 4L^2t^2\right) (x^2 - t^2)\right]^{1/2}}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm \left[\left(\delta^2 + 4L^2t^2 - 4L^2 x^2 \right)t^2 \right]^{1/2}}{2(x^2 - t^2)}\\
+%                &= \frac{x\delta \pm t\left[\left(\delta^2 - 4L^2t^2 - 4L^2 x^2 \right) \right]^{1/2}}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm t\left[\left((L^2 - t^2 + x^2 + \rho^2)^2 - 4L^2(-t^2 + x^2 + \rho^2)\right) + 4L^2 \rho^2 \right]^{1/2}}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm t\left[(x^2 + \rho^2 - L^2 - t^2) ^2  + 4L^2 \rho^2 \right]^{1/2}}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm 2t\left[(x^2 + \rho^2 - L^2 - t^2) ^2/4  + L^2 \rho^2 \right]^{1/2}}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm 2t\xi}{2(x^2 - t^2)}\\
+%                &= \frac{x\delta \pm \left[(\delta^2 - \delta (2x^2 + 2\rho^2) + (2x^2 + 2\rho^2))t^2 - x^2 (\delta (2x^2 + 2\rho^2) - (2x^2 + 2\rho^2)) + 4 t^2(\rho^2 + x^2) (x^2 - t^2)\right]^{1/2}}{2(x^2 - t^2)}\\
+        \end{align*}
+      \item
+    \end{enumerate}
+\end{enumerate}
+\end{document}
