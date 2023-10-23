@@ -1,9 +1,10 @@
 \documentclass[12pt,a4]{article}
 \usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
 \usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
 \usepackage{setspace}
-\usepackage{caption}
 \usepackage{tikz}
 \usepackage{pgf,tikz,pgfplots,wrapfig}
 \usepackage{mathrsfs}
@@ -13,6 +14,26 @@
 \usepackage{booktabs,multirow}
 \usepackage{bm}
 \usepackage{tensor}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
 
 \usetikzlibrary{decorations.text, calc}
 \pgfplotsset{compat=1.7}
@@ -95,7 +116,7 @@
         \begin{align*}
           k\tensor{F}{^\mu_\nu}v^\nu = (Ek\sinh(g \tau), Ek\cosh(g \tau), 0, 0)
         \end{align*}
-        Thus we can see that this trajectory satisfies the Lorentz force law provided:
+        Thus, this trajectory satisfies the Lorentz force law provided:
         \begin{equation*}
           g = Ek
         \end{equation*}
@@ -107,6 +128,21 @@
         \begin{equation*}
           a^\mu a_\mu = -g^2 \sinh^2(g \tau) + g^2\cosh^2(g \tau) = g^2
         \end{equation*}
+      \item
+        Figure~\ref{fig:partTrajectories} gives the trajectories for the particle with different acclerations.
+        \begin{figure}[H]
+          \centering
+          \includegraphics[width = 0.4\textwidth]{ParticleTrajectories.pdf}
+          \label{fig:partTrajectories}
+        \end{figure}
+        The particle goes off to positive infinity for large times.
+        The speed of the particle tends to $1$, as the particle cannot travel faster than the speed of light.
+      \item
+        \begin{figure}[H]
+          \centering
+          \includegraphics[width = 0.4\textwidth]{ConstCoords.pdf}
+          \label{fig:partTrajectories}
+        \end{figure}
       \item 
         \begin{align*}
           ds^2 &= -dt^2 + dx^2 + d\rho^2 + \rho^2d\phi^2\\
@@ -135,12 +171,70 @@
   \item
     \begin{enumerate}
       \item
+        The scalar and vector potentials are:
+        \begin{gather*}
+          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\frac{\rho (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3\mathbf{r}' \qquad
+          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\frac{\mathbf{J} (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3\mathbf{r}'\\
+          A^\mu = \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3r'
+        \end{gather*}
+        Since nothing can travel faster than the speed of light, and it is expected that electromagnetic interactions will travel at the speed of light, it is expecetd that anything observed will have come the past at some $t_r = t - |\mathbf{r} - \mathbf{r}|'$.
+        For a moving point charge:
+        \begin{gather*}
+          \rho (\mathbf{r}', t_r') = Q \delta^3(\mathbf{r'}_Q - \mathbf{r'}_Q(t_r')) \qquad
+          \mathbf{J} (\mathbf{r}', t_r') = Q \mathbf{v}_Q'(t_r') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t_r'))\\
+          J^\mu (\mathbf{r}', t') = \int d\tau' Q u^\mu \delta^4(x'^\mu - x_Q^\mu)
+        \end{gather*}
+        So that:
+        \begin{equation*}
+          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\frac{Q \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t_r'))}{|\mathbf{r} - \mathbf{r}'|} d^3\mathbf{r}' \qquad
+          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\frac{Q \mathbf{v}_Q'(t_r') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t_r'))}{|\mathbf{r} - \mathbf{r}'|} d^3\mathbf{r}'
+        \end{equation*}
+        And a sneaky dirac delta insertion can clean things up:
+        \begin{align*}
+%          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|}\delta(t_r' - t') dt' d^3\mathbf{r}' \\
+%          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \mathbf{v}'_Q(t') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|} \delta(t_r' - t')dt' d^3r'\\
+          A^\mu &= \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} \delta(t_r' - t')dt' d^3 r'\\
+                &= \frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t_r') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'
+        \end{align*}
+        Using, where $x_0$ is a zero of $f$:
+        \begin{equation}
+          \delta(f(x)) = \frac{\delta(x - x_0)}{|f'(x_0)|}
+          \label{eq:diracdeltafunction}
+        \end{equation}
+        And let $\Delta t = (t - t')$ then:
+        \begin{equation*}
+          \delta(\Delta t^2 - |\mathbf{r} - \mathbf{r}'|^2) = \frac{\delta(t - t')}{2 \Delta t |_{|\mathbf{r} - \mathbf{r}'|}} = \frac{\delta(t - t')}{2 |\mathbf{r} - \mathbf{r}'|}
+        \end{equation*}
+        Thus
+        \begin{align*}
+          A^\mu &=\frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t_r') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'\\
+                &=\frac{1}{2 \pi}\int J^\mu (\mathbf{r}', t_r') \delta((t - t')^2 - |\mathbf{r} - \mathbf{r}'|^2)dt' d^3 r'\\
+                &=\frac{1}{2 \pi}\int J^\mu (\mathbf{r}', t_r') \delta((x^\nu - x'^\nu)(x_\nu - x'_\nu))d^4x'\\
+                &=\frac{1}{2 \pi}\int Q u^\mu \delta^4(x'^\nu - x_Q'^\nu)|_{t'_r} \delta((x^\nu - x'^\nu)(x_\nu - x'_\nu))d \tau' d^4x' \\
+                &=\frac{1}{2 \pi}Q \left.\int  u^\mu \delta((x_Q'^\nu - x'^\nu)(x'\tensor{}{_Q_\nu} - x'_\nu)) d \tau' \right|_{t'_r}
+        \end{align*}
+        Now $(x_Q'^\mu - x'_\mu)(x_Q'^\mu - x'_\mu)$ is implicitly a function of $\tau$, therefore using Equation~\ref{eq:diracdeltafunction}:
+        \begin{align*}
+          \delta((x_Q'^\mu - x'^\mu)(x'\tensor{}{_Q_\mu} - x'_\mu)) = \frac{\delta(\tau - \tau')}{|(x_Q'^\mu - x'^\mu)\partial_\tau x'\tensor{}{_Q_\mu} + (x_Q'^\mu - x'_\mu)\partial_\tau x_Q'^\mu|} = \frac{\delta(\tau - \tau')}{2|(x'^\mu - x_Q'^\mu)u_\mu|}
+        \end{align*}
+        And using this in the expression for $A^\mu$ and carrying out the $\tau '$ integral over the delta function:
+        \begin{align*}
+          A^\mu &=\frac{1}{4 \pi}Q \frac{u^\mu}{|(x'^\nu - x_Q'^\nu)u_\nu|}
+        \end{align*}
+        Choosing units that set $4 \pi = 1$ gives the desired relation.
       \item
+        Now $u^\mu = (\cosh(g \tau), \sinh(g \tau), 0, 0) = (g x_Q, g t_Q, 0, 0) = g(x_Q,t_Q, 0, 0)$. 
+        Now the index must be lowered with the (Minkowski) metric:
+        \begin{equation*}
+          \eta_{\mu\nu} u^\mu = -1 u_0 dt + 1 u_1 dx + 1 u_2 d\rho + \rho^2 u_3 d\phi = g(-x_Q,t_Q, 0, 0)^{T}
+        \end{equation*}
+        Where the transpose is there to indicate that this is a form.
+        Now:
         \begin{align*}
           R^\nu u_\nu = (x^\nu - \gamma^\nu)u_\nu
         \end{align*}
         \begin{align*}
-          R_\nu u^\nu &= (t - t_Q, x - x_Q, y, z)^T g (-x_Q, t_Q, 0, 0)\\
+          R^\nu u_\nu &= (t - t_Q, x - x_Q, y, z) g (-x_Q, t_Q, 0, 0)^T\\
                       &= g(-t x_Q + t_Qx_Q +x t_Q - x_Qt_Q)\\
                       &= g(x t_Q -t x_Q)
         \end{align*}
@@ -149,6 +243,7 @@
           A^\mu = - \frac{Q g (-x_Q, t_Q, 0, 0)}{g(x t_Q -t x_Q)} = \frac{Q  (-x_Q, t_Q, 0, 0)}{t x_Q - x t_Q} = \frac{Q}{\xi} (-x_Q, t_Q, 0, 0)
         \end{align*}
       \item
+        I did this by hand first and then I decided to calculate $t_Q$ with Mathematica.
         \begin{equation*}
           t_Q = t - \sqrt{\rho^2 + (x - x_Q)^2}
         \end{equation*}
@@ -180,10 +275,110 @@
                 &= \frac{x\delta \pm t\left[\left((L^2 - t^2 + x^2 + \rho^2)^2 - 4L^2(-t^2 + x^2 + \rho^2)\right) + 4L^2 \rho^2 \right]^{1/2}}{2(x^2 - t^2)}\\
                 &= \frac{x\delta \pm t\left[(x^2 + \rho^2 - L^2 - t^2) ^2  + 4L^2 \rho^2 \right]^{1/2}}{2(x^2 - t^2)}\\
                 &= \frac{x\delta \pm 2t\left[(x^2 + \rho^2 - L^2 - t^2) ^2/4  + L^2 \rho^2 \right]^{1/2}}{2(x^2 - t^2)}\\
-                &= \frac{x\delta \pm 2t\xi}{2(x^2 - t^2)}\\
+                &= \frac{x\delta \pm 2t\xi}{2(x^2 - t^2)}
 %                &= \frac{x\delta \pm \left[(\delta^2 - \delta (2x^2 + 2\rho^2) + (2x^2 + 2\rho^2))t^2 - x^2 (\delta (2x^2 + 2\rho^2) - (2x^2 + 2\rho^2)) + 4 t^2(\rho^2 + x^2) (x^2 - t^2)\right]^{1/2}}{2(x^2 - t^2)}\\
         \end{align*}
+        Now, the correct sign should be chosen.
+        Both the plus and minus sign seem to solve the problem provided the expression for $t_Q$ is given the same sign:
+        \begin{equation*}
+          t_Q = \frac{t\delta \pm 2x\xi}{2(x^2 - t^2)}
+        \end{equation*}
+        The for this expression calculation is analogous to the above.
+        The only difference appears to be the following.
+        Look at the large $t$ limit, $\xi \sim t^2$ so that:
+        \begin{equation*}
+          x_Q \leadsto \mp 2 t
+        \end{equation*}
+        So that for the top sign as $t \to \infty$ the particle goes in the negative direction, and the bottom sign indicates that the particle goes to positive infinity.
+        In the $\tau$ parameterization of $x_Q$, $x_Q$ goes to positive infinity indicating that the lower sign corresponds to the earlier parametrization.
       \item
+        Since the expression for the potential has $t$, $x$ and $\rho$ dependence it is possible for the $F_{10}$, $F_{01}$, $F_{20}$, $F_{02}$, $F_{12}$ and $F_{21}$ components to be non-zero.
+        All other components are automatically zero.
+        Doing the calculation explicitly shows that all the above mentioned are non-zero.
+        $F_{[10]}$ and $F_{[20]}$ correspond to the Electric field in the $x$ and $\rho$ direction, but maybe surprisingly the $F_{[21]}$ components are non-zero indicating a magnetic field in the $\phi$ direction.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        Now the transformation is:
+        \begin{equation*}
+          A_\mu dx^\mu = A_\mu \frac{\partial x^\mu}{\partial X^\mu} dX^\mu = A'_\mu dX^\mu
+        \end{equation*}
+        Where $X$ stands for the Rhindler coordinates, and $A'_\mu = A_\mu \frac{\partial x^\mu}{\partial X^\mu}$.
+        The transformation matrix is, see the Mathematica notebook:
+        \begin{equation*}
+          \frac{\partial x^\mu}{\partial X^\mu}
+          =
+          \left(
+          \begin{matrix*}
+            (1+g X) \cosh(g T)&\sinh g T)&0&0\\
+            (1+g X) \sinh g T)&\cosh g T)&0&0\\
+            0&0&1&0\\
+            0&0&0&1
+          \end{matrix*}
+          \right)
+        \end{equation*}
+        And using this and writing the potential in the Rhindler coordintes gives the transformation.
+      \item
+        Taking the Taylor series in $g$ of the potential:
+        \begin{align*}
+          \phi &= \frac{Q}{r} -\frac{g Q X}{2 r}+ \frac{3 g ^2Q (X^2+r^2) }{8 r^2}\\
+               &= \frac{Q}{r}(1 -\frac{1}{2 r}gX+ \frac{3 g ^2 (X^2+r^2) }{8 r}
+        \end{align*}
+      \item
+        Figure~\ref{fig:equipgraphs} gives plots of equipotentials for various values of $g$.
+        \begin{figure}[H]
+          \centering
+          \begin{subfigure}[a]{.4\textwidth}
+            \includegraphics[width=\linewidth]{g01equip.pdf}
+          \end{subfigure}
+          \begin{subfigure}[a]{.4\textwidth}
+            \includegraphics[width=\linewidth]{g025equip.pdf}
+          \end{subfigure}
+          \begin{subfigure}[a]{.4\textwidth}
+            \includegraphics[width=\linewidth]{g05equip.pdf}
+          \end{subfigure}
+          \begin{subfigure}[a]{.4\textwidth}
+            \includegraphics[width=\linewidth]{g1equip.pdf}
+          \end{subfigure}
+          \begin{subfigure}[a]{.4\textwidth}
+            \includegraphics[width=\linewidth]{g0equip.pdf}
+          \end{subfigure}
+%          \subfigure[]{\includegraphics[width=0.24\textwidth]{g025equip.pdf}}
+%          \subfigure[]{\includegraphics[width=0.24\textwidth]{g05equip.pdf}}
+%          \subfigure[]{\includegraphics[width=0.24\textwidth]{g1equip.pdf}}
+          \caption{Equipotentials for the accelerating charge in an orthonormal coordinate system}
+          \label{fig:equipgraphs}
+        \end{figure}
+        Figure~\ref{fig:equipgraphs} shows that the graphs seem streched out to the left and compressed to the right.
+        The electric field will be weaker at points in the direction opposite to the charge's motion and stronger at points that are to the right of the charge.
+        In the exreme cases of high $g$ the potential is constant to the left of the charge indicating that there will be no electric field to the left of the charge.
+        This occurence is (probably) equivalent to the fact that no light escape regions of high enough gravitational acceleration.
+        With $g$ low and zero, the equipotentials become circles reducting to the static limit.
+      \item
+        The $F'_{M N}$ components are given by $F'_{MN} = \partial_{M}A'_N - \partial_{N}A'_M$.
+        The only thing to keep track of here is that the indices here should be raised by the inverse metric:
+        \begin{equation*}
+          F'^{M N} = g^{M P}g^{N\Sigma}F'_{P\Sigma}
+        \end{equation*}
+        And $\det (g_\alpha \beta) = -(1 + gX)^2\rho^2$, the rest is mess of algebra, for which Mathematica gives:
+        
+        \begin{lstlisting}[language=Mathematica, mathescape]
+In[41]:= FmunuPrime =
+  (D[AdmuPrime /. {r^2 ->X^2 + $\rho$^2}, {{T,X,$\rho$, $\phi$}}] 
+  -Transpose[D[AdmuPrime /. {r^2 ->X^2 + $\rho$^2}, 
+            {{T,X,$\rho$, $\phi$}}]])//FullSimplify
+Out[41]= 
+  {{0,(4 Q (1+g X) (X (2+g X)-g $\rho$^2))/((X^2+ρ^2) ((2+g X)^2
+  +g^2 ρ^2))^(3/2),(8 Q (1+g X)^2 ρ)/((X^2+ρ^2) ((2+g X)^2+g^2 ρ^2))^(3/2),0},{-((4 Q (1+g X) (X (2+g X)-g ρ^2))/((X^2+ρ^2) ((2+g X)^2+g^2 ρ^2))^(3/2)),0,0,0},{-((8 Q (1+g X)^2 ρ)/((X^2+ρ^2) ((2+g X)^2+g^2 ρ^2))^(3/2)),0,0,0},{0,0,0,0}}
+In[42]:= ds2 = DiagonalMatrix[{-(1+g X)^2,1,1,$\rho$^2}];
+(*Thank you to Ruhi for this idea*);
+In[43]:= del={D[#,T] &, D[#,X] &,D[#,$\rho$] &,D[#,$\phi$] &}; 
+In[44]:= gu = Inverse[ds2]//FullSimplify;
+Total[del[[#]][Sqrt[-Det[ds2]]gu.FmunuPrime.gu[[#]]]&/@Range[4]]
+        //FullSimplify
+Out[45]= {0,0,0,0}
+        \end{lstlisting}
     \end{enumerate}
 \end{enumerate}
 \end{document}

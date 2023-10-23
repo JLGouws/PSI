@@ -1,0 +1,110 @@
+In[1]:= 
+Clear["Global`*"];
+SetDirectory[NotebookDirectory[]];
+Question 1
+In[3]:= 
+tQ[g_,\[Tau]_] :=Sinh[g \[Tau]] / g
+xQ[g_,\[Tau]_] := Cosh[g \[Tau]] / g
+In[5]:= xumu[g_,\[Tau]_] ={tQ[g, \[Tau]], xQ[g, \[Tau]], 0, 0};
+uumu[g_,\[Tau]_] = D[xumu[g, \[Tau]],\[Tau]];
+
+In[7]:= eta = DiagonalMatrix[{-1, 1, 1, 1}];
+In[8]:= Simplify[uumu[g,t].eta.uumu[g,t]]
+Out[8]= -1
+In[9]:= gs = {0.3, 0.5, 1,4};
+Export["ParticleTrajectories.pdf",ParametricPlot[Evaluate[xumu[#,t][[{2,1}]]&/@gs], {t, -10, 10}, PlotRange->{{0,5},{-5,5}}, PlotLegends->(StringForm["X = `1`",#]&/@gs)]];
+
+Out[61]= ParticleTrajectories.pdf
+In[12]:= t[g_, X_, T_] = (1/g + X)Sinh[g T];
+x[g_, X_, T_]=(1/g + X) Cosh[g T];
+In[14]:= 
+Xs = {-0.99, 0, 1, 2, 3};
+Ts = {-3,-5,-1, 0, 1, 3, 5};
+In[16]:= {-1.5,-1,0,1,2}
+Out[16]= {-1.5,-1,0,1,2}
+In[17]:= sur[1, #, q]&/@Ts
+Out[17]= {sur[1,-3,q],sur[1,-5,q],sur[1,-1,q],sur[1,0,q],sur[1,1,q],sur[1,3,q],sur[1,5,q]}
+In[18]:= PlotConstTs = ParametricPlot[Evaluate[sur[1, #, q]&/@Xs], {q, -10, 10},  PlotRange->{{0,5},{-5,5}}, PlotStyle->{Black},PlotLegends->(StringForm["X = `1`",#]&/@Xs)];
+In[19]:= 
+PlotConstXs = ParametricPlot[Evaluate[sur[0.3, q,# ]&/@Ts ], {q, -10, 10},  PlotRange->{{0,5},{-5,5}}, PlotStyle->{Directive[Red,Dashed]}, PlotLegends->(StringForm["T = `1`",#]&/@Ts)];
+In[20]:= Export["ConstCoords.pdf",Show[PlotConstTs, PlotConstXs]]
+Out[20]= ConstCoords.pdf
+In[21]:= eta = DiagonalMatrix[{-1, 1, 1,1}];
+Question 2
+In[22]:= 
+Eq1= t - tQ == Sqrt[(\[Rho]^2 + (x - Sqrt[L^2 + tQ^2])^2)];
+tQExp = Solve[Eq1, tQ][[2]];
+tQNew = tQ /. tQExp /. {-L^2t + t^3  - t x^2 - t \[Rho]^2 -> -t(L^2 - t^2 + x^2+\[Rho]^2)}/.{Sqrt[L^4 x^2+2 L^2 t^2 x^2+t^4 x^2-2 L^2 x^4-2 t^2 x^4+x^6+2 L^2 x^2 \[Rho]^2-2 t^2 x^2 \[Rho]^2+2 x^4 \[Rho]^2+x^2 \[Rho]^4]-> x Sqrt[L^4+2 L^2 t^2+t^4-2 L^2  x^2-2 t^2 x^2+ x^4+2 L^2 \[Rho]^2-2 t^2 \[Rho]^2+2  x^2 \[Rho]^2+\[Rho]^4]}/.{(L^4+2 L^2 t^2+t^4-2 L^2 x^2-2 t^2 x^2+x^4+2 L^2 \[Rho]^2-2 t^2 \[Rho]^2+2 x^2 \[Rho]^2+\[Rho]^4 )->(( L^2 + t^2 - x^2 - \[Rho]^2)^2 +4L^2 \[Rho]^2)}/.{x Sqrt[4 L^2 \[Rho]^2+(L^2+t^2-x^2-\[Rho]^2)^2] -> 2 x Sqrt[ (L^2+t^2-x^2-\[Rho]^2)^2/4 +L^2 \[Rho]^2]}/.{Sqrt[ (L^2+t^2-x^2-\[Rho]^2)^2/4 +L^2 \[Rho]^2]->\[Xi]}/.{(L^2 - t^2 + x^2+\[Rho]^2)-> \[Delta]}
+During evaluation of In[22]:= Solve::nongen: There may be values of the parameters for which some or all solutions are not valid.
+Out[24]= (-t \[Delta]+2 x \[Xi])/(2 (t^2-x^2))
+In[25]:= Eq2 = xQ^2== L^2 + tQ^2;
+xQExp = Solve[Eq2 /.{tQ -> t - Sqrt[\[Rho]^2 + (x - xQ)^2]}, xQ][[2]];
+xQNew =xQ /. xQExp /. {-L^2x + t^2 x - x^3 - x \[Rho]^2 -> -x(L^2 - t^2 + x^2+\[Rho]^2)}/.{Sqrt[L^4 t^2+2 L^2 t^4+t^6-2 L^2 t^2 x^2-2 t^4 x^2+t^2 x^4+2 L^2 t^2 \[Rho]^2-2 t^4 \[Rho]^2+2 t^2 x^2 \[Rho]^2+t^2 \[Rho]^4]-> t Sqrt[L^4+2 L^2 t^2+t^4-2 L^2  x^2-2 t^2 x^2+ x^4+2 L^2 \[Rho]^2-2 t^2 \[Rho]^2+2  x^2 \[Rho]^2+\[Rho]^4]} /.{(L^4+2 L^2 t^2+t^4-2 L^2 x^2-2 t^2 x^2+x^4+2 L^2 \[Rho]^2-2 t^2 \[Rho]^2+2 x^2 \[Rho]^2+\[Rho]^4 )->(( L^2 + t^2 - x^2 - \[Rho]^2)^2 +4L^2 \[Rho]^2)}/.{t Sqrt[4 L^2 \[Rho]^2+(L^2+t^2-x^2-\[Rho]^2)^2] -> 2 t Sqrt[ (L^2+t^2-x^2-\[Rho]^2)^2/4 +L^2 \[Rho]^2]}/.{Sqrt[ (L^2+t^2-x^2-\[Rho]^2)^2/4 +L^2 \[Rho]^2]->\[Xi],(L^2 - t^2 + x^2+\[Rho]^2)-> \[Delta]}
+During evaluation of In[25]:= Solve::nongen: There may be values of the parameters for which some or all solutions are not valid.
+Out[27]= (-x \[Delta]+2 t \[Xi])/(2 (t^2-x^2))
+Question 3
+In[28]:= transformMatrix = D[{t[g, X, T], x[g, X, T], \[Rho], \[Phi]},{{T,X,\[Rho], \[Phi]}} ]//FullSimplify
+Out[28]= {{(1+g X) Cosh[g T],Sinh[g T],0,0},{(1+g X) Sinh[g T],Cosh[g T],0,0},{0,0,1,0},{0,0,0,1}}
+In[29]:= 
+Admu = Q {-xQNew,tQNew, 0, 0}/\[Xi]/.{\[Xi]->Sqrt[ (L^2+t^2-x^2-\[Rho]^2)^2/4 +L^2 \[Rho]^2], \[Delta]->(L^2 - t^2 + x^2+\[Rho]^2)} //FullSimplify
+Out[29]= {-((Q t)/(t^2-x^2))+(Q x (L^2-t^2+x^2+\[Rho]^2))/(2 (t^2-x^2) Sqrt[L^2 \[Rho]^2+1/4 (L^2+t^2-x^2-\[Rho]^2)^2]),(Q x)/(t^2-x^2)-(Q t (L^2-t^2+x^2+\[Rho]^2))/(2 (t^2-x^2) Sqrt[L^2 \[Rho]^2+1/4 (L^2+t^2-x^2-\[Rho]^2)^2]),0,0}
+In[30]:= Fmunu =(D[Admu, {{t,x,\[Rho], \[Phi]}}] - Transpose[D[Admu, {{t,x,\[Rho], \[Phi]}}]])//FullSimplify
+Out[30]= {{0,-((4 L^2 Q (L^2+t^2-x^2+\[Rho]^2))/(L^4+2 L^2 (t^2-x^2+\[Rho]^2)+(-t^2+x^2+\[Rho]^2)^2)^(3/2)),(8 L^2 Q x \[Rho])/(L^4+2 L^2 (t^2-x^2+\[Rho]^2)+(-t^2+x^2+\[Rho]^2)^2)^(3/2),0},{(4 L^2 Q (L^2+t^2-x^2+\[Rho]^2))/(L^4+2 L^2 (t^2-x^2+\[Rho]^2)+(-t^2+x^2+\[Rho]^2)^2)^(3/2),0,-((8 L^2 Q t \[Rho])/(L^4+2 L^2 (t^2-x^2+\[Rho]^2)+(-t^2+x^2+\[Rho]^2)^2)^(3/2)),0},{-((8 L^2 Q x \[Rho])/(L^4+2 L^2 (t^2-x^2+\[Rho]^2)+(-t^2+x^2+\[Rho]^2)^2)^(3/2)),(8 L^2 Q t \[Rho])/(L^4+2 L^2 (t^2-x^2+\[Rho]^2)+(-t^2+x^2+\[Rho]^2)^2)^(3/2),0,0},{0,0,0,0}}
+In[31]:= AdmuNew =  Admu.transformMatrix /.{t->t[g, X,T], x->x[g, X,T]}/.{L-> 1/g, \[Rho]^2->r^2-X^2}//FullSimplify
+Out[31]= {-((Q (2+g^2 r^2+2 g X))/(g Sqrt[(r^2 (4+g^2 r^2+4 g X))/g^2])),-((g Q)/(1+g X)),0,0}
+In[32]:= 
+FmunuNew = (D[AdmuNew/.{ r^2 -> X^2 + \[Rho]^2}, {{T,X,\[Rho], \[Phi]}}] - Transpose[D[AdmuNew /.{ r^2 -> X^2 + \[Rho]^2}, {{T,X,\[Rho], \[Phi]}}]])//FullSimplify
+Out[32]= {{0,(4 Q (1+g X) (X (2+g X)-g \[Rho]^2))/(g^3 (((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))/g^2)^(3/2)),(8 Q (1+g X)^2 \[Rho])/(g^3 (((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))/g^2)^(3/2)),0},{-((4 Q (1+g X) (X (2+g X)-g \[Rho]^2))/(g^3 (((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))/g^2)^(3/2))),0,0,0},{-((8 Q (1+g X)^2 \[Rho])/(g^3 (((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))/g^2)^(3/2))),0,0,0},{0,0,0,0}}
+In[33]:= {{0,(4 (1+g X) (X (2+g X)-g \[Rho]^2))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2),(8 (1+g X)^2 \[Rho])/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2),0},{-((4 (1+g X) (X (2+g X)-g \[Rho]^2))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)),0,0,0},{-((8 (1+g X)^2 \[Rho])/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)),0,0,0},{0,0,0,0}}
+Out[33]= {{0,(4 (1+g X) (X (2+g X)-g \[Rho]^2))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2),(8 (1+g X)^2 \[Rho])/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2),0},{-((4 (1+g X) (X (2+g X)-g \[Rho]^2))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)),0,0,0},{-((8 (1+g X)^2 \[Rho])/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)),0,0,0},{0,0,0,0}}
+In[34]:= $Assumptions=g >0;
+In[35]:= f =  Q* Log[1+g X];
+In[36]:= AdmuPrime = AdmuNew +D[f,{{T,X,\[Rho],\[Phi]}}];
+
+AdmuPrimeExplicit = AdmuNew +D[f,{{T,X,\[Rho],\[Phi]}}]/.{r-> Sqrt[X^2 + \[Rho]^2]}
+
+\[CapitalPhi] = -AdmuPrime[[1]];
+
+\[Phi]p = (\[CapitalPhi]/.{ r -> Sqrt[X^2 + \[Rho]^2]})/(1 + g X)//FullSimplify
+Out[37]= {-((Q (2+2 g X+g^2 (X^2+\[Rho]^2)))/(g Sqrt[((X^2+\[Rho]^2) (4+4 g X+g^2 (X^2+\[Rho]^2)))/g^2])),0,0,0}
+Out[39]= (Q (2+2 g X+g^2 (X^2+\[Rho]^2)))/((1+g X) Sqrt[(X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2)])
+In[40]:= 
+Series[\[Phi]p,{g,0,2}]//FullSimplify
+Out[40]= Q/Sqrt[X^2+\[Rho]^2]-((Q X) g)/(2 Sqrt[X^2+\[Rho]^2])+(3 Q (2 X^2+\[Rho]^2) g^2)/(8 Sqrt[X^2+\[Rho]^2])+O[g]^3
+In[105]:= PhiP1 =ContourPlot[\[Phi]p/.{g->0.1, Q-> 1},{X, -1/0.1 ,5},{\[Rho], 0, 5}, PlotLabel->StringForm["g = `1`", 1/10],FrameLabel->{X, \[Rho]}];
+PhiP2 = ContourPlot[\[Phi]p/.{g->0.25, Q-> 1},{X, -1/0.25  ,5},{\[Rho], 0, 5}, PlotLabel->StringForm["g = `1`", 1/4],FrameLabel->{X, \[Rho]}];
+PhiP3 = ContourPlot[\[Phi]p/.{g->0.5, Q-> 1},{X, -1/0.8 ,5},{\[Rho], 0, 5}, PlotLabel->StringForm["g = `1`", 1/2],FrameLabel->{X, \[Rho]}];
+PhiP4 = ContourPlot[\[Phi]p/.{g->1, Q-> 1},{X, -0.99, 5},{\[Rho], 0, 5}, PlotLabel->StringForm["g = `1`", 1],FrameLabel->{X, \[Rho]}];
+
+PhiP5 = ContourPlot[\[Phi]p/.{g->0, Q-> 1},{X, -2.5, 2.5},{\[Rho], 0, 5}, PlotLabel->StringForm["g = `0`", 1],FrameLabel->{X, \[Rho]}];
+In[123]:= Export["Equipotentials.pdf",GraphicsGrid[{{PhiP1, PhiP2},{PhiP1, PhiP2}}]];
+Export["g01equip.pdf",PhiP1];
+Export["g025equip.pdf",PhiP2];
+Export["g05equip.pdf",PhiP3];
+Export["g1equip.pdf",PhiP4];
+Export["g0equip.pdf",PhiP5];
+In[41]:= FmunuPrime =(D[AdmuPrime /. {r^2 ->X^2 + \[Rho]^2}, {{T,X,\[Rho], \[Phi]}}] -  Transpose[D[AdmuPrime /. {r^2 ->X^2 + \[Rho]^2}, {{T,X,\[Rho], \[Phi]}}]])//FullSimplify
+Out[41]= {{0,(4 Q (1+g X) (X (2+g X)-g \[Rho]^2))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2),(8 Q (1+g X)^2 \[Rho])/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2),0},{-((4 Q (1+g X) (X (2+g X)-g \[Rho]^2))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)),0,0,0},{-((8 Q (1+g X)^2 \[Rho])/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)),0,0,0},{0,0,0,0}}
+In[42]:= ds2 = DiagonalMatrix[{-(1+g X)^2,1,1,\[Rho]^2}];
+In[43]:= del={D[#,T] &, D[#,X] &,D[#,\[Rho]] &,D[#,\[Phi]] &}; (*Thank you to Ruhi for this idea*);
+In[44]:= gu = Inverse[ds2]//FullSimplify;
+Total[del[[#]][Sqrt[-Det[ds2]]gu.FmunuPrime.gu[[#]]]&/@Range[4]]//FullSimplify
+Out[45]= {0,0,0,0}
+In[51]:= Fd0d0 =D[AdmuPrimeExplicit[[1]], T] - D[AdmuPrimeExplicit[[1]], T]
+Out[51]= 0
+In[52]:= Fd1d0 =D[AdmuPrimeExplicit[[1]], X] - D[AdmuPrimeExplicit[[2]], T] //FullSimplify
+Out[52]= (4 Q (1+g X) (X (2+g X)-g \[Rho]^2))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)
+In[53]:= Fd2d0 =D[AdmuPrimeExplicit[[1]], \[Rho]] - D[AdmuPrimeExplicit[[3]], T] //FullSimplify
+Out[53]= (8 Q (1+g X)^2 \[Rho])/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)
+In[54]:= Fd3d0 =D[AdmuPrimeExplicit[[1]], \[Phi]] - D[AdmuPrimeExplicit[[4]], T] //FullSimplify
+Out[54]= 0
+In[55]:= Fu1u0 = Fd1d0 /(1 + g X)^2
+Out[55]= (4 Q (X (2+g X)-g \[Rho]^2))/((1+g X) ((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2))
+In[56]:= Fu2u0 = Fd2d0 / (1 + g X)^2
+Out[56]= (8 Q \[Rho])/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(3/2)
+In[57]:= A = D[\[Rho] (1 + g X) Fu1u0, X] //FullSimplify
+Out[57]= (16 Q (1+g X) \[Rho] (-X^2 (2+g X)^2+(2+g X (2+g X)) \[Rho]^2+2 g^2 \[Rho]^4))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(5/2)
+In[58]:= B =D[\[Rho] (1 + g X) Fu2u0, \[Rho]]//FullSimplify
+Out[58]= (16 Q (1+g X) \[Rho] (-2 \[Rho]^2+(X (2+g X)-2 g \[Rho]^2) (X (2+g X)+g \[Rho]^2)))/((X^2+\[Rho]^2) ((2+g X)^2+g^2 \[Rho]^2))^(5/2)
+In[59]:= A + B //FullSimplify
+Out[59]= 0
