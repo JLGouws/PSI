@@ -106,13 +106,12 @@
         \begin{equation*}
           u^\mu = \frac{d x^\mu}{d \tau} = (\cosh(g \tau), \sinh(g \tau), 0, 0) \Rightarrow \frac{d u^\mu}{d \tau} = (g \sinh(g \tau), g\cosh(g \tau), 0, 0)
         \end{equation*}
-        Now if $\tau$ is the proper time for this trajectory $u^\mu u_\mu  = 1$:
+        Now if $\tau$ is the proper time for this trajectory $u^\mu u_\mu  = -1$:
         \begin{align*}
           \eta^{\mu\nu}u_\mu u_\nu = (-\cosh(g \tau), \sinh(g \tau), 0, 0)^T (\cosh(g \tau), \sinh(g \tau), 0, 0) = \sinh^2(g\tau) - \cosh^2(g \tau) = -1
         \end{align*}
         As required.
-        Now using the expression in the Lorentz force equation yeilds:
-        Now:
+        Now using the expression in the Lorentz force equation yields:
         \begin{align*}
           k\tensor{F}{^\mu_\nu}v^\nu = (Ek\sinh(g \tau), Ek\cosh(g \tau), 0, 0)
         \end{align*}
@@ -121,6 +120,7 @@
           g = Ek
         \end{equation*}
       \item
+        Lowering the index of the 4-accleration gives:
         \begin{equation*}
           a^\mu = (g \sinh(g \tau), g\cosh(g \tau), 0, 0) \Rightarrow a_\mu = \eta_{\mu\nu}a^\nu = (-g \sinh(g \tau), g\cosh(g \tau), 0, 0)
         \end{equation*}
@@ -133,20 +133,26 @@
         \begin{figure}[H]
           \centering
           \includegraphics[width = 0.4\textwidth]{ParticleTrajectories.pdf}
+          \caption{The trajectories of the charge for different values of $g$.}
           \label{fig:partTrajectories}
         \end{figure}
         The particle goes off to positive infinity for large times.
         The speed of the particle tends to $1$, as the particle cannot travel faster than the speed of light.
       \item
+        Figure~\ref{fig:constCoords} shows the lines of constant $T$ and $X$.
+        Note when $X = -\frac{1}{g}$ the coordinate system becomes degenerate--any $T$ will map to $(x = 0, t = 0)$ so the Rhindler coordinate system breaks down at this point and another chart is necessary to give the rest of space coordinates.
+        The Rhindler coordinate system, thus, is only valid for $X \in (-1/g, \infty)$ and $T \in (-\infty, \infty)$.
         \begin{figure}[H]
           \centering
           \includegraphics[width = 0.4\textwidth]{ConstCoords.pdf}
-          \label{fig:partTrajectories}
+          \caption{Lines of constant $X$ and $T$}
+          \label{fig:constCoords}
         \end{figure}
       \item 
+        The metric and its transformation is given by:
         \begin{align*}
           ds^2 &= -dt^2 + dx^2 + d\rho^2 + \rho^2d\phi^2\\
-               &= -\left(\frac{dt}{dT}\right)^2dT^2 + \left(\frac{dx}{dX}\right)^2 dX^2 + d\rho^2 + \rho^2d\phi^2\\
+               &= -\left(\frac{dt}{dT}\right)^2dT^2 + \left(\frac{dx}{dX}\right)^2 dX^2 + d\rho^2 + \rho^2d\phi^2
         \end{align*}
         Now:
         \begin{equation*}
@@ -171,32 +177,23 @@
   \item
     \begin{enumerate}
       \item
-        The scalar and vector potentials are:
+        The 4-vector potential is:
         \begin{gather*}
-          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\frac{\rho (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3\mathbf{r}' \qquad
-          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\frac{\mathbf{J} (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3\mathbf{r}'\\
           A^\mu = \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3r'
         \end{gather*}
         Since nothing can travel faster than the speed of light, and it is expected that electromagnetic interactions will travel at the speed of light, it is expecetd that anything observed will have come the past at some $t_r = t - |\mathbf{r} - \mathbf{r}|'$.
         For a moving point charge:
         \begin{gather*}
-          \rho (\mathbf{r}', t_r') = Q \delta^3(\mathbf{r'}_Q - \mathbf{r'}_Q(t_r')) \qquad
-          \mathbf{J} (\mathbf{r}', t_r') = Q \mathbf{v}_Q'(t_r') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t_r'))\\
           J^\mu (\mathbf{r}', t') = \int d\tau' Q u^\mu \delta^4(x'^\mu - x_Q^\mu)
         \end{gather*}
-        So that:
-        \begin{equation*}
-          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\frac{Q \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t_r'))}{|\mathbf{r} - \mathbf{r}'|} d^3\mathbf{r}' \qquad
-          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\frac{Q \mathbf{v}_Q'(t_r') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t_r'))}{|\mathbf{r} - \mathbf{r}'|} d^3\mathbf{r}'
-        \end{equation*}
-        And a sneaky dirac delta insertion can clean things up:
+        And a sneaky dirac delta insertion in the vector potential can clean things up:
         \begin{align*}
 %          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|}\delta(t_r' - t') dt' d^3\mathbf{r}' \\
 %          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \mathbf{v}'_Q(t') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|} \delta(t_r' - t')dt' d^3r'\\
           A^\mu &= \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} \delta(t_r' - t')dt' d^3 r'\\
                 &= \frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t_r') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'
         \end{align*}
-        Using, where $x_0$ is a zero of $f$:
+        Using the identity, where $x_0$ is a zero of $f$:
         \begin{equation}
           \delta(f(x)) = \frac{\delta(x - x_0)}{|f'(x_0)|}
           \label{eq:diracdeltafunction}
@@ -213,7 +210,7 @@
                 &=\frac{1}{2 \pi}\int Q u^\mu \delta^4(x'^\nu - x_Q'^\nu)|_{t'_r} \delta((x^\nu - x'^\nu)(x_\nu - x'_\nu))d \tau' d^4x' \\
                 &=\frac{1}{2 \pi}Q \left.\int  u^\mu \delta((x_Q'^\nu - x'^\nu)(x'\tensor{}{_Q_\nu} - x'_\nu)) d \tau' \right|_{t'_r}
         \end{align*}
-        Now $(x_Q'^\mu - x'_\mu)(x_Q'^\mu - x'_\mu)$ is implicitly a function of $\tau$, therefore using Equation~\ref{eq:diracdeltafunction}:
+        Now $(x_Q'^\mu - x'^\mu)(x'\tensor{}{_Q_\mu} - x'_\mu)$ is implicitly a function of $\tau$, therefore using Equation~\ref{eq:diracdeltafunction}:
         \begin{align*}
           \delta((x_Q'^\mu - x'^\mu)(x'\tensor{}{_Q_\mu} - x'_\mu)) = \frac{\delta(\tau - \tau')}{|(x_Q'^\mu - x'^\mu)\partial_\tau x'\tensor{}{_Q_\mu} + (x_Q'^\mu - x'_\mu)\partial_\tau x_Q'^\mu|} = \frac{\delta(\tau - \tau')}{2|(x'^\mu - x_Q'^\mu)u_\mu|}
         \end{align*}
@@ -231,10 +228,8 @@
         Where the transpose is there to indicate that this is a form.
         Now:
         \begin{align*}
-          R^\nu u_\nu = (x^\nu - \gamma^\nu)u_\nu
-        \end{align*}
-        \begin{align*}
-          R^\nu u_\nu &= (t - t_Q, x - x_Q, y, z) g (-x_Q, t_Q, 0, 0)^T\\
+          R^\nu u_\nu &= (x^\nu - x_Q^\nu)u_\nu\\
+                      &= (t - t_Q, x - x_Q, y, z) g (-x_Q, t_Q, 0, 0)^T\\
                       &= g(-t x_Q + t_Qx_Q +x t_Q - x_Qt_Q)\\
                       &= g(x t_Q -t x_Q)
         \end{align*}
@@ -290,11 +285,11 @@
           x_Q \leadsto \mp 2 t
         \end{equation*}
         So that for the top sign as $t \to \infty$ the particle goes in the negative direction, and the bottom sign indicates that the particle goes to positive infinity.
-        In the $\tau$ parameterization of $x_Q$, $x_Q$ goes to positive infinity indicating that the lower sign corresponds to the earlier parametrization.
+        In the $\tau$ parameterization of $x_Q$, $x_Q$ goes to positive infinity indicating that the lower sign corresponds to the parametrization in question 1.
       \item
         Since the expression for the potential has $t$, $x$ and $\rho$ dependence it is possible for the $F_{10}$, $F_{01}$, $F_{20}$, $F_{02}$, $F_{12}$ and $F_{21}$ components to be non-zero.
         All other components are automatically zero.
-        Doing the calculation explicitly shows that all the above mentioned are non-zero.
+        Doing the calculation explicitly shows that all the above mentioned are non-zero--see the Mathematica notebook.
         $F_{[10]}$ and $F_{[20]}$ correspond to the Electric field in the $x$ and $\rho$ direction, but maybe surprisingly the $F_{[21]}$ components are non-zero indicating a magnetic field in the $\phi$ direction.
     \end{enumerate}
   \item
@@ -320,10 +315,19 @@
         \end{equation*}
         And using this and writing the potential in the Rhindler coordintes gives the transformation.
       \item
-        Taking the Taylor series in $g$ of the potential:
+        The gauge function should satisfy the following properties:
+        \begin{equation*}
+          \partial_T f = 0 \qquad \partial_X f = -\frac{Q}{L + X} \qquad \partial_\rho f = 0 \qquad \partial_\phi f = 0
+        \end{equation*}
+        Thus, $f$ should only have explicit $X$ dependence, and a function that will give the correct $\partial_X f$ criterion is:
+        \begin{equation*}
+          f = - Q \ln(L + X)
+        \end{equation*}
+      \item
+        Taking the Taylor series in $g$ of the potential, which I left to Mathematica.
         \begin{align*}
           \phi &= \frac{Q}{r} -\frac{g Q X}{2 r}+ \frac{3 g ^2Q (X^2+r^2) }{8 r^2}\\
-               &= \frac{Q}{r}(1 -\frac{1}{2 r}gX+ \frac{3 g ^2 (X^2+r^2) }{8 r}
+               &= \frac{Q}{r}\left(1 -\frac{1}{2 r}gX+ \frac{3 g ^2 (X^2+r^2) }{8 r}\right)
         \end{align*}
       \item
         Figure~\ref{fig:equipgraphs} gives plots of equipotentials for various values of $g$.
@@ -357,6 +361,11 @@
         With $g$ low and zero, the equipotentials become circles reducting to the static limit.
       \item
         The $F'_{M N}$ components are given by $F'_{MN} = \partial_{M}A'_N - \partial_{N}A'_M$.
+        Which I gave to Mathematica to compute:
+        \begin{equation*}
+          F_{10} = \frac{4Q(1 + g X)(X(2 + gX) - g \rho^2)}{r^2((2 + gX)^2 + g^2 \rho^2)^{3/2}} \qquad
+          F_{20} = \frac{8Q(1 + g X)\rho}{r^2((2 + gX)^2 + g^2 \rho^2)^{3/2}}
+        \end{equation*}
         The only thing to keep track of here is that the indices here should be raised by the inverse metric:
         \begin{equation*}
           F'^{M N} = g^{M P}g^{N\Sigma}F'_{P\Sigma}
