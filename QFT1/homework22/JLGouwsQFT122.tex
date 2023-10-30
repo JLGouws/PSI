@@ -1,0 +1,160 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usetikzlibrary{intersections}
+\usepackage{tkz-euclide}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tensor}
+\usepackage{slashed}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+
+\DeclareMathOperator*{\SumInt}{%
+\mathchoice%
+  {\ooalign{$\displaystyle\sum$\cr\hidewidth$\displaystyle\int$\hidewidth\cr}}
+  {\ooalign{\raisebox{.14\height}{\scalebox{.7}{$\textstyle\sum$}}\cr\hidewidth$\textstyle\int$\hidewidth\cr}}
+  {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
+  {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
+}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+\allowdisplaybreaks
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdfpagemode=FullScreen,
+    }
+
+\title{
+\textsc{QT Homework 2 Choice 2}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[compat=1.1.0]{tikz-feynman}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+%\feynmandiagram [horizontal=a to b] {
+%  i1 -- [plain] a -- [plain] i2,
+%  a -- [plain] b,
+%  f1 -- [plain] b -- [plain] f2,
+%};
+
+\begin{enumerate}
+  \item
+    The Hamiltonian density is defined by:
+    \begin{align*}
+      \mathcal{H} &=  \pi \dot \psi- \mathcal{L}\\
+                  &=  i\psi^\dagger \dot \psi- \bar{\psi} (i \slashed{\partial} - m) \psi\\
+                  &=  i\psi^\dagger \dot \psi- \psi^\dagger \gamma^0 (i \gamma^\mu \partial_\mu - m) \psi\\
+                  &=  i\psi^\dagger \dot \psi- \psi^\dagger \gamma^0 (i\gamma^0\partial_0 + i \gamma^i \partial_i - m) \psi\\
+                  &=  i\psi^\dagger \dot \psi- i \psi^\dagger \gamma^0 \gamma^0\partial_0\psi - \psi^\dagger \gamma^0 (i \gamma^i \partial_i - m) \psi\\
+                  &=  i\psi^\dagger \dot \psi- i \psi^\dagger \dot\psi - \psi^\dagger \gamma^0 (i \gamma^i \partial_i - m) \psi\\
+                  &=  -\psi^\dagger \gamma^0 (i \gamma^i \partial_i - m) \psi\\
+                  &=  \psi^\dagger (-i \gamma^0 \gamma^i \partial_i + m\gamma^0 ) \psi
+    \end{align*}
+  \item
+    Using the mode expansion of $\psi$ as given in the homework:
+    \begin{align*}
+      H &=  \int d^3 x\psi^\dagger_l (-i \gamma^0 \gamma^i \partial_i + m\gamma^0 )_{lm} \psi_m\\
+%        &=  \int d^3 x \int d V_\mathbf{p} \sum_{r = 1}^2((u^r)^\dagger(\mathbf{p}) b ^{r*} (\mathbf{p})e^{+ i q \cdot x} + (v^{s})^\dagger(\mathbf{p}) c ^{s} (\mathbf{p})e^{- i p \cdot x})  \\
+%        & \qquad \times \gamma^0(-i \gamma^i \partial_i + m) \int d V_\mathbf{q} \sum_{s = 1}^2(u^s(\mathbf{q}) b ^s (\mathbf{q})e^{- i p \cdot x} + v^s(\mathbf{q}) c ^{s*} (\mathbf{q})e^{+ i p \cdot x})\\
+%        &=  \int d^3 x \int d V_\mathbf{p} \sum_{r = 1}^2((u^r)^\dagger(\mathbf{p}) b ^{r*} (\mathbf{p})e^{+ i q \cdot x} + (v^{s})^\dagger(\mathbf{p}) c ^{s} (\mathbf{p})e^{- i p \cdot x})  \\
+%        & \qquad \times \gamma^0(-i \gamma^i p_i + m) \int d V_\mathbf{q} \sum_{s = 1}^2(-u^s(\mathbf{q}) b ^s (\mathbf{q})e^{- i p \cdot x} + v^s(\mathbf{q}) c ^{s*} (\mathbf{q})e^{+ i p \cdot x})\\
+%        &=  \int d^3 x \int d V_\mathbf{p} \sum_{r = 1}^2((u^r)^\dagger(\mathbf{p}) b ^{r*} (\mathbf{p})e^{+ i q \cdot x} + (v^{s})^\dagger(\mathbf{p}) c ^{s} (\mathbf{p})e^{- i p \cdot x})  \\
+%        & \qquad \times \gamma^0(i\gamma^0p_0 - i \gamma^\mu p_\mu + m) \int d V_\mathbf{q} \sum_{s = 1}^2(-u^s(\mathbf{q}) b ^s (\mathbf{q})e^{- i p \cdot x} + v^s(\mathbf{q}) c ^{s*} (\mathbf{q})e^{+ i p \cdot x})\\
+        &=  \int d^3 x\psi^\dagger_{l} (-i \gamma^0 \gamma^i \partial_i + m\gamma^0 )_{lm} \int d V_\mathbf{q} \sum_{s = 1}^2(u^s_m(\mathbf{q}) b ^s (\mathbf{q})e^{- i p \cdot x} + v^s(\mathbf{q})_m c ^{s*} (\mathbf{q})e^{+ i p \cdot x})\\
+        &= \sum_{s = 1}^2 \int d V_\mathbf{q} \int d^3 x\psi^\dagger_{l} \gamma^0_{lk} (-i  \gamma^i \partial_i + m)_{km} (u^s_m(\mathbf{q}) b ^s (\mathbf{q})e^{- i p \cdot x} + v^s_m(\mathbf{q}) c ^{s*} (\mathbf{q})e^{+ i p \cdot x})\\
+%        &= \sum_{s = 1}^2 \int d V_\mathbf{q} \int d^3 x\psi^\dagger_{l} \gamma^0_{lk} \left[(-i  \gamma^i \partial_i + m)_{km} e^{- i p \cdot x} u^s_m(\mathbf{q}) b ^s (\mathbf{q}) + (-i  \gamma^i \partial_i + m)_{km} e^{+ i p \cdot x} v^s(\mathbf{q})_m c ^{s*} (\mathbf{q}))\right]\\
+        &= \sum_{s = 1}^2 \int d V_\mathbf{q} \int d^3 x\psi^\dagger_{l} \gamma^0_{lk} \left[(- \gamma^i p _i + m)_{km} u^s_m(\mathbf{q}) b ^s (\mathbf{q}) e^{- i p \cdot x} + ( \gamma^i p_i + m)_{km} v^s_m(\mathbf{q}) c ^{s*} (\mathbf{q}) e^{+ i p \cdot x} )\right]
+    \end{align*}
+    Now:
+    \begin{align*}
+      (-\slashed{p} + m)_{km} u^s(\mathbf{q}) = 0 &\Rightarrow (-\gamma^0p_0 - \gamma^i p_i + m) u^s(\mathbf{q}) = 0\\
+                                             &\Rightarrow (-\gamma^i p_i + m) u^s(\mathbf{q}) = \gamma^0p_0 u^s(\mathbf{q})\\
+                                             &\Rightarrow (-\gamma^i p_i + m) u^s(\mathbf{q}) = \gamma^0E_\mathbf{p} u^s(\mathbf{q})
+    \end{align*}
+    Assuming that the field is evluated on shell.
+    Similarly:
+    \begin{align*}
+      (\gamma^i p_i + m) v^s(\mathbf{q}) = - \gamma^0p_0 v^s(\mathbf{q}) = - \gamma^0E_\mathbf{p} v^s(\mathbf{q})
+    \end{align*}
+    \begin{align*}
+      H &= \sum_{s = 1}^2 \int d V_\mathbf{q} \int d^3 x\psi^\dagger_{l} \gamma^0_{lk} \left[ \gamma^0_{km}p_0 u^s_m(\mathbf{q}) b ^s (\mathbf{q}) e^{- i p \cdot x} - \gamma^0_{km}p_0 v^s_m(\mathbf{q}) c ^{s*} (\mathbf{q})e^{+ i p \cdot x} \right]\\
+      H &= \sum_{s = 1}^2 \int d V_\mathbf{q} \int d^3 x\psi^\dagger_{l} \delta_{lm} \left[ p_0 u^s_m(\mathbf{q}) b ^s (\mathbf{q}) e^{- i p \cdot x} - p_0 v^s_m(\mathbf{q}) c ^{s*} (\mathbf{q})e^{+ i p \cdot x} \right]\\
+        &= \sum_{s = 1}^2 \int d V_\mathbf{q} \int d^3 x\psi^\dagger_{l} \left[ p_0 u^s_l(\mathbf{q}) b ^s (\mathbf{q}) e^{- i p \cdot x} - p_0 v^s_l(\mathbf{q}) v^s(\mathbf{q}) c ^{s*} (\mathbf{q})e^{+ i p \cdot x} \right]\\
+        &= \sum_{s = 1}^2 \int d V_\mathbf{q} \int d^3 x \int d V_\mathbf{p} \sum_{r = 1}^2\left[(u^r)^\dagger_l(\mathbf{p}) b ^{r*} (\mathbf{p})e^{+ i q \cdot x} + (v^{s})^\dagger_l(\mathbf{p}) c ^{s} (\mathbf{p})e^{- i q \cdot x}\right] \\
+        &\qquad \times \left[ p_0 u^s_l(\mathbf{q}) b ^s (\mathbf{q}) e^{- i p \cdot x} - p_0 v^s_l(\mathbf{q}) c ^{s*} (\mathbf{q})e^{+ i p \cdot x} \right]\\
+        &= \sum_{s,r = 1}^2 \iint d V_\mathbf{q} p_0 d V_\mathbf{p} \int d^3 x \left[(u^r)^\dagger(\mathbf{p}) \cdot u^s(\mathbf{q}) b ^{r*} (\mathbf{p}) b ^s (\mathbf{q}) e^{i (q - p)\cdot x}\right.\\
+        & \qquad \left.  - (u^r)^\dagger(\mathbf{p}) \cdot v^s(\mathbf{q}) b ^{r*} c ^{s*} (\mathbf{q}) (\mathbf{p})e^{+ i (q + p)\cdot x} + (v^{s})^\dagger(\mathbf{p}) \cdot u^s(\mathbf{q}) c ^{s} (\mathbf{p}) b ^s (\mathbf{q})e^{- i (q + p) \cdot x} \right.\\
+        & \qquad \quad \left. - (v^{s})^\dagger(\mathbf{p}) \cdot v^s(\mathbf{q}) c ^{s} (\mathbf{p}) c ^{s*} (\mathbf{q}) e^{- i (q - p) \cdot x}\right] 
+    \end{align*}
+    Doing the $x$ integration turns the exponentials into deltas, but the time component remains unchanged.
+    \begin{align*}
+      H &= \sum_{s,r = 1}^2 \iint d V_\mathbf{p} (2 \pi)^3 E_\mathbf{q} \frac{d^3q}{(2\pi)^3 2E_\mathbf{q}}  \left[(u^r)^\dagger(\mathbf{p}) \cdot u^s(\mathbf{q}) b ^{r*} (\mathbf{p}) b ^s (\mathbf{q}) \delta^3(\mathbf{q} - \mathbf{p})e^{i (E_\mathbf{q} - E_\mathbf{p})t}  \right.\\
+        & \qquad \left. - (u^r)^\dagger(\mathbf{p}) \cdot v^s(\mathbf{q}) b ^{r*} c ^{s*} (\mathbf{q}) (\mathbf{p})\delta(\mathbf{p} + \mathbf{q})e^{+ i (E_\mathbf{q} + E_\mathbf{p}) t} \right. \\
+        & \qquad \quad \left. + (v^{s})^\dagger(\mathbf{p}) \cdot u^s(\mathbf{q}) c ^{s} (\mathbf{p}) b ^s (\mathbf{q})\delta^3(\mathbf{q} + \mathbf{p})e^{- i (E_\mathbf{q} + E_\mathbf{p}) t}\right.\\
+        & \qquad \qquad \left. - (v^{s})^\dagger(\mathbf{p}) \cdot v^s(\mathbf{q}) c ^{s} (\mathbf{p}) c ^{s*} (\mathbf{q}) \delta^3(\mathbf{q} - \mathbf{p}) e^{- i (E_\mathbf{q} - E_\mathbf{p})t}\right] \\
+        &= \sum_{s,r = 1}^2 \int d V_\mathbf{q} (2 \pi)^3 E_\mathbf{p} \frac{1}{(2\pi)^3 2E_\mathbf{p}}  \left[(u^r)^\dagger(\mathbf{p}) \cdot u^s(\mathbf{q}) b ^{r*} (\mathbf{p}) b ^s (\mathbf{p})e^{i (E_\mathbf{p} - E_\mathbf{p})t}  \right.\\
+        & \qquad \left. - (u^r)^\dagger(\mathbf{p}) \cdot v^s(\mathbf{-p}) b ^{r*} (\mathbf{p})c ^{s*} (-\mathbf{p}) e^{+ i (E_\mathbf{p} + E_\mathbf{p}) t} + (v^{s})^\dagger(\mathbf{p}) \cdot u^s(-\mathbf{p}) c ^{s} (\mathbf{p}) b ^s (\mathbf{p})e^{- i (E_\mathbf{p} + E_\mathbf{p}) t}\right.\\
+        & \qquad \quad \left. - (v^{s})^\dagger(\mathbf{p}) \cdot v^s(\mathbf{p}) c ^{s} (\mathbf{p}) c ^{s*} (\mathbf{p}) e^{- i (E_\mathbf{p} - E_\mathbf{p})t}\right] \\
+        &= \frac{1}{2} \sum_{s,r = 1}^2 \int d V_\mathbf{p}   \left[(u^r)^\dagger(\mathbf{p}) u^s(\mathbf{q}) b ^{r*} (\mathbf{p}) b ^s (\mathbf{p}) - (u^r)^\dagger(\mathbf{p}) v^s(\mathbf{-p}) b ^{r*} (\mathbf{p})c ^{s*} (-\mathbf{p}) e^{2 i E_\mathbf{p} t}  \right.\\
+        & \qquad \left. + (v^{s})^\dagger(\mathbf{p}) u^s(-\mathbf{p}) c ^{s} (\mathbf{p}) b ^s (\mathbf{p})e^{2 i E_\mathbf{p} t} - (v^{s})^\dagger(\mathbf{p}) v^s(\mathbf{p}) c ^{s} (\mathbf{p}) c ^{s*} (\mathbf{p}) \right] 
+    \end{align*}
+    And using the inner product spinner identity on this gives:
+    \begin{align}
+      H &= \frac{1}{2} \sum_{s,r = 1}^2 \int d V_\mathbf{p}   \left[2 E_\mathbf{p} \delta^{rs} b ^{r*} (\mathbf{p}) b ^s (\mathbf{p}) - 2 E_\mathbf{p} \delta^{rs} c ^{s} (\mathbf{p}) c ^{s*} (\mathbf{p}) \right] \nonumber\\
+        &=  \sum_{s = 1}^2 \int d V_\mathbf{p}   E_\mathbf{p} \left[ b ^{s*} (\mathbf{p}) b ^s (\mathbf{p}) - c ^{s} (\mathbf{p}) c ^{s*} (\mathbf{p}) \right]\label{eq:hamiltonianbad} 
+    \end{align}
+  \item
+    This Hamiltonian has the problem of not being bounded below.
+    If $c^{s\dagger}$ is promoted to a creation operator, continuous lowering of a systems energy is possible by creating more and more particles of type $c$.
+    In this situation there is no way to define a Vacuum state.
+
+    The resolution is to turn the annoying minus sign in Equation~\ref{eq:hamiltonianbad} into a plus sign by switching order of the operators.
+    \begin{align*}
+      H = \sum_{s = 1}^2 \int d V_\mathbf{p}   E_\mathbf{p} \left[ b ^{s\dagger} (\mathbf{p}) b ^s (\mathbf{p}) + c ^{s\dagger} (\mathbf{p}) c ^{s} (\mathbf{p}) \right] - \sum_{s = 1}^2 \int d V_\mathbf{p} E_\mathbf{p}\left\{c ^{s\dagger} (\mathbf{p}) ,c ^{s} (\mathbf{p})\right\}
+    \end{align*}
+    The second  term is just a constant, which is the vacuum energy, so it will not affect any dynamics.
+    Which is related to the fact that fermionic operators obey the anticommutation relation:
+    \begin{equation*}
+      \left\{\mathbf{b}^r_\mathbf{p},\mathbf{b}^s_\mathbf{q}\right\} = (2\pi)^3\delta(\mathbf{p} - \mathbf{q})\delta^{rs}
+    \end{equation*}
+
+\end{enumerate}
+
+\end{document}

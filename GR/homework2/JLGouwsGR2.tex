@@ -1,0 +1,187 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{GR Homework 2}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    Given $\tensor{g}{_\mu_\nu} = \eta_{\mu\nu} + h_{\mu\nu} + O(h^2)$, the Christoffel symbolds are:
+    \begin{align*}
+      \Gamma^\mu_{\alpha \beta} &= \frac{1}{2} g^{\mu \sigma} (g_{\sigma\beta, \alpha} + g_{\alpha\sigma, \beta} - g_{\alpha\beta, \sigma})\\
+                                  &= \frac{1}{2} (\eta^{\mu \sigma} - h^{\mu\nu}) (h_{\sigma\beta, \alpha} + h_{\alpha\sigma, \beta} - h_{\alpha\beta, \sigma})\\
+                                  &= \frac{1}{2} \eta^{\mu \sigma} (h_{\sigma\beta, \alpha} + h_{\alpha\sigma, \beta} - h_{\alpha\beta, \sigma}) - \frac{1}{2} h^{\mu\nu} (h_{\sigma\beta, \alpha} + h_{\alpha\sigma, \beta} - h_{\alpha\beta, \sigma})\\
+                                  &= \frac{1}{2} \eta^{\mu \sigma} (h_{\sigma\beta, \alpha} + h_{\alpha\sigma, \beta} - h_{\alpha\beta, \sigma}) + \mathcal{O}(h^2)
+    \end{align*}
+    Note that:
+    \begin{align*}
+      \Gamma \sim \mathcal{O}(h) \Rightarrow \Gamma^2 \sim \mathcal{O} (h^2)
+    \end{align*}
+    Thus $\Gamma^2$ terms can be ignored.
+    Now for for the Riemann tensor:
+    \begin{align*}
+      \tensor{R}{^\rho_\sigma_\mu_\nu} &= \partial_\mu \Gamma^\rho_{\nu\sigma } - \partial_\nu \Gamma^\rho_{\mu\sigma } + \Gamma^\rho{\mu\lambda}\Gamma^\lambda_{\nu\sigma} - \Gamma^\lambda_{\mu\sigma}\\
+                                      &= \partial_\mu \Gamma^\rho_{\nu\sigma } - \partial_\nu \Gamma^\rho_{\mu\sigma } + \mathcal{O}(h^2)\\
+                                      &= \frac{1}{2}\eta^{\rho \zeta} \partial_\mu (h_{\zeta\sigma, \nu} + h_{\nu\zeta, \sigma} - h_{\nu\sigma, \zeta}) - \partial_\nu \frac{1}{2} \eta^{\rho \zeta} (h_{\zeta\sigma, \mu} + h_{\mu\zeta, \sigma} - h_{\mu\sigma, \zeta})\\
+                                      &= \frac{1}{2}\eta^{\rho \zeta} (h_{\zeta\sigma, \nu\mu} + h_{\nu\zeta, \sigma\mu} - h_{\nu\sigma, \zeta\mu} - h_{\zeta\sigma, \mu\nu} - h_{\mu\zeta, \sigma\nu} + h_{\mu\sigma, \zeta\nu})\\
+                                      &= \frac{1}{2}\eta^{\rho \zeta} (h_{\nu\zeta, \sigma\mu} + h_{\mu\sigma, \zeta\nu} - h_{\nu\sigma, \zeta\mu} - h_{\mu\zeta, \sigma\nu})
+    \end{align*}
+    Now for the Ricci tensor:
+    \begin{align*}
+      \tensor{R}{_\sigma_\nu} &= \tensor{R}{^\mu_\sigma_\mu_\nu} \\
+                              &= \frac{1}{2}\eta^{\mu\zeta} (h_{\nu\zeta, \sigma\mu} + h_{\mu\sigma, \zeta\nu} - h_{\nu\sigma, \zeta\mu} - h_{\mu\zeta, \sigma\nu})\\
+                              &= \frac{1}{2}\eta^{\mu\zeta} (h_{\nu\zeta, \sigma\mu} + h_{\mu\sigma, \zeta\nu} - h_{\nu\sigma, \zeta\mu} - h_{\mu\zeta, \sigma\nu})\\
+                              &= \frac{1}{2}\eta^{\mu\zeta} (\partial_\mu \partial_\sigma\tensor{h}{_\nu_\zeta} + \partial_\nu \partial_\zeta h_{\mu\sigma} - \partial_\mu \partial_\zeta h_{\nu\sigma} - \partial_\sigma \partial_\nu h_{\mu\zeta})\\
+                              &= \frac{1}{2} (\partial_\mu \partial_\sigma\tensor{h}{^\mu_\nu} + \partial_\nu \partial^\mu h_{\mu\sigma} - \partial_\mu \partial^\mu h_{\nu\sigma} - \partial_\sigma \partial_\nu \tensor{h}{_\mu^\mu})\\
+                              &= \frac{1}{2} (\partial_\mu \partial_\sigma\tensor{h}{^\mu_\nu} + \partial_\nu \partial_\mu \tensor{h}{^\mu_\sigma} - \Box h_{\nu\sigma} - \partial_\sigma \partial_\nu h)
+    \end{align*}
+    And the Ricci scalar:
+    \begin{align*}
+      R &= \eta^{\sigma\nu}\tensor{R}{_\sigma_\nu}\\ 
+        &= \frac{1}{2} (\partial_\mu \partial_\sigma\tensor{h}{^\mu^\sigma} + \partial_\nu \partial_\mu \tensor{h}{^\mu^\nu} - \Box \tensor{h}{^\nu_\nu} - \partial^\nu \partial_\nu h)\\
+        &= \partial_\mu \partial_\sigma\tensor{h}{^\mu^\sigma}- \Box h 
+    \end{align*}
+    Using these to make the Einstein tensor:
+    \begin{align*}
+      G_{\mu\nu}  &= \tensor{R}{_\mu_\nu} - \eta_{\mu\nu}R\\
+                  &= \frac{1}{2} (\partial_\zeta \partial_\mu\tensor{h}{^\zeta_\nu} + \partial_\nu \partial_\zeta \tensor{h}{^\zeta_\mu} - \Box h_{\nu\mu} - \partial_\mu \partial_\nu h) -\frac{1}{2}\eta_{\mu\nu}(\partial_\rho \partial_\lambda\tensor{h}{^\rho^\lambda}- \Box h)\\
+                  &= \frac{1}{2} (\partial_\zeta \partial_\mu\tensor{h}{^\zeta_\nu} + \partial_\nu \partial_\zeta \tensor{h}{^\zeta_\mu} - \Box h_{\nu\mu} - \partial_\mu \partial_\nu h -\eta_{\mu\nu}\partial_\rho \partial_\lambda\tensor{h}{^\rho^\lambda} + \eta_{\mu\nu}\Box h)\\
+                  &= -\frac{1}{2}\Box( h_{\mu\nu} -  \eta_{\mu\nu} h) + \frac{1}{2} (\partial_\zeta \partial_\mu\tensor{h}{^\zeta_\nu} + \partial_\nu \partial_\zeta \tensor{h}{^\zeta_\mu} -  \partial_\mu \partial_\nu h -\eta_{\mu\nu}\partial_\rho \partial_\lambda\tensor{h}{^\rho^\lambda})\\
+                  &= -\frac{1}{2}\partial^\kappa\partial_\kappa( h_{\mu\nu} -  \eta_{\mu\nu} h) + \frac{1}{2} (\partial_\zeta \partial_\mu\tensor{h}{^\zeta_\nu} + \partial_\nu \partial_\zeta \tensor{h}{^\zeta_\mu} -  \partial_\mu \partial_\nu h -\eta_{\mu\nu}\partial_\rho \partial_\lambda\tensor{h}{^\rho^\lambda})
+    \end{align*}
+
+    \begin{align*}
+      G_{\mu\nu}  &= -\frac{1}{2}\partial^\kappa \partial_\kappa \bar{h}_{\mu\nu} + \partial^\kappa \partial_{(\mu} \bar{h}_{\nu)\kappa} - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta \bar{h}_{\kappa\delta}\\
+                  &= -\frac{1}{2}\partial^\kappa \partial_\kappa (h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}h) + \frac{1}{2}\partial^\kappa \partial_{\mu} (h_{\nu\kappa} - \frac{1}{2}\eta_{\nu\kappa}h)\\
+                  & \qquad + \frac{1}{2}\partial^\kappa \partial_{\nu} (h_{\mu\kappa} - \frac{1}{2}\eta_{\mu\kappa}h) - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta (h_{\kappa\delta} - \frac{1}{2}\eta_{\kappa\delta}h)\\
+                  &= -\frac{1}{2}\Box h_{\mu\nu} + \frac{1}{4}\eta_{\mu\nu}\Box h + \frac{1}{2}\partial^\kappa \partial_{\mu} (h_{\nu\kappa} - \frac{1}{2}\eta_{\nu\kappa}h)\\
+                  & \qquad + \frac{1}{2}\partial^\kappa \partial_{\nu} (h_{\mu\kappa} - \frac{1}{2}\eta_{\mu\kappa}h) - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta} + \eta_{\mu\nu}\frac{1}{4}\Box h\\
+                  &= -\frac{1}{2}\Box h_{\mu\nu} + \frac{1}{2}\eta_{\mu\nu}\Box h + \frac{1}{2}\partial_\kappa \partial_{\mu} \tensor{h}{_\nu^\kappa} - \frac{1}{4}\partial_\nu \partial_{\mu}h\\
+                  & \qquad + \frac{1}{2}\partial_\kappa \partial_{\nu} \tensor{h}{_\mu^\kappa} - \frac{1}{4} \partial_\mu \partial_{\nu} h - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta}\\
+                  &= -\frac{1}{2}\Box h_{\mu\nu} + \frac{1}{2}\eta_{\mu\nu}\Box h + \frac{1}{2}\partial_\kappa \partial_{\mu} \tensor{h}{_\nu^\kappa} - \frac{1}{2}\partial_\nu \partial_{\mu}h + \frac{1}{2}\partial_\kappa \partial_{\nu} \tensor{h}{_\mu^\kappa} - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta}\\
+    \end{align*}
+
+  \item
+    \begin{enumerate}
+      \item 
+        Under a coordinate transformation
+        \begin{equation*}
+          g_{\mu\nu} dx^\mu \otimes dx^\nu = g_{\rho \sigma} \frac{\partial x^\rho}{\partial x'^\mu} \frac{\partial x^\sigma}{\partial x'^\nu} dx'^\mu \otimes dx'^\nu
+        \end{equation*}
+        Therefore:
+        \begin{equation*}
+          g'_{\mu\nu} = g_{\rho \sigma} \frac{\partial x^\rho}{\partial x'^\mu} \frac{\partial x^\sigma}{\partial x'^\nu} 
+        \end{equation*}
+        Now, noting $x^\mu = x'^\mu + \xi^\mu(x)$:
+        \begin{equation*}
+          \frac{\partial x^\rho}{\partial x'^\mu} = \frac{\partial x'^\rho}{\partial x'^\mu} + \frac{\partial \xi^\rho}{\partial x'^\mu} = \delta^\rho_\mu + \frac{\partial \xi^\rho}{\partial x^\zeta} \frac{\partial x'^\zeta}{\partial x^\mu} = \delta^\rho_\mu + \frac{\partial \xi^\rho}{\partial x^\zeta} \delta^\zeta_\mu + \frac{\partial \xi^\rho}{\partial x^\zeta}\frac{\partial\xi^\zeta}{\partial x^\mu} 
+        \end{equation*}
+        And ignoring terms of order $\xi^2$ since $\xi$ is an infinitesimal coordinate transformation:
+        \begin{equation*}
+          \frac{\partial x^\rho}{\partial x'^\mu} = \delta^\rho_\mu + \frac{\partial \xi^\rho}{\partial x^\mu} 
+        \end{equation*}
+        Therefore:
+        \begin{align*}
+          g'_{\mu\nu} &= \left(\eta_{\rho \sigma} + h_{\rho \sigma }\right) \left(\delta^\rho_\mu + \frac{\partial \xi^\rho}{\partial x^\mu}\right) \left(\delta^\sigma_\nu + \frac{\partial \xi^\sigma}{\partial x^\nu}\right)\\
+                      &= \eta_{\rho \sigma} \delta^\rho_\mu \delta^\sigma_\nu + \eta_{\rho \sigma} \delta^\rho_\mu \frac{\partial^\sigma \xi}{\partial x^\nu} + \eta_{\rho \sigma} \frac{\partial^\rho \xi}{\partial x^\mu} \delta^\sigma_\nu + h_{\rho\sigma}\delta^\rho_\mu\delta^\sigma_\nu\left(\eta_{\rho \sigma} + h_{\rho \sigma }\right) \left(\delta^\rho_\mu + \frac{\partial \xi^\rho}{\partial x^\mu}\right) \left(\delta^\sigma_\nu + \frac{\partial \xi^\sigma}{\partial x^\nu}\right)
+        \end{align*}
+        Keeping only first order terms:
+        \begin{align*}
+          g'_{\mu\nu} &= \eta_{\mu\nu} + h_{\mu\nu} + \partial_\nu \xi_\mu + \partial _\mu \xi_\nu 
+        \end{align*}
+      \item 
+        It is required that:
+        \begin{align*}
+          \partial^\mu \bar{h}'_{\mu\nu} &= \partial^\mu \left(h_{\mu\nu} + \partial_\nu \xi_\mu + \partial _\mu \xi_\nu -\frac{1}{2}\eta_{\mu\nu}(h + 2\partial_\rho \xi^\rho)\right)\\
+                                         &= \partial^\mu h_{\mu\nu} + \partial_\nu\partial^\mu \xi_\mu + \Box \xi_\nu -\frac{1}{2}\partial_\nu h - \partial_\nu \partial_\rho \xi^\rho\\
+                                         &= \partial^\mu h_{\mu\nu}  + \Box \xi_\nu -\frac{1}{2}\partial_\nu h \\
+                                         &= \partial^\mu \bar{h}_{\mu\nu}  + \Box \xi_\nu \\
+        \end{align*}
+    \end{enumerate}
+\end{enumerate}
+\end{document}
