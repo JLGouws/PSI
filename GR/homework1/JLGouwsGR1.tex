@@ -140,8 +140,8 @@
         The speed of the particle tends to $1$, as the particle cannot travel faster than the speed of light.
       \item
         Figure~\ref{fig:constCoords} shows the lines of constant $T$ and $X$.
-        Note when $X = -\frac{1}{g}$ the coordinate system becomes degenerate--any $T$ will map to $(x = 0, t = 0)$ so the Rhindler coordinate system breaks down at this point and another chart is necessary to give the rest of space coordinates.
-        The Rhindler coordinate system, thus, is only valid for $X \in (-1/g, \infty)$ and $T \in (-\infty, \infty)$.
+        Note when $X = -\frac{1}{g}$ the coordinate system becomes degenerate--any $T$ will map to $(x = 0, t = 0)$ so the Rindler coordinate system breaks down at this point and another chart is necessary to give the rest of space coordinates.
+        The Rindler coordinate system, thus, is only valid for $X \in (-1/g, \infty)$ and $T \in (-\infty, \infty)$.
         \begin{figure}[H]
           \centering
           \includegraphics[width = 0.4\textwidth]{ConstCoords.pdf}
@@ -177,6 +177,58 @@
   \item
     \begin{enumerate}
       \item
+        Maxwell's equations for the vector potential are:
+        \begin{equation*}
+          \Box A^\mu = - 4 \pi j^\mu
+        \end{equation*}
+        For the case of a point charge:
+        \begin{equation*}
+          j^\mu(x) = Q \int d\tau u^\mu(\tau) \delta^{(4)} (x - x^{\nu}(\tau))
+        \end{equation*}
+        The physical solutions for the vector potential are of interest, these correspond to the retarded solution of Maxwell's equations. 
+        The retarded solution for the potential at a given point in space-time is given by the presence of the charge in the past of the charges trajectory since it takes time for the field of the charge to propagte to the given spacetime point.
+        The field propagates by photons and travels at the speed of light as shown in the diagram below:
+        \begin{figure}[H]
+          \centering
+          \begin{tikzpicture}
+            \draw[->] (0,-1.5) -- (0, 9);
+            \draw[->] (-1,0) -- (6, 0);
+            \draw[fill] (1, 4) circle (3pt);
+            \draw[dashed] (-1, 6) -- (6,-1);
+            \draw[dashed] (-1, 2) -- (6,9);
+%            \draw (-1, 6) -- (6,-1);
+%            \draw[color=blue] plot ({cosh(x)},{sinh(x)});
+%            \draw[domain=0:3,smooth, color=blue] plot[parametric,id=parametric-example] function{cosh(t),sinh(t)};
+            \draw [red, thick, domain=0:2.5, samples=40] plot ({cosh(\x)}, {sinh(\x)} ) node[right, color=black] {$x^\mu(\tau)$};
+          \end{tikzpicture}
+        \end{figure}
+        \begin{align*}
+          A^\mu_R(x) &= -4\pi \int d^4 y j^\mu (y) G_R(y,x)\\
+                     &= 2 \int d^4 y \Theta(x^{0} - y^{0})\delta^{(4)}\left((x - y)^2\right)j^\mu (y) \\
+                     &= 2 Q\int d^4 y \int d\tau \Theta(x^{0} - y^{0})\delta^{(4)}\left((x - y)^2\right)   u^\mu(\tau) \delta^{(4)} (y - x^{\nu}(\tau))\\
+                     &= 2 Q \int d\tau \Theta(x^{0} - y^{0})\delta^{(4)}\left((x^\nu - x^{\nu}(\tau))^2\right) u^\mu(\tau)
+        \end{align*}
+        Using the property for the dirac delta of a funtion, where:
+        \begin{align*}
+          f(\tau) = (x^\nu - x^{\nu}(\tau))(x_\nu - x_{\nu}(\tau)) 
+        \end{align*}
+        And:
+        \begin{align*}
+          &0 = f(\tau_R)\\ 
+          \Rightarrow &0 = (t - t(\tau_R))^2 - |\vec{x} - \vec{x}(\tau_R)|^2 = (t - t(\tau_R) - |\vec{x} - \vec{x}(\tau_R)|) (t - t(\tau_R) + |\vec{x} - \vec{x}(\tau_R)|)
+        \end{align*}
+        but since only the retarded solution is of interest, the only root that will contribute in the vector potential is:
+        \begin{equation*}
+          t(\tau_R) = t  - |\vec{x} - \vec{x}(\tau_R)| \Leftrightarrow t = t(\tau_R) + |\vec{x} - \vec{x}(\tau_R)|
+        \end{equation*}
+        And
+        \begin{align*}
+          \delta^{(4)}\left((x^\nu - x^{\nu}(\tau))^2\right) = \frac{\delta(\tau - \tau_R)}{\left|\partial_\tau\left((x^\nu - x^{\nu}(\tau))^2\right)\right|} = \frac{\delta(\tau - \tau_R)}{\left|2(x^\nu - x^{\nu}(\tau))\dot{x}_{\nu}(\tau)\right|} = \frac{\delta(\tau - \tau_R)}{2\left|(x^\nu - x^{\nu}(\tau))u_{\nu}(\tau)\right|}
+        \end{align*}
+        \begin{align*}
+          A^\mu_R(x) &= 2 Q \int d\tau \Theta(x^{0} - y^{0})\frac{\delta(\tau - \tau_R) u^\mu(\tau)}{2\left|(x^\nu - x^{\nu}(\tau))u_{\nu}(\tau)\right|} \\
+                     &= \frac{Qu^\mu(\tau_R)}{\left|(x^\nu - x^{\nu}(\tau_R))u_{\nu}(\tau_R)\right|} 
+        \end{align*}
         The 4-vector potential is:
         \begin{gather*}
           A^\mu = \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3r'
@@ -190,8 +242,8 @@
         \begin{align*}
 %          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|}\delta(t_r' - t') dt' d^3\mathbf{r}' \\
 %          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \mathbf{v}'_Q(t') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|} \delta(t_r' - t')dt' d^3r'\\
-          A^\mu &= \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} \delta(t_r' - t')dt' d^3 r'\\
-                &= \frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t_r') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'
+          A^\mu &= \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t')}{|\mathbf{r} - \mathbf{r}'|} \delta(t' - t')dt' d^3 r'\\
+                &= \frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'
         \end{align*}
         Using the identity, where $x_0$ is a zero of $f$:
         \begin{equation}
@@ -200,7 +252,7 @@
         \end{equation}
         And let $\Delta t = (t - t')$ then:
         \begin{equation*}
-          \delta(\Delta t^2 - |\mathbf{r} - \mathbf{r}'|^2) = \frac{\delta(t - t')}{2 \Delta t |_{|\mathbf{r} - \mathbf{r}'|}} = \frac{\delta(t - t')}{2 |\mathbf{r} - \mathbf{r}'|}
+          \delta(\Delta t^2 - |\mathbf{r} - \mathbf{r}'|^2) = \frac{\delta(t - t' - |\mathbf{r} - \mathbf{r}'|)}{2 |\mathbf{r} - \mathbf{r}'|} + \frac{\delta(t - t' + |\mathbf{r} - \mathbf{r}'|)}{2 |\mathbf{r} - \mathbf{r}'|}
         \end{equation*}
         Thus
         \begin{align*}
@@ -299,7 +351,7 @@
         \begin{equation*}
           A_\mu dx^\mu = A_\mu \frac{\partial x^\mu}{\partial X^\mu} dX^\mu = A'_\mu dX^\mu
         \end{equation*}
-        Where $X$ stands for the Rhindler coordinates, and $A'_\mu = A_\mu \frac{\partial x^\mu}{\partial X^\mu}$.
+        Where $X$ stands for the Rindler coordinates, and $A'_\mu = A_\mu \frac{\partial x^\mu}{\partial X^\mu}$.
         The transformation matrix is, see the Mathematica notebook:
         \begin{equation*}
           \frac{\partial x^\mu}{\partial X^\mu}
@@ -313,7 +365,7 @@
           \end{matrix*}
           \right)
         \end{equation*}
-        And using this and writing the potential in the Rhindler coordintes gives the transformation.
+        And using this and writing the potential in the Rindler coordintes gives the transformation.
       \item
         The gauge function should satisfy the following properties:
         \begin{equation*}

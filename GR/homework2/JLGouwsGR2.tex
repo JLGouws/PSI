@@ -2,6 +2,7 @@
 \usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
 \usepackage{xcolor,graphicx}
 \usepackage{caption}
+\usepackage{cancel}
 \usepackage{subcaption}
 \usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
 \usepackage{setspace}
@@ -91,27 +92,30 @@
 
 \begin{enumerate}
   \item
-    Given $\tensor{g}{_\mu_\nu} = \eta_{\mu\nu} + h_{\mu\nu} + O(h^2)$, the Christoffel symbolds are:
+    The Einstein Tensor in terms of the metric is required for the Einstein Equations.
+    Getting the Einstein tensor requires the Ricci tensor which is determined from the Riemann tensor which is related to the metric through the Christoffel symbols.
+    Thus, the Christoffel symbols are required first.
+    Given $\tensor{g}{_\mu_\nu} = \eta_{\mu\nu} + h_{\mu\nu} + O(h^2)$, the Christoffel symbols are:
     \begin{align*}
       \Gamma^\mu_{\alpha \beta} &= \frac{1}{2} g^{\mu \sigma} (g_{\sigma\beta, \alpha} + g_{\alpha\sigma, \beta} - g_{\alpha\beta, \sigma})\\
                                   &= \frac{1}{2} (\eta^{\mu \sigma} - h^{\mu\nu}) (h_{\sigma\beta, \alpha} + h_{\alpha\sigma, \beta} - h_{\alpha\beta, \sigma})\\
                                   &= \frac{1}{2} \eta^{\mu \sigma} (h_{\sigma\beta, \alpha} + h_{\alpha\sigma, \beta} - h_{\alpha\beta, \sigma}) - \frac{1}{2} h^{\mu\nu} (h_{\sigma\beta, \alpha} + h_{\alpha\sigma, \beta} - h_{\alpha\beta, \sigma})\\
                                   &= \frac{1}{2} \eta^{\mu \sigma} (h_{\sigma\beta, \alpha} + h_{\alpha\sigma, \beta} - h_{\alpha\beta, \sigma}) + \mathcal{O}(h^2)
     \end{align*}
-    Note that:
+    Note that from the above:
     \begin{align*}
       \Gamma \sim \mathcal{O}(h) \Rightarrow \Gamma^2 \sim \mathcal{O} (h^2)
     \end{align*}
-    Thus $\Gamma^2$ terms can be ignored.
-    Now for for the Riemann tensor:
+    Thus the $\Gamma^2$ terms can be ignored.
+    Now for for the Riemann tensor, using its definition in terms of the connection coefficients:
     \begin{align*}
-      \tensor{R}{^\rho_\sigma_\mu_\nu} &= \partial_\mu \Gamma^\rho_{\nu\sigma } - \partial_\nu \Gamma^\rho_{\mu\sigma } + \Gamma^\rho{\mu\lambda}\Gamma^\lambda_{\nu\sigma} - \Gamma^\lambda_{\mu\sigma}\\
+      \tensor{R}{^\rho_\sigma_\mu_\nu} &= \partial_\mu \Gamma^\rho_{\nu\sigma } - \partial_\nu \Gamma^\rho_{\mu\sigma } + \Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma} - \Gamma^\lambda_{\mu\sigma}\\
                                       &= \partial_\mu \Gamma^\rho_{\nu\sigma } - \partial_\nu \Gamma^\rho_{\mu\sigma } + \mathcal{O}(h^2)\\
                                       &= \frac{1}{2}\eta^{\rho \zeta} \partial_\mu (h_{\zeta\sigma, \nu} + h_{\nu\zeta, \sigma} - h_{\nu\sigma, \zeta}) - \partial_\nu \frac{1}{2} \eta^{\rho \zeta} (h_{\zeta\sigma, \mu} + h_{\mu\zeta, \sigma} - h_{\mu\sigma, \zeta})\\
                                       &= \frac{1}{2}\eta^{\rho \zeta} (h_{\zeta\sigma, \nu\mu} + h_{\nu\zeta, \sigma\mu} - h_{\nu\sigma, \zeta\mu} - h_{\zeta\sigma, \mu\nu} - h_{\mu\zeta, \sigma\nu} + h_{\mu\sigma, \zeta\nu})\\
                                       &= \frac{1}{2}\eta^{\rho \zeta} (h_{\nu\zeta, \sigma\mu} + h_{\mu\sigma, \zeta\nu} - h_{\nu\sigma, \zeta\mu} - h_{\mu\zeta, \sigma\nu})
     \end{align*}
-    Now for the Ricci tensor:
+    Now contrating the first and third indices of the Riemann tensor, gives the Ricci tensor:
     \begin{align*}
       \tensor{R}{_\sigma_\nu} &= \tensor{R}{^\mu_\sigma_\mu_\nu} \\
                               &= \frac{1}{2}\eta^{\mu\zeta} (h_{\nu\zeta, \sigma\mu} + h_{\mu\sigma, \zeta\nu} - h_{\nu\sigma, \zeta\mu} - h_{\mu\zeta, \sigma\nu})\\
@@ -120,7 +124,7 @@
                               &= \frac{1}{2} (\partial_\mu \partial_\sigma\tensor{h}{^\mu_\nu} + \partial_\nu \partial^\mu h_{\mu\sigma} - \partial_\mu \partial^\mu h_{\nu\sigma} - \partial_\sigma \partial_\nu \tensor{h}{_\mu^\mu})\\
                               &= \frac{1}{2} (\partial_\mu \partial_\sigma\tensor{h}{^\mu_\nu} + \partial_\nu \partial_\mu \tensor{h}{^\mu_\sigma} - \Box h_{\nu\sigma} - \partial_\sigma \partial_\nu h)
     \end{align*}
-    And the Ricci scalar:
+    And the Ricci scalar, from contracting the Ricci tensor with the metric (taking only the flat metric, because the Ricci tensor is $\mathcal{O}(h)$):
     \begin{align*}
       R &= \eta^{\sigma\nu}\tensor{R}{_\sigma_\nu}\\ 
         &= \frac{1}{2} (\partial_\mu \partial_\sigma\tensor{h}{^\mu^\sigma} + \partial_\nu \partial_\mu \tensor{h}{^\mu^\nu} - \Box \tensor{h}{^\nu_\nu} - \partial^\nu \partial_\nu h)\\
@@ -134,22 +138,27 @@
                   &= -\frac{1}{2}\Box( h_{\mu\nu} -  \eta_{\mu\nu} h) + \frac{1}{2} (\partial_\zeta \partial_\mu\tensor{h}{^\zeta_\nu} + \partial_\nu \partial_\zeta \tensor{h}{^\zeta_\mu} -  \partial_\mu \partial_\nu h -\eta_{\mu\nu}\partial_\rho \partial_\lambda\tensor{h}{^\rho^\lambda})\\
                   &= -\frac{1}{2}\partial^\kappa\partial_\kappa( h_{\mu\nu} -  \eta_{\mu\nu} h) + \frac{1}{2} (\partial_\zeta \partial_\mu\tensor{h}{^\zeta_\nu} + \partial_\nu \partial_\zeta \tensor{h}{^\zeta_\mu} -  \partial_\mu \partial_\nu h -\eta_{\mu\nu}\partial_\rho \partial_\lambda\tensor{h}{^\rho^\lambda})
     \end{align*}
-
+    And after relabbeling some indices (the following steps were done in reverse, so they might be more easily readable from the bottom up):
     \begin{align*}
-      G_{\mu\nu}  &= -\frac{1}{2}\partial^\kappa \partial_\kappa \bar{h}_{\mu\nu} + \partial^\kappa \partial_{(\mu} \bar{h}_{\nu)\kappa} - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta \bar{h}_{\kappa\delta}\\
-                  &= -\frac{1}{2}\partial^\kappa \partial_\kappa (h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}h) + \frac{1}{2}\partial^\kappa \partial_{\mu} (h_{\nu\kappa} - \frac{1}{2}\eta_{\nu\kappa}h)\\
+      G_{\mu\nu} &= -\frac{1}{2}\partial^\kappa\partial_\kappa ( h_{\mu\nu} - \eta_{\mu\nu}h) + \frac{1}{2}(\partial_\kappa \partial_{\mu} \tensor{h}{_\nu^\kappa} + \partial_\kappa \partial_{\nu} \tensor{h}{_\mu^\kappa} - \partial_\nu \partial_{\mu}h - \eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta})\\
+                  &= -\frac{1}{2}\partial^\kappa\partial_\kappa h_{\mu\nu} + \frac{1}{2}\eta_{\mu\nu}\partial^\kappa\partial_\kappa h + \frac{1}{2}\partial_\kappa \partial_{\mu} \tensor{h}{_\nu^\kappa} - \frac{1}{2}\partial_\nu \partial_{\mu}h + \frac{1}{2}\partial_\kappa \partial_{\nu} \tensor{h}{_\mu^\kappa} - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta}\\
+                  &= -\frac{1}{2}\partial^\kappa\partial_\kappa h_{\mu\nu} + \frac{1}{2}\eta_{\mu\nu}\partial^\kappa\partial_\kappa h + \frac{1}{2}\partial_\kappa \partial_{\mu} \tensor{h}{_\nu^\kappa} - \frac{1}{4}\partial_\nu \partial_{\mu}h\\
+                  & \qquad + \frac{1}{2}\partial^\kappa \partial_{\nu} h_{\mu\kappa} - \frac{1}{4}\partial_\mu \partial_{\nu}h - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta}\\
+                  &= -\frac{1}{2}\partial^\kappa\partial_\kappa h_{\mu\nu} + \frac{1}{4}\eta_{\mu\nu}\partial^\kappa\partial_\kappa h + \frac{1}{2}\partial^\kappa \partial_{\mu} (h_{\nu\kappa} - \frac{1}{2}\eta_{\nu\kappa}h)\\
+                  & \qquad + \frac{1}{2}\partial^\kappa \partial_{\nu} (h_{\mu\kappa} - \frac{1}{2}\eta_{\mu\kappa}h) - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta} + \frac{1}{4} \eta_{\mu\nu} \partial^\kappa \partial_\kappa h\\
+%                  &= -\frac{1}{2}\partial^\kappa \partial_\kappa (h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}h) + \frac{1}{2}\partial^\kappa \partial_{\mu} (h_{\nu\kappa} - \frac{1}{2}\eta_{\nu\kappa}h)\\
+                  &= -\frac{1}{2}\partial^\kappa\partial_\kappa( h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu} h) + \frac{1}{2}\partial^\kappa \partial_{\mu} (h_{\nu\kappa} - \frac{1}{2}\eta_{\nu\kappa}h)\\
                   & \qquad + \frac{1}{2}\partial^\kappa \partial_{\nu} (h_{\mu\kappa} - \frac{1}{2}\eta_{\mu\kappa}h) - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta (h_{\kappa\delta} - \frac{1}{2}\eta_{\kappa\delta}h)\\
-                  &= -\frac{1}{2}\Box h_{\mu\nu} + \frac{1}{4}\eta_{\mu\nu}\Box h + \frac{1}{2}\partial^\kappa \partial_{\mu} (h_{\nu\kappa} - \frac{1}{2}\eta_{\nu\kappa}h)\\
-                  & \qquad + \frac{1}{2}\partial^\kappa \partial_{\nu} (h_{\mu\kappa} - \frac{1}{2}\eta_{\mu\kappa}h) - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta} + \eta_{\mu\nu}\frac{1}{4}\Box h\\
-                  &= -\frac{1}{2}\Box h_{\mu\nu} + \frac{1}{2}\eta_{\mu\nu}\Box h + \frac{1}{2}\partial_\kappa \partial_{\mu} \tensor{h}{_\nu^\kappa} - \frac{1}{4}\partial_\nu \partial_{\mu}h\\
-                  & \qquad + \frac{1}{2}\partial_\kappa \partial_{\nu} \tensor{h}{_\mu^\kappa} - \frac{1}{4} \partial_\mu \partial_{\nu} h - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta}\\
-                  &= -\frac{1}{2}\Box h_{\mu\nu} + \frac{1}{2}\eta_{\mu\nu}\Box h + \frac{1}{2}\partial_\kappa \partial_{\mu} \tensor{h}{_\nu^\kappa} - \frac{1}{2}\partial_\nu \partial_{\mu}h + \frac{1}{2}\partial_\kappa \partial_{\nu} \tensor{h}{_\mu^\kappa} - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta h_{\kappa\delta}\\
+                  &= -\frac{1}{2}\partial^\kappa \partial_\kappa \bar{h}_{\mu\nu} + \partial^\kappa \partial_{(\mu} \bar{h}_{\nu)\kappa} - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta \bar{h}_{\kappa\delta}
     \end{align*}
-
+    And equating this to $T_{\mu\nu}$ the correct proportionality constant gives:
+    \begin{align*}
+      G_{\mu\nu} = -\frac{1}{2}\partial^\kappa \partial_\kappa \bar{h}_{\mu\nu} + \partial^\kappa \partial_{(\mu} \bar{h}_{\nu)\kappa} - \frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta \bar{h}_{\kappa\delta} = 8 \pi G T_{\mu\nu}
+    \end{align*}
   \item
     \begin{enumerate}
       \item 
-        Under a coordinate transformation
+        Under a coordinate transformation, the metric tensor transforms as.
         \begin{equation*}
           g_{\mu\nu} dx^\mu \otimes dx^\nu = g_{\rho \sigma} \frac{\partial x^\rho}{\partial x'^\mu} \frac{\partial x^\sigma}{\partial x'^\nu} dx'^\mu \otimes dx'^\nu
         \end{equation*}
@@ -170,10 +179,13 @@
           g'_{\mu\nu} &= \left(\eta_{\rho \sigma} + h_{\rho \sigma }\right) \left(\delta^\rho_\mu + \frac{\partial \xi^\rho}{\partial x^\mu}\right) \left(\delta^\sigma_\nu + \frac{\partial \xi^\sigma}{\partial x^\nu}\right)\\
                       &= \eta_{\rho \sigma} \delta^\rho_\mu \delta^\sigma_\nu + \eta_{\rho \sigma} \delta^\rho_\mu \frac{\partial^\sigma \xi}{\partial x^\nu} + \eta_{\rho \sigma} \frac{\partial^\rho \xi}{\partial x^\mu} \delta^\sigma_\nu + h_{\rho\sigma}\delta^\rho_\mu\delta^\sigma_\nu\left(\eta_{\rho \sigma} + h_{\rho \sigma }\right) \left(\delta^\rho_\mu + \frac{\partial \xi^\rho}{\partial x^\mu}\right) \left(\delta^\sigma_\nu + \frac{\partial \xi^\sigma}{\partial x^\nu}\right)
         \end{align*}
-        Keeping only first order terms:
+        The last term is second order in $h$ so keeping only first order terms:
         \begin{align*}
           g'_{\mu\nu} &= \eta_{\mu\nu} + h_{\mu\nu} + \partial_\nu \xi_\mu + \partial _\mu \xi_\nu 
         \end{align*}
+        This is a bit of a naive approach.
+        A better approach would be to look at the diffeomorphisms from the flat space onto the manifold with the perturbed metric and then diffeomorphisms from the space onto itself.
+        Then the linearized metric under a diffeomorphism can be pulled back onto the flat space and compared with the flat metric which is in essence a Lie derivative, Sean Carroll gives a more complete description in \textit{Spacetime and Geometry}.
       \item 
         It is required that:
         \begin{align*}
@@ -181,7 +193,139 @@
                                          &= \partial^\mu h_{\mu\nu} + \partial_\nu\partial^\mu \xi_\mu + \Box \xi_\nu -\frac{1}{2}\partial_\nu h - \partial_\nu \partial_\rho \xi^\rho\\
                                          &= \partial^\mu h_{\mu\nu}  + \Box \xi_\nu -\frac{1}{2}\partial_\nu h \\
                                          &= \partial^\mu \bar{h}_{\mu\nu}  + \Box \xi_\nu \\
+                                         &=0 
         \end{align*}
+        This is just an inhomogenous wave equation, and has a solution.
+        Under this condition the Einstein equation becomes:
+        \begin{align*}
+          &-\frac{1}{2}\partial^\kappa \partial_\kappa \bar{h}_{\mu\nu} + \cancelto{0}{\partial^\kappa \partial_{(\mu} \bar{h}_{\nu)\kappa}} - \cancelto{0}{\frac{1}{2}\eta_{\mu\nu} \partial^\kappa \partial^\delta \bar{h}_{\kappa\delta}} = 8 \pi G T_{\mu\nu}\\
+          \Rightarrow & \Box \bar{h}_{\mu\nu} = -16\pi G T_{\mu\nu}
+        \end{align*}
+        Setting $G$ to one gives the required result.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        Taking the pure time component of the Einstein equation gives:
+        \begin{equation*}
+          \Box \bar{h}_{00} = - 16\pi T_{00} = -16 \pi \rho 
+        \end{equation*}
+        Letting:
+        \begin{equation*}
+          \phi = - \frac{1}{4} \bar{h}_{00} \Rightarrow \bar{h}_{00} = - 4 \phi
+        \end{equation*}
+        and assuming that this field is static so that:
+        \begin{equation*}
+          \frac{\partial \phi}{\partial t} = 0 \Rightarrow \frac{\partial^2 \phi}{\partial t^2} = 0
+        \end{equation*}
+        using this in the linearized Einstein equations gives:
+        \begin{align*}
+          \left(- \frac{\partial^2 }{\partial t^2} + \nabla^2\right) (- 4 \phi) = -16 \pi \rho  &\Rightarrow - \frac{\partial^2 \phi}{\partial t^2} + \nabla^2 \phi = 4 \pi \rho \\
+                                                                                                &\Rightarrow \nabla^2 \phi = 4 \pi \rho
+        \end{align*}
+        The Einstein Equations for the other components of the metric is, given the Newtonian limit where the metric is time independent:
+        \begin{align*}
+          \Box \bar{h}_{\mu\nu} = 0 \rightarrow - \frac{\partial^2}{\partial t^2} \bar{h}_{\mu\nu} +\nabla^2 \bar{h}_{\mu\nu} = 0 \Rightarrow \nabla^2 \bar{h}_{\mu\nu} = 0 \qquad (\mu,\nu) \neq (0, 0)
+        \end{align*}
+        This equation suggests that the metric components could be linear in the coordinats which would imply that the metric does not tend to flat space at the infinities of the coordinates which is not physical.
+        Requiring the flat space limit, sets all components other than $\bar{h}_{00}$ to zero.
+
+        Assuming slow motion gives the following condition on the velocity:
+        \begin{equation*}
+          \left|\frac{d x^i}{d \tau}\right| \ll \frac{d t}{d \tau} \Rightarrow \left|\frac{d x^i}{d \tau}\right| \ll 1
+        \end{equation*}
+        Where the last equality follows from time flowing at similar rates, $\gamma \approx 1$, for slow moving observers.
+        Using these restrictions, the geodesic equation becomes:
+        \begin{align*}
+          0 &= \frac{\partial x^\mu}{\partial t^2} + \Gamma^\mu_{\alpha \beta} \frac{\partial x^\alpha}{\partial t} \frac{\partial x^\beta}{\partial t} \\
+            &= \frac{\partial x^\mu}{\partial t^2} + \Gamma^\mu_{00} \frac{\partial x^0}{\partial t} \frac{\partial x^0}{\partial t} + \Gamma^y_{ii} \frac{\partial x^i}{\partial t} \frac{\partial x^i}{\partial t}\\
+            &\approx \frac{\partial x^\mu}{\partial t^2} + \Gamma^\mu_{00} \frac{\partial \tau}{\partial t} \frac{\partial \tau}{\partial t} \\
+            &\approx \frac{\partial x^\mu}{\partial t^2} + \Gamma^\mu_{00} 
+        \end{align*}
+        And connection coefficient is given by, assuming the newtownian limit and static field $\frac{\partial}{\partial t} g_{\mu\nu} = 0 \Rightarrow \frac{\partial}{\partial t} h_{\mu\nu} = 0$:
+        \begin{align*}
+          \Gamma^\mu_{0 0} &= \frac{1}{2} \eta^{\mu \sigma} (h_{\sigma 0, 0} + h_{0\sigma, 0} - h_{0 0, \sigma})\\
+                           &= - \frac{1}{2}  \eta^{\mu \sigma}  h_{0 0, \sigma}\\
+                           &= - \frac{1}{2}  \eta^{\mu \sigma}\partial_\sigma  h_{0 0}
+        \end{align*}
+        The following relations give $h_{00}$:
+        \begin{equation*}
+          \bar{h}_{\mu\nu} = h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}h \Rightarrow \bar{h} =  h - 2 h = - h
+        \end{equation*}
+        Since $\eta^{\mu\nu}\eta_{\mu\nu} = 4$.
+        Taking the only non-zero component of the metric to be the $h_{00}$ component gives $\bar{h} = \eta^{00}\tensor{\bar{h}}{_0_0}  = 4 \phi$,
+        it follows that:
+        \begin{equation*}
+          \bar{h}_{\mu\nu} = h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}h = h_{\mu \nu} = \bar{h}_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu} \bar{h} \Rightarrow h_{00} = \bar{h}_{00} + \frac{1}{2} \bar{h} = -4 \phi + 2 \phi = -2 \phi
+        \end{equation*}
+        Now taking only the spacial components of the geodesic equation:
+        \begin{align*}
+          \frac{\partial x^i}{\partial t^2} &= -\Gamma^\mu_{00} \\
+                                            &= \frac{1}{2}  \eta^{i \sigma} \partial_\sigma h_{0 0}\\
+                                            &= \frac{1}{2}  \delta^{i \sigma} \partial_\sigma (-2 \phi)\\
+                                            &= - \partial^i \phi
+        \end{align*}
+        Which is the motion of a particle given by $\mathbf{F} = m \mathbf{a}$ for a particle in a gravitaional potential with $V = m \phi$.
+      \item
+        Taking the components of the equation with non-zero energy-momentum tensor:
+        \begin{equation*}
+          \Box \bar{h}_{0\mu} = - 16\pi G T_{0\mu} = 16 \pi J_{\mu}
+        \end{equation*}
+        Letting:
+        \begin{equation*}
+          A_\mu = - \frac{1}{4} \bar{h}_{\mu0} \Rightarrow \bar{h}_{\mu 0} = - 4 A_\mu 
+        \end{equation*}
+        And using this in the Einstein equation
+        \begin{equation*}
+          -4 \Box A_\mu = 16 \pi J_{\mu} \Rightarrow \Box A_\mu  = -4 \pi J_{\mu}
+        \end{equation*}
+        Taking the $\nu = 0$ component of the De Donder gauge condition gives the condition on $A_\mu$:
+        \begin{equation*}
+          \partial_\mu A^\mu = 0
+        \end{equation*}
+        Now the geodesic equation will give the force law.
+        Splitting up the different components of the geodesic equation to see if any simplifications are possible with the given assumptions yields:
+        \begin{align*}
+          0 &= \frac{\partial x^\mu}{\partial \tau^2} + \Gamma^\mu_{\alpha \beta} \frac{\partial x^\alpha}{\partial \tau} \frac{\partial x^\beta}{\partial \tau}\\
+            &= \frac{\partial x^\mu}{\partial \tau^2} + \Gamma^\mu_{00} \frac{\partial x^0}{\partial \tau} \frac{\partial x^0}{\partial \tau} + \Gamma^\mu_{0i} \frac{\partial x^0}{\partial \tau} \frac{\partial x^i}{\partial \tau} + \Gamma^\mu_{0i} \frac{\partial x^0}{\partial \tau} \frac{\partial x^i}{\partial \tau} +  \Gamma^\mu_{ij} \frac{\partial x^i}{\partial \tau} \frac{\partial x^j}{\partial \tau}\\
+            &= \frac{\partial x^\mu}{\partial \tau^2} + \Gamma^\mu_{00} \left(\frac{\partial t}{\partial \tau}\right)^2  + \Gamma^\mu_{0i} \frac{\partial t}{\partial \tau} \frac{\partial x^i}{\partial \tau} + \Gamma^\mu_{i0} \frac{\partial t}{\partial \tau} \frac{\partial x^i}{\partial t} +  \Gamma^\mu_{ij} \frac{\partial x^i}{\partial t} \frac{\partial x^j}{\partial t}
+        \end{align*}
+        Assuming that the test particle is moving relatively slowly, so that $\frac{\partial t}{\partial \tau}\approx 1$ and ${v^i}^2 \ll 1$ so the terms proportional to the velocity squared are domniated by the terms linear in the velocity:
+        \begin{align}
+          0 &= \frac{\partial x^\mu}{\partial \tau^2} + \Gamma^\mu_{00} + 2\Gamma^\mu_{0i} \frac{\partial x^i}{\partial \tau} \label{eq:secondgeodesic}
+        \end{align}
+        Let $A^\mu = (\phi,\mathbf{A})$, and note that $\bar{h} = \eta^{00}\tensor{\bar{h}}{_0_0}  = 4 \phi$ so that:
+        \begin{equation*}
+          h_{\mu \nu} = \bar{h}_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu} \bar{h} \Rightarrow h_{00} = \bar{h}_{00} + \frac{1}{2} \bar{h} = -4 \phi + 2 \phi = -2 \phi
+        \end{equation*}
+        Similarly:
+        \begin{equation*}
+          \Rightarrow h_{0i} = \bar{h}_{0i} + \frac{1}{2} \eta_{0i} \bar{h} = -4 A_i
+        \end{equation*}
+        As in part (a):
+        \begin{equation*}
+          \Gamma^i_{0 0} = - \frac{1}{2}  \eta^{i \sigma}\partial_\sigma  h_{0 0} =  -\partial^i \phi \coloneqq  -E^i
+        \end{equation*}
+        but the other connection coeeficients of interest are:
+        \begin{align*}
+          \Gamma^\mu_{0 i} &= - \frac{1}{2} \eta^{\mu \sigma} (h_{\sigma i, 0} + h_{0 \sigma, i} - h_{i 0, \sigma})\\
+                           &= - \frac{1}{2} \eta^{\mu \sigma} (h_{0 \sigma, i} - h_{i 0, \sigma})
+        \end{align*}
+        Focussing only on the spatial components, since the Newtonian limit only requires $\partial^2_t \mathbf{x}$:
+        \begin{align*}
+                \Gamma^i_{0 j} &= - \frac{1}{2} \delta^{i k} (h_{0 k, j} - h_{j 0, k}) \\
+                               &= 2 \delta^{i k} (\partial_j A_k - \partial_k A_j) \\
+                               &= 2 \delta^{i k} \tensor{F}{_j_k}\\
+                               &= 2 \delta^{i k} \tensor{F}{_j_k}\\
+                               &= 2 \delta^{i k} \tensor{\epsilon}{_j_k_l}B^l\\
+                               &= 2 \delta^{i k} \tensor{\epsilon}{_j_k_l}B^l\\
+                               &= - 2 \tensor{\epsilon}{^i_j_l}B^l
+        \end{align*}
+        And using these in the linearized geodesic equation~\ref{eq:secondgeodesic} yields:
+        \begin{align*}
+          0 = \frac{\partial^2 x^i}{\partial \tau^2} - E^i - 4\tensor{\epsilon}{^i_j_l}v^j B^l  \Leftrightarrow \frac{\partial^2 \mathbf{x}}{\partial \tau^2} = \mathbf{E} + 4\mathbf{v} \times \mathbf{B}
+        \end{align*}
+        Which is the opposite sign posed in the question for the magnetic term, but is the sign given in the \href{https://en.wikipedia.org/wiki/Gravitoelectromagnetism}{Wikipedia page}.
     \end{enumerate}
 \end{enumerate}
 \end{document}
