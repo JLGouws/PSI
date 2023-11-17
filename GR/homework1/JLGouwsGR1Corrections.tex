@@ -69,7 +69,7 @@
 %}
 
 \title{
-\textsc{GR Homework 1}
+\textsc{GR Homework 1 Corrections}
 }
 \author{\textsc{J L Gouws}
 }
@@ -93,6 +93,10 @@
   \item
     \begin{enumerate}
       \item
+        I am only submitting this question because you only asked me to redo this question.
+        I would fix up some other things if I had more time, but I have to prepare for interviews too...
+        On a positive note, I will probably not misspell Rindler again (facepalm).
+        In my last submission I did not do this approach because I did not want to pull the Green's function out of thin air.
         Maxwell's equations for the vector potential are:
         \begin{equation*}
           \Box A^\mu = - 4 \pi j^\mu
@@ -104,6 +108,7 @@
         The physical solutions for the vector potential are of interest, these correspond to the retarded solution of Maxwell's equations. 
         The retarded solution for the potential at a given point in space-time is given by the presence of the charge in the past of the charges trajectory since it takes time for the field of the charge to propagte to the given spacetime point.
         The field propagates by photons and travels at the speed of light as shown in the diagram below:
+
         \begin{figure}[H]
           \centering
           \begin{tikzpicture}
@@ -115,11 +120,56 @@
             \draw [red, thick, domain=0:2.5, samples=40] plot ({cosh(\x)}, {sinh(\x)} ) node[right, color=black] {$x^\mu(\tau)$};
           \end{tikzpicture}
         \end{figure}
+
+        Inverting this requires the retarded Green's function, where $x$ is the length $(x^\mu x_\mu)^{1/2}$ of some vector that is the distance between two points in space time.
+        Fourier analysis gives:
         \begin{align*}
-          A^\mu_R(x) &= -4\pi \int d^4 y j^\mu (y) G_R(y,x)\\
-                     &= 2 \int d^4 y \Theta(x^{0} - y^{0})\delta^{(4)}\left((x - y)^2\right)j^\mu (y) \\
-                     &= 2 Q\int d^4 y \int d\tau \Theta(x^{0} - y^{0})\delta^{(4)}\left((x - y)^2\right)   u^\mu(\tau) \delta^{(4)} (y - x^{\nu}(\tau))\\
-                     &= 2 Q \int d\tau \Theta(x^{0} - y^{0})\delta^{(4)}\left((x^\nu - x^{\nu}(\tau))^2\right) u^\mu(\tau)
+          \Box D (x) = \delta^{(4)} (x) \Leftrightarrow  1  &= \int d^4x e^{ik_\mu x^{\mu}} \delta^{(4)} (x) \\
+                                                            &= \int d^4x e^{ik_\mu x^{\mu}} \Box \int d^4 p e^{-ip_\mu x^{\mu}} \tilde{D}(p)\\
+                                                            &= \int d^4x e^{ik_\mu x^{\mu}} \int d^4 p e^{-ip_\mu x^{\mu}} (-p_\mu p^\mu) \tilde{D}(p)\\
+                                                            &= \int d^4p (-p_\mu p^\mu) \tilde{D}(p)\int d^4x e^{i(k_\mu - p_\mu) x^{\mu}} \\
+                                                            &= (2 \pi)^4\int d^4p (-p_\mu p^\mu) \tilde{D}(p)\delta^{(4)}(k_\mu - p_\mu) \\
+                                                            &= -k_\mu k^\mu (2 \pi)^4 \tilde{D}(k)\\
+                                                            &\Rightarrow \tilde{D}(k) =- \frac{1}{(2 \pi)^4k_\mu k^\mu }
+        \end{align*}
+        Taking $x^\mu = (t, \vec{x})$ and $k^\mu = (\omega, \vec{k})$, and inverting the Fourier transform:
+        \begin{align*}
+          D (x) &= - \frac{1}{(2 \pi)^4}\int d^4 k e^{i k^\mu x_\mu} \frac{1}{k^\mu k_\mu}\\
+                &= - \frac{1}{(2 \pi)^4}\int d^3 k e^{i \vec{k} \cdot \vec{x}} \int d \omega \frac{1}{\vec{k}^2 - \omega^2}\\
+                &= - \frac{1}{(2 \pi)^4}\int d^3 k e^{i \vec{k} \cdot \vec{x}} \int d \omega \frac{e^{i \omega t}}{(|\vec{k}| - \omega)(|\vec{k}| + \omega)}
+        \end{align*}
+        Performing the $\omega$ integral for $t < 0$ around a semi-circle in the upper halfplane that does not include the poles $i \epsilon$ above the poles gives:
+        \begin{align*}
+          \int d \omega \frac{e^{i \omega t}}{(\omega - |\vec{k}|)( \omega + |\vec{k}|)} = 0
+        \end{align*}
+        Since there are no poles in the contour.
+        For $t > 0$, the contour must be close below, enclosing both poles. After using the residue theorem:
+        \begin{align*}
+          \int d \omega \frac{e^{i \omega t}}{(\omega - |\vec{k}|)( \omega + |\vec{k}|)} = - 2 \pi \frac{\sin |\vec{k}| t}{|\vec{k}|}
+        \end{align*}
+        Using these results the retarded green's function is:
+        \begin{align*}
+          D_R (x) = \frac{1}{(2 \pi)^3}\int d^3 k e^{i \vec{k} \cdot \vec{x}}\Theta(t) \frac{\sin |\vec{k}| t}{|\vec{k}|}
+        \end{align*}
+        Doing this integral in spherical coordinates gives (I leave this out for brevity, the calculation is in Aldo's 2023 Classical mechanics notes):
+        \begin{align*}
+          D_R (x) = \frac{1}{4 \pi |\vec{r}|}\Theta(t) \delta(t - |\vec{r}|)
+        \end{align*}
+        And since $\Theta(t) \Rightarrow t >0 \Rightarrow t + |\vec{r}| \neq 0$ then using the property of the dirac delta of a function\footnote{$\displaystyle \delta(f(\tau)) = \sum_{\tau_0 \text{is a root of } f}\frac{\delta(\tau - \tau_0)}{|f'(\tau_0)|}$}:
+        \begin{align*}
+          D_R (x) &= \frac{1}{2 \pi }\Theta(t) \left(\frac{\delta(t - |\vec{r}|)}{2|\vec{r}|} + \frac{\delta(t + |\vec{r}|)}{2|\vec{r}|}\right)\\
+                  &= \frac{1}{2 \pi }\Theta(t) \delta((t - |\vec{r}|)(t + |\vec{r}|))\\
+                  &= \frac{1}{2 \pi }\Theta(t) \delta(t^2 - |\vec{r}|^2)\\
+                  &= \frac{1}{2 \pi }\Theta(t) \delta(r^\mu r_\mu)
+        \end{align*}
+
+        The retarded solution includes the effects from the past in the future, that is the poles are included for $t > 0$ (there effect is only observed when $t > 0$) and ignored when $t < 0$.
+        Inverting the wave equation for the vector potential now gives:
+        \begin{align*}
+          A^\mu_R(x) &= -4\pi \int d^4 y j^\mu (y) D_R(x - y)\\
+                     &= -2 \int d^4 y \Theta(x^{0} - y^{0})\delta^{(4)}\left((x - y)^2\right)j^\mu (y) \\
+                     &= -2 Q\int d^4 y \int d\tau \Theta(x^{0} - y^{0})\delta^{(4)}\left((x - y)^2\right)   u^\mu(\tau) \delta^{(4)} (y - x^{\nu}(\tau))\\
+                     &= -2 Q \int d\tau \Theta(t - t(\tau_R))\delta^{(4)}\left((x^\nu - x^{\nu}(\tau))^2\right) u^\mu(\tau)
         \end{align*}
         Using the property for the dirac delta of a funtion, where:
         \begin{align*}
@@ -127,63 +177,67 @@
         \end{align*}
         And:
         \begin{align*}
-          &0 = f(\tau_R)\\ 
-          \Rightarrow &0 = (t - t(\tau_R))^2 - |\vec{x} - \vec{x}(\tau_R)|^2 = (t - t(\tau_R) - |\vec{x} - \vec{x}(\tau_R)|) (t - t(\tau_R) + |\vec{x} - \vec{x}(\tau_R)|)
+          0 &= f(\tau_R)\\ 
+          \Rightarrow 0 &= (t - t(\tau_R))^2 - |\vec{x} - \vec{x}(\tau_R)|^2 \\
+                          &= (t - t(\tau_R) - |\vec{x} - \vec{x}(\tau_R)|) (t - t(\tau_R) + |\vec{x} - \vec{x}(\tau_R)|)
         \end{align*}
-        but since only the retarded solution is of interest, the only root that will contribute in the vector potential is:
+        but since only the retarded solution is of interest, the only root that will contribute in the vector potential is ($t - t(\tau_R) > 0$ is guaranteed by the step function):
         \begin{equation*}
           t(\tau_R) = t  - |\vec{x} - \vec{x}(\tau_R)| \Leftrightarrow t = t(\tau_R) + |\vec{x} - \vec{x}(\tau_R)|
         \end{equation*}
-        And
+       And the delta function becomes:
         \begin{align*}
-          \delta^{(4)}\left((x^\nu - x^{\nu}(\tau))^2\right) = \frac{\delta(\tau - \tau_R)}{\left|\partial_\tau\left((x^\nu - x^{\nu}(\tau))^2\right)\right|} = \frac{\delta(\tau - \tau_R)}{\left|2(x^\nu - x^{\nu}(\tau))\dot{x}_{\nu}(\tau)\right|} = \frac{\delta(\tau - \tau_R)}{2\left|(x^\nu - x^{\nu}(\tau))u_{\nu}(\tau)\right|}
+          \delta^{(4)}\left((x^\nu - x^{\nu}(\tau))^2\right)  &= \frac{\delta(\tau - \tau_R)}{\left|\partial_\tau\left((x^\nu - x^{\nu}(\tau))^2\right)\right|} \\
+                                                              &= \frac{\delta(\tau - \tau_R)}{\left|2(x^\nu - x^{\nu}(\tau))\dot{x}_{\nu}(\tau)\right|} \\
+                                                              &= \frac{\delta(\tau - \tau_R)}{2\left|(x^\nu - x^{\nu}(\tau))u_{\nu}(\tau)\right|}
         \end{align*}
+        Substituting these results into the expression for the vector potential yields:
         \begin{align*}
-          A^\mu_R(x) &= 2 Q \int d\tau \Theta(x^{0} - y^{0})\frac{\delta(\tau - \tau_R) u^\mu(\tau)}{2\left|(x^\nu - x^{\nu}(\tau))u_{\nu}(\tau)\right|} \\
-                     &= \frac{Qu^\mu(\tau_R)}{\left|(x^\nu - x^{\nu}(\tau_R))u_{\nu}(\tau_R)\right|} 
+          A^\mu_R(x) &= - 2 Q \left.\int d\tau \Theta(x^{0} - y^{0})\frac{\delta(\tau - \tau_R) u^\mu(\tau)}{2\left|(x^\nu - x^{\nu}(\tau))u_{\nu}(\tau)\right|} \right|_{t = t(\tau_R) + |\vec{x} - \vec{x}(\tau_R)|}\\
+                     &= - \left.\frac{Qu^\mu(\tau_R)}{\left|(x^\nu - x^{\nu}(\tau_R))u_{\nu}(\tau_R)\right|} \right|_{t = t(\tau_R) + |\vec{x} - \vec{x}(\tau_R)|}
         \end{align*}
-        The 4-vector potential is:
-        \begin{gather*}
-          A^\mu = \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3r'
-        \end{gather*}
-        Since nothing can travel faster than the speed of light, and it is expected that electromagnetic interactions will travel at the speed of light, it is expecetd that anything observed will have come the past at some $t_r = t - |\mathbf{r} - \mathbf{r}|'$.
-        For a moving point charge:
-        \begin{gather*}
-          J^\mu (\mathbf{r}', t') = \int d\tau' Q u^\mu \delta^4(x'^\mu - x_Q^\mu)
-        \end{gather*}
-        And a sneaky dirac delta insertion in the vector potential can clean things up:
-        \begin{align*}
-%          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|}\delta(t_r' - t') dt' d^3\mathbf{r}' \\
-%          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \mathbf{v}'_Q(t') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|} \delta(t_r' - t')dt' d^3r'\\
-          A^\mu &= \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t')}{|\mathbf{r} - \mathbf{r}'|} \delta(t' - t')dt' d^3 r'\\
-                &= \frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'
-        \end{align*}
-        Using the identity, where $x_0$ is a zero of $f$:
-        \begin{equation}
-          \delta(f(x)) = \frac{\delta(x - x_0)}{|f'(x_0)|}
-          \label{eq:diracdeltafunction}
-        \end{equation}
-        And let $\Delta t = (t - t')$ then:
-        \begin{equation*}
-          \delta(\Delta t^2 - |\mathbf{r} - \mathbf{r}'|^2) = \frac{\delta(t - t' - |\mathbf{r} - \mathbf{r}'|)}{2 |\mathbf{r} - \mathbf{r}'|} + \frac{\delta(t - t' + |\mathbf{r} - \mathbf{r}'|)}{2 |\mathbf{r} - \mathbf{r}'|}
-        \end{equation*}
-        Thus
-        \begin{align*}
-          A^\mu &=\frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t_r') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'\\
-                &=\frac{1}{2 \pi}\int J^\mu (\mathbf{r}', t_r') \delta((t - t')^2 - |\mathbf{r} - \mathbf{r}'|^2)dt' d^3 r'\\
-                &=\frac{1}{2 \pi}\int J^\mu (\mathbf{r}', t_r') \delta((x^\nu - x'^\nu)(x_\nu - x'_\nu))d^4x'\\
-                &=\frac{1}{2 \pi}\int Q u^\mu \delta^4(x'^\nu - x_Q'^\nu)|_{t'_r} \delta((x^\nu - x'^\nu)(x_\nu - x'_\nu))d \tau' d^4x' \\
-                &=\frac{1}{2 \pi}Q \left.\int  u^\mu \delta((x_Q'^\nu - x'^\nu)(x'\tensor{}{_Q_\nu} - x'_\nu)) d \tau' \right|_{t'_r}
-        \end{align*}
-        Now $(x_Q'^\mu - x'^\mu)(x'\tensor{}{_Q_\mu} - x'_\mu)$ is implicitly a function of $\tau$, therefore using Equation~\ref{eq:diracdeltafunction}:
-        \begin{align*}
-          \delta((x_Q'^\mu - x'^\mu)(x'\tensor{}{_Q_\mu} - x'_\mu)) = \frac{\delta(\tau - \tau')}{|(x_Q'^\mu - x'^\mu)\partial_\tau x'\tensor{}{_Q_\mu} + (x_Q'^\mu - x'_\mu)\partial_\tau x_Q'^\mu|} = \frac{\delta(\tau - \tau')}{2|(x'^\mu - x_Q'^\mu)u_\mu|}
-        \end{align*}
-        And using this in the expression for $A^\mu$ and carrying out the $\tau '$ integral over the delta function:
-        \begin{align*}
-          A^\mu &=\frac{1}{4 \pi}Q \frac{u^\mu}{|(x'^\nu - x_Q'^\nu)u_\nu|}
-        \end{align*}
-        Choosing units that set $4 \pi = 1$ gives the desired relation.
+%        The 4-vector potential is:
+%        \begin{gather*}
+%          A^\mu = \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t_r')}{|\mathbf{r} - \mathbf{r}'|} d^3r'
+%        \end{gather*}
+%        Since nothing can travel faster than the speed of light, and it is expected that electromagnetic interactions will travel at the speed of light, it is expecetd that anything observed will have come the past at some $t_r = t - |\mathbf{r} - \mathbf{r}|'$.
+%        For a moving point charge:
+%        \begin{gather*}
+%          J^\mu (\mathbf{r}', t') = \int d\tau' Q u^\mu \delta^4(x'^\mu - x_Q^\mu)
+%        \end{gather*}
+%        And a sneaky dirac delta insertion in the vector potential can clean things up:
+%        \begin{align*}
+%%          \phi(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|}\delta(t_r' - t') dt' d^3\mathbf{r}' \\
+%%          \mathbf{A}(\mathbf{r}, t) = \frac{1}{4 \pi}\int\int\frac{Q \mathbf{v}'_Q(t') \delta^3(\mathbf{r'} - \mathbf{r'}_Q(t'))}{|\mathbf{r} - \mathbf{r}'|} \delta(t_r' - t')dt' d^3r'\\
+%          A^\mu &= \frac{1}{4 \pi}\int \frac{J^\mu (\mathbf{r}', t')}{|\mathbf{r} - \mathbf{r}'|} \delta(t' - t')dt' d^3 r'\\
+%                &= \frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'
+%        \end{align*}
+%        Using the identity, where $x_0$ is a zero of $f$:
+%        \begin{equation}
+%          \delta(f(x)) = \frac{\delta(x - x_0)}{|f'(x_0)|}
+%          \label{eq:diracdeltafunction}
+%        \end{equation}
+%        And let $\Delta t = (t - t')$ then:
+%        \begin{equation*}
+%          \delta(\Delta t^2 - |\mathbf{r} - \mathbf{r}'|^2) = \frac{\delta(t - t' - |\mathbf{r} - \mathbf{r}'|)}{2 |\mathbf{r} - \mathbf{r}'|} + \frac{\delta(t - t' + |\mathbf{r} - \mathbf{r}'|)}{2 |\mathbf{r} - \mathbf{r}'|}
+%        \end{equation*}
+%        Thus
+%        \begin{align*}
+%          A^\mu &=\frac{1}{4 \pi}\int J^\mu (\mathbf{r}', t_r') \frac{\delta((t - t') - |\mathbf{r} - \mathbf{r}'|)}{|\mathbf{r} - \mathbf{r}'|}dt' d^3 r'\\
+%                &=\frac{1}{2 \pi}\int J^\mu (\mathbf{r}', t_r') \delta((t - t')^2 - |\mathbf{r} - \mathbf{r}'|^2)dt' d^3 r'\\
+%                &=\frac{1}{2 \pi}\int J^\mu (\mathbf{r}', t_r') \delta((x^\nu - x'^\nu)(x_\nu - x'_\nu))d^4x'\\
+%                &=\frac{1}{2 \pi}\int Q u^\mu \delta^4(x'^\nu - x_Q'^\nu)|_{t'_r} \delta((x^\nu - x'^\nu)(x_\nu - x'_\nu))d \tau' d^4x' \\
+%                &=\frac{1}{2 \pi}Q \left.\int  u^\mu \delta((x_Q'^\nu - x'^\nu)(x'\tensor{}{_Q_\nu} - x'_\nu)) d \tau' \right|_{t'_r}
+%        \end{align*}
+%        Now $(x_Q'^\mu - x'^\mu)(x'\tensor{}{_Q_\mu} - x'_\mu)$ is implicitly a function of $\tau$, therefore using Equation~\ref{eq:diracdeltafunction}:
+%        \begin{align*}
+%          \delta((x_Q'^\mu - x'^\mu)(x'\tensor{}{_Q_\mu} - x'_\mu)) = \frac{\delta(\tau - \tau')}{|(x_Q'^\mu - x'^\mu)\partial_\tau x'\tensor{}{_Q_\mu} + (x_Q'^\mu - x'_\mu)\partial_\tau x_Q'^\mu|} = \frac{\delta(\tau - \tau')}{2|(x'^\mu - x_Q'^\mu)u_\mu|}
+%        \end{align*}
+%        And using this in the expression for $A^\mu$ and carrying out the $\tau '$ integral over the delta function:
+%        \begin{align*}
+%          A^\mu &=\frac{1}{4 \pi}Q \frac{u^\mu}{|(x'^\nu - x_Q'^\nu)u_\nu|}
+%        \end{align*}
+%        Choosing units that set $4 \pi = 1$ gives the desired relation.
     \end{enumerate}
 \end{enumerate}
 \end{document}
