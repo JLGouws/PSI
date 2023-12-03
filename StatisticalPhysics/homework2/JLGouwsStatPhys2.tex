@@ -1,0 +1,118 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{Statistical Physics Homework 2}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        \begin{align*}
+          \sum_j B_{ij} 
+%                        &= \sum_{j}\frac{1}{N} \sum_k B_k e^{i k \cdot (x_i - x_j)}\\
+%                        &= \frac{1}{N} \sum_k B_k  e^{i k \cdot x_i} \sum_{j} e^{-i k \cdot x_j)}
+                        &= \sum_{j}  \frac{1}{N^2} \sum_{k q} \hat B_{kq} e^{i k \cdot x_i} e^{i q \cdot x_i}\\
+        \end{align*}
+        Assuming that the model is limited to nearest neighbour interactions:
+        \begin{align*}
+          \sum_j B_{ij} 
+                        &= \sum_{j}  \frac{1}{N^2} \sum_{k q} N B_k \delta_{k + q, 0} e^{i k \cdot x_i} e^{i q \cdot x_j}\\
+                        &=   \frac{1}{N^2} \sum_{k q} N B_k \delta_{k + q, 0} e^{i k \cdot x_i} \sum_{j} e^{i q \cdot x_j}\\
+                        &=   \frac{1}{N^2} \sum_{k q} N B_k \delta_{k + q, 0} e^{i k \cdot x_i} N \delta_{q,0}\\
+                        &=   \frac{1}{N^2} \sum_{k} N^2 B_k \delta_{k, 0} e^{i k \cdot x_i} \\
+                        &=   B_0 
+        \end{align*}
+      \item
+        For the minimum, derivatives are taken:
+        \begin{align*}
+          \frac{\partial S}{\partial \phi_i} &= \frac{\beta A^2}{2} \phi^T B \phi - \sum_i \ln(\cosh(\beta A (B \phi)_i))\\
+        \end{align*}
+    \end{enumerate}
+\end{enumerate}
+\end{document}
