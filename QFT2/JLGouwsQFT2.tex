@@ -1,0 +1,260 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{tikz-feynman}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{slashed}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{QFT II Homework 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item 
+        $S$ had dimension 1 and has the form:
+        \begin{equation*}
+          S = \int d^2x \bar{\psi}_a i \slashed{\partial} \psi^a + \frac{g^2}{2N} \left(\bar{\psi}_a \psi^a\right)^2
+        \end{equation*}
+%        Thus $\bar{\psi}_a \psi^a$ has dimension 1.% and $\psi$ has dimenstion $1/2$. and 
+%        This gives $-$
+        which implies $g^2$ must have the same dimension as $[\slashed{\partial}] = 1$ or $[g] = 1/ 2$ and note $[\psi] = 1$.
+      \item
+        Under the transformation $\psi_a \to \gamma^5\psi_a$ the Dirac conjugate of $\psi$ changes to $\bar{\psi}_a \to \left(\gamma^5 \psi_a \right)^\dagger \gamma^0 = \psi_a^\dagger {\gamma^5}^\dagger \gamma^0 = -\psi_a^\dagger \gamma^1 \gamma^0 \gamma^0 = -\psi_a^\dagger \gamma^0 \gamma^0 \gamma^1 = - \bar{\psi_a}\gamma^5$ so the the Lagrangian changes like:
+        \begin{align*}
+          \mathcal{L}_{NG} \to \mathcal{L}_{NG} &= \int d^2x -\bar{\psi}_a \gamma^5 \gamma^i\partial_i \gamma^5 \psi^a + \frac{g^2}{2N} \left(-\bar{\psi}_a \gamma^5 \gamma^5\psi^a\right)^2\\
+                                                &= \int d^2x -\bar{\psi}_a \gamma^5 \gamma^i \gamma^5 \partial_i \psi^a + \frac{g^2}{2N} \left(-\bar{\psi}_a \psi^a\right)^2\\
+                                                &= \int d^2x \bar{\psi}_a \gamma^5 \gamma^5 \gamma^i \partial_i \psi^a + \frac{g^2}{2N} \left(\bar{\psi}_a \psi^a\right)^2\\
+                                                &= \int d^2x \bar{\psi}_a \gamma^5 \gamma^5 \gamma^i \partial_i \psi^a + \frac{g^2}{2N} \left(\bar{\psi}_a \psi^a\right)^2\\
+                                                &= \int d^2x \bar{\psi}_a \slashed{\partial_i} \psi^a + \frac{g^2}{2N} \left(\bar{\psi}_a \psi^a\right)^2
+        \end{align*}
+        A mass term will have the form:
+        \begin{align*}
+           m \bar{\psi}_a \psi^a
+        \end{align*}
+        Which becomes negative under a chiral transformation and so the chiral symmetry forbids a mass term.
+      \item
+        The diagram for the two point function is:
+        \begin{center}
+          \begin{tikzpicture}[baseline={(current bounding box.center)},
+              arrowlabel/.style={
+                /tikzfeynman/momentum/.cd, % means that the following keys are read from the /tikzfeynman/momentum family
+                arrow shorten=#1,arrow distance=1.5mm
+              },
+              arrowlabel/.default=0.4
+            ]
+            \begin{feynman}
+              \vertex [dot] (a) {};
+              \vertex  at (a) (c);
+              \vertex  at (a) (d);
+              \vertex [left=5em of a] (i3) {};
+              \vertex [right=5em of a] (i4) {};
+              \diagram * {
+%                (i3) -- [fermion] (a) -- [out=40, in=0, min distance=0.5cm] (b) -- [out=180, in=140, min distance=0.5cm] (a) -- [fermion] (i4),
+                (i3) -- [fermion, edge label=$p_1$] (d) -- [out=40, in=140, min distance=10em, fermion, edge label = {$k$}] (c)  -- [fermion, edge label = {$p_2$}] (i4),
+  %                (a) -- [out=45, in=-45, loop, min distance=2cm] (a),%-- [plain, half left] (b) -- [plain, half left] (a),
+              };
+  %              \draw (a) arc [start angle=0, end angle=-180, radius=0.7cm];
+            \end{feynman}
+          \end{tikzpicture}
+        \end{center}
+        The matrix element of this is:
+        \begin{equation*}
+          \langle \Omega | \psi_{\alpha i} \psi_{\beta j}  | \Omega \rangle = \left(i {g \over \sqrt{n}}\right)^2 \frac{i}{\slashed{k}} = - \frac{g^2 / N}{(\slashed{p} - \slashed{q})_{\alpha \beta}} \delta_{ij}
+        \end{equation*}
+        Another diagram for the two point function is:
+        \begin{center}
+          \begin{tikzpicture}[baseline={(current bounding box.center)},
+              arrowlabel/.style={
+                /tikzfeynman/momentum/.cd, % means that the following keys are read from the /tikzfeynman/momentum family
+                arrow shorten=#1,arrow distance=1.5mm
+              },
+              arrowlabel/.default=0.4
+            ]
+            \begin{feynman}
+              \vertex [dot] (a) {};
+              \vertex  at (a) (c);
+              \vertex  at (a) (d);
+              \vertex [left=5em of a] (i3) {};
+              \vertex [right=5em of a] (i4) {};
+              \diagram * {
+%                (i3) -- [fermion] (a) -- [out=40, in=0, min distance=0.5cm] (b) -- [out=180, in=140, min distance=0.5cm] (a) -- [fermion] (i4),
+                (i3) -- [fermion, edge label=$p_1$] (d) -- [out=140, in=40, min distance=10em, fermion, edge label = {$k$}] (c)  -- [fermion, edge label = {$p_2$}] (i4),
+  %                (a) -- [out=45, in=-45, loop, min distance=2cm] (a),%-- [plain, half left] (b) -- [plain, half left] (a),
+              };
+  %              \draw (a) arc [start angle=0, end angle=-180, radius=0.7cm];
+            \end{feynman}
+          \end{tikzpicture}
+        \end{center}
+        With the opposite sign propagator, but the two diagrams subtract. Therefore, both the diagrams contribute constructively to the two point function so must be zero for other reasons.
+      \item
+        The functional integral for the Gross-Neveu theory is:
+        \begin{align*}
+          Z = \int D[\bar{\psi}, \psi]  \exp\left[\int d^2x \bar{\psi}_a i \slashed{\partial} \psi^a + \frac{g^2}{2N} \left(\bar{\psi}_a \psi^a\right)^2\right]
+        \end{align*}
+        And the functional integral for the scalar theory scalar field theory:
+        \begin{align*}
+          Z &= \int D[\sigma, \bar{\psi}, \psi] \exp\left[\int d^2x \bar{\psi}_a i (\slashed{\partial} - \sigma ) \psi^a - \frac{N}{2g^2} \sigma^2\right]\\
+            &= \int D[\bar{\psi}, \psi] \int D \sigma \exp\left[\int d^2x \bar{\psi}_a i \slashed{\partial} \psi^a - \sigma \bar{\psi}_a \psi^a  - \frac{N}{2g^2}\sigma^2 \right]\\
+            &= \int D[\bar{\psi}, \psi] \exp\left[\int d^2x \bar{\psi}_a i \slashed{\partial} \psi^a \right] \int D \sigma \exp\left[\int d^2x - \sigma \bar{\psi}_a \psi^a  - \frac{N}{2g^2}\sigma^2 \right]
+        \end{align*}
+        The integral in the action can be worked out with a discretization on a lattice, and taking a limit:
+        \begin{align*}
+          \int D \sigma \exp\left[\int d^2x - \sigma \bar{\psi}_a \psi^a  - \frac{N}{2g^2}\sigma^2 \right] &= \lim_{\epsilon \to 0 } \int D \sigma \exp\left[\sum_x \left(- \sigma(x) \bar{\psi}_a \psi^a  - \frac{N}{2g^2}\sigma^2(x) \right) \epsilon\right] \\ 
+                                                                                                           &\propto \lim_{\epsilon \to 0 } \left(\int \prod_x  d \sigma(x)\right) e^\epsilon\exp\left[\sum_x - \sigma \bar{\psi}_a \psi^a  - \frac{N}{2g^2}\sigma^2 \right] \\ 
+                                                                                                           &\propto \lim_{\epsilon \to 0 } \left(\prod_x e^\epsilon \int   d \sigma(x) \exp\left[- \sigma \bar{\psi}_a \psi^a  - \frac{N}{2g^2}\sigma^2 \right] \right)
+        \end{align*}
+        The $\sigma$ integral here is a Gaussian integral of the form:
+        \begin{equation*}
+          \int_{-\infty}^{\infty} dx \exp\left( -\frac{1}{ 2} a x^2 + Jx\right)  dx = \left ( {2\pi \over a } \right) ^{1\over 2} \exp\left( { J^2 \over 2a }\right)
+        \end{equation*}
+        Thus:
+        \begin{align*}
+          \int D \sigma \exp\left[\int d^2x - \sigma \bar{\psi}_a \psi^a  - \frac{N}{2g^2}\sigma^2 \right] &\propto \lim_{\epsilon \to 0 } \left(\prod_x e^\epsilon \left ( {2\pi g^2 \over N } \right) ^{1\over 2} \exp\left( \frac{g^2}{2N}(\bar{\psi}_a \psi^a)^2\right) \right)\\
+                                                                                                           &\propto \lim_{\epsilon \to 0 } \left(\prod_x  \exp\left(\epsilon \frac{g^2}{2N}(\bar{\psi}_a \psi^a)^2\right) \right)\\
+                                                                                                           &\propto \lim_{\epsilon \to 0 } \exp\left(\sum_x \epsilon \frac{g^2}{2N}(\bar{\psi}_a \psi^a)^2\right) \\
+                                                                                                           &\propto  \exp\left(\int d^2 x \frac{g^2}{2N}(\bar{\psi}_a \psi^a)^2\right) 
+        \end{align*}
+        Therefore the path integral is:
+        \begin{align*}
+          Z &\propto \int D[\bar{\psi}, \psi] \exp\left[\int d^2x \bar{\psi}_a i \slashed{\partial} \psi^a \right] \exp\left[\int d^2x \frac{g^2}{2N}(\bar{\psi}_a \psi^a)^2 \right]\\
+            &= \int D[\bar{\psi}, \psi] \exp\left[\int d^2x \bar{\psi}_a i \slashed{\partial} \psi^a + \frac{g^2}{2N}(\bar{\psi}_a \psi^a)^2 \right]
+        \end{align*}
+        Which is the same partition function up to some pontential overall normalization factor, which will not affect any physics.
+      \item
+        The functional integral for the scalar Gross-Neveu theory is:
+        \begin{align*}
+          Z &= \int D[\sigma, \bar{\psi}, \psi] \exp\left[\int d^2x \bar{\psi}_a i (\slashed{\partial} - \sigma ) \psi^a - \frac{N}{2g^2} \sigma^2\right]\\
+            &= \int D[\sigma] \int D[\bar{\psi}, \psi] \exp\left[\int d^2x \bar{\psi}_a i (\slashed{\partial} - \sigma ) \psi^a - \frac{N}{2g^2} \sigma^2\right]\\
+            &= \int D[\sigma] \exp\left[- \int d^2x \frac{N}{2g^2} \sigma^2\right]\int D[\bar{\psi}, \psi] \exp\left[\int d^2x \bar{\psi}_a i (\slashed{\partial} - \sigma ) \psi^a \right]\\
+        \end{align*}
+        And for Fermionic/Grassmann variables, using a short hand $\int \mathcal{D} \bar{\psi}_a \mathcal{D} \psi^a$ for the measure over all fermionic fields:
+        \begin{align*}
+          &\int \mathcal{D} \bar{\psi}_a \mathcal{D} \psi^a \exp\left[\sum_{a = 1}^n\int dx^2 \bar{\psi}_a (i \slashed{\partial} - \sigma) \psi^a \right] \\
+          =& \int \mathcal{D} \bar{\psi}_a \mathcal{D} \psi^a \prod_{b = 1}^N \exp\left[\int dx^2 \bar{\psi}_b (i \slashed{\partial} - \sigma) \psi^b \right]\\
+                                                                                                                                             =& \prod_{a = 1}^N \left[\int \mathcal{D} \bar{\psi}_a \mathcal{D} \psi_a  \lim_{\epsilon \to 0}\exp\left[\sum_x \epsilon \bar{\psi}_a (i \slashed{\partial} - \sigma) \psi^a \right]\right]\\
+                                                                                                                                       \propto      &  \prod_{a = 1}^N \left[\lim_{\epsilon \to 0}  \prod_x e^\epsilon \int d \bar{\psi}_a(x) d \psi_a(x)  \exp\left[\bar{\psi}_a (i \slashed{\partial} - \sigma) \psi^a \right]\right]\\
+                                                                                                                                       \propto      & \prod_{a = 1}^N \left[\lim_{\epsilon \to 0} \prod_xe^\epsilon \det(i \slashed{\partial} - \sigma)\right]\\
+                                                                                                                                       \propto      & \prod_{a = 1}^N \left[\lim_{\epsilon \to 0} \prod_x e^\epsilon \exp\left[\tr(\log(i \slashed{\partial} - \sigma))\right]\right]\\
+                                                                                                                                       \propto      & \prod_{a = 1}^N \left[\lim_{\epsilon \to 0} \exp\left[\sum_x \epsilon\tr(\log(i \slashed{\partial} - \sigma))\right]\right]\\
+                                                                                                                                       \propto      & \prod_{a = 1}^N  \exp\left[\lim_{\epsilon \to 0} \sum_x \epsilon\tr(\log(i \slashed{\partial} - \sigma))\right]\\
+                                                                                                                                       \propto      & \prod_{a = 1}^N\exp\left[\int d^2 x \tr(\log(i \slashed{\partial} - \sigma))\right]\\
+                                                                                                                                       \propto      & \exp\left[N \int d^2 x \tr(\log(i \slashed{\partial} - \sigma))\right]\\
+        \end{align*}
+        Where $\tr$ indicates the full operator trace, of both the spinor indices and of the kernel.
+        Putting this back in the partion function expression yields:
+        \begin{align*}
+          Z &\propto \int D[\sigma] \exp\left[- \int d^2x \frac{N}{2g^2} \sigma^2\right]\exp\left[ \int d^2 x N \tr(\log(i \slashed{\partial} - \sigma))\right]\\
+            &= \int D[\sigma] \exp\left[- \int d^2x \frac{N}{2g^2} \sigma^2 +  \int d^2 x N \tr(\log(i \slashed{\partial} - \sigma))\right]\\
+            &= \int D[\sigma] \exp\left[- \int d^2x \frac{N}{2g^2} \sigma^2 +  N \tr(\log(i \slashed{\partial} - \sigma))\right]
+        \end{align*}
+        Which is the functional integral presented in the question up to some overall constant normalization factor.
+      \item
+        The saddle point approximation requires the extremum of the action:
+        \begin{align*}
+          \frac{\delta S}{\delta \sigma} &= \frac{\partial \mathcal{L}}{\partial \sigma}\\
+                                         &= -\frac{N}{g^2}\sigma + N \frac{\sigma}{4 \pi}\log\left(\frac{\Lambda^2}{\sigma^2}\right)
+        \end{align*}
+        Since the action is extremized for $\sigma_c$, the action's functional derivative should be zero at this extremum:
+        \begin{align*}
+                      & 0 = -\frac{N}{g^2}\sigma_c + N \frac{\sigma_c}{4 \pi}\log\left(\frac{\Lambda^2}{\sigma^2_c}\right)\\
+        \end{align*}
+        Clearly $\sigma_c = 0$ is a solution, but also:
+        \begin{align*}
+          \Rightarrow & \frac{4 \pi}{g^2} = \log\left(\frac{\Lambda^2}{\sigma^2_c}\right)\\
+          \Rightarrow & \frac{\Lambda^2}{\sigma^2_c} = e^{\frac{4 \pi}{g^2}}\\
+          \Rightarrow & \sigma^2_c = \Lambda^2 e^{- \frac{4 \pi}{g^2}}\\
+          \Rightarrow & \sigma_c = \pm \Lambda e^{- \frac{2 \pi}{g^2}}
+        \end{align*}
+        These solutions are unphysical. 
+        Physical solution no not depend on the regulator.
+      \item
+        The result that the main contribution to the functional integral is the path $\sigma_c = 0$ agrees with the previous results, because $\sigma$ is an effective mass field for the Gross-Neveu model as seen in question d).
+        The results from $b)$ and $c)$ indicate that the Gross-Neveu fermions have no mass and this is also true to a good degree of approximation after any renoralization effects.
+        Therefore, the effective mass for the Gross-Neveu fermions is zero and classically where no renormalization is needed they will have zero mass.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

@@ -93,6 +93,7 @@
   \item
     \begin{enumerate}
       \item
+        The cleanest way to get the desired relations is looking near the equilibrium value by Taylor expanding, and subsituting the values of the derivatives.
         Taylor expanding the pressure $P(T, v)$ about the equilibrium point up to third order (and ignoring the order term to save space) gives:
         \begin{equation*}
           P (T, v) = P(T, v_c) + \frac{\partial P}{\partial v}\left(T, v_c\right)(v - v_c)  + \frac{1}{2}\frac{\partial^2 P}{\partial v^2}\left(T, v_c\right)(v - v_c)^2  + \frac{1}{6}\frac{\partial^3 P}{\partial v^3}\left(T, v_c\right)(v - v_c)^3
@@ -173,6 +174,7 @@
     \end{enumerate}
   \item
     The below figure shows the definition of the equation of state and its isotherms.
+    This code is in the Wolfram (Mathematica) Language executed through a Jupyter notebook using the Wolfram for Jupyter Paclet.
     \begin{figure}[H]
       \begin{center}
         \includegraphics[scale = 0.8]{graphsAndDefinitions.png}
@@ -193,6 +195,7 @@
             \includegraphics[scale = 0.8]{eqStateRedVar.png}
           \end{center}
         \end{figure}
+        As desired.
       \item
         For the $\delta$ critical exponent, the reduced pressure can be expanded in $v_r$ around $v_c = 1$:
         \begin{figure}[H]
@@ -200,14 +203,25 @@
             \includegraphics[scale = 0.8]{delta.png}
           \end{center}
         \end{figure}
+        This gives:
+        \begin{equation*}
+          P_r - 1 \sim -\frac{2}{3} (v_r - 1)^3 \Rightarrow v_r -1 \sim -\frac{2}{3}(P_r - 1)^{1/3}
+        \end{equation*}
+        and $\delta$ can be read off from this equation to have the value $3$.\\
+
         For the $\gamma$ critical exponent, the isothermal compressibility $\kappa = -\frac{1}{v}\left(\frac{\partial P}{\partial v}\right)^{-1}$ at the critical volume is expanded in $T$ about $T_c$:
         \begin{figure}[H]
           \begin{center}
             \includegraphics[scale = 0.8]{gamma.png}
           \end{center}
         \end{figure}
+        And  this gives:
+        \begin{equation*}
+          \kappa_T \sim \frac{b e^2}{2 k_B} (T - T_c)^{-1}
+        \end{equation*}
+        Which makes it clear that $\gamma = 1$.  
       \item
-        The beta component is calculated in the same ways as in the tutorial:
+        The beta exponent is calculated in the same way as in the tutorial:
         \begin{figure}[H]
           \begin{center}
             \includegraphics[scale = 0.7]{betaExponent.png}
@@ -219,8 +233,13 @@
         \end{equation*}
         or:
         \begin{equation*}
-          v_g - 1 \sim v_l - 1 \sim || \quad \text{as } t \to 0^-
+          v_l - 1 \sim - x\sim -\sqrt{3}|t|^{1/2} \quad \text{as } t \to 0^-
         \end{equation*}
+        and:
+        \begin{equation*}
+          v_g - 1 \sim y \sim \sqrt{3}|t|^{1/2} \quad \text{as } t \to 0^-
+        \end{equation*}
+        Thus $\beta$ for this model is $1/2$.
 
     \end{enumerate}
 \end{enumerate}
