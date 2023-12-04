@@ -111,8 +111,30 @@
       \item
         For the minimum, derivatives are taken:
         \begin{align*}
-          \frac{\partial S}{\partial \phi_i} &= \frac{\beta A^2}{2} \phi^T B \phi - \sum_i \ln(\cosh(\beta A (B \phi)_i))\\
+          \frac{\partial S}{\partial \phi_i} &= \frac{\partial }{\partial \phi_i}\left(\frac{\beta A^2}{2} \phi^T B \phi - \sum_j \ln(\cosh(\beta A (B \phi)_j))\right)\\
+                                             &= \frac{\beta A^2}{2} \frac{\partial }{\partial \phi_i}\sum_{ij}\phi_i B_{ij} \phi_j - \frac{\partial }{\partial \phi_i}\sum_j \ln(\cosh(\beta A (B \phi)_j))\\
+                                             &= \frac{\beta A^2}{2} \sum_{j} \left( B_{ij} \phi_j + \phi_jB_{ji} \right) - \sum_j \beta A B_{ji}\frac{\sinh(\beta A (B \phi)_j)}{\cosh(\beta A (B \phi)_j)}\\
+                                             &= \frac{\beta A^2}{2} \sum_{j} \left( B_{ij} \phi_j + \phi_jB_{ji} \right) - \beta A\sum_j B_{ji}\tanh(\beta A (B \phi)_j)\\
+                                             &= \beta A^2 \sum_{j} B_{ij} \phi_j - \beta A \sum_j B_{ji}\tanh(\beta A (B \phi)_j)
         \end{align*}
+        This is zero at the critical point $\psi_i = \bar{\psi}$ for every $i$, and evaluating for very $i$ gives the result:
+        \begin{align*}
+          0 = \left.\frac{\partial S}{\partial \phi_i}\right|_{\phi_i = \bar{psi}} 
+                                             &= \beta A^2 \sum_{j} B_{ij} \phi_{j} - \beta A \sum_j B_{ji}\tanh(\beta A \sum_k B_{jk} \phi_k)\\
+                                             &= \beta A^2 \sum_{j} B_{ij} \bar{\psi} - \beta A \sum_j B_{ji}\tanh(\beta A \sum_k B_{jk} \bar\psi)\\
+                                             &= \beta A^2 \bar{\psi} \sum_{j} B_{ij}  - \beta A \sum_j B_{ji}\tanh(\beta A \bar\psi \sum_k B_{jk} )\\
+                                             &= \beta A M B_0  - \beta A \sum_j B_{ji}\tanh(\beta M B_0 )\\
+                                             &= \beta A M B_0  - \beta A \tanh(\beta M B_0 ) \sum_j B_{ji}\\
+                                             &= \beta A M B_0  - \beta A \tanh(\beta M B_0 ) B_0\\
+                                             &= \beta A B_0 \left(M   -  \tanh(\beta M B_0 )\right)
+        \end{align*}
+        Or equivalently:
+        \begin{align*}
+                      & M =  \tanh(\beta M B_0 )\\
+          \Rightarrow & M =  \tanh(\frac{1}{k_B T} M k_B T_c )\\
+          \Rightarrow & M =  \tanh(\frac{M T_c }{T} )
+        \end{align*}
+      \item
     \end{enumerate}
 \end{enumerate}
 \end{document}
