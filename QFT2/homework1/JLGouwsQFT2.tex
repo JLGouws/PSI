@@ -95,13 +95,18 @@
   \item
     \begin{enumerate}
       \item 
-        $S$ had dimension 1 and has the form:
+        $S$ has dimension (of $\hbar$ which is chosen to have dimension) 0 and has the form:
         \begin{equation*}
           S = \int d^2x \bar{\psi}_a i \slashed{\partial} \psi^a + \frac{g^2}{2N} \left(\bar{\psi}_a \psi^a\right)^2
         \end{equation*}
-%        Thus $\bar{\psi}_a \psi^a$ has dimension 1.% and $\psi$ has dimenstion $1/2$. and 
+        Note that $[\slashed{\partial}] = 1$ and $[d^2x] = -2$.
+        Thus $\bar{\psi}_a \psi^a$ has dimension 1 and $\psi$ has dimension $1/2$.
+        Therefore, $[\left(\bar{\psi}_a \psi^a\right)^2] = 2$ and since $[d^2x] = -2$ the combination of these two terms is dimensionless.
+        It follows that $g^2$ should also be dimensionless since $N$ is a dimensionless number and the action is also dimensionless.
+        Finially $[g] = 0$.
+
 %        This gives $-$
-        which implies $g^2$ must have the same dimension as $[\slashed{\partial}] = 1$ or $[g] = 1/ 2$ and note $[\psi] = 1$.
+%        which implies $g^2$ must have the same dimension as $[\slashed{\partial}] = 1$ or $[g] = 1/ 2$ and note $[\psi] = 1$.
       \item
         Under the transformation $\psi_a \to \gamma^5\psi_a$ the Dirac conjugate of $\psi$ changes to $\bar{\psi}_a \to \left(\gamma^5 \psi_a \right)^\dagger \gamma^0 = \psi_a^\dagger {\gamma^5}^\dagger \gamma^0 = -\psi_a^\dagger \gamma^1 \gamma^0 \gamma^0 = -\psi_a^\dagger \gamma^0 \gamma^0 \gamma^1 = - \bar{\psi_a}\gamma^5$ so the the Lagrangian changes like:
         \begin{align*}
