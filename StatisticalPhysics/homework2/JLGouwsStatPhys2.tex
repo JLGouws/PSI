@@ -183,21 +183,33 @@
                   &= \frac{\beta}{2} M^2 \sum_{i } B_{0} - \sum_i \ln(\cosh(\beta M B_0))\\
                   &= \frac{\beta}{2} M^2 N B_{0} - N \ln(\cosh(\beta M B_0))
         \end{align*}
-        And the hessian term is:
+        And the Hessian term is:
         \begin{align*}
-          \frac{1}{2}\sum_{i,j}(\phi - \psi)_i (\phi - \psi)_j \frac{\partial^2 S}{\partial \phi_i \partial \phi_j}(\psi) &= \beta A^2  \frac{1}{2}\sum_{i,j}(\phi - \psi)_i B_{ij} (\phi - \psi)_j  \\
-               & \qquad   - \beta \sech\left(\sqrt{1 - M^2}\right) \frac{1}{2}\sum_{i,j} (\phi - \psi)_i (B^2)_{ij} (\phi - \psi)_j
+          \frac{1}{2}\sum_{i,j}(\phi - \psi)_i (\phi - \psi)_j \frac{\partial^2 S}{\partial \phi_i \partial \phi_j}(\psi) &= \frac{1}{2}\beta A^2 (\phi - \psi)^T B (\phi - \psi)  \\
+               & \qquad   - \beta \left(\sqrt{1 - M^2}\right) \frac{1}{2}(\phi - \psi)^T B^2 (\phi - \psi)
         \end{align*}
       \item
         The integral in the denomenator is:
         \begin{align*}
-          \int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}(\phi - \psi)^T\left(B  - \beta \sech (\sqrt{1 - M})B^2)\right) (\phi - \psi)\right]
+          \int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}(\phi - \psi)^T\left(B  - \beta (1 - M^2)B^2)\right) (\phi - \psi)\right]
         \end{align*}
         The integral is invariant under the change of variables $\tilde\phi = \phi - \psi$:
         \begin{align*}
-          &\int_{\mathbb{R}^N} d^N\tilde\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta \sech (\sqrt{1 - M})B^2\right) \tilde\phi\right]\\
-          & \qquad = \sqrt{\frac{(2 \pi)^n}{\det\left( B  - \beta \sech (\sqrt{1 - M})B^2\right)}}
+          &\int_{\mathbb{R}^N} d^N\tilde\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta (1 - M^2)B^2\right) \tilde\phi\right]\\
+          & \qquad = \sqrt{\frac{(2 \pi)^N}{\det\left( B  - \beta (1 - M)^2B^2\right)}}
         \end{align*}
+        And for the integral in the numerator under the same change of variables:
+        \begin{align*}
+            &\int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta (1 - M^2)B^2)\right) \tilde\phi \right] (\tilde \phi_i + \psi_i)\\
+          = & \int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta (1 - M^2)B^2)\right) \tilde\phi \right]\psi_i\\
+          = & \psi_i\int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta (1 - M^2)B^2)\right) \tilde\phi \right]\\
+          = & \psi_i \sqrt{\frac{(2 \pi)^N}{\det\left( B  - \beta (1 - M)^2B^2\right)}}
+        \end{align*}
+        The integral with $\tilde \phi$ not in the exponent is the integral of an odd times an even function so is zero.
+        Putting these two together:
+        \begin{equation*}
+          \langle \sigma_i \rangle \approx A \frac{\psi_i \sqrt{\frac{(2 \pi)^N}{\det\left( B  - \beta (1 - M)^2B^2\right)}}}{\sqrt{\frac{(2 \pi)^N}{\det\left( B  - \beta (1 - M)^2B^2\right)}}} = A \bar{\psi} = M
+        \end{equation*}
     \end{enumerate}
 \end{enumerate}
 \end{document}
