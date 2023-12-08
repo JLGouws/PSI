@@ -1,0 +1,108 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{tikz-feynman}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{slashed}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{QFT II Homework 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+\usepackage{graphicx}
+\usepackage{array}
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      The integral $I(p_1 + p_2, m_R;\Lambda)$ corresponds to the diagram:
+
+      \begin{center}
+        \feynmandiagram [horizontal=a to b][line width=1pt] {
+          i1 -- [dotted, momentum=$p_1$] a -- [plain, momentum=$k$, out = 50, in = 130, min distance = 20pt] b -- [dotted, momentum=$p_3$] i3,
+          i2 -- [dotted, momentum=$p_2$] a -- [plain, reversed momentum'=$k - p_1 - p_2$, out = -50, in = -130, min distance = 20pt] b -- [dotted, momentum=$p_4$] i4
+        };
+
+        The interaction vertex comes from the interaction term $g_R \phi^4 / 4!$.
+        This has the associated integral:
+        \begin{equation*}
+          I(p_1 + p_2, m_R;\Lambda) = \int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{i}{k^2 - m_R^2 + i \epsilon} \frac{i}{(k - p_1 - p_2)^2 - m_R^2 + i \epsilon}
+        \end{equation*}
+      \end{center}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

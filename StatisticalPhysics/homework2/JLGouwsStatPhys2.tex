@@ -177,6 +177,27 @@
         \begin{align*}
           S(\phi) \approx S(\psi) + \frac{1}{2}\sum_{i,j}(\phi - \psi)_i (\phi - \psi)_j \frac{\partial^2 S}{\partial \phi_i \partial \phi_j}(\psi)
         \end{align*}
+        The first term is:
+        \begin{align*}
+          S(\psi) &= \frac{\beta}{2} (A\bar{\psi})^2 \sum_{i j} B_{ij} - \sum_i \ln(\cosh(\beta A\bar{\psi}\sum_jB_{ij}))\\
+                  &= \frac{\beta}{2} M^2 \sum_{i } B_{0} - \sum_i \ln(\cosh(\beta M B_0))\\
+                  &= \frac{\beta}{2} M^2 N B_{0} - N \ln(\cosh(\beta M B_0))
+        \end{align*}
+        And the hessian term is:
+        \begin{align*}
+          \frac{1}{2}\sum_{i,j}(\phi - \psi)_i (\phi - \psi)_j \frac{\partial^2 S}{\partial \phi_i \partial \phi_j}(\psi) &= \beta A^2  \frac{1}{2}\sum_{i,j}(\phi - \psi)_i B_{ij} (\phi - \psi)_j  \\
+               & \qquad   - \beta \sech\left(\sqrt{1 - M^2}\right) \frac{1}{2}\sum_{i,j} (\phi - \psi)_i (B^2)_{ij} (\phi - \psi)_j
+        \end{align*}
+      \item
+        The integral in the denomenator is:
+        \begin{align*}
+          \int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}(\phi - \psi)^T\left(B  - \beta \sech (\sqrt{1 - M})B^2)\right) (\phi - \psi)\right]
+        \end{align*}
+        The integral is invariant under the change of variables $\tilde\phi = \phi - \psi$:
+        \begin{align*}
+          &\int_{\mathbb{R}^N} d^N\tilde\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta \sech (\sqrt{1 - M})B^2\right) \tilde\phi\right]\\
+          & \qquad = \sqrt{\frac{(2 \pi)^n}{\det\left( B  - \beta \sech (\sqrt{1 - M})B^2\right)}}
+        \end{align*}
     \end{enumerate}
 \end{enumerate}
 \end{document}
