@@ -152,19 +152,24 @@
           \left.\frac{\partial^2 S}{\partial \phi_j \partial \phi_i}\right|_{\bar{\psi}} 
                                             &= \beta A^2  B_{ij}  - \beta^2 A^2 \sum_k B_{ki} B_{kj}\sech^2\left(\frac{MT_c}{T}\right)\\
                                             &= \beta A^2  B_{ij}  - \beta^2 A^2 \sum_k B_{ki} B_{kj}\sech^2\left(\artanh(M)\right)\\
-                                            &= \beta A^2  \left(B_{ij}  - \beta \sech\left(\sqrt{1 - M^2}\right) \sum_k B_{ik} B_{kj} \right)\\
-                                            &= \beta A^2  \left(B_{ij}  - \beta \sech\left(\sqrt{1 - M^2}\right) (B^2)_{ij} \right)
+                                            &= \beta A^2  \left(B_{ij}  - \beta \left(\sqrt{1 - M^2}\right)^2 \sum_k B_{ik} B_{kj} \right)\\
+                                            &= \beta A^2  \left(B_{ij}  - \beta \left(1 - M^2\right) (B^2)_{ij} \right)
         \end{align*}
         Using Eq.~\ref{eq:magnetization} in the second step. 
         Since $\beta A^2 > 0$ the term that determines the positive definiteness is:
         \begin{align*}
-          B_{ij}  - \beta \sech\left(\sqrt{1 - M^2}\right) (B^2)_{ij}
+          B_{ij}  - \beta \left(1 - M^2\right) (B^2)_{ij}
         \end{align*}
         Near the critical temperature $\beta = 1 / k_B(T_c - t) = 1 / (B_0 - k_B t) \sim 1 / B_0 + k_B t / B_0^2 $, the eigen values for the above matrix are:
         \begin{align*}
-          B_{k}  - \beta \sech\left(\sqrt{1 - M^2}\right) B^2_{k} & \approx B_{k}  - \left(\frac{1}{B_0} +\frac{k_B t}{B_0^2}\right) \sech\left(\sqrt{1 - M^2}\right) B^2_{k}\\
-                                                                  & \geq B_{k}  - \left(\frac{1}{B_0} + \frac{k_B t}{B_0^2}\right) B^2_{k}\\
-                                                                  & = B_{k}  - \frac{B_{k}}{B_0}B_{k} - k_B t\frac{B^2_{k}}{B_0^2}\\
+          B_{k}  - \beta \sech\left(\sqrt{1 - M^2}\right) B^2_{k} 
+%                                                                  & \approx B_{k}  - \left(\frac{1}{B_0} +\frac{k_B t}{B_0^2}\right) \left(1 - M^2\right) B^2_{k}\\
+%                                                                  & \geq B_{k}  - \left(\frac{1}{B_0} + \frac{k_B t}{B_0^2}\right) B^2_{k}\\
+%                                                                  & = B_{k}  - \frac{B_{k}}{B_0}B_{k} - k_B t\frac{B^2_{k}}{B_0^2}\\
+                                                                  & \approx B_{k}  - \frac{1}{B_0} \left(1 - M^2\right) B^2_{k}\\
+                                                                  & \approx B_{k} - \frac{B_{k}}{B_0}B_{k}  + M^2 B_{k}^2 \\
+                                                                  & \geq  M^2 B_{k}^2 \\
+                                                                  & >  0 
         \end{align*}
         Since $\sech^2(x) \leq 1$
       \item
