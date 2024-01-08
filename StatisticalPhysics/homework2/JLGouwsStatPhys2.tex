@@ -99,11 +99,12 @@
   \item
     \begin{enumerate}
       \item
+        Taking the inverse fourier transform of the elements of $B$ gives:
         \begin{align*}
           \sum_j B_{ij} 
 %                        &= \sum_{j}\frac{1}{N} \sum_k B_k e^{i k \cdot (x_i - x_j)}\\
 %                        &= \frac{1}{N} \sum_k B_k  e^{i k \cdot x_i} \sum_{j} e^{-i k \cdot x_j)}
-                        &= \sum_{j}  \frac{1}{N^2} \sum_{k q} \hat B_{kq} e^{i k \cdot x_i} e^{i q \cdot x_i}\\
+                        &= \sum_{j}  \frac{1}{N^2} \sum_{k q} \hat B_{kq} e^{i k \cdot x_i} e^{i q \cdot x_i}
         \end{align*}
         Assuming that the model is limited to nearest neighbour interactions:
         \begin{align*}
@@ -136,7 +137,7 @@
         \end{align*}
         Or equivalently:
         \begin{align}
-                      & M =  \tanh(\beta M B_0 ) \nonumber \\
+                      & 0 =  M - \tanh(\beta M B_0 ) \nonumber \\
           \Rightarrow & M =  \tanh(\frac{1}{k_B T} M k_B T_c ) \nonumber \\
           \Rightarrow & M =  \tanh(\frac{M T_c }{T} ) \label{eq:magnetization}
         \end{align}
@@ -145,7 +146,7 @@
         \begin{align*}
           \frac{\partial^2 S}{\partial \phi_j \partial \phi_i} 
                                             &= \frac{\partial}{\partial \phi_j } \left(\beta A^2 \sum_{k} B_{ik} \phi_k - \beta A \sum_k B_{ki}\tanh(\beta A (B \phi)_k)\right)\\
-                                            &= \beta A^2  B_{ij}  - \beta^2 A^2 \sum_k B_{ki} B_{kj}\sech^2(\beta A (B \phi)_k)\\
+                                            &= \beta A^2  B_{ij}  - \beta^2 A^2 \sum_k B_{ki} B_{kj}\sech^2(\beta A (B \phi)_k)
         \end{align*}
         Evaluating this at the critical point gives:
         \begin{align*}
@@ -157,21 +158,69 @@
         \end{align*}
         Using Eq.~\ref{eq:magnetization} in the second step. 
         Since $\beta A^2 > 0$ the term that determines the positive definiteness is:
+        \begin{align}
+          B_{ij}  - \beta \left(1 - M^2\right) (B^2)_{ij} \label{eq:Bmatrixpositive}
+        \end{align}
+        Just above the critical Temperature, $M = 0$ as the lecture notes show for the equation $M = \tanh(C M)$ and $\beta = 1 / k_B(T_c + t) = 1 / (B_0 + k_B t) \sim 1 / B_0 - k_B t / B_0^2 + k_B^2 t^2 / B_0^3$.
+        The eigenvalues of the matrix in Eq~\ref{eq:Bmatrixpositive} are:
         \begin{align*}
-          B_{ij}  - \beta \left(1 - M^2\right) (B^2)_{ij}
+          B_{k}  - \beta \left(1 - M^2\right) B^2_{k} & \approx B_{k}  - \left(\frac{1}{B_0} - \frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3} \right)  B^2_{k} \nonumber\\
+                                                      & = +(B_{k}  - \frac{B_k}{B_0}B_k) - \left( - \frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3} \right)  B^2_{k} \nonumber\\
+                                                      & \geq - \left( - \frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3} \right)  B^2_{k} \nonumber\\
+                                                      & = \left( \frac{k_B t}{B_0^2} - \frac{k_B^2 t^2}{B_0^3} \right)  B^2_{k} \nonumber\\
         \end{align*}
-        Near the critical temperature $\beta = 1 / k_B(T_c - t) = 1 / (B_0 - k_B t) \sim 1 / B_0 + k_B t / B_0^2 $, the eigen values for the above matrix are:
-        \begin{align*}
-          B_{k}  - \beta \sech\left(\sqrt{1 - M^2}\right) B^2_{k} 
-%                                                                  & \approx B_{k}  - \left(\frac{1}{B_0} +\frac{k_B t}{B_0^2}\right) \left(1 - M^2\right) B^2_{k}\\
-%                                                                  & \geq B_{k}  - \left(\frac{1}{B_0} + \frac{k_B t}{B_0^2}\right) B^2_{k}\\
+        where the greater than equality comes from:
+        \begin{equation*}
+          0 < B_k \leq B_0 \Rightarrow 0 \leq (B_{k}  - \frac{B_k}{B_0}B_k)
+        \end{equation*}
+        Since $0 < B_k \leq B_0$, this being positive definite requires:
+        \begin{equation*}
+          \frac{k_B t}{B_0^2} - \frac{k_B^2 t^2}{B_0^3} > 0 \Rightarrow k_B t - \frac{k_B t^2}{T_c} > 0 \Rightarrow t < T_c
+        \end{equation*}
+        This gives a rough bound for the size $t$ of the temperature change that will keep the matrix positive definite.\\
+        
+        Now for the case of temperatures jsut below the critical temperatures.
+        Just below the critical temperature $\beta = 1 / k_B(T_c - t) = 1 / (B_0 - k_B t) \sim 1 / B_0 + k_B t / B_0^2 $, the eigenvalues for the above matrix are:
+        \begin{align}
+          B_{k}  - \beta \left(1 - M^2\right) B^2_{k} 
+                                                                  & \approx B_{k}  - \left(\frac{1}{B_0} +\frac{k_B t}{B_0^2}\right) \left(1 - M^2\right) B^2_{k} \nonumber\\
+                                                                  & = B_{k}  - \left(\frac{1}{B_0} + \frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3}\right) B^2_{k} + M^2 \left(\frac{1}{B_0} +\frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3}\right) B_k^2\nonumber\\ 
+                                                                  & = B_{k} - \frac{B_k}{B_0}B_k - \left(\frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3}\right) B^2_{k} + M^2 \left(\frac{1}{B_0} +\frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3}\right) B_k^2\nonumber\\ 
+                                                                  & \geq  - \left(\frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3}\right) B^2_{k} + M^2 \left(\frac{1}{B_0} +\frac{k_B t}{B_0^2} + \frac{k_B^2 t^2}{B_0^3}\right) B_k^2\nonumber\\ 
+                                                                  & =  \frac{B_k^2}{B_0^2}\left(- k_B t - \frac{k_B^2 t^2}{B_0} + M^2 B_0 + M^2 k_B t + M^2 \frac{k_B^2 t^2}{B_0}\right) \label{eq:crazyBracketedTerm}
+%                                                                  & \geq  - k_B t + \frac{k_B^2 t^2}{B_0} + M^2 B_0 + M^2 k_B t + M^2 \frac{k_B^2 t^2}{B_0}\\ 
+%                                                                  & = B_{k}  - \frac{B_{k}}{B_0} B_{k} - k_B t\frac{B^2_{k}}{B_0^2}  + M^2 \frac{B_k}{B_0}B_k + M^2 k_B t\frac{B_k^2}{B_0^2} \\ 
+%                                                                  & \geq - k_B t\frac{B^2_{k}}{B_0^2}  + M^2 \frac{B_k}{B_0}B_k + M^2 k_B t\frac{B_k^2}{B_0^2} \\ 
+%                                                                  & = \frac{B^2_{k}}{B_0^2} \left( - k_B t  + M^2 B_0 + M^2 k_B t \right) \\ 
+%                                                                  & \geq M^2 B_0 - k_B t + M^2 k_B t
 %                                                                  & = B_{k}  - \frac{B_{k}}{B_0}B_{k} - k_B t\frac{B^2_{k}}{B_0^2}\\
-                                                                  & \approx B_{k}  - \frac{1}{B_0} \left(1 - M^2\right) B^2_{k}\\
-                                                                  & \approx B_{k} - \frac{B_{k}}{B_0}B_{k}  + M^2 B_{k}^2 \\
-                                                                  & \geq  M^2 B_{k}^2 \\
-                                                                  & >  0 
+%                                                                  & \approx B_{k}  - \frac{1}{B_0} \left(1 - M^2\right) B^2_{k}\\
+%                                                                  & \approx B_{k} - \frac{B_{k}}{B_0}B_{k}  + M^2 B_{k}^2 \\
+%                                                                  & \geq  M^2 B_{k}^2 \\
+%                                                                  & >  0 
+        \end{align}
+        In the last step of the above, $B_k^2/ B_0^2$ is definitely positive, so it remains to be checked that the expression in brackets is strictly positive.
+        Near $T = T_c$ from below, $M$ takes the values:
+        \begin{equation}
+          M \approx \pm \sqrt{3} \left(\frac{\sqrt{t}(t - T_c)}{T_c^{3/2}} \right) \Rightarrow M^2 \approx 3 \frac{t(t - T_c)^2}{T_c^3} = 3 \frac{t}{T_c} - 6\frac{t^2}{T_c^2} \label{eq:magnetization}
+        \end{equation}
+        As given by Mathematica.
+        \begin{center}
+          \includegraphics[scale = 0.8]{magnetization.png}
+        \end{center}
+        And using this in the bracketed expression of Eq~\ref{eq:crazyBracketedTerm} yields:
+        \begin{align*}
+          &\left(- k_B t - \frac{k_B t^2}{T_c} + M^2 B_0 + M^2 k_B t + M^2 \frac{k_B^2 t^2}{B_0}\right)\\
+%          & =B_{k}  - \beta \left(1 - M^2\right) B^2_{k} &\geq 3 k_B t - 6 \frac{k_B t^2}{T_c} - k_B t + 3\frac{k_B t^2}{T_c}\\
+          &\qquad = - k_B t  - \frac{k_B t^2}{T_c} + 3 k_B t - 6 \frac{k_B t^2}{T_c} + 3\frac{k_B t^2}{T_c} + \mathcal{O}(t^3)\\
+          &\qquad = 2 \left(k_B t - 2 \frac{k_B t^2}{T_c} \right) + \mathcal{O}(t^3)
         \end{align*}
-        Since $\sech^2(x) \leq 1$
+        Which is positive to second order in $t$ if:
+        \begin{equation*}
+          k_B t - 2 \frac{k_B t^2}{T_c} > 0 \Rightarrow t < \frac{T_c}{2}
+        \end{equation*}
+        Which is a very big bound.
+        Doing the calculation to higher orders will likely make this bound tighter.
       \item
         Using the approximation:
         \begin{align*}
@@ -186,10 +235,26 @@
         And the Hessian term is:
         \begin{align*}
           \frac{1}{2}\sum_{i,j}(\phi - \psi)_i (\phi - \psi)_j \frac{\partial^2 S}{\partial \phi_i \partial \phi_j}(\psi) &= \frac{1}{2}\beta A^2 (\phi - \psi)^T B (\phi - \psi)  \\
-               & \qquad   - \beta \left(\sqrt{1 - M^2}\right) \frac{1}{2}(\phi - \psi)^T B^2 (\phi - \psi)
+               & \qquad   - \beta \left(1 - M^2\right) \frac{1}{2}(\phi - \psi)^T B^2 (\phi - \psi)
         \end{align*}
+        And this gives the approximation for the partition function:
+        \begin{align*}
+          Z &\approx \sqrt{\det\left(\frac{2 \beta A^2 B}{\pi^N}\right)} \int_{\mathbb{R}^N} d^N \phi e^{-S(\psi) - (\phi - \psi) \frac{\partial S}{\partial \phi_i \partial \phi_j} (\phi - \psi)}\\
+            &= \sqrt{\det\left(\frac{2^N \beta A^2 B}{\pi^N}\right)} e^{-S(\psi)}\int_{\mathbb{R}^N} d^N \phi e^{ - (\phi - \psi) \frac{\partial S}{\partial \phi_i \partial \phi_j} (\phi - \psi)}\\
+            &= \sqrt{\frac{(2 \pi)^N}{\det\left( \beta A^2(B  - \beta (1 - M)^2B^2)\right)}} \sqrt{\det\left(\frac{2^N \beta A^2 B}{\pi^N}\right)} e^{-S(\psi)}\\
+            &= 2^N\sqrt{\det\left(\frac{ B}{ B  - \beta (1 - M)^2B^2}\right)} e^{-S(\psi)}\\
+            &= 2^N\sqrt{\det\left(\frac{ B}{ B  - \beta (1 - M)^2B^2}\right)} \exp\left[-\frac{\beta}{2} M^2 N B_{0} + N \ln(\cosh(\beta M B_0))\right]
+        \end{align*}
+        Which has the same form as the mean field theory parition funciton:
+        \begin{align*}
+          Z &\sim \sqrt{\frac{\beta qJ}{A''(x_0))}} e^{NA(x_0)}\\
+            &\sim \sqrt{\frac{\beta qJ}{A''(x_0))}} e^{-N\frac{\beta q J x_0^2}{2} + N \ln(2\cosh(\beta q J x_0))}\\
+            &= \sqrt{\frac{\beta qJ}{A''(x_0))}} e^{-N\frac{\beta q J x_0^2}{2} + N \ln(\cosh(\beta q J x_0)) + N \ln 2}\\
+            &= 2^N\sqrt{\frac{qJ}{|-q J + \beta (1 - x_0^2) q^2 J^2 |}} e^{-N\frac{\beta q J x_0^2}{2} + N \ln(\cosh(\beta q J x_0))}
+        \end{align*}
+        With $B \sim qJ$ and $x_0 \sim M$.
       \item
-        The integral in the denomenator is:
+        The integral in the denominator is:
         \begin{align*}
           \int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}(\phi - \psi)^T\left(B  - \beta (1 - M^2)B^2)\right) (\phi - \psi)\right]
         \end{align*}
@@ -198,7 +263,7 @@
           &\int_{\mathbb{R}^N} d^N\tilde\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta (1 - M^2)B^2\right) \tilde\phi\right]\\
           & \qquad = \sqrt{\frac{(2 \pi)^N}{\det\left( B  - \beta (1 - M)^2B^2\right)}}
         \end{align*}
-        And for the integral in the numerator under the same change of variables:
+        And the integral in the numerator under the same change of variables is:
         \begin{align*}
             &\int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta (1 - M^2)B^2)\right) \tilde\phi \right] (\tilde \phi_i + \psi_i)\\
           = & \int_{\mathbb{R}^N} d^N\phi \exp\left[-\frac{\beta A^2}{2}\tilde\phi^T\left(B  - \beta (1 - M^2)B^2)\right) \tilde\phi \right]\psi_i\\
@@ -210,6 +275,27 @@
         \begin{equation*}
           \langle \sigma_i \rangle \approx A \frac{\psi_i \sqrt{\frac{(2 \pi)^N}{\det\left( B  - \beta (1 - M)^2B^2\right)}}}{\sqrt{\frac{(2 \pi)^N}{\det\left( B  - \beta (1 - M)^2B^2\right)}}} = A \bar{\psi} = M
         \end{equation*}
+        And the average magnetization is:
+        \begin{equation*}
+          M_{\text{avg}} = \frac{1}{N} \sum_{i} \langle \sigma_i \rangle = \frac{1}{N} \sum_{i} M = \frac{1}{N} NM = M
+        \end{equation*}
+        The beta critical exponent is given by Eq~\ref{eq:magnetization} repeated here after some rearranging:
+        \begin{equation}
+          M \approx \pm \sqrt{3} \left(\frac{|T - T_c|^{1/2}}{T_c^{1/2}} \right) 
+        \end{equation}
+        so that $\beta = 1/ 2$.
+      \item
+        I am not sure what is meant by exact result here. I presume it is not refering to the exact solution of the Ising model, which has no known exact solution in 3D.
+        Either way, the approximation in this calculation does not get better with increasing $N$ for the simple reason that there is no $N$ appearing in the Gaussian integral:
+        \begin{align*}
+          &\int_{\mathbb{R}^N} d^N \phi \exp[ - (\phi - \psi) \frac{\partial S}{\partial \phi_i \partial \phi_j} (\phi - \psi)]\\
+          &\qquad= \qquad \int_{\mathbb{R}^N} d^N \phi \exp[ - \frac{1}{2}(\phi - \psi)^T 
+          \left(
+\beta A^2  B \left(1 - M^2\right)  B^2\right) (\phi - \psi)]
+        \end{align*}
+        This Gaussian integral here does not get any more dominant, taller and sharper, as $N$ increases so the approximation made above in calculating the partition funciton is no more exact.
+        This is quite different from the use of Laplace's method where the $N$ in the exponent of the integral makes the Gaussian function sharper and taller; therefore, it makes the integral's approximation more accurate.
+        The above approximation holds for smaller $N$, whereas Laplace's method only works for very large N.
     \end{enumerate}
 \end{enumerate}
 \end{document}

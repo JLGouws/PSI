@@ -71,7 +71,7 @@
 %}
 
 \title{
-\textsc{QFT II Homework 1}
+\textsc{QFT II Homework 2}
 }
 \author{\textsc{J L Gouws}
 }
@@ -89,20 +89,271 @@
 \begin{enumerate}
   \item
     \begin{enumerate}
-      The integral $I(p_1 + p_2, m_R;\Lambda)$ corresponds to the diagram:
+      \item
+        The integral $I(p_1 + p_2, m_R;\Lambda)$ corresponds to the diagram:
 
-      \begin{center}
-        \feynmandiagram [horizontal=a to b][line width=1pt] {
-          i1 -- [dotted, momentum=$p_1$] a -- [plain, momentum=$k$, out = 50, in = 130, min distance = 20pt] b -- [dotted, momentum=$p_3$] i3,
-          i2 -- [dotted, momentum=$p_2$] a -- [plain, reversed momentum'=$k - p_1 - p_2$, out = -50, in = -130, min distance = 20pt] b -- [dotted, momentum=$p_4$] i4
-        };
+        \begin{center}
+          \feynmandiagram [horizontal=a to b][line width=1pt] {
+            i1 -- [dotted, momentum=$p_1$] a -- [plain, reversed momentum=$k$, out = 50, in = 130, min distance = 20pt] b -- [dotted, momentum=$p_3$] i3,
+            i2 -- [dotted, momentum=$p_2$] a -- [plain, momentum'=$k + p_1 + p_2$, out = -50, in = -130, min distance = 20pt] b -- [dotted, momentum=$p_4$] i4
+          };
+        \end{center}
 
         The interaction vertex comes from the interaction term $g_R \phi^4 / 4!$.
-        This has the associated integral:
+        This has the associated integral in Euclidean space:
         \begin{equation*}
-          I(p_1 + p_2, m_R;\Lambda) = \int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{i}{k^2 - m_R^2 + i \epsilon} \frac{i}{(k - p_1 - p_2)^2 - m_R^2 + i \epsilon}
+          I(p_1 + p_2, m_R;\Lambda) = \int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{1}{k^2 + m_R^2} \frac{1}{(k + p_1 + p_2)^2 + m_R^2}
         \end{equation*}
-      \end{center}
+      \item
+        For $m_R = 0$:
+        \begin{align*}
+          I(p, 0;\Lambda) &= \int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{1}{k^2} \frac{1}{(k + p)^2}\\
+                          &= \frac{2 \pi^2}{(2 \pi)^4} \int_{0 }^{\Lambda}  d k\frac{k^3}{k^2} \frac{1}{(k + p)^2}\\
+                          &= \frac{2 \pi^2}{(2 \pi)^4} \int_{0 }^{\Lambda}  d k \frac{k}{(k + p)^2}\\
+                          &= \frac{2 \pi^2}{(2 \pi)^4} \left[ \log\left(\left|k+p\right|\right)+\dfrac{p}{k+p}\right]_0^\Lambda\\
+                          &= \frac{2 \pi^2}{(2 \pi)^4} \left[ \log\left(\left|\Lambda + p\right|\right)+\dfrac{p}{\Lambda +p } - \log p - 1\right]\\
+        \end{align*}
+        For large Lambda/momentum modes, the first $\log$ can be expanded about $p = 0$:
+        \begin{align*}
+          I(p, 0;\Lambda) &\approx \frac{2 \pi^2}{(2 \pi)^4} \left[ \log\left(\Lambda\right) + \frac{p}{\Lambda} + \dfrac{p}{\Lambda} - \log p - 1\right]\\
+                          &\approx \frac{2 \pi^2}{(2 \pi)^4} \left[ \log\left(\Lambda\right)  - \log p \right]\\
+                          &\approx \frac{2 \pi^2}{(2 \pi)^4} \left[ \frac{1}{2}\log\left(\frac{\Lambda^2}{p^2}\right)\right]\\
+                          &\approx \frac{1}{(4 \pi)^2} \log\left(\frac{\Lambda^2}{p^2}\right)
+        \end{align*}
+        Where the constant terms have been ignored since they will be insignifican for large $\Lambda$.
+      \item
+        Differentiating the integral and swapping the order of integration and differentialtion yields:
+        \begin{align*}
+          \frac{\partial}{\partial (m^2_R)}I(p, m_R;\Lambda) &= \frac{\partial}{\partial (m^2_R)}\int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{1}{k^2 + m_R^2} \frac{1}{(k + p)^2 + m_R^2}\\
+                                                             &= \int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{\partial}{\partial (m^2_R)}\left[\frac{1}{k^2 + m_R^2} \frac{1}{(k + p)^2 + m_R^2}\right]\\
+                                                             &= - \int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{1}{(k^2 + m_R^2)^2} \frac{1}{(k + p)^2 + m_R^2}\\
+                                                             &  \qquad-\int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \left[\frac{1}{k^2 + m_R^2} \frac{1}{[(k - p)^2 + m_R^2]^2}\right]
+        \end{align*}
+        For large $\Lambda$ this integral goes like
+        \begin{align*}
+          \frac{\partial}{\partial (m^2_R)}I(p, m_R;\Lambda)  &\sim \left[\int_{|k| < \Lambda} k^3 d k \frac{1}{k^4} \frac{1}{k^2} + \int_{|k| < \Lambda} k^3d k \frac{1}{k^2} \frac{1}{k^4}\right]\\
+                                                              &\sim \left[\int_{|k| < \Lambda} \frac{d k}{k^3}\right]\\
+                                                              &\sim \frac{1}{\Lambda^2}
+        \end{align*}
+        Which goes to zero as $\Lambda$ tends to infinity indicating that the integral does not diverge for large momenta.
+      \item
+        For the four point generating functional:
+        \begin{equation*}
+          \hat \Gamma_R(p_i) = g_R \Rightarrow 0 = -\frac{\hbar g_R^2}{2}[I(p_1 + p_2, 0) + I(p_1 + p_3, 0) + I(p_1 + p_4, 0)] + \hbar C_1
+        \end{equation*}
+        The integrals here are:
+        \begin{align*}
+          I(p_a + p_b, 0;\Lambda) &= \int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{1}{k^2 } \frac{1}{(k + p_a + p_b)^2 }\\
+                                  &\sim \frac{1}{(4 \pi)^2} \log\left(\frac{\Lambda^2}{(p_a + p_b)^2}\right)\\
+                                  &\sim \frac{1}{(4 \pi)^2} \log\left(\frac{\Lambda^2}{\mu^2}\right)
+        \end{align*}
+        So that:
+        \begin{equation*}
+          C_1 = \frac{ g_R^2}{2}\left[3 \times \frac{1}{(4 \pi)^2} \log\left(\frac{\Lambda^2}{\mu^2}\right)\right] = \frac{3g_R^2}{2}\frac{1}{(4 \pi)^2} \log\left(\frac{\Lambda^2}{\mu^2}\right)
+        \end{equation*}
+      \item
+        \begin{align*}
+          \hat \Gamma_R(p_i)  &= g_R -\frac{\hbar g_R^2}{2} \frac{1}{(4 \pi)^2}\left[\log\left(\frac{\Lambda^2}{(p_1 + p_2)^2}\right) + \log\left(\frac{\Lambda^2}{(p_1 + p_3)^2}\right) + \log\left(\frac{\Lambda^2}{(p_1 + p_4)^2}\right)\right]\\ 
+                              &\quad +  \frac{3\hbar g_R^2}{2}\frac{1}{(4 \pi)^2} \log\left(\frac{\Lambda^2}{\mu^2}\right)\\
+                              &=g_R - \frac{\hbar g_R^2}{2} \frac{1}{(4 \pi)^2}\left[\log\left(\frac{\mu^2}{(p_1 + p_2)^2}\right) + \log\left(\frac{\mu^2}{(p_1 + p_3)^2}\right) + \log\left(\frac{\mu^2}{(p_1 + p_4)^2}\right)\right]
+        \end{align*}
+      \item
+        Consider the four point funcitons being evaluated with all the external momenta $\mu '$
+        \begin{align}
+          &\Gamma^{(4)}(\mu', g_R', \mu') = \Gamma^{(4)}(\mu', g_R, \mu)\nonumber \\
+          &g_R'(\mu ') = g_R(\mu) - \frac{3\hbar g_R^2(\mu)}{2}\frac{1}{(4 \pi)^2}\log\frac{\mu^2}{\mu'^2} \label{eq:gAtDiffScales}
+        \end{align}
+      \item
+        The beta function is given by:
+        \begin{equation*}
+          \beta(g_R) = \mu \frac{\partial g_R}{\partial\mu}
+        \end{equation*}
+        Taking Eq~\ref{eq:gAtDiffScales} and setting $\mu '  = \mu + d\mu$, then taylor expanding gives:
+        \begin{align*}
+                          & g_R'(\mu + \partial\mu) = g_R(\mu) - \frac{3\hbar g_R^2(\mu)}{2}\frac{1}{(4 \pi)^2}\left(\log \mu^2  - \log (\mu + d\mu)^2\right)\\
+          \Leftrightarrow & g_R(\mu) + \frac{\partial g_R(\mu)}{\partial\mu} d\mu + \mathcal{O}(d\mu^2) = g_R(\mu) - \frac{3\hbar g_R^2(\mu)}{2}\frac{1}{(4 \pi)^2}\left(\log \mu^2 - \log (\mu + d\mu)^2\right)\\
+          \Leftrightarrow & \frac{\partial g_R(\mu)}{\partial\mu}d \mu + \mathcal{O}(d\mu^2) = - \frac{3\hbar g_R^2(\mu)}{2}\frac{1}{(4 \pi)^2}\left(\log \mu^2 - \log \mu^2  - \frac{2}{\mu} d\mu)\right) +\mathcal{O}(d\mu^2)\\
+          \Leftrightarrow & \frac{\partial g_R(\mu)}{\partial\mu}d \mu + \mathcal{O}(d\mu^2) =  \frac{1}{(4 \pi)^2}\frac{3\hbar g_R^2(\mu)}{\mu} d\mu +\mathcal{O}(d\mu^2)
+        \end{align*}
+        From this the $\beta$ function is:
+        \begin{equation*}
+          \beta(g_R) = \mu \frac{\partial g_R(\mu)}{\partial\mu} = \frac{3\hbar}{(4 \pi)^2} g_R^2(\mu)
+        \end{equation*}
+        And here is a plot of the $\beta$-function.
+        \begin{figure}[!ht]
+        \begin{center}
+        \begin{tikzpicture}
+          \begin{axis}[
+                axis x line=center,
+                axis y line=center,
+                ticks=none,
+                xlabel={$g_R$},
+                ylabel={$\beta(g_R)$},
+                xlabel style={below right},
+                ylabel style={above left},
+                xmin=-0.5,
+                xmax=10,
+                ymin=0,
+                ymax=30]
+                domain=0:120,
+            ]
+            \addplot[no marks, domain=0:11] {x^2};
+          \end{axis}
+        \end{tikzpicture}
+        \end{center}
+        \end{figure}
+
+      \item
+        From the graph it is evident that the coupling is stronger at higher energies, and weaker at lower energies since the $\beta$ function is alway positive.
+        The coupling gets stronger slowly at lower energies, and gets increasingly stronger at higher energies.
+        The growth probably slows down at the highest energy possible of experiment, but then more powerful methods of high-energy physics are probably required to see this.
+      \item
+        The integral for the tadpole diagram is:
+        \begin{equation*}
+          T(m_R) = \int_{|k| < \Lambda} \frac{d^D k}{(2 \pi)^D} \frac{1}{k^2 + m_R^2}
+        \end{equation*}
+        With $D = 4$ in this homework's specific case.
+      \item
+        To calculate the total solid angle of a $D$-hypersphere, take the $D$-dimensional Gaussian integral and change it to spherical coordinates.
+        In this transformation, the radial differential is $dr$, and the angle differentials become $r f_i(\pmb{\theta}) d \theta_i$, where $f_i$ is some funciton of the angles in the hyper-spherical coordinate system and $i = 1, ..., D-1$.
+        \begin{equation*}
+          \int_{-\infty}^{\infty} dx_1 ... dx_D\exp\left(-\sum_{i = 1}^Dx_i^2\right) = \int \Omega_D \int_0^\infty dr r^{D - 1} e^{-r^2}
+        \end{equation*}
+        Where:
+        \begin{equation*}
+          \Omega_D = \prod_{i = 1}^{D - 1} f_i(\pmb{\theta}) d \theta_i
+        \end{equation*}
+        The expression on the lefthand side:
+        \begin{equation*}
+          \int_{-\infty}^{\infty} dx_1 ... dx_D\exp\left(-\sum_{i = 1}^Dx_i^2\right) 
+        \end{equation*}
+        Is the integral of a product of Gaussian integrals:
+        \begin{equation*}
+          \prod_{i = 1}^D\left[\int_{-\infty}^{\infty} dx_i \exp\left(x_i^2\right) \right] = \prod_{i = 1}^D\sqrt{\pi} = (\pi)^{D / 2}
+        \end{equation*}
+        The other intergal requiring evaluation is:
+        \begin{align*}
+          \int_0^\infty dr r^{D- 1} e^{-r^2} = \int_0^\infty \frac{1}{2} u^{-1 / 2} du u^{(D - 1)/2} e^{-u} = \frac{1}{2} \int_0^\infty  du u^{D/2 - 1} e^{-u} = \frac{1}{2} \Gamma(D / 2)
+        \end{align*}
+        Therefore:
+        \begin{equation*}
+          \pi^{D/ 2} = \frac{1}{2} \Gamma(D / 2)\int \Omega_D  \Rightarrow \int \Omega_D = \frac{2\pi^{D/ 2}}{ \Gamma(D / 2)}
+        \end{equation*}
+      \item
+        For $4$ dimensions, the integral of the tadpole diagram is:
+        \begin{align*}
+          T(m_R)  & = \int_{|k| < \Lambda} \frac{d^4 k}{(2 \pi)^4} \frac{1}{k^2 + m_R^2} \\
+                  & = \int \Omega_4 \int_{k < \Lambda}  \frac{d k}{(2 \pi)^4} \frac{k^3 }{k^2 + m_R^2}
+        \end{align*}
+        Since only the large Lambda behavior is of interest, the integral can be expanded about $m_R = 0$:
+        \begin{align*}
+          T(m_R)  & = \frac{2 \pi^{2}}{(2 \pi)^4}\int_{k < \Lambda}  d k \frac{k^3 }{k^2 + m_R^2}\\
+                  & = \frac{2 \pi^{2}}{(2 \pi)^4}\frac{1}{2} (\Lambda^2 + m^2 \log m^2 - m^2 \log (m^2 + \Lambda^2))\\
+                  & \approx \frac{2 \pi^{2}}{(2 \pi)^4}\frac{1}{2} \left(\Lambda^2 + m_R^2 \log m_R^2 - 2m_R^2 \log \Lambda  - \frac{m_R^4}{\Lambda^2}\right)\\
+                  & \approx \frac{1}{(4 \pi)^2} \left(\Lambda^2 - m_R^2 \log \frac{\Lambda^2}{m_R^2} \right)\\
+                  & \approx \frac{1}{(4 \pi)^2} \left(\Lambda^2 - m_R^2 \log \Lambda^2 + m_R^2\log m_R^2 \right)
+%                  & = \frac{2 \pi^{2}}{(2 \pi)^4}\int_{k < \Lambda}  d k \left[\frac{k^3 }{k^2}  - \frac{k^3 }{k^4} m_R^2 + \frac{k^3}{k^6}m_R^4 + \mathcal{O}(m_R^6) \right]\\
+%                  & \approx \frac{2 \pi^{2}}{(2 \pi)^4}\int_{k < \Lambda}  d k \left[k  - \frac{m_R^2}{k}  + \frac{m_R^4}{k^3}\right]\\
+%                  & \approx \frac{2 \pi^{2}}{(2 \pi)^4} \left[\frac{1}{2}\Lambda^2  - m_R^2 \log \Lambda  - \frac{m_R^4}{2\Lambda^2}\right]
+        \end{align*}
+        Which are the quadratic and logarithmically divergent terms as well as the finite term for large $\Lambda$.
+      \item
+        Writing the full expression for the two point irreducible funciton gives:
+        \begin{equation*}
+          \hat\Gamma^{(2)}_R(p) = p^2 + m_R^2 + \frac{\hbar g_R }{(4\pi)^2}\frac{1}{2} \left(\Lambda^2 - m_R^2 \log \frac{\Lambda^2}{m_R^2}\right)+ \hbar B
+        \end{equation*}
+        Requiring $\hat\Gamma^{(2)}_R(0, m_R, g_R , \mu) = m_R^2$ gives:
+        \begin{align*}
+          & m_R^2 = m_R^2 + \frac{1}{2}\frac{\hbar g_R }{(4\pi)^2} \left(\Lambda^2 - m_R^2 \log \frac{\Lambda^2}{m_R^2}\right)+ \hbar B\\
+          &\Rightarrow  B = - \frac{1}{2}\frac{ g_R }{(4\pi)^2}\left(\Lambda^2 - m_R^2 \log \frac{\Lambda^2}{m_R^2}\right)\\
+          &\Rightarrow  B = - \frac{1}{2}\frac{ g_R }{(4\pi)^2}\left(\Lambda^2 - m_R^2\times \log \frac{\Lambda^2}{\mu^2}\right)
+        \end{align*}
+        From this:
+        \begin{gather*}
+          B_{1, 0}(g_R, \mu, \Lambda) = - \frac{1}{2}\frac{ g_R }{(4\pi)^2}\frac{\Lambda^2}{2} \qquad \quad B_{1, 1}(g_R, \mu, \Lambda) = \frac{1}{2} \frac{ g_R }{(4\pi)^2} \log \frac{\Lambda^2}{\mu^2}
+        \end{gather*}
+      \item
+        The full two point effective action is now:
+        \begin{equation*}
+          \hat\Gamma^{(2)}_R(p) = p^2 + m_R^2 + \frac{1}{2} \frac{\hbar g_R }{(4\pi)^2} \left(\Lambda^2 - m_R^2 \log \frac{\Lambda^2}{m_R^2}\right)  - \frac{1}{2} \frac{ \hbar g_R }{(4\pi)^2}\left(\Lambda^2 - m_R^2\times \log \frac{\Lambda^2}{\mu^2}\right)
+        \end{equation*}
+        Which gives that:
+        \begin{equation*}
+          \hat\Gamma^{(2)}_R(p_i, g_R, \mu) = p^2 + m_R^2 + \frac{1}{2}\frac{\hbar g_R }{(4\pi)^2}  m_R^2 \log \frac{m_R^2}{\mu^2} = p^2 + m_R^2 - \frac{1}{2} \frac{\hbar g_R }{(4\pi)^2}  m_R^2 \log \frac{\mu^2}{m_R^2}
+        \end{equation*}
+        This is independent of $\Lambda$ and so has no divergences for $\Lambda \to \infty$.
+        Notice from the last expression that performing an experiment at a higher energy scale, higher $\mu$, logarithmically decreases the mass in the experiment keeping the measured mass finite.
+        The expression is also only linear in $p^2$ so will be finite for any experimentally feasible value of $p$.
+      \item
+        Requiring the two point irreducible function to be independent of the scale is equivlent to:
+        \begin{equation*}
+          \hat\Gamma^{(2)}_R(p_i, m_R', g_R', \mu') =  \hat\Gamma^{(2)}_R(p_i, m_R, g_R, \mu)
+        \end{equation*}
+        This leads to:
+        \begin{equation*}
+          m_R'^2(\mu') + \frac{\hbar g_R'(\mu') }{(4\pi)^2}  m_R'^2(\mu') \log \frac{m_R'^2(\mu')}{\mu'^2} = m_R^2(\mu) + \frac{\hbar g_R (\mu)}{(4\pi)^2}  m_R^2(\mu) \log \frac{m_R^2(\mu)}{\mu^2}
+        \end{equation*}
+        Now using the fact:
+        \begin{equation*}
+          g_R'(\mu ') = g_R(\mu) - \frac{3\hbar g_R^2(\mu)}{2}\log\frac{\mu^2}{\mu'^2}
+        \end{equation*}
+        The relation is:
+        \begin{equation}
+          m_R'^2(\mu') + \frac{1}{2}\frac{\hbar g_R(\mu)}{(4\pi)^2}  m_R'^2(\mu') \log \frac{m_R'^2(\mu')}{\mu'^2}= m_R^2(\mu) + \frac{1}{2}\frac{\hbar g_R (\mu)}{(4\pi)^2}  m_R^2(\mu) \log \frac{m_R^2(\mu)}{\mu^2} \label{eq:mAtDiffScales}
+        \end{equation}
+        Where the terms in order $\hbar^2$ are ignored.
+      \item
+        By definition:
+        \begin{equation*}
+          \Gamma^{(2)}_R(p) = p^2 + m_{\text{phys}}^2
+        \end{equation*}
+        from its relation to the particles propagator.
+        Now evaluating this expression at scale $\mu^2 = m_R^2$ gives:
+        \begin{align*}
+          p^2 + m_{\text{phys}}^2 = \hat\Gamma^{(2)}_R(p_i, g_R, m_R^2) &= p^2 + m_R^2 + \frac{\hbar g_R }{(4\pi)^2}  m_R^2 \log \frac{m_R^2}{m_R^2}\\
+                                                                        &= p^2 + m_R^2 + \frac{\hbar g_R }{(4\pi)^2}  m_R^2 \log(1) \\
+                                                                        &= p^2 + m_R^2                                              
+        \end{align*}
+        Eliminating $p^2$ on both sides gives:
+        \begin{align*}
+          m_{\text{phys}}^2 = m_R^2
+        \end{align*}
+        or more generally:
+        \begin{align*}
+          m_{\text{phys}}^2 = m_R^2 + \frac{1}{2}\frac{\hbar g_R }{(4\pi)^2}  m_R^2 \log \frac{m_R^2}{\mu^2}
+        \end{align*}
+      \item
+        Taking Eq.~\ref{eq:mAtDiffScales} and setting $\mu' = \mu + d \mu$ gives:
+        \begin{align*}
+            & m_R'^2(\mu + d \mu) + \frac{1}{2}\frac{\hbar g_R(\mu)}{(4\pi)^2}  m_R'^2(\mu + d \mu) \log \frac{m_R'^2(\mu + d \mu)}{(\mu + d \mu)^2}\\
+          = &\left[ m_R^2(\mu) + \frac{d m_R^2}{d \mu} d \mu\right]\left(1 + \frac{1}{2}\frac{\hbar g_R(\mu)}{(4\pi)^2} \log \frac{m_R'^2(\mu + d \mu)}{(\mu + d \mu)^2}\right) + \mathcal{O}(d \mu^2)
+        \end{align*}
+        Looking only at the logarithmic term:
+        \begin{align*}
+          \log \frac{m_R'^2(\mu + d \mu)}{(\mu + d \mu)^2} &= \log m_R'^2(\mu + d \mu) - \log (\mu + d \mu)^2\\
+                                                           &= \log \left(m_R^2(\mu) + \frac{d m_R^2(\mu)}{d \mu} d \mu\right) - \log (\mu^2 + 2 \mu d \mu)\\
+                                                           &= \log m_R^2 + \frac{1}{m_R^2}\frac{d m_R^2(\mu)}{d \mu} d \mu - \log \mu^2 - \frac{2 d \mu}{\mu}\\
+                                                           &= \log \frac{m_R^2}{\mu^2} + \frac{1}{m_R^2}\frac{d m_R^2(\mu)}{d \mu} d \mu - \frac{2 d \mu}{\mu}
+        \end{align*}
+        Putting this result back into the previous equation gives:
+        \begin{align*}
+          &   m_R'^2(\mu + d \mu) + \frac{1}{2}\frac{\hbar g_R(\mu)}{(4\pi)^2}  m_R'^2(\mu + d \mu) \log \frac{m_R'^2(\mu + d \mu)}{(\mu + d \mu)^2}\\
+          &\qquad =  m_R^2(\mu) + \frac{d m_R^2}{d \mu} d \mu + \frac{1}{2}\frac{\hbar g_R}{(4\pi)^2} m_R^2 \log \frac{m_R^2}{\mu^2} + \frac{1}{2}\frac{\hbar g_R}{(4\pi)^2} \frac{d m_R^2}{d \mu} d \mu  - \frac{\hbar g_R}{(4\pi)^2} \frac{m_R^2}{\mu}d\mu\\
+          & \qquad \qquad + \frac{1}{2}\frac{\hbar g_R}{(4\pi)^2} \log \left[\frac{m_R^2}{\mu^2}\right] \frac{d m_R^2}{d \mu} d \mu + \mathcal{O}(d \mu^2)
+        \end{align*}
+        And using this in Eq.~\ref{eq:mAtDiffScales} yields:
+        \begin{align*}
+                      & \frac{d m_R^2}{d \mu} d \mu + \frac{1}{2}\frac{\hbar g_R}{(4\pi)^2} \frac{d m_R^2}{d \mu} d \mu + \frac{1}{2}\frac{\hbar g_R}{(4\pi)^2} \log \frac{m_R^2}{\mu^2} \frac{d m_R^2}{d \mu} d \mu = \frac{\hbar g_R}{(4\pi)^2} \frac{m_R^2}{\mu} d \mu+ \mathcal{O}(d \mu^2)\\
+          \Rightarrow & \frac{d m_R^2}{d \mu} \left(1 + \frac{1}{2}\frac{\hbar g_R}{(4\pi)^2} + \frac{1}{2}\frac{\hbar g_R}{(4\pi)^2} \log \frac{m_R^2}{\mu^2} \right) = \frac{\hbar g_R}{(4\pi)^2} \frac{m_R^2}{\mu}\\ 
+          \Rightarrow & \frac{d m_R^2}{d \mu}  =  \frac{m_R^2}{\mu \left(\frac{(4\pi)^2}{\hbar g_R} + \frac{1}{2} +  \frac{1}{2}  \log \frac{m_R^2}{\mu^2} \right)}
+        \end{align*}
+        Now for the anomalous dimension:
+        \begin{equation*}
+          \gamma_{m^2}(g_R) \equiv \mu \frac{\partial}{\partial \mu} \log m_R^2 = \mu \frac{1}{m_R^2} \frac{\partial m_R^2}{\partial \mu} = \frac{1}{\left(\frac{(4\pi)^2}{\hbar g_R} + \frac{1}{2} +  \frac{1}{2}  \log \frac{m_R^2}{\mu^2} \right)}
+        \end{equation*}
+        I was kind of stuck on this problem and I am not sure if my answer is good, or even on the right track, please give me some hints if it is the wrong approach.
+      \item
+        I worked alone for this homework.
     \end{enumerate}
 \end{enumerate}
 \end{document}

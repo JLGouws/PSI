@@ -91,6 +91,7 @@
 
 \maketitle
 
+I was not sure if you wanted me to submit corrections or not so I though I should try submitting corrections to the homework in case you did.
 \begin{enumerate}
   \item
     \begin{enumerate}
@@ -103,7 +104,7 @@
         Thus $\bar{\psi}_a \psi^a$ has dimension 1 and $\psi$ has dimension $1/2$.
         Therefore, $[\left(\bar{\psi}_a \psi^a\right)^2] = 2$ and since $[d^2x] = -2$ the combination of these two terms is dimensionless.
         It follows that $g^2$ should also be dimensionless since $N$ is a dimensionless number and the action is also dimensionless.
-        Finially $[g] = 0$.
+        Finally $[g] = 0$.
 
 %        This gives $-$
 %        which implies $g^2$ must have the same dimension as $[\slashed{\partial}] = 1$ or $[g] = 1/ 2$ and note $[\psi] = 1$.
@@ -148,33 +149,33 @@
         \end{center}
         The matrix element of this is:
         \begin{equation*}
-          \langle \Omega | \psi_{\alpha i} \psi_{\beta j}  | \Omega \rangle = \left(i {g \over \sqrt{n}}\right)^2 \frac{i}{\slashed{k}} = - \frac{g^2 / N}{(\slashed{p} - \slashed{q})_{\alpha \beta}} \delta_{ij}
+          \langle \Omega | \psi_{\alpha i} \psi_{\beta j}  | \Omega \rangle = \left(i {g \over \sqrt{n}}\right)^2 \frac{i}{\slashed{k}} = - \frac{g^2 / N}{(\slashed{k})_{\alpha \beta}} \delta_{ij}
         \end{equation*}
-        Another diagram for the two point function is:
-        \begin{center}
-          \begin{tikzpicture}[baseline={(current bounding box.center)},
-              arrowlabel/.style={
-                /tikzfeynman/momentum/.cd, % means that the following keys are read from the /tikzfeynman/momentum family
-                arrow shorten=#1,arrow distance=1.5mm
-              },
-              arrowlabel/.default=0.4
-            ]
-            \begin{feynman}
-              \vertex [dot] (a) {};
-              \vertex  at (a) (c);
-              \vertex  at (a) (d);
-              \vertex [left=5em of a] (i3) {};
-              \vertex [right=5em of a] (i4) {};
-              \diagram * {
-%                (i3) -- [fermion] (a) -- [out=40, in=0, min distance=0.5cm] (b) -- [out=180, in=140, min distance=0.5cm] (a) -- [fermion] (i4),
-                (i3) -- [fermion, edge label=$p_1$] (d) -- [out=140, in=40, min distance=10em, fermion, edge label = {$k$}] (c)  -- [fermion, edge label = {$p_2$}] (i4),
-  %                (a) -- [out=45, in=-45, loop, min distance=2cm] (a),%-- [plain, half left] (b) -- [plain, half left] (a),
-              };
-  %              \draw (a) arc [start angle=0, end angle=-180, radius=0.7cm];
-            \end{feynman}
-          \end{tikzpicture}
-        \end{center}
-        With the opposite sign propagator, but the two diagrams subtract. Therefore, both the diagrams contribute constructively to the two point function so must be zero for other reasons.
+%        Another diagram for the two point function is:
+%        \begin{center}
+%          \begin{tikzpicture}[baseline={(current bounding box.center)},
+%              arrowlabel/.style={
+%                /tikzfeynman/momentum/.cd, % means that the following keys are read from the /tikzfeynman/momentum family
+%                arrow shorten=#1,arrow distance=1.5mm
+%              },
+%              arrowlabel/.default=0.4
+%            ]
+%            \begin{feynman}
+%              \vertex [dot] (a) {};
+%              \vertex  at (a) (c);
+%              \vertex  at (a) (d);
+%              \vertex [left=5em of a] (i3) {};
+%              \vertex [right=5em of a] (i4) {};
+%              \diagram * {
+%%                (i3) -- [fermion] (a) -- [out=40, in=0, min distance=0.5cm] (b) -- [out=180, in=140, min distance=0.5cm] (a) -- [fermion] (i4),
+%                (i3) -- [fermion, edge label=$p_1$] (d) -- [out=140, in=40, min distance=10em, fermion, edge label = {$k$}] (c)  -- [fermion, edge label = {$p_2$}] (i4),
+%  %                (a) -- [out=45, in=-45, loop, min distance=2cm] (a),%-- [plain, half left] (b) -- [plain, half left] (a),
+%              };
+%  %              \draw (a) arc [start angle=0, end angle=-180, radius=0.7cm];
+%            \end{feynman}
+%          \end{tikzpicture}
+%        \end{center}
+%        With the opposite sign propagator, but the two diagrams subtract. Therefore, both the diagrams contribute constructively to the two point function so must be zero for other reasons.
       \item
         The functional integral for the Gross-Neveu theory is:
         \begin{align*}
@@ -254,12 +255,26 @@
           \Rightarrow & \sigma^2_c = \Lambda^2 e^{- \frac{4 \pi}{g^2}}\\
           \Rightarrow & \sigma_c = \pm \Lambda e^{- \frac{2 \pi}{g^2}}
         \end{align*}
-        These solutions are unphysical. 
-        Physical solution no not depend on the regulator.
+%        These solutions are unphysical. 
+%        Physical solution no not depend on the regulator.
       \item
-        The result that the main contribution to the functional integral is the path $\sigma_c = 0$ agrees with the previous results, because $\sigma$ is an effective mass field for the Gross-Neveu model as seen in question d).
-        The results from $b)$ and $c)$ indicate that the Gross-Neveu fermions have no mass and this is also true to a good degree of approximation after any renoralization effects.
-        Therefore, the effective mass for the Gross-Neveu fermions is zero and classically where no renormalization is needed they will have zero mass.
+        The result tells us that the fermion can have a constant mass $\Lambda$ which is non-zero.
+        This is consistent for two reasons answer b) argued that the fermion had no mass to preserve chiral symmetry $\psi_a \to \gamma^5\psi_a$.
+        The argument in b) only checked the symmetry at the classical level and not at the quantum level.
+        When quantizing the theory in the path integral, this symmetry might not be preserved, allowing renormalization corrections to the mass, introducing mass counterterms wich the fermion its mass.
+        In c) there was shown to be no renormalization correction to the mass.
+        What happened here is that the perturbative expasion broke down.
+        It can happen that a function is non-zero, but expanding it around a point and taking a limit to that point can give an expansion is zero everywhere:
+        \begin{equation*}
+          e^{-1 / x^2} = \lim_{z \to 0} e^{-1 / z^2} + \lim_{z \to 0} \frac{2}{z^3} e^{-1 / z^2} (x - z) + \lim_{z \to 0} \frac{2 - 3z^2}{z^6} e^{-1 / z^2} (x - z)^2 + ...
+        \end{equation*}
+        And in the limit going to small $z$ the exponential decays to zero faster than any polynomial hence the taylor series give $e^{-1 / x^2} \equiv 0$ which is obviously incorrect.
+        And hence series expansions like the one done in c) can give incorrect results.
+%        The result that the main contribution to the functional integral is the path $\sigma_c = 0$ agrees with the previous results, because $\sigma$ is an effective mass field for the Gross-Neveu model as seen in question d).
+%        The results from $b)$ and $c)$ indicate that the Gross-Neveu fermions have no mass and this is also true to a good degree of approximation after any renoralization effects.
+%        Therefore, the effective mass for the Gross-Neveu fermions is zero and classically where no renormalization is needed they will have zero mass.
+      \item
+        I worked alone for this homework, but Dan gave me some help with the last question.
     \end{enumerate}
 \end{enumerate}
 \end{document}
