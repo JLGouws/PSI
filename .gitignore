@@ -9,3 +9,11 @@ lib
 lib64
 pyvenv.cfg
 share
+<<<<<<< HEAD
+=======
+firedrake*
+firedrake/
+.ipynb_checkpoints/
+numericalMethods/src/
+numericalMethods/MCMC/MCMCExamples2.ipynb
+>>>>>>> 09a031f (removed file)
