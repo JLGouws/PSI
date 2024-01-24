@@ -1,3 +1,6 @@
 [submodule "numericalMethods/FittingAModel2024"]
 	path = numericalMethods/FittingAModel2024
 	url = https://github.com/JLGouws/FittingAModel2024
+[submodule "numericalMethods/PSI-Numerical-Methods-2024-MCMC-Homework1"]
+	path = numericalMethods/PSI-Numerical-Methods-2024-MCMC-Homework1
+	url = https://github.com/JLGouws/PSI-Numerical-Methods-2024-MCMC-Homework1
