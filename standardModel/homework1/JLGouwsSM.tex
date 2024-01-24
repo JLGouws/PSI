@@ -1,0 +1,162 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+\usepackage{slashed}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{Standard Model Homework 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        This is more orless a straight forward derivation of expanding and matching terms, first take the derivative and look at the parts separately:
+        \begin{align*}
+          D_\mu &= \partial_\mu - ig_2 \frac{1}{2} W^i_\mu \sigma^i - i g_1 Y B_\mu
+        \end{align*}
+        First for the $W$ boson part:
+        \begin{align*}
+          - ig_2 \frac{1}{2} W^i_\mu \sigma^i &= - ig_2 \frac{1}{2} W^1_\mu \sigma^1 - ig_2 \frac{1}{2} W^2_\mu \sigma^2  - ig_2 \frac{1}{2} W^3_\mu \sigma^3\\
+                                              &= - ig_2 W^1_\mu T^1 - ig_2 W^2_\mu T^2  - ig_2  W^3_\mu T^3\\
+                                              &= - \frac{ig_2}{2} (2W^1_\mu T^1 + 2W^2_\mu T^2)  - ig_2  W^3_\mu T^3\\
+                                              &= - \frac{ig_2}{2} (W^1_\mu T^1 + W^1_\mu T^1 + i W^1_\mu T^2 - i W^1_\mu T^2 - i W^2_\mu T^1  + i W^2_\mu T^1 + W^2_\mu T^2 + W^2_\mu T^2)\\
+                                              & \qquad + ig_2  W^3_\mu T^3\\
+                                              &= - \frac{ig_2}{2} (W^1_\mu(T^1 + i T^2) - i W^2_\mu(T^1 + i T^2) + W^1_\mu(T^1 - i T^2) - i W^2_\mu(T^1 - i T^2))\\
+                                              & \qquad + ig_2  W^3_\mu T^3\\
+                                              &= - \frac{ig_2}{2} ((W^1_\mu - i W^2_\mu)(T^1 + i T^2) + (W^1_\mu + i W^2_\mu)(T^1 - i T^2))  - ig_2  W^3_\mu T^3\\
+                                              &= - \frac{ig_2}{2} (\sqrt{2}W^+_\mu T^+ + \sqrt{2}W^-_\mu T^-)  - ig_2  W^3_\mu T^3\\
+                                              &= - \frac{ig_2}{\sqrt{2}} (W^+_\mu T^+ + W^-_\mu T^-)  - ig_2  W^3_\mu T^3
+        \end{align*}
+        Now for the remaining terms in the covariant derivative:
+        \begin{align*}
+          - ig_2  W^3_\mu T^3 - i g_1 Y B_\mu &= -ig_2 \frac{1}{\cos \theta_W }\cos \theta_W W^3T^3 - ig_1 Y B_\mu\\
+                                              &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu T^3 - i g_1 B_\mu T^3- ig_1 Y B_\mu\\
+                                              &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu T^3 - i g_1 ( T^3 + Y ) B_\mu\\
+                                              &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu T^3 - i g_1 Q B_\mu\\
+                                              &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu T^3 - i g_1 Q (\cos \theta_W A_\mu + \sin^2 \theta_W B_\mu - \cos \theta_W B_\mu \sin \theta_W W^3_\mu)\\
+                                              &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu T^3 - i e Q A_\mu - i g_1 Q \sin \theta_W (\sin \theta_W B_\mu - \cos \theta_W B_\mu  W^3_\mu)\\
+                                              &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu T^3 - i e Q A_\mu + i g_1 Q \sin \theta_W Z_\mu\\
+                                              &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu T^3 - i e Q A_\mu + i g_2 \frac{\sin \theta_W}{\cos \theta_W} Q \sin \theta_W Z_\mu\\
+                                              &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu (T^3 - Q \sin^2 \theta_W) - i e Q A_\mu
+%⇧        \begin{align*}
+%⇧          \frac{1}{\sqrt{2}}W^+ T^+ + W^-T^- &= (W^1 - i W^2)(T^1 + i T^2) + (W^1 + i W^2)(T^1 - i T^2)\\
+%⇧                           &= (W^1 - i W^2)(T^1 + i T^2) + (W^1 + i W^2)(T^1 - i T^2)\\
+%⇧                           &= W^1(T^1 + i T^2) - i W^2(T^1 + i T^2) + W^1(T^1 - i T^2) + i W^2(T^1 - i T^2)\\
+%⇧                           &= W^1T^1 + i W^1T^2 - i W^2T^1 + W^2T^2 + W^1T^1 - i W^1T^2 + i W^2T^1 + W^2T^2\\
+%⇧                           &= 2 W^1T^1 + 2 W^2T^2\\
+%⇧                           & W^1T^1 + 2 W^2T^2\\
+%⇧        \end{align*}
+        \end{align*}
+        And finally throwing all of the parts together gives:
+        \begin{align*}
+          D_\mu &= \partial_\mu - \frac{ig_2}{\sqrt{2}} (W^+_\mu T^+ + W^-_\mu T^-) -ig_2 \frac{1}{\cos \theta_W }Z_\mu (T^3 - Q \sin^2 \theta_W) - i e A_\mu Q
+        \end{align*}
+      \item
+        Keeping only the $Z$ boson part:
+        \begin{align*}
+          D_\mu &= - ig_2 \frac{1}{\cos \theta_W }Z_\mu (T^3 - Q \sin^2 \theta_W)
+        \end{align*}
+        And calculating:
+        \begin{align*}
+          D_\mu(Q_L) &= - ig_Z Z_\mu (T^3 - Q \sin^2 \theta_W) (Q_L)\\
+                     &= - ig_Z Z_\mu \left(\left[\begin{matrix} 1/2 & 0 \\ 0 & -1/2\end{matrix}\right] - \left(\left[\begin{matrix} 1/2 & 0 \\ 0 & -1/2\end{matrix}\right] + \left[\begin{matrix} Y_B & 0 \\ 0 & Y_B\end{matrix}\right]\right) \sin^2 \theta_W\right) \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]\\
+                     &= - ig_Z Z_\mu \left(\left[\begin{matrix} 1/2 & 0 \\ 0 & -1/2\end{matrix}\right] - \left[\begin{matrix} 1/2 + 1/6 & 0 \\ 0 & 1/6 - 1/2\end{matrix}\right]  \sin^2 \theta_W\right) \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]\\
+                     &= - ig_Z Z_\mu \left(\left[\begin{matrix} 1/2 & 0 \\ 0 & -1/2\end{matrix}\right] - \left[\begin{matrix} 2/3 & 0 \\ 0 & -1/3 \end{matrix}\right]  \sin^2 \theta_W\right) \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]\\
+                     &= - ig_Z Z_\mu \left[\begin{matrix} 1/2 - (2 / 3)\sin^2 \theta_W& 0 \\ 0 & -1/2 - (-1/3)\sin^2 \theta_W\end{matrix}\right]  \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]\\
+                     &= - ig_Z Z_\mu \left[\begin{matrix} (1/2 - (2 / 3)\sin^2 \theta_W) u_L \\ (-1/2 - (-1/3) \sin^2 \theta_W) d_L \end{matrix}  \right] 
+        \end{align*}
+        From which it can be seen $Q_u = 2 / 3$ and $Q_d = - 1 / 3$.
+      \item
+        \begin{align*}
+          \bar{Q_L} i \slashed{D} Q_L &= \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]^\dagger \gamma^5 g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
+                                      &= \left[\begin{matrix} u_L^\dagger\gamma^5 & d_L^\dagger \gamma^5 \end{matrix}\right]  g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
+                                      &= \left[\begin{matrix} \bar{u}_L & \bar{d}_L \end{matrix}\right]  g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
+                                      &= \bar{u}_L g_Z \slashed{Z}  (1/2 - Q_u\sin^2 \theta_W) u_L + \bar{d}_L  (- 1/2 - Q_d \sin^2 \theta_W) d_L \\
+        \end{align*}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,251 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{Gravitational Physics Homework 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    The orthonormal basis one forms that make the metric into the Minkoski metric are:
+    \begin{align*}
+      \underline{\omega}^0 &= dt\\
+      \underline{\omega}^1 &= \frac{a(t)}{\sqrt{1- k r^2}} dr\\
+      \underline{\omega}^2 &= a(t) r d\theta\\
+      \underline{\omega}^3 &= a(t) r \sin \theta d \phi
+    \end{align*}
+  \item
+%    \begin{align*}
+%      d \underline{\omega}   & = \frac{a'(t)}{\sqrt{1 - k r^2}} dt \wedge dr + a'(t) r d t \wedge d \theta + a(t) dr \wedge d \theta + a'(t) r \sin \theta dt \wedge d \phi\\
+%                              & \qquad  + a(t) r \cos \theta d \theta \wedge d \phi + a(t) \sin \theta d r \wedge d \phi\\
+%                             & = \frac{a'(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^1 + \frac{a'(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^2 + \frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^1 \wedge \underline{\omega}^2 + \frac{a'(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^3\\
+%                              & \qquad  + \frac{\cot{\theta}}{a(t) r} \underline{\omega}^2 \wedge \underline{\omega}^3 + \frac{\sqrt{1 - k r^2}}{a(t) r} \underline{\omega}^{1} \wedge \underline{\omega}^3
+%    \end{align*}
+%    We have the following components:
+    First, using Cartan's equation requires the exterior derivative of the $\underline{\omega}^a$s:
+    \begin{align*}
+      &d \underline{\omega} ^ 0 = 0\\
+      &d \underline{\omega} ^ 1 = \frac{a'(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^1\\
+      &d \underline{\omega} ^ 2 = \frac{a'(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^2 + \frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^1 \wedge \underline{\omega}^2\\
+      &d \underline{\omega} ^ 3 = \frac{a'(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^3 + \frac{\cot{\theta}}{a(t) r} \underline{\omega}^2 \wedge \underline{\omega}^3 + \frac{\sqrt{1 - k r^2}}{a(t) r} \underline{\omega}^{1} \wedge \underline{\omega}^3
+    \end{align*}
+    Now, using these in Cartan's torsion equation:
+    \begin{equation*}
+      \underline{T}^a = d \underline{\omega}^a + \tensor{\underline{\theta}}{^a_b} \wedge \underline{\omega}^b
+    \end{equation*}
+    And setting the torsion to zero yields:
+%    \begin{equation*}
+%      0 = d \underline{\omega}^0 = - \tensor{\underline{\theta}}{^0_b} \wedge \underline{\omega}^b \Rightarrow \tensor{\underline{\theta}}{^0_b} = \tensor{\underline{\theta}}{^b_0} = 0
+%    \end{equation*}
+    \begin{equation*}
+      d \underline{\omega} ^ 1 = \frac{a'(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^1 = - \tensor{\underline{\theta}}{^1_b} \wedge \underline{\omega}^b \Rightarrow  \tensor{\underline{\theta}}{^1_0} = \frac{a'(t)}{a(t)} \underline{\omega}^1 = \frac{a'(t)}{\sqrt{1 - k r^2}} dr
+    \end{equation*}
+    We can also determine from this that $\tensor{\underline{\theta}}{^1_1}$ has no component in $\underline{\omega}^1$, $\tensor{\underline{\theta}}{^1_2}$ has no component in $\underline{\omega}^2$ and $\tensor{\underline{\theta}}{^1_3}$ has no component in $\underline{\omega}^3$.
+    And also requiring the connection one-forms be antisymmetric:
+    \begin{equation*}
+      \tensor{\underline{\theta}}{^0_1} = \tensor{\underline{\theta}}{_0_1} = -\tensor{\underline{\theta}}{_1_0} = \tensor{\underline{\theta}}{^1_0}
+    \end{equation*}
+    For the next orthonormal basis 1-form:
+    \begin{align*}
+      d \underline{\omega} ^ 2 &= \frac{a'(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^2 + \frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^1 \wedge \underline{\omega}^2\\
+                               &= - \tensor{\underline{\theta}}{^2_b} \wedge \underline{\omega}^b\\
+                               &= - \tensor{\underline{\theta}}{^2_0} \wedge \underline{\omega}^0 -\tensor{\underline{\theta}}{^2_1} \wedge \underline{\omega}^1 - \tensor{\underline{\theta}}{^2_2} \wedge \underline{\omega}^2 - \tensor{\underline{\theta}}{^2_3} \wedge \underline{\omega}^3 
+    \end{align*}
+    Therefore:
+    \begin{align*}
+      \tensor{\underline{\theta}}{^2_0} = \frac{a'(t)}{a(t)} \underline{\omega}^2 \qquad &\text{ and } \qquad \tensor{\underline{\theta}}{^2_1} = \frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^2\\
+      \tensor{\underline{\theta}}{^0_2} = \frac{a'(t)}{a(t)} \underline{\omega}^2 \qquad &\text{ and } \qquad \tensor{\underline{\theta}}{^1_2} = -\frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^2\\
+    \end{align*}
+    And similarly:
+    \begin{gather*}
+      \tensor{\underline{\theta}}{^3_0} = \frac{a'(t)}{a(t)} \underline{\omega}^3 \quad \text{ and } \quad \tensor{\underline{\theta}}{^3_1} = \frac{\sqrt{1 - k r^2}}{a(t) r}  \underline{\omega}^3 \quad \text{ and } \quad \tensor{\underline{\theta}}{^3_2} = \frac{\cot \theta }{a(t)r} \underline{\omega}^3 \\
+      \tensor{\underline{\theta}}{^0_3} = \frac{a'(t)}{a(t)} \underline{\omega}^3 \quad \text{ and } \quad \tensor{\underline{\theta}}{^1_3} = -\frac{\sqrt{1 - k r^2}}{a(t) r} \underline{\omega}^3 \quad \text{ and } \quad \tensor{\underline{\theta}}{^2_3} = -\frac{\cot \theta }{a(t)r} \underline{\omega}^3 
+    \end{gather*}
+    All other connection 1-form components are zero, because otherwise there would be more terms in the exterior derivatives of the orthonormal basis 1-froms.
+  \item
+    The above connection 1-forms can be used to determine the curvature 2-forms.
+    First:
+    \begin{align*}
+      \tensor{\underline{R}}{^1_0} &= d \tensor{\underline{\theta}}{^1_0} + \tensor{\underline{\theta}}{^1_c} \wedge \tensor{\underline{\theta}}{^c_0}\\
+                                   &= \frac{a''(t)}{\sqrt{1 - k r^2}} dt \wedge dr + \tensor{\underline{\theta}}{^1_c} \wedge \tensor{\underline{\theta}}{^c_0}\\
+                                   &= \frac{a''(t)}{\sqrt{1 - k r^2}} dt \wedge dr + \tensor{\underline{\theta}}{^1_c} \wedge \tensor{\underline{\theta}}{^c_0}\\
+                                   &= \frac{a''(t)}{\sqrt{1 - k r^2}} dt \wedge dr\\
+                                   &= \frac{a''(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^1
+    \end{align*}
+    Next:
+    \begin{align*}
+      \tensor{\underline{R}}{^2_0} &= d \tensor{\underline{\theta}}{^2_0} + \tensor{\underline{\theta}}{^2_c} \wedge \tensor{\underline{\theta}}{^c_0}\\
+                                   &= d \left(a'(t) r d \theta \right) + \frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^2 \wedge \frac{a'(t)}{a(t)} \underline{\omega}^1 \\
+                                   &= a''(t) r d t \wedge d \theta + a'(t) d r \wedge d \theta + a'(t) d \theta \wedge d r\\
+                                   &= a''(t) r d t \wedge d \theta \\
+                                   &= \frac{a''(t)}{a(t)} \underline{\omega}^0 \wedge \underline{\omega}^2 
+    \end{align*}
+    And:
+    \begin{align*}
+      \tensor{\underline{R}}{^3_0} &= d \tensor{\underline{\theta}}{^3_0} + \tensor{\underline{\theta}}{^3_c} \wedge \tensor{\underline{\theta}}{^c_0}\\
+                                   &= d \left(a'(t) r \sin \theta d \phi\right) + \frac{\sqrt{1 - k r^2}}{a(t) r}  \underline{\omega}^3 \wedge \frac{a'(t)}{a(t)} \underline{\omega}^1 + \frac{\cot \theta }{a(t)r} \underline{\omega}^3 \wedge \frac{a'(t)}{a(t)} \underline{\omega}^2\\
+                                   &= a''(t) r \sin \theta d t \wedge d \phi + a'(t) \sin \theta dr \wedge d\phi + a'(t) r \cos \theta d \theta \wedge d \phi\\
+                                   & \qquad + a'(t) r \sin \theta d\phi \wedge  dr + a'(t)r\cos \theta d \phi \wedge d\theta \\
+                                   &= a''(t) r \sin \theta d t \wedge d \phi \\
+                                   &= \frac{a''(t)}{a(t)}  \underline{\omega}^0 \wedge \underline{\omega}^3
+    \end{align*}
+    The other 2-forms follow from similar calculations
+%    \begin{align*}
+%      \tensor{\underline{R}}{^1_2} &= d \tensor{\underline{\theta}}{^1_2} + \tensor{\underline{\theta}}{^1_c} \wedge \tensor{\underline{\theta}}{^c_2}\\
+%                                   &= d\left(-\sqrt{1 - k r^2} d\theta \right) + \frac{a'(t)}{\sqrt{1 - k r^2}} dr \wedge a'(t)r d\theta \\
+%                                   &= \frac{r(a'^2(t) - k)}{\sqrt{1 - k r^2}} d r \wedge d\theta
+%    \end{align*}
+
+    \begin{align*}
+      \tensor{\underline{R}}{^2_1} &= d \tensor{\underline{\theta}}{^2_1} + \tensor{\underline{\theta}}{^2_c} \wedge \tensor{\underline{\theta}}{^c_1}\\
+                                   &= d\left(\sqrt{1 - k r^2} d\theta \right) + a'(t)r d\theta \wedge \frac{a'(t)}{\sqrt{1 - k r^2}} dr \\
+                                   &= - \frac{r(k + a'^2(t))}{\sqrt{1 - k r^2}} d r \wedge d\theta\\
+                                   &= -\frac{k + a'^2(t)}{a^2(t)} \underline{\omega}^1 \wedge \underline{\omega}^2
+    \end{align*}
+    And the next 2-form with $1$ in the lower index:
+    \begin{align*}
+      \tensor{\underline{R}}{^3_1} &= d \tensor{\underline{\theta}}{^3_1} + \tensor{\underline{\theta}}{^3_c} \wedge \tensor{\underline{\theta}}{^c_1}\\
+                                   &= d\left(\sin \theta \sqrt{1 - k r^2}  d\phi\right) + \frac{a'(t)}{a(t)} \underline{\omega}^3 \wedge \frac{a'(t)}{a(t)} \underline{\omega}^1 + \frac{\cot \theta }{a(t)r} \underline{\omega}^3 \wedge \frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^2\\
+                                   &= - \frac{k r\sin \theta }{\sqrt{1 - k r^2}} d r \wedge d \phi + \cos \theta \sqrt{1 - k r^2} d\theta \wedge d \phi + \frac{a'(t)^2 r \sin \theta }{\sqrt{1 - k r^2}}  d \phi \wedge  d r + \sqrt{1 - k r^2}  \cos \theta d\phi  \wedge d\theta\\
+%                                   &= \frac{r\sin \theta (k - a'^2(t))}{\sqrt{1 - k r^2}} d r \wedge d \phi \\
+                                   &= - \frac{r\sin \theta (k + a'^2(t))}{\sqrt{1 - k r^2}} d r \wedge d \phi \\
+                                   &= -\frac{(k + a'^2(t))}{a^2(t)} \underline{\omega}^1 \wedge \underline{\omega}^3
+    \end{align*}
+    And finally:
+    \begin{align*}
+      \tensor{\underline{R}}{^3_2} &= d \tensor{\underline{\theta}}{^3_2} + \tensor{\underline{\theta}}{^3_c} \wedge \tensor{\underline{\theta}}{^c_2}\\
+                                   &= d\left(\cos \theta d\phi \right) + \frac{a'(t)}{a(t)} \underline{\omega}^3 \wedge \frac{a'(t)}{a(t)} \underline{\omega}^2 - \frac{\sqrt{1 - k r^2}}{a(t) r} \underline{\omega}^3 \wedge \frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^2 \\
+                                   &= -\sin \theta d \theta \wedge d\phi + a'^2(t) r^2 \sin \theta d \phi \wedge d\theta - \left(1 - k r^2\right)\sin \theta d\phi \wedge d\theta \\
+                                   &=  r^2 \sin \theta\left( k + a'^2(t) \right) d\theta \wedge d \phi  \\
+                                   &=  \frac{\left( k + a'^2(t) \right)}{a^2(t)} \underline{\omega}^2 \wedge \underline{\omega}^3
+    \end{align*}
+%    \begin{align*}
+%      \tensor{\underline{R}}{^2_3} &= d \tensor{\underline{\theta}}{^2_3} + \tensor{\underline{\theta}}{^2_c} \wedge \tensor{\underline{\theta}}{^c_3}\\
+%                                   &= d\left(-\cos \theta d\phi \right) + \frac{a'(t)}{a(t)} \underline{\omega}^2 \wedge \frac{a'(t)}{a(t)} \underline{\omega}^3  - \frac{\sqrt{1 - k r^2}}{a(t) r} \underline{\omega}^3 \wedge \frac{\sqrt{1 - k r^2}}{a(t)r} \underline{\omega}^2 \\
+%                                   &= \sin \theta d \theta \wedge d\phi + a'^2(t) r^2 \sin \theta d \phi \wedge d\theta - \left(1 - k r^2\right)\sin \theta d\phi \wedge d\theta \\
+%                                   &=  r^2 \sin \theta\left( k + a'^2(t) \right) d\theta \wedge d \phi  
+%    \end{align*}
+    These are all the components of the curvature 2-form, all other components are related by symmetries, or they are zero.
+  \item
+    From the above, the Riemann tensor components in the orthonomal basis are evident, note that the number indices here mean orthonormal basis and coordinate symbol indices mean coordinate basis components.
+    \begin{align*}
+      \tensor{R}{^0_1_0_1} &= \frac{a''(t)}{a(t)}\\
+      \tensor{R}{^0_2_0_2} &= \frac{a''(t)}{a(t)}\\
+      \tensor{R}{^0_3_0_3} &= \frac{a''(t)}{a(t)}\\
+      \tensor{R}{^1_2_1_2} &= \frac{k + a'^2(t)}{a^2(t)} \\
+      \tensor{R}{^1_3_1_3} &= \frac{k + a'^2(t)}{a^2(t)}\\
+      \tensor{R}{^2_3_2_3} &= \frac{ k + a'^2(t) }{a^2(t)}
+    \end{align*}
+    The other components are related by symmetry if they have the same indices in a different permutation, otherwise the components are zero.
+    And in the coordintate basis:
+    \begin{align*}
+      &\tensor{R}{^t_r_t_r} = \frac{a''(t)a(t)}{1 - k r^2}\\
+      &\tensor{R}{^t_\theta_t_\theta} = a''(t)a(t) r^2\\
+      &\tensor{R}{^t_\phi_t_\phi} = a''(t)a(t)r^2 \sin^2 \theta \\
+      &\tensor{R}{^r_\theta_r_\theta} =  (k - a'^2(t))r^2 \\
+      &\tensor{R}{^r_\phi_r_\phi} =      (k + a'^2(t)) r^2 \sin^2 \theta\\
+      &\tensor{R}{^\theta_\phi_\theta_\phi} =  \left( k + a'^2(t) \right) r^2 \sin ^2 \theta 
+    \end{align*}
+    The other components of the orthonormal basis Riemann tensor are:
+    \begin{align*}
+      &\tensor{R}{^1_0_1_0} = -\frac{a''(t)}{a(t)} \Rightarrow \tensor{R}{^r_t_r_t} = -\frac{a''(t)}{a(t)} \\
+      &\tensor{R}{^2_0_2_0} = -\frac{a''(t)}{a(t)} \Rightarrow \tensor{R}{^\theta_t_\theta_t} = -\frac{a''(t)}{a(t)} \\
+      &\tensor{R}{^3_0_3_0} = -\frac{a''(t)}{a(t)} \Rightarrow \tensor{R}{^\phi_t_\phi_t} = -\frac{a''(t)}{a(t)}\\
+      &\tensor{R}{^2_1_2_1} = - \frac{(k - a'^2(t))}{a^2(t)} \Rightarrow \tensor{R}{^\theta_r_\theta_r} = \frac{k - a'^2(t)}{1 - kr^2}\\
+      &\tensor{R}{^3_1_3_1} = - \frac{(k - a'^2(t))}{a^2(t)} \Rightarrow \tensor{R}{^\phi_r_\phi_r} = \frac{k - a'^2(t)}{1 - kr^2}\\
+      &\tensor{R}{^3_2_3_2} = - \frac{\left( k + a'^2(t) \right)}{a^2(t)} \Rightarrow \tensor{R}{^\phi_\theta_\phi_\theta} = \left( k + a'^2(t) \right) r^2
+    \end{align*}
+    Therefore the components of the Ricci tensor in the coordinate basis are:
+    \begin{align*}
+      R_{t t} &= \tensor{R}{^r_t _r _t} + \tensor{R}{^\theta_t_\theta_t} + \tensor{R}{^\phi_t_\phi_t}= - 3 \frac{a''(t)}{a(t)}\\
+      R_{r r} &= \frac{a''(t)a(t) + 2a'^2(t) + 2k}{1 - k r^2}\\
+      R_{\theta \theta} &= -r^2(a''(t) a(t) + 2a'^2(t) + 2 k)\\
+      R_{\phi\phi} &= r^2 (a''(t) a(t) + 2a'^2(t) + 2 k) \sin\theta
+    \end{align*}
+    The Ricci tensor has no cross terms since the other components would require repetition of two lower indices in the Riemann tensor and all these components are zero.
+\end{enumerate}
+\end{document}
