@@ -1,0 +1,141 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\e}{\mathrm{d}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{Gravitational Physics Homework 2}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    Let $\omega = \e \lambda$ be exact, then:
+    \begin{equation*}
+      \e \omega = \e( \e \lambda )
+    \end{equation*}
+    For $n = 1$, the only case that has to be checked is for 1-forms, and a 1-form being closed is simply $\frac{\partial f}{\partial x} dx = 0$, or  $\frac{\partial f}{\partial x} = 0$.
+  \item
+    \begin{align*}
+      g &= \frac{1}{4 \pi } \int_{S^2} F^{(2)} \\
+        &= \frac{1}{4 \pi } \int_{S^2} \e A^{(1)} \\
+        &= \frac{1}{4 \pi } \int_{\partial S^2} A^{(1)} \\
+        &= 0 
+    \end{align*}
+    Since the sphere has not boundary.
+  \item
+    \begin{align*}
+      \e F^{(4)} &= \e (Q \sin \theta \e \theta \wedge \e \phi)\\
+                 &= Q \cos \theta \e \theta \wedge \e \theta \wedge \e \phi\\
+                 &= 0 
+    \end{align*}
+    And for the other term, note the metric is $\e t^2 - \e r^2 - r^2 \e \theta - r^2 \sin^2 \theta \e \phi$
+    \begin{align*}
+      \e * F^{(4)} &= \e (* (Q \sin \theta \e \theta \wedge \e \phi))\\
+                   &= \e \left(\frac{1}{(4 - 2)!}\frac{1}{2} \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu + \tensor{\epsilon}{^\phi^\theta _\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu\right)\right)\\
+                   &= \frac{1}{4}\e \left(Q \sin \theta \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu}  \e x^\mu \wedge \e x^\nu + \tensor{\epsilon}{^\phi^\theta _\mu_\nu} \e x^\mu \wedge \e x^\nu\right)\right)\\
+                   &= \frac{1}{4}\e \left(Q \sin \theta \left( \tensor{\epsilon}{^\theta ^\phi_t_r} \e t \wedge \e r + \tensor{\epsilon}{^\theta ^\phi_r_t} \e r \wedge \e t + \tensor{\epsilon}{^\phi^\theta _t_r} \e t \wedge \e r + \tensor{\epsilon}{^\phi^\theta _r_t} \e r \wedge \e t\right)\right)
+%                   &= \e \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu \right)\\
+%                   &= \e \left(\tensor{\epsilon}{^\theta ^\phi_t_r} Q \sin \theta \e t \wedge \e r - \tensor{\epsilon}{^\theta ^\phi_r_t} Q \sin \theta \e r \wedge \e t\right)\\
+%                   &= Q \cos \theta \e \theta \wedge \e \theta \wedge \e \phi\\
+%                   &= 0 
+    \end{align*}
+    Now $\sqrt{g} = r^2 \sin \theta$ and $g^{\theta \theta} = -\frac{1}{r^2}$ and $g^{\phi\phi} = -\frac{1}{r^2 \sin^2\theta }$
+    Therefore $\tensor{\epsilon}{^\theta ^\phi_t_r} = \sqrt{g} g^{\theta\theta} g^{\phi\phi} \sigma_{\theta\phi t r}$ and:
+    \begin{align*}
+      \e * F^{(4)} &= \e \left(Q \frac{Q}{r^2} \e t \wedge \e r\right)\\
+                   &= 0 
+    \end{align*}
+  \item
+    Here:
+    \begin{equation*}
+      \e \theta = \frac{\partial \theta }{ \partial x} \e x
+    \end{equation*}
+    \begin{equation*}
+      x =  r \sin \theta \cos \phi \Rightarrow \e x = \sin \theta \cos \phi \e r + r \cos \theta \cos \phi \e \theta -  r \sin \theta \sin \phi \e \phi
+    \end{equation*}
+    
+\end{enumerate}
+\end{document}
