@@ -16,6 +16,7 @@
 \usepackage{tensor}
 \usepackage{listings}
 \usepackage{slashed}
+\usepackage{tikz-feynman}
  \lstset{
     basicstyle=\ttfamily\small,
     numberstyle=\footnotesize,
@@ -152,11 +153,118 @@
         From which it can be seen $Q_u = 2 / 3$ and $Q_d = - 1 / 3$.
       \item
         \begin{align*}
-          \bar{Q_L} i \slashed{D} Q_L &= \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]^\dagger \gamma^5 g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
-                                      &= \left[\begin{matrix} u_L^\dagger\gamma^5 & d_L^\dagger \gamma^5 \end{matrix}\right]  g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
+          \bar{Q_L} i \slashed{D} Q_L &= \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]^\dagger \gamma^0 g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
+                                      &= \left[\begin{matrix} u_L^\dagger\gamma^5 & d_L^\dagger \gamma^0 \end{matrix}\right]  g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
                                       &= \left[\begin{matrix} \bar{u}_L & \bar{d}_L \end{matrix}\right]  g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
                                       &= \bar{u}_L g_Z \slashed{Z}  (1/2 - Q_u\sin^2 \theta_W) u_L + \bar{d}_L  (- 1/2 - Q_d \sin^2 \theta_W) d_L \\
         \end{align*}
+      \item
+        The right handed Fermions transform trivially under $SU(2)$, but not under $U(1)$, according to the holy table of Standard Model.
+        Therefore, the covariant derivative is:
+        \begin{equation*}
+          D_\mu = \partial_\mu - i g_1 Y B_\mu
+        \end{equation*}
+%        And acting on a fermion is:
+%        \begin{equation*}
+%          D_\mu\psi_R = \partial_\mu\psi_R - i g_1 Y B_\mu \psi_R
+%        \end{equation*}
+      \item
+        For this question, 
+        \begin{align*}
+                          & \frac{Z_\mu}{\cos \theta_W} + \frac{\sin \theta_W}{\cos \theta_W} B_\mu=  \frac{A_\mu}{\sin \theta_W} - \frac{\cos \theta_W}{\sin \theta_W} B_\mu\\
+          \Leftrightarrow & \frac{\cos \theta_W}{\sin \theta_W} B_\mu + \frac{\sin \theta_W}{\cos \theta_W} B_\mu =  \frac{A_\mu}{\sin \theta_W} - \frac{Z_\mu}{\cos \theta_W}\\
+          \Leftrightarrow & \frac{g_2^2 + g_1^2}{g_1 g_2} B_\mu =  \frac{A_\mu}{\sin \theta_W} - \frac{Z_\mu}{\cos \theta_W}\\
+          \Leftrightarrow & B_\mu  =  \frac{g_2}{g_1}\sin^2 \theta_W A_\mu - \frac{g_Z}{g_1} \sin^2 Z_\mu
+        \end{align*}
+        \begin{equation*}
+          D_\mu = \partial_\mu - i g_1 Y ()
+        \end{equation*}
+%        In this case, $W$ is in the Trivial representation, so:
+%        \begin{equation*}
+%          Z_\mu = - \sin \theta_W B_\mu
+%        \end{equation*}
+%        And the covariant derivative is:
+%        \begin{align*}
+%          D_\mu &= \partial_\mu + i g_1 Y \frac{Z_\mu}{\sin \theta_W } \\
+%                &= \partial_\mu + i g_Z \frac{\cos \theta_W}{g^2} g_1 Y \frac{Z_\mu}{\sin \theta_W } 
+%        \end{align*}
+        The covariant derivative here becomes:
+        \begin{align*}
+          D_\mu %&= \partial_\mu - i g_1 Y (g_2\sin^2 \theta_W A_\mu - g_Z \sin^2 Z_\mu)\\
+                &= \partial_\mu - i g_1 Y \left(\frac{g_2}{g_1}\sin^2 \theta_W A_\mu - \frac{g_Z}{g_1} \sin^2\theta_W Z_\mu\right)\\
+                &= \partial_\mu - i Y g_2\sin^2 \theta_W A_\mu - i g_Z(-Y \sin^2\theta_W) Z_\mu)
+        \end{align*}
+        Ignoring other terms gives the desired result.
+      \item
+        Determining the interaction between the $u_R$ quarks and the $Z$ boson gives, remembering that these quarks are scalars as far as the derivative goes:
+        \begin{align*}
+          \bar{u}_R i\slashed{D}  \bar{u}_R
+                &= \bar{u}_R  g_Z \slashed{Z} (-\frac{2}{3} \sin^2\theta_W) ) \bar{u}_R
+        \end{align*}
+        For the down quark $Y = -\frac{1}{3} = Q$ from the holy table.
+        Generalizing this the interaction term for right handed fermions:
+        \begin{align*}
+          \bar{\psi}_R i\slashed{D}  \bar{\psi}_R
+                &= \bar{\psi}_R  g_Z \slashed{Z} (-Q \sin^2\theta_W) ) \bar{\psi}_R
+        \end{align*}
+        Here the physical charge is the actual charge because the right handed fermions do not interact with the Weak field which changes the physical charge in the case of left handed fermions.
+      \item
+        We have the following interactions:
+        \begin{align*}
+          g_Z \overline{\left(P_L \psi\right)} \slashed{Z}  (T_{3, \psi} - Q \sin^2 \theta_W)P_L\psi \qquad \text{ and } \qquad \overline{\left(P_R \psi\right)}  g_Z \slashed{Z} (-Q \sin^2\theta_W) ) P_R\bar{\psi} 
+        \end{align*}
+        If, these are added together:
+        \begin{align*}
+                          & g_Z \overline{\left(P_L \psi\right)} \slashed{Z}  T_{3, \psi} P_L\psi + g_Z \overline{\left(P_L \psi\right)} \slashed{Z}( - Q \sin^2 \theta_W )P_L\psi + \overline{\left(P_R \psi\right)}  g_Z \slashed{Z} (-Q \sin^2\theta_W) ) P_R\bar{\psi}\\
+          =               & g_Z \overline{\left(P_L \psi\right)} \slashed{Z}  T_{3, \psi} P_L\psi + g_Z \overline{\left((P_R + P_L) \psi\right)} \slashed{Z}( - Q \sin^2 \theta_W )(P_R + P_L)\psi \\
+          =               & g_Z \overline{\left(P_L \psi\right)} \slashed{Z}  T_{3, \psi} P_L\psi + g_Z \overline{\psi} \slashed{Z}( - Q \sin^2 \theta_W ) \psi 
+        \end{align*}
+        Now focus on the first term:
+        \begin{align*}
+                          & g_Z \overline{\left(\frac{1 - \gamma^5}{2} \psi\right)} \slashed{Z}  T_{3, \psi} \left(\frac{1 - \gamma^5}{2}\right)\psi \\
+          =               & \frac{1}{4} g_Z \overline{\left((1 - \gamma^5 )\psi\right)} \slashed{Z}  T_{3, \psi} \left(1 - \gamma^5\right)\psi \\
+          =               & \frac{1}{4} g_Z \psi^\dagger\left(1 - \gamma^5 \right)\gamma^0 \slashed{Z}  T_{3, \psi} \left(1 - \gamma^5\right)\psi \\
+          =               & \frac{1}{4} g_Z \bar{\psi}\left(1 + \gamma^5 \right) \slashed{Z}  T_{3, \psi} \left(1 - \gamma^5\right)\psi \\
+          =               & \frac{1}{4} g_Z \bar{\psi} \slashed{Z} \left(1 - \gamma^5 \right) T_{3, \psi} \left(1 - \gamma^5\right)\psi \\
+          =               & \frac{1}{4} g_Z \bar{\psi} \slashed{Z}  T_{3, \psi} \left(1 - \gamma^5 \right) \left(1 - \gamma^5\right)\psi \\
+          =               & \frac{1}{4} g_Z \bar{\psi} \slashed{Z}  T_{3, \psi} \left(1 - 2 \gamma^5  + 1\right) \psi \\
+          =               & g_Z \bar{\psi} \slashed{Z}  \left(\frac{T_{3, \psi}}{2}  -  \frac{T_{3, \psi}}{2} \gamma^5 \right) \psi \\
+        \end{align*}
+        Finally combining this with the previous term:
+        \begin{align*}
+          =               & g_Z \bar{\psi} \slashed{Z}  \left(\frac{T_{3, \psi}}{2}  -  \frac{T_{3, \psi}}{2} \gamma^5 \right) \psi  + g_Z \overline{\psi} \slashed{Z}( - Q \sin^2 \theta_W ) \psi \\
+          =               & g_Z \bar{\psi} \slashed{Z}  \left(\frac{T_{3, \psi}}{2} - Q \sin^2 \theta_W -  \frac{T_{3, \psi}}{2} \gamma^5 \right) \psi \\
+          =               & g_Z \bar{\psi} \slashed{Z}  \left(g_V -  g_A \gamma^5 \right) \psi \\
+        \end{align*}
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        The interaction term is:
+        \begin{equation*}
+          g_Z \bar{\psi} \slashed{Z} g_{V A} \bar{\psi}
+        \end{equation*}
+        And the vertex is thus:
+        \begin{figure}[!ht]
+          \centering
+          \feynmandiagram [horizontal=a to b] {
+            i1 -- [fermion] a -- [fermion] i2,
+            a -- [boson] b
+          };
+        \end{figure}
+        And the rule is to associate a factor of:
+        \begin{equation*}
+          - i g_Z
+        \end{equation*}
+      \item
+        The leading order Feynman diagram is:
+        \begin{figure}[!ht]
+          \centering
+          \feynmandiagram [horizontal=a to b] {
+            i1 -- [fermion] a -- [fermion] i2,
+            a -- [boson] b
+          };
+        \end{figure}
     \end{enumerate}
 \end{enumerate}
 \end{document}
