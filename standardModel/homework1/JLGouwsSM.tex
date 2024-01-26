@@ -254,17 +254,56 @@
         \end{figure}
         And the rule is to associate a factor of:
         \begin{equation*}
-          - i g_Z
+          - i g_Z \gamma^\mu g_{V A}
+        \end{equation*}
+        The fermion propagator gets the term:
+        \begin{equation*}
+          -\frac{i (\slashed{p} + m)}{p^2 - m^2+ i \epsilon}
+        \end{equation*}
+        \begin{figure}[!ht]
+          \centering
+          \feynmandiagram [horizontal=a to b] {
+            a -- [fermion] b 
+          };
+        \end{figure}
+        The boson gets the term:
+        \begin{equation*}
+          -\frac{i \eta_{\mu\nu}}{p^2 + i \epsilon}
         \end{equation*}
       \item
         The leading order Feynman diagram is:
         \begin{figure}[!ht]
           \centering
-          \feynmandiagram [horizontal=a to b] {
+          \feynmandiagram [vertical=a to b] {
             i1 -- [fermion] a -- [fermion] i2,
             a -- [boson] b
           };
         \end{figure}
+      \item
+        The amplitude is given by:
+        \begin{equation*}
+          M(Z_0 \to f \bar{f}) = - i g_Z \epsilon_\mu^\lambda \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p)
+        \end{equation*}
+      \item
+        \begin{align*}
+          |M(Z_0 \to f \bar{f})|^2 &= - i g_Z \epsilon_\mu^\lambda \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) (- i g_Z \epsilon_\nu^\lambda \bar{u}^r(p) \gamma^\nu g_{V A} v^s(p))^*\\
+                                   &= g_Z^2 \epsilon_\mu^\lambda \epsilon_\nu^{\lambda *} \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) ( \bar{u}^r(p) \gamma^\nu g_{V A} v^s(p))^*
+        \end{align*}
+        Averaging over the polarizations, thens spins gives:
+        \begin{align*}
+          \overline{|M(Z_0 \to f \bar{f})|}^2 
+                                   &= \sum_{s}\sum_{r}\sum_{\lambda = 1}^{3} g_Z^2 \epsilon_\mu^\lambda \epsilon_\nu^{\lambda *} \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) ( \bar{u}^r(p) \gamma^\nu g_{V A} v^s(p))^*\\
+                                   &= \sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) ( \bar{u}^r(p) \gamma^\nu g_{V A} v^s(p))^*
+        \end{align*}
+        The $Z$ boson has a mass of $\SI{91.18}{\giga \eV}$ and the electron has mass $\SI{0.510}{\mega \eV}$. 
+        The electron mass is clearly much smaller than the $Z$ boson mass.
+        \begin{align*}
+          T^{\mu\nu}  =& \Tr\left[\gamma^\mu g_{VA} (\gamma^\alpha q_\alpha - m) g_{VA} \gamma^\nu (\gamma^\beta p_\beta + m) \right]\\
+                   \to & \Tr\left[\gamma^\mu (g_V - g_A \gamma^5) \gamma^\alpha q_\alpha \gamma^\nu (g_V - g_A \gamma^5) \gamma^\beta p_\beta \right]\\
+                      =& g_V^2 \Tr\left[\gamma^\mu  \gamma^\alpha q_\alpha \gamma^\nu \gamma^\beta p_\beta \right] + g_A^2 \Tr\left[\gamma^\mu \gamma^5 \gamma^\alpha q_\alpha \gamma^\nu g_A \gamma^5 \gamma^\beta p_\beta \right] -  2 g_A g_V\Tr\left[\gamma^\mu \gamma^5 \gamma^\alpha q_\alpha \gamma^\nu  \gamma^5 \gamma^\beta p_\beta \right]\\
+                      =& \Tr\left[\gamma^\mu g_V \gamma^5 \gamma^\alpha q_\alpha \gamma^\nu \gamma^\beta p_\beta \right] - \Tr\left[\gamma^\mu g_A \gamma^5 \gamma^\alpha q_\alpha \gamma^\nu \gamma^\beta p_\beta \right]\\
+                      =& \Tr\left[\gamma^\mu g_V \gamma^5 \gamma^\alpha q_\alpha \gamma^\nu \gamma^\beta p_\beta \right] - \Tr\left[\gamma^\mu g_A \gamma^5 \gamma^\alpha q_\alpha \gamma^\nu \gamma^\beta p_\beta \right]\\
+        \end{align*}
     \end{enumerate}
 \end{enumerate}
 \end{document}
