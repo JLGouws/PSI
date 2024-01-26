@@ -1,0 +1,226 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{Quantum Foundations Homework 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        Note, that the notation in these answers is not absolutely explicit, and it uses some liberty.
+        The notation does not show the entaglement with the ready states of the detectors from the beginning, and this continues in all the answers appearing later.
+        \begin{align*}
+              & \left| \text{in} \right\rangle \\
+          \to & \frac{1}{\sqrt{2}} \left(\left| v \right \rangle + i \left| u \right \rangle \right) \\
+          \to & \frac{1}{\sqrt{2}} \left(i\left| v \right \rangle - \left| u \right \rangle \right) \\
+          \to & \frac{1}{\sqrt{2}} \left(i\left| v \right \rangle - e^{i \phi}\left| u \right \rangle \right) \\
+          \to & \frac{1}{\sqrt{2}} \left(\frac{i}{\sqrt{2}}\left(\left| C_0 \right \rangle \left| D \right \rangle + i \left| C \right \rangle \left| D_0 \right \rangle\right) - \frac{1}{\sqrt{2}} e^{i \phi}\left( \left| C \right \rangle\left| D_0 \right \rangle + i\left| C_0 \right \rangle \left| D \right \rangle \right) \right) \\
+            = & \frac{1}{2} \left( i \left| C_0 \right \rangle \left| D \right \rangle - \left| C \right \rangle \left| D_0 \right \rangle - e^{i \phi} \left( \left| C \right \rangle \left| D_0 \right \rangle + i \left| C_0 \right \rangle \left| D \right \rangle \right) \right) \\
+            = & i \frac{(1 - e^{i \phi})}{2} \left| C_0 \right \rangle \left| D \right \rangle - \frac{(1 + e^{i \phi})}{2} \left| C \right \rangle \left| D_0 \right \rangle  
+        \end{align*}
+        From this it follows that:
+        \begin{equation*}
+          P (D) = \left| i \frac{(1 - e^{i \phi})}{2} \right|^2 = \sin^2 (\phi / 2) \qquad \text{ and } \qquad  P (C) = \left| - \frac{(1 + e^{i \phi})}{2} \right|^2 = \cos^2 (\phi / 2)
+        \end{equation*}
+      \item
+        Here again, the notation is not absolutely explicit, but hopefully it is clear.
+        The following solution uses one ket to denote the location of the photon, it might be better to indicate the state of the boxes as $\left| U_0 \right \rangle\left| V_0 \right \rangle$ for empty boxes and $\left| U \right \rangle\left| V_0 \right \rangle$ to denote a particle in box $U$ and so forth.
+        The events are exclusive and this notation is a sense enforces this.
+        \begin{align*}
+              & \left| \text{in} \right\rangle \\
+          \to & \frac{1}{\sqrt{2}} \left(\left| v \right \rangle + i \left| u \right \rangle \right) \\
+          \to & \frac{1}{\sqrt{2}} \left(\left| v \right \rangle - \left| u \right \rangle \right) \\
+          \to & \frac{1}{\sqrt{2}} \left(\left| v \right \rangle \left| V \right \rangle - \left| u \right \rangle \left| U \right \rangle\right) \\
+          \to & \frac{1}{\sqrt{2}} \left(i\left| v \right \rangle \left| V \right \rangle - e^{i \phi}\left| u \right \rangle \left| U \right \rangle\right) \\
+          \to & \frac{1}{\sqrt{2}} \left(\frac{i}{\sqrt{2}}\left(\left| C_0 \right \rangle \left| D \right \rangle + i \left| C \right \rangle \left| D_0 \right \rangle\right) \left| V \right \rangle - \frac{1}{\sqrt{2}} e^{i \phi}\left( \left| C \right \rangle\left| D_0 \right \rangle + i\left| C_0 \right \rangle \left| D \right \rangle \right) \left| U \right \rangle \right) \\
+            = & \frac{1}{2} \left( i \left| C_0 \right \rangle \left| D \right \rangle \left| V \right \rangle - \left| C \right \rangle \left| D_0 \right \rangle \left| V \right \rangle - e^{i \phi} \left| C \right \rangle \left| D_0 \right \rangle \left| U \right \rangle - i e^{i \phi} \left| C_0 \right \rangle \left| D \right \rangle \left| U \right \rangle \right)
+        \end{align*}
+        Now for the conditional probablilities:
+        \begin{align*}
+          P(C | U) &= \frac{P(C \cap U)}{P(U)} = \frac{\left|\frac{-e^{i \phi}}{2}\right|^2}{\left|\frac{-e^{i \phi}}{2}\right|^2 + \left|\frac{-ie^{i \phi}}{2}\right|^2} = \frac{1}{2}\\
+          P(D | U) &= \frac{1}{2}\\
+          P(C | V) &= \frac{1}{2}\\
+          P(D | V) &= \frac{1}{2}
+        \end{align*}
+      \item
+        The presence of the boxes completely removes the $\phi$ dependence.
+        The presence of the photon in the box indicates the path that the photon took, because the photon being placed in the box is essentially a measurement.
+        The "measurement" therefore destroys interference at the detectors $C$ and $D$ and hence the loss of the $\phi$ dependence.
+
+      \item
+        Here, we want to calculate $P(C)$, which is straight forward because $U$ and $V$ are disjoint.
+        \begin{equation*}
+          P(C) = P(C \cap U) + P(C \cap V) = P(C | U) P(U) + P(C | V) P(V) = \frac{1}{2} \cdot \frac{1}{2} + \frac{1}{2}\cdot \frac{1}{2} = \frac{1}{2}
+        \end{equation*}
+      \item
+        Ignoring the measurement, clearly gives quite different answers to doing the measurement.
+        This essentially comes down to the measurement done by box $U$ or box $V$ destroying interference, regardless of the result being checked.
+      \item
+        Making a measurement in the $\left| \pm \right \rangle$ basis gives no information about which path the particle took.
+        Therefore it is as if the boxes are U and V are not there and the result should be the same as the first question where there are no boxes.
+      \item
+        The final state after the photon has traversed the experimental equipment is:
+        \begin{align*}
+          \frac{1}{2} \left(i\left(\left| C_0 \right \rangle \left| D \right \rangle + i \left| C \right \rangle \left| D_0 \right \rangle\right) \left| V \right \rangle - e^{i \phi}\left( \left| C \right \rangle\left| D_0 \right \rangle + i\left| C_0 \right \rangle \left| D \right \rangle \right) \left| U \right \rangle \right)
+        \end{align*}
+        Which is required in the $\left| \pm \right\rangle$ basis.
+        Getting this into a $\left| \pm \right\rangle$ basis requires applying the identity operator $I_{sys} = I_{C} \otimes I_{D} \otimes \left(\left| + \right\rangle \left\langle + \right| + \left| - \right\rangle \left\langle - \right|\right)$ operator and calculating:
+        \begin{align*}
+              & \frac{1}{2} \left(i\left(\left| C_0 \right \rangle \left| D \right \rangle + i \left| C \right \rangle \left| D_0 \right \rangle\right) \left| V \right \rangle - e^{i \phi}\left( \left| C \right \rangle\left| D_0 \right \rangle + i\left| C_0 \right \rangle \left| D \right \rangle \right) \left| U \right \rangle \right) \\
+          \to & \frac{1}{2\sqrt{2}} \left(i\left(\left| C_0 \right \rangle \left| D \right \rangle + i \left| C \right \rangle \left| D_0 \right \rangle\right) \left| + \right \rangle - e^{i \phi}\left( \left| C \right \rangle\left| D_0 \right \rangle + i\left| C_0 \right \rangle \left| D \right \rangle \right) \left| + \right \rangle \right) \\
+              & \quad + \frac{1}{2\sqrt{2}} \left(-i\left(\left| C_0 \right \rangle \left| D \right \rangle + i \left| C \right \rangle \left| D_0 \right \rangle\right) \left| - \right \rangle - e^{i \phi}\left( \left| C \right \rangle\left| D_0 \right \rangle + i\left| C_0 \right \rangle \left| D \right \rangle \right) \left| - \right \rangle \right) \\
+          \to & \frac{1}{2\sqrt{2}} \left(i(1 - e^{i\phi}) \left| C_0 \right \rangle \left| D \right \rangle \left| + \right \rangle - (1 + e^{i \phi}) \left| C \right \rangle \left| D_0 \right \rangle \left| + \right \rangle \right) \\
+              & \quad + \frac{1}{2\sqrt{2}} \left(-i(1 + e^{i\phi})\left| C_0 \right \rangle \left| D \right \rangle \left| - \right \rangle + (1 - e^{i\phi}) \left| C \right \rangle \left| D_0 \right \rangle \left| - \right \rangle\right) 
+        \end{align*}
+        Now the conditional probabilites follow straight forwardly:
+        \begin{align*}
+          P(C | +) &= \frac{P(C \cap +)}{P(+)} = \frac{\left|\frac{1 + e^{i \phi}}{2\sqrt{2}}\right|^2}{\left|\frac{1 + e^{i \phi}}{2\sqrt{2}}\right|^2 + \left|i\frac{1 - e^{i \phi}}{2\sqrt{2}}\right|^2} = \cos^2(\phi / 2)\\
+          P(D | +) &= \sin^2(\phi / 2)\\
+          P(C | -) &= \sin^2(\phi / 2)\\
+          P(D | -) &= \cos^2(\phi / 2)
+        \end{align*}
+      \item
+        The significance (I believe) of the $\left| \pm \right\rangle$ basis is that it is a basis of maximal uncertainty; for example, if $U$ and $V$ were states of two qubits, the basis would be a basis of Bell states.
+        Having knowledge of this measurement means that we know the particle is in a superposition of being on the paths $u$ and $v$ like in part a).
+%        I am not sure about what the next part of the question is asking.
+%        Measuring the $\left| \pm \right\rangle$ state and measuring $\left| C\right\rangle$ or $\left| D\right\rangle$ are quite different, and $P()$.
+        However, in this case $P(C) = P(D) = 1/2$, still the same as part d) above, so making the measurement in $\left|\pm\right\rangle$ does still destroy the interference pattern.
+        Therefore, ignoring the outcome of the $\left| \pm \right\rangle$ measurement is very different from not performing it at all.
+        This is quite difficult to interpret (for me at least), but similar situations exist in variations of the double-slit experiment (with polarizers).
+    \end{enumerate}
+  \item
+    Assume that there is a machine that can clone states, in symbols:
+    \begin{align*}
+      & \left|\psi\right\rangle \left|M\right\rangle \to \left|\psi\right\rangle \left|\psi\right\rangle \left|M\right\rangle\\
+      & \left|\phi\right\rangle \left|M\right\rangle \to \left|\phi\right\rangle \left|\phi\right\rangle \left|M\right\rangle
+    \end{align*}
+    Now if we have a linear combination $\left|s\right\rangle = \alpha\left|\psi\right\rangle + \beta \left|\phi\right\rangle$, and try to clone it, there are two ways:
+    \begin{align*}
+      \left|s\right\rangle\left|M\right\rangle =& \left(\alpha\left|\psi\right\rangle + \beta \left|\phi\right\rangle\right) \left|M\right\rangle\\
+                                               =& \alpha\left|\psi\right\rangle \left|M\right\rangle + \beta \left|\phi\right\rangle \left|M\right\rangle\\
+                                            \to & \alpha\left|\psi\right\rangle \left|\psi\right\rangle \left|M\right\rangle + \beta \left|\phi\right\rangle\left|\phi\right\rangle \left|M\right\rangle\\
+                                               =& (\alpha\left|\psi\right\rangle \left|\psi\right\rangle  + \beta \left|\phi\right\rangle\left|\phi\right\rangle) \left|M\right\rangle
+    \end{align*}
+    It is also possible to clone the system in this way:
+    \begin{align*}
+      \left|s\right\rangle\left|M\right\rangle &\to \left|s\right\rangle\left|s\right\rangle\left|M\right\rangle \\
+                                               &= \left(\alpha\left|\psi\right\rangle + \beta \left|\phi\right\rangle\right) \left(\alpha\left|\psi\right\rangle + \beta \left|\phi\right\rangle\right)\left|M\right\rangle \\
+                                               &= \left(\alpha^2\left|\psi\right\rangle \left|\psi\right\rangle  + 2 \alpha \beta \left|\psi\right\rangle \left|\phi\right\rangle + \beta^2 \left|\phi\right\rangle \left|\phi\right\rangle\right)\left|M\right\rangle
+    \end{align*}
+    Which are two clearly different states, and thus the operation of cloning is not well defined.
+  \item
+    \begin{enumerate}
+      \item
+        When Alice gets the second qubit $S$, the total system is in state:
+        \begin{align*}
+          \left|\phi\right\rangle_S \left|\phi^+\right\rangle &= \frac{1}{\sqrt{2}}\left(\alpha\left| 0\right\rangle_S + \beta\left| 1\right \rangle_S\right)\frac{1}{\sqrt{2}}\left(\left| 0\right\rangle_A\left| 0 \right \rangle_B + \left| 1\right\rangle_A\left| 1 \right \rangle_B\right)\\
+                                                              &= \frac{1}{2}\left(\left(\alpha\left| 0\right\rangle_S + \beta\left| 1\right \rangle_S\right)\left| 0\right\rangle_A\left| 0 \right \rangle_B + \left(\alpha\left| 0\right\rangle_S + \beta\left| 1\right \rangle_S\right)\left| 1\right\rangle_A\left| 1 \right \rangle_B\right)\\
+                                                              &= \frac{1}{2}\left(\alpha\left| 0\right\rangle_S \left| 0\right\rangle_A\left| 0 \right \rangle_B + \beta\left| 1\right \rangle_S\left| 0\right\rangle_A\left| 0 \right \rangle_B + \alpha\left| 0\right\rangle_S\left| 1\right\rangle_A\left| 1 \right \rangle_B + \beta\left| 1\right \rangle_S\left| 1\right\rangle_A\left| 1 \right \rangle_B\right)
+        \end{align*}
+        Now if Alice measures the product state in one of the states $\left|\phi^{\pm}\right\rangle_{SA}$ or $\left|\psi^{\pm}\right\rangle_{SA}$ (applying the corresponding bra to $\left|\phi\right\rangle_S \left|\phi^+\right\rangle$), the state will collapse to:
+        \begin{align}
+          \left|\phi^{+}\right\rangle_{SA} &\to \frac{1}{2 \sqrt{2}}\left(\alpha \left| 0 \right\rangle_B + \beta \left|1 \right \rangle_B\right) \label{eq:aliceCase1}\\
+          \left|\phi^{-}\right\rangle_{SA} &\to \frac{1}{2 \sqrt{2}}\left(\alpha \left| 0 \right\rangle_B - \beta \left|1 \right \rangle_B\right) \label{eq:aliceCase2}\\
+          \left|\psi^{+}\right\rangle_{SA} &\to \frac{1}{2 \sqrt{2}}\left(\alpha \left| 1 \right\rangle_B + \beta \left|0 \right \rangle_B\right) \label{eq:aliceCase3}\\
+          \left|\psi^{-}\right\rangle_{SA} &\to \frac{1}{2 \sqrt{2}}\left(\alpha \left| 1 \right\rangle_B - \beta \left|0 \right \rangle_B\right) \label{eq:aliceCase4}
+        \end{align}
+        And thus Alice precisely knows the superposition state of Bob's qubit depending on which case was measured.
+      \item
+        In Case~\ref{eq:aliceCase1}, Bob's qubit is in the same state as $\left|\phi\right\rangle_S$.
+        Therefore, Bob only has to apply the identity operator $\left|0\right\rangle_B\left\langle 0 \right|_B + \left|1\right\rangle_B\left\langle 1 \right|_B$ to his state.
+        In Case~\ref{eq:aliceCase2}, Bob must change the sign of the qubit $\left|1\right\rangle_B$.
+        Therefore, Bob has to apply the operator $\left|0\right\rangle_B\left\langle 0 \right|_B - \left|1\right\rangle_B\left\langle 1 \right|_B$ to his state, which corresponds to the $\sigma_z$ matrix.
+        In Case~\ref{eq:aliceCase3}, Bob must switch the two qubits.
+        Therefore, Bob has to apply the operator $\left|1\right\rangle_B\left\langle 0 \right|_B + \left|0\right\rangle_B\left\langle 1 \right|_B$ to his state, which is just the $\sigma_x$ matrix.
+        In the final Case~\ref{eq:aliceCase4}, Bob must change the sign of the qubit $\left|0\right\rangle_B$ and then switch the two qubits.
+        Therefore, Bob has to apply the operator $-\left|1\right\rangle_B\left\langle 0 \right|_B + \left|0\right\rangle_B\left\langle 1 \right|_B$ to his state, which is just the $i\sigma_y$ matrix.
+        In all of these cases Bob just has to apply the corresponding unitary.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

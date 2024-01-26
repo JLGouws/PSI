@@ -1,0 +1,333 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+\newcommand{\e}{\mathrm{d}}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{Mathematical Physics Homework 1}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+        Using the coordinate fomula for the hodge star:
+        \begin{align*}
+          * \e x &= \frac{1}{(3 - 1)!} \sqrt{|\det{\delta_{ij}}|} \Delta^{x j_1} \varepsilon_{j_1 j_2 j_3} \e x^{j_2} \wedge \e x^{j_3}\\
+                 &= \frac{1}{2} \varepsilon_{x j_2 j_3} \e x^{j_2} \wedge \e x^{j_3}\\
+                 &= \frac{1}{2} \left(\e y \wedge \e z - \e z \wedge \e y\right)\\
+                 &= \e y \wedge \e z
+        \end{align*}
+        Since the inverse metric is just $\Delta^{ab} = \delta^{ab}$ and $\det \delta = 1$.
+        Similarly:
+        \begin{align*}
+          * \e y &= \frac{1}{(3 - 1)!} \sqrt{|\det{\delta_{ij}}|} \Delta^{y j_1} \varepsilon_{j_1 j_2 j_3} \e x^{j_2} \wedge \e x^{j_3}\\
+                 &= \frac{1}{2} \varepsilon_{y j_2 j_3} \e x^{j_2} \wedge \e x^{j_3}\\
+                 &= \e z \wedge \e x
+        \end{align*}
+        And finally:
+        \begin{align*}
+          * \e z &= \varepsilon_{z j_2 j_3} \e x^{j_2} \wedge \e x^{j_3}\\
+                 &= \e x \wedge \e y
+        \end{align*}
+        The Hodge star operator's action on the two and three forms is:
+        \begin{align*}
+          * (\e y \wedge \e z)
+                  &= *(* \e x) 
+                  &= (-1)^{1(3 - 2)}\sign(\det \delta) \e x
+                  &= \e x
+        \end{align*}
+        The factor $(-1)^{1(3 - 2)}\sign(\det \delta)$ is the same for all of the 2-forms, therefore:
+        \begin{equation*}
+          *(\e z \wedge \e x) = \e y \qquad \text{ and } \qquad *(\e x \wedge \e y) = \e z
+        \end{equation*}
+        For the top form:
+        \begin{equation*}
+          * 1 = \sqrt{\det \delta} dx \wedge dy \wedge dz = dx \wedge dy \wedge dz \Rightarrow *(dx \wedge dy \wedge dz) = ** 1 = 1
+        \end{equation*}
+        For a general smooth top form where $f \in \Omega^0(M)$:
+        \begin{equation*}
+          *(f dx \wedge dy \wedge dz) = f
+        \end{equation*}
+      \item
+        \begin{equation*}
+          \e f^\sharp = (\frac{\partial f}{\partial x} \e x + \frac{\partial f}{\partial y} \e y + \frac{\partial f}{\partial z} \e z)^\sharp = \frac{\partial f}{\partial x}\frac{\partial}{\partial y} + \frac{\partial f}{\partial y}\frac{\partial }{\partial y}  + \frac{\partial f}{\partial z}\frac{\partial}{\partial y} \equiv \nabla f
+        \end{equation*}
+        For the one form $\alpha = \alpha_x \e x + \alpha_y \e y + \alpha_z \e z$:
+        \begin{align*}
+          &* \e \alpha \\
+                      =& *(\partial_y\alpha_x \e y \wedge \e x + \partial_z \alpha_x \e z \wedge \e x + \partial_x\alpha_y \e x \wedge \e y + \partial_z \alpha_y \e z \wedge \e y + \partial_x\alpha_z \e x \wedge \e z + \partial_y \alpha_z \e y \wedge \e z)\\
+                      =& *\left[(\partial_x\alpha_y - \partial_y\alpha_x) \e x \wedge \e y + (\partial_y \alpha_z - \partial_z \alpha_y)\e y \wedge \e z + (\partial_z \alpha_x - \partial_x \alpha_z)\e z \wedge \e x \right]\\
+                      =& (\partial_x\alpha_y - \partial_y\alpha_x) \e z + (\partial_y \alpha_z - \partial_z \alpha_y) \e x + (\partial_z \alpha_x - \partial_x \alpha_z)\e y 
+        \end{align*}
+        Similarly:
+        \begin{align*}
+          * \e * \alpha 
+                      &= *\left[\e (\alpha_x \e y \wedge \e z + \alpha_y \e z \wedge \e x + \alpha_z \e x \wedge \e y\right]\\
+                      &= *\left[\partial_x \alpha_x \e x \wedge \e y \wedge \e z + \partial_y \alpha_y \e y \wedge \e z \wedge \e x + \partial_z \alpha_z \e z \wedge \e x \wedge \e y\right]\\
+                      &= *\left[(\partial_x \alpha_x + \partial_y \alpha_y + \partial_z \alpha_z ) \e x \wedge \e y \wedge \e z\right]\\
+                      &= \partial_x \alpha_x + \partial_y \alpha_y + \partial_z \alpha_z
+        \end{align*}
+        Which is just the gradient of $\alpha$:
+        \begin{align*}
+          * (\alpha \wedge \beta)
+                      &= *\left[(\beta_x \e x + \beta_y \e y + \beta_z \e z) \wedge (\alpha_x \e x + \alpha_y \e y + \alpha_z \e z)\right]\\
+                      &= *\left[(\beta_x\alpha_y - \beta_y\alpha_x) \e x \wedge \e y + (\beta_y \alpha_z - \beta_z \alpha_y)\e y \wedge \e z + (\beta_z \alpha_x - \beta_x \alpha_z)\e z \wedge \e x \right]\\
+                      &= (\beta_x\alpha_y - \beta_y\alpha_x) \e z + (\beta_y \alpha_z - \beta_z \alpha_y)\e x + (\beta_z \alpha_x - \beta_x \alpha_z)\e y
+        \end{align*}
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        Under the coordinate reflection $(\e x, \e y, \e z) \to (- \e x, -\e y, -\e z)$, the magnetic field transforms as:
+        \begin{align*}
+          B &= B_x \e y \wedge \e z + B_y \e z \wedge \e x + B_z \e x \wedge \e y \\
+            &\to  B_x (- \e y) \wedge ( - \e z) + B_y (-\e z) \wedge (- \e x) + B_z (- \e x) \wedge (-\e y)\\
+            &=  B_x \e y \wedge \e z + B_y \e z \wedge \e x + B_z \e x \wedge \e y\\
+            &=  B
+        \end{align*}
+      \item
+        The equation:
+        \begin{equation*}
+          \e B = 0 \Leftrightarrow * \e * (*B) = 0 \Leftrightarrow \nabla \cdot (* B)^\sharp = 0
+        \end{equation*}
+        The next equation is:
+        \begin{equation*}
+          \e E + \frac{\partial B}{\partial t} = 0 \Leftrightarrow * \e E +  \frac{\partial * B}{\partial t} = 0 \Leftrightarrow  \nabla \times E^\sharp + \frac{\partial (* B)^\sharp}{\partial t} = 0
+        \end{equation*}
+        Next:
+        \begin{equation*}
+          * \e * E = \mu_0 \rho \Leftrightarrow  \nabla \cdot E^\sharp = \mu_0 \rho
+        \end{equation*}
+        Finally:
+        \begin{equation*}
+          * \e * B - \frac{\partial E}{\partial t} = \mu_0 J \Leftrightarrow * \e (* B) - \frac{\partial E}{\partial t} = \mu_0 J \Leftrightarrow * \nabla \times (*B)^\sharp - \frac{\partial E^\sharp}{\partial t} = \mu_0 J^\sharp
+        \end{equation*}
+      \item
+        Here $\e B = 0$ says that $B$ is closed so Poincare's lemma says $B$ is exact, or there is a 1-form, $A$, such that $B = \e A$.
+        Also:
+        \begin{align*}
+                      & \e E + \frac{\partial B}{\partial t} = 0\\
+          \Rightarrow & \e E + \frac{\partial \e A}{\partial t} = 0\\
+          \Rightarrow & \e E + \e \frac{\partial A}{\partial t} = 0\\
+          \Rightarrow & \e \left(E + \frac{\partial A}{\partial t}\right) = 0
+        \end{align*}
+        Therefore, $E + \partial_t A$ is a closed 1-form so by Poincare's lemma, there exists a 0-form $\phi$ or $-\varphi$ such that:
+        \begin{align*}
+                      & E + \frac{\partial A}{\partial t} = - \e \varphi\\
+          \Rightarrow & E  = - \e \varphi - \frac{\partial A}{\partial t}
+        \end{align*}
+      \item
+        For the 0-forms:
+        \begin{equation*}
+          *1 = \e t \wedge \e x \wedge \e y \wedge \e z
+        \end{equation*}
+        And hence the top form:
+        \begin{equation*}
+          *(\e t \wedge \e x \wedge \e y \wedge \e z) = *(*1) = (-1)^{0(4-1)}(-1) 1 = -1
+        \end{equation*}
+        For the one forms:
+        \begin{align*}
+          *\e t
+                 &= \frac{1}{(4 - 1)!} \sqrt{|\det{\eta_{ij}}|} H^{t j_1} \varepsilon_{j_1 j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= - \frac{1}{3!}  \varepsilon_{t j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= - \frac{1}{6}  \left(\varepsilon_{t x y z} \e x \wedge \e y \wedge \e z + \varepsilon_{t x z y} \e x \wedge \e z \wedge \e y + \varepsilon_{t y x z} \e y \wedge \e x \wedge \e z\right.\\
+                 &\qquad \qquad +\left. \varepsilon_{t y z x} \e z \wedge \e z \wedge \e x + \varepsilon_{t z x y} \e z \wedge \e x \wedge \e y + \varepsilon_{t z y x} \e z \wedge \e y \wedge \e x\right)\\
+                 &= -  \e x \wedge \e y \wedge \e z
+        \end{align*}
+        \begin{align*}
+          *\e x
+                 &= \frac{1}{(4 - 1)!} \sqrt{|\det{\eta_{ij}}|} H^{x j_1} \varepsilon_{j_1 j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= - \frac{1}{3!}  \varepsilon_{x j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= \frac{1}{6}  \left(\varepsilon_{x t y z} \e t \wedge \e y \wedge \e z + \varepsilon_{x t z y} \e t \wedge \e z \wedge \e y + \varepsilon_{x y t z} \e y \wedge \e t \wedge \e z\right.\\
+                 &\qquad \qquad +\left. \varepsilon_{x y z t} \e y \wedge \e z \wedge \e t + \varepsilon_{x z t y} \e z \wedge \e t \wedge \e y + \varepsilon_{x z y t} \e z \wedge \e y \wedge \e t\right)\\
+                 &= -  \e t \wedge \e y \wedge \e z
+        \end{align*}
+        \begin{align*}
+          *\e y
+                 &= \frac{1}{(4 - 1)!} \sqrt{|\det{\eta_{ij}}|} H^{y j_1} \varepsilon_{j_1 j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= \frac{1}{3!}  \varepsilon_{y j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= \frac{1}{6}  \left(\varepsilon_{y t x z} \e t \wedge \e x \wedge \e z + \varepsilon_{y t z x} \e t \wedge \e z \wedge \e x + \varepsilon_{y x t z} \e x \wedge \e t \wedge \e z\right.\\
+                 &\qquad \qquad +\left. \varepsilon_{y x z t} \e x \wedge \e z \wedge \e t + \varepsilon_{y z t x} \e z \wedge \e t \wedge \e x + \varepsilon_{y z x t} \e z \wedge \e x \wedge \e t\right)\\
+                 &=  \e t \wedge \e x \wedge \e z
+        \end{align*}
+        Similarly for $z$.
+        \begin{align*}
+          *\e z
+                 &=  - \e t \wedge \e x \wedge \e y
+        \end{align*}
+        For the three forms:
+        \begin{align*}
+          *(\e x \wedge \e y \wedge \e z) 
+            &= *(- *\e t)\\
+            &= - (-1)^{1(4 - 1)} \sign(-1) \e t\\
+            &= - \e t
+        \end{align*}
+        \begin{align*}
+          *(\e t \wedge \e y \wedge \e z) 
+            &= - \e x
+        \end{align*}
+        \begin{align*}
+          *(\e t \wedge \e x \wedge \e z) 
+            &= \e y
+        \end{align*}
+        \begin{align*}
+          *(\e t \wedge \e x \wedge \e y) 
+            &= \e z
+        \end{align*}
+        For the 2-forms:
+        \begin{align*}
+          *(\e t \wedge \e x)
+                 &= \frac{1}{(4 - 2)!} \sqrt{|\det{\eta_{ij}}|} H^{t j_1} \varepsilon_{j_1 j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= - \frac{1}{3!}  \varepsilon_{t j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= - \frac{1}{6}  \left(\varepsilon_{t x y z} \e x \wedge \e y \wedge \e z + \varepsilon_{t x z y} \e x \wedge \e z \wedge \e y + \varepsilon_{t y x z} \e y \wedge \e x \wedge \e z\right.\\
+                 &\qquad \qquad +\left. \varepsilon_{t y z x} \e z \wedge \e z \wedge \e x + \varepsilon_{t z x y} \e z \wedge \e x \wedge \e y + \varepsilon_{t z y x} \e z \wedge \e y \wedge \e x\right)\\
+                 &= -  \e x \wedge \e y \wedge \e z
+        \end{align*}
+        \begin{align*}
+          *\e x
+                 &= \frac{1}{(4 - 1)!} \sqrt{|\det{\eta_{ij}}|} H^{x j_1} \varepsilon_{j_1 j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= - \frac{1}{3!}  \varepsilon_{x j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= \frac{1}{6}  \left(\varepsilon_{x t y z} \e t \wedge \e y \wedge \e z + \varepsilon_{x t z y} \e t \wedge \e z \wedge \e y + \varepsilon_{x y t z} \e y \wedge \e t \wedge \e z\right.\\
+                 &\qquad \qquad +\left. \varepsilon_{x y z t} \e y \wedge \e z \wedge \e t + \varepsilon_{x z t y} \e z \wedge \e t \wedge \e y + \varepsilon_{x z y t} \e z \wedge \e y \wedge \e t\right)\\
+                 &= -  \e t \wedge \e y \wedge \e z
+        \end{align*}
+        \begin{align*}
+          *\e y
+                 &= \frac{1}{(4 - 1)!} \sqrt{|\det{\eta_{ij}}|} H^{y j_1} \varepsilon_{j_1 j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= \frac{1}{3!}  \varepsilon_{y j_2 j_3 j_4} \e x^{j_2} \wedge \e x^{j_3} \wedge \e x^{j_4}\\
+                 &= \frac{1}{6}  \left(\varepsilon_{y t x z} \e t \wedge \e x \wedge \e z + \varepsilon_{y t z x} \e t \wedge \e z \wedge \e x + \varepsilon_{y x t z} \e x \wedge \e t \wedge \e z\right.\\
+                 &\qquad \qquad +\left. \varepsilon_{y x z t} \e x \wedge \e z \wedge \e t + \varepsilon_{y z t x} \e z \wedge \e t \wedge \e x + \varepsilon_{y z x t} \e z \wedge \e x \wedge \e t\right)\\
+                 &=  \e t \wedge \e x \wedge \e z
+        \end{align*}
+      \item
+        \begin{align*}
+          F &= B_x \e y \wedge \e z + B_y \e z \wedge \e x + B_z \e x \wedge \e y + E \wedge \e t\\
+            &= B_x \e y \wedge \e z + B_y \e z \wedge \e x + B_z \e x \wedge \e y + E_x \e x \wedge \e t  + E_y \e y \wedge \e t  + E_z \e z \wedge \e t\\
+            &= B_x \e y \otimes \e z - B_x \e z \otimes \e y + B_y \e z \otimes \e x - B_y \e x \otimes \e z + B_z \e x \otimes \e y - B_z \e y \otimes \e x\\
+            &\qquad \quad + E_x \e x \otimes \e t - E_x \e t \otimes \e x + E_y \e y \otimes \e t - E_y \e t \otimes \e x + E_z \e z \otimes \e t - E_z \e t \otimes \e z\\
+        \end{align*}
+        Which is a $(0,2)$ Tensor with the same compnents as the Electromagnetic field strength tensor.
+      \item
+        \begin{align*}
+                          &\e F = 0\\
+          \Leftrightarrow &\e (B + E \wedge \e t) = 0\\
+          \Leftrightarrow &\e B + \e (E \wedge \e t) = 0\\
+          \Leftrightarrow &\e B + (\e E) \wedge \e t - E \wedge \e(\e t) = 0\\
+          \Leftrightarrow &\e B + (\e E) \wedge \e t  = 0\\
+        \end{align*}
+        Calculating $\e B$ gives:
+        \begin{align*}
+            & \e(B_x \e y \wedge \e z + B_y \e z \wedge \e x + B_z \e x \wedge \e y) \\
+          = & \partial_t B_x  \e t \wedge \e y \wedge \e z + \partial_t B_y  \e t \wedge \e z \wedge \e x + \partial_t B_z  \e t \wedge \e x \wedge \e y\\
+            & \qquad + \partial_x B_x \e x \wedge \e y \wedge \e z + \partial_y B_y \e y \wedge \e z \wedge \e x  + \partial_z B_z \e z \wedge \e x \wedge \e y\\
+          = & \partial_t B_x  \e t \wedge \e y \wedge \e z + \partial_t B_y  \e t \wedge \e z \wedge \e x + \partial_t B_z  \e t \wedge \e x \wedge \e y\\
+            & \qquad + \partial_x B_x \e x \wedge \e y \wedge \e z + \partial_y B_y \e x \wedge \e t \wedge \e z + \partial_z B_z \e x \wedge \e y \wedge \e z\\
+          = & \partial_t B_z  \e x \wedge \e y \wedge \e t + \partial_t B_x  \e y \wedge \e z \wedge \e t + \partial_t B_y  \e z \wedge \e x \wedge \e t \\
+            & \qquad + (\partial_x B_x + \partial_y B_y + \partial_z B_z )\e x \wedge \e y \wedge \e z
+        \end{align*}
+        Calculating $\e E$ gives, and ignorin the time parts, which will vanish after the wedge with $\e t$:
+        \begin{align*}
+          &\e (E_x \e x + E_y \e y + E_z \e z) \\
+          = &(\partial_x E_y - \partial_y E_x) \e x \wedge \e y + (\partial_y  E_z - \partial_z  E_y)\e y \wedge \e z + (\partial_z  E_x - \partial_x  E_z)\e z \wedge \e x\\
+        \end{align*}
+        From matching the components:
+        \begin{align*}
+            (\partial_x B_x + \partial_y B_y + \partial_z B_z )\e x \wedge \e y \wedge \e z = 0 \Leftrightarrow \nabla \cdot B = 0
+        \end{align*}
+        And also:
+        \begin{align*}
+          &\partial_t B_z  \e x \wedge \e y \wedge \e t + \partial_t B_x  \e y \wedge \e z \wedge \e t + \partial_t B_y  \e z \wedge \e x \wedge \e t \\
+          =& - (\partial_x E_y - \partial_y E_x) \e x \wedge \e y \wedge \e t + (\partial_y  E_z - \partial_z  E_y)\e y \wedge \e z \wedge \e t + (\partial_z  E_x - \partial_x  E_z)\e z \wedge \e x \wedge \e t \\
+        \end{align*}
+        Or equivalently:
+        \begin{equation*}
+          \frac{\partial B}{\partial t} + \nabla \times E = 0
+        \end{equation*}
+      \item
+        $F$ is closed by Maxwell's equations, and therefore exact $F+ \e A$ for some 1-form $A$.
+    \end{enumerate}
+\end{enumerate}
+\end{document}
