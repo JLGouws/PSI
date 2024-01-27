@@ -148,6 +148,36 @@
     \begin{equation*}
       x =  r \sin \theta \cos \phi \Rightarrow \e x = \sin \theta \cos \phi \e r + r \cos \theta \cos \phi \e \theta -  r \sin \theta \sin \phi \e \phi
     \end{equation*}
+  \item
+    The inverse Jacobian matrix is:
+    \href{https://en.wikipedia.org/wiki/Spherical_coordinate_system}{Something Linky}
+    \begin{equation*}
+      J = \frac{\partial(r, \theta, \phi)}{\partial (x, y, z)} =
+      \left(
+      \begin{matrix}
+        \dfrac{x}{r}&\dfrac{y}{r}&\dfrac{z}{r}\\
+        \dfrac{xz}{r^2\sqrt{x^2+y^2}}&\dfrac{yz}{r^2\sqrt{x^2+y^2}}&\dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}}\\
+        \dfrac{-y}{x^2+y^2}&\dfrac{x}{x^2+y^2}&0
+      \end{matrix}
+      \right)
+    \end{equation*}
+    Therefore:
+    \begin{equation*}
+      \e \theta = \dfrac{xz}{r^2\sqrt{x^2+y^2}} \e x + \dfrac{yz}{r^2\sqrt{x^2+y^2}} \e y + \dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}} \e z
+    \end{equation*}
+    and:
+    \begin{equation*}
+      \e \phi = \dfrac{-y}{x^2+y^2} \e x + \dfrac{x}{x^2+y^2} \e y
+    \end{equation*}
+    And obviously:
+    \begin{equation*}
+      \sin \theta = \frac{\sqrt{x^2 + y^2}}{r}
+    \end{equation*}
+    From which, calculating $F$ is straight forward:
+    \begin{align*}
+      F &= Q \frac{\sqrt{x^2 + y^2}}{r} \left(\dfrac{xz}{r^2\sqrt{x^2+y^2}} \e x + \dfrac{yz}{r^2\sqrt{x^2+y^2}} \e y + \dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}} \e z\right) \wedge \left(\dfrac{-y}{x^2+y^2} \e x + \dfrac{x}{x^2+y^2} \e y\right)\\
+        &= Q \left(\dfrac{z}{r^3} \e x \wedge \e y + \dfrac{y}{r^3} \e z \wedge \e x + \dfrac{x}{r^3} \e y \wedge \e z\right)
+    \end{align*}
     
 \end{enumerate}
 \end{document}
