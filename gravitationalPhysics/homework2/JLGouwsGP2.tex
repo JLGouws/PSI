@@ -96,7 +96,19 @@
     \begin{equation*}
       \e \omega = \e( \e \lambda )
     \end{equation*}
-    For $n = 1$, the only case that has to be checked is for 1-forms, and a 1-form being closed is simply $\frac{\partial f}{\partial x} dx = 0$, or  $\frac{\partial f}{\partial x} = 0$.
+    For $n = 1$, the only case that has to be checked is for 1-forms because there are no "$-1$"-forms to make "0"-forms exact.
+    All 1-forms are necesarilly exact: $\e (\alpha \e x) = \frac{\partial \alpha}{\partial x} \e x \wedge \e x \equiv 0$.
+    The question now is for every one-form $\alpha(x) \e x$, is there a function $\beta(x)$ such that $\alpha = \frac{\partial \beta}{\partial x}$.
+    Such a function is:
+    \begin{equation*}
+      \beta(x) = \int_0^x \alpha(x') \e x'
+    \end{equation*}
+    Since $\alpha$ is smooth and hence integrable, this is indeed a smooth $0$ form.
+
+    This argument breaks down on the circle, because forms have to be smooth (and continuous) on the whole circle.
+    A counter example of a closed, but non exact 1-form on the circle is $\e \theta$, where $\theta$ is the angle along the circle.
+    Here if one tries to construct the 0-form $\beta(\theta) = \theta + C$ it satisfies $\frac{\partial \beta}{\theta} \e \theta = \e \theta$, but is not actually a 0-form on the circle $S^1$.
+    The points $\theta = 0$ and $\theta = 2 \pi$ are the same points on the circle, but $\beta(0) = C$ and $\beta(2 \pi) = 2 \pi + C$ and so $\beta$ is not single valued and hence a well defined function on $S^1$.
   \item
     \begin{align*}
       g &= \frac{1}{4 \pi } \int_{S^2} F^{(2)} \\
@@ -136,6 +148,36 @@
     \begin{equation*}
       x =  r \sin \theta \cos \phi \Rightarrow \e x = \sin \theta \cos \phi \e r + r \cos \theta \cos \phi \e \theta -  r \sin \theta \sin \phi \e \phi
     \end{equation*}
+  \item
+    The inverse Jacobian matrix is:
+    \href{https://en.wikipedia.org/wiki/Spherical_coordinate_system}{Something Linky}
+    \begin{equation*}
+      J = \frac{\partial(r, \theta, \phi)}{\partial (x, y, z)} =
+      \left(
+      \begin{matrix}
+        \dfrac{x}{r}&\dfrac{y}{r}&\dfrac{z}{r}\\
+        \dfrac{xz}{r^2\sqrt{x^2+y^2}}&\dfrac{yz}{r^2\sqrt{x^2+y^2}}&\dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}}\\
+        \dfrac{-y}{x^2+y^2}&\dfrac{x}{x^2+y^2}&0
+      \end{matrix}
+      \right)
+    \end{equation*}
+    Therefore:
+    \begin{equation*}
+      \e \theta = \dfrac{xz}{r^2\sqrt{x^2+y^2}} \e x + \dfrac{yz}{r^2\sqrt{x^2+y^2}} \e y + \dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}} \e z
+    \end{equation*}
+    and:
+    \begin{equation*}
+      \e \phi = \dfrac{-y}{x^2+y^2} \e x + \dfrac{x}{x^2+y^2} \e y
+    \end{equation*}
+    And obviously:
+    \begin{equation*}
+      \sin \theta = \frac{\sqrt{x^2 + y^2}}{r}
+    \end{equation*}
+    From which, calculating $F$ is straight forward:
+    \begin{align*}
+      F &= Q \frac{\sqrt{x^2 + y^2}}{r} \left(\dfrac{xz}{r^2\sqrt{x^2+y^2}} \e x + \dfrac{yz}{r^2\sqrt{x^2+y^2}} \e y + \dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}} \e z\right) \wedge \left(\dfrac{-y}{x^2+y^2} \e x + \dfrac{x}{x^2+y^2} \e y\right)\\
+        &= Q \left(\dfrac{z}{r^3} \e x \wedge \e y + \dfrac{y}{r^3} \e z \wedge \e x + \dfrac{x}{r^3} \e y \wedge \e z\right)
+    \end{align*}
     
 \end{enumerate}
 \end{document}
