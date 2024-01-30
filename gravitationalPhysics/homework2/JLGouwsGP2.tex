@@ -92,92 +92,160 @@
 
 \begin{enumerate}
   \item
-    Let $\omega = \e \lambda$ be exact, then:
-    \begin{equation*}
-      \e \omega = \e( \e \lambda )
-    \end{equation*}
-    For $n = 1$, the only case that has to be checked is for 1-forms because there are no "$-1$"-forms to make "0"-forms exact.
-    All 1-forms are necesarilly exact: $\e (\alpha \e x) = \frac{\partial \alpha}{\partial x} \e x \wedge \e x \equiv 0$.
-    The question now is for every one-form $\alpha(x) \e x$, is there a function $\beta(x)$ such that $\alpha = \frac{\partial \beta}{\partial x}$.
-    Such a function is:
-    \begin{equation*}
-      \beta(x) = \int_0^x \alpha(x') \e x'
-    \end{equation*}
-    Since $\alpha$ is smooth and hence integrable, this is indeed a smooth $0$ form.
+    \begin{enumerate}
+      \item
+        Let $\omega = \e \lambda$ be exact, then:
+        \begin{equation*}
+          \e \omega = \e( \e \lambda )
+        \end{equation*}
+        For $n = 1$, the only case that has to be checked is for 1-forms because there are no "$-1$"-forms to make "0"-forms exact.
+        All 1-forms are necesarilly exact: $\e (\alpha \e x) = \frac{\partial \alpha}{\partial x} \e x \wedge \e x \equiv 0$.
+        The question now is for every one-form $\alpha(x) \e x$, is there a function $\beta(x)$ such that $\alpha = \frac{\partial \beta}{\partial x}$.
+        Such a function is:
+        \begin{equation*}
+          \beta(x) = \int_0^x \alpha(x') \e x'
+        \end{equation*}
+        Since $\alpha$ is smooth and hence integrable, this is indeed a smooth $0$ form.
 
-    This argument breaks down on the circle, because forms have to be smooth (and continuous) on the whole circle.
-    A counter example of a closed, but non exact 1-form on the circle is $\e \theta$, where $\theta$ is the angle along the circle.
-    Here if one tries to construct the 0-form $\beta(\theta) = \theta + C$ it satisfies $\frac{\partial \beta}{\theta} \e \theta = \e \theta$, but is not actually a 0-form on the circle $S^1$.
-    The points $\theta = 0$ and $\theta = 2 \pi$ are the same points on the circle, but $\beta(0) = C$ and $\beta(2 \pi) = 2 \pi + C$ and so $\beta$ is not single valued and hence a well defined function on $S^1$.
+        This argument breaks down on the circle, because forms have to be smooth (and continuous) on the whole circle.
+        A counter example of a closed, but non exact 1-form on the circle is $\e \theta$, where $\theta$ is the angle along the circle.
+        Here if one tries to construct the 0-form $\beta(\theta) = \theta + C$ it satisfies $\frac{\partial \beta}{\theta} \e \theta = \e \theta$, but is not actually a 0-form on the circle $S^1$.
+        The points $\theta = 0$ and $\theta = 2 \pi$ are the same points on the circle, but $\beta(0) = C$ and $\beta(2 \pi) = 2 \pi + C$ and so $\beta$ is not single valued and hence a well defined function on $S^1$.
+      \item
+        \begin{align*}
+          g &= \frac{1}{4 \pi } \int_{S^2} F^{(2)} \\
+            &= \frac{1}{4 \pi } \int_{S^2} \e A^{(1)} \\
+            &= \frac{1}{4 \pi } \int_{\partial S^2} A^{(1)} \\
+            &= 0 
+        \end{align*}
+        Since the sphere has not boundary.
+      \item
+        \begin{align*}
+          \e F^{(4)} &= \e (Q \sin \theta \e \theta \wedge \e \phi)\\
+                     &= Q \cos \theta \e \theta \wedge \e \theta \wedge \e \phi\\
+                     &= 0 
+        \end{align*}
+        And for the other term, note the metric is $\e t^2 - \e r^2 - r^2 \e \theta - r^2 \sin^2 \theta \e \phi$
+        \begin{align*}
+          \e * F^{(4)} &= \e (* (Q \sin \theta \e \theta \wedge \e \phi))\\
+                       &= \e \left(\frac{1}{(4 - 2)!}\frac{1}{2} \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu + \tensor{\epsilon}{^\phi^\theta _\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu\right)\right)\\
+                       &= \frac{1}{4}\e \left(Q \sin \theta \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu}  \e x^\mu \wedge \e x^\nu + \tensor{\epsilon}{^\phi^\theta _\mu_\nu} \e x^\mu \wedge \e x^\nu\right)\right)\\
+                       &= \frac{1}{4}\e \left(Q \sin \theta \left( \tensor{\epsilon}{^\theta ^\phi_t_r} \e t \wedge \e r + \tensor{\epsilon}{^\theta ^\phi_r_t} \e r \wedge \e t + \tensor{\epsilon}{^\phi^\theta _t_r} \e t \wedge \e r + \tensor{\epsilon}{^\phi^\theta _r_t} \e r \wedge \e t\right)\right)
+    %                   &= \e \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu \right)\\
+    %                   &= \e \left(\tensor{\epsilon}{^\theta ^\phi_t_r} Q \sin \theta \e t \wedge \e r - \tensor{\epsilon}{^\theta ^\phi_r_t} Q \sin \theta \e r \wedge \e t\right)\\
+    %                   &= Q \cos \theta \e \theta \wedge \e \theta \wedge \e \phi\\
+    %                   &= 0 
+        \end{align*}
+        Now $\sqrt{g} = r^2 \sin \theta$ and $g^{\theta \theta} = -\frac{1}{r^2}$ and $g^{\phi\phi} = -\frac{1}{r^2 \sin^2\theta }$
+        Therefore $\tensor{\epsilon}{^\theta ^\phi_t_r} = \sqrt{g} g^{\theta\theta} g^{\phi\phi} \sigma_{\theta\phi t r}$ and:
+        \begin{align*}
+          \e * F^{(4)} &= \e \left(Q \frac{Q}{r^2} \e t \wedge \e r\right)\\
+                       &= 0 
+        \end{align*}
+      \item
+        Here:
+        \begin{equation*}
+          \e \theta = \frac{\partial \theta }{ \partial x} \e x
+        \end{equation*}
+        \begin{equation*}
+          x =  r \sin \theta \cos \phi \Rightarrow \e x = \sin \theta \cos \phi \e r + r \cos \theta \cos \phi \e \theta -  r \sin \theta \sin \phi \e \phi
+        \end{equation*}
+      \item
+        The \href{https://en.wikipedia.org/wiki/Spherical_coordinate_system}{inverse Jacobian matrix} is:
+        \begin{equation*}
+          J = \frac{\partial(r, \theta, \phi)}{\partial (x, y, z)} =
+          \left(
+          \begin{matrix}
+            \dfrac{x}{r}&\dfrac{y}{r}&\dfrac{z}{r}\\
+            \dfrac{xz}{r^2\sqrt{x^2+y^2}}&\dfrac{yz}{r^2\sqrt{x^2+y^2}}&\dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}}\\
+            \dfrac{-y}{x^2+y^2}&\dfrac{x}{x^2+y^2}&0
+          \end{matrix}
+          \right)
+        \end{equation*}
+        Therefore:
+        \begin{equation*}
+          \e \theta = \dfrac{xz}{r^2\sqrt{x^2+y^2}} \e x + \dfrac{yz}{r^2\sqrt{x^2+y^2}} \e y + \dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}} \e z
+        \end{equation*}
+        and:
+        \begin{equation*}
+          \e \phi = \dfrac{-y}{x^2+y^2} \e x + \dfrac{x}{x^2+y^2} \e y
+        \end{equation*}
+        And obviously:
+        \begin{equation*}
+          \sin \theta = \frac{\sqrt{x^2 + y^2}}{r}
+        \end{equation*}
+        From which, calculating $F$ is straight forward:
+        \begin{align*}
+          F &= Q \frac{\sqrt{x^2 + y^2}}{r} \left(\dfrac{xz}{r^2\sqrt{x^2+y^2}} \e x + \dfrac{yz}{r^2\sqrt{x^2+y^2}} \e y + \dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}} \e z\right) \wedge \left(\dfrac{-y}{x^2+y^2} \e x + \dfrac{x}{x^2+y^2} \e y\right)\\
+            &= Q \left(\dfrac{z}{r^3} \e x \wedge \e y + \dfrac{y}{r^3} \e z \wedge \e x + \dfrac{x}{r^3} \e y \wedge \e z\right)
+        \end{align*}
+      \item
+        For the integral of the 2-form on the sphere:
+        \begin{align*}
+          g =
+          \frac{1}{4 \pi}\int_{S^2} F^{(2)} =
+          \frac{1}{4 \pi}\int_{S^2} Q \sin \theta \e \theta \wedge \e \phi =
+          \frac{1}{4 \pi}\int_{S^2} Q \e \Omega =
+          \frac{4 \pi}{4 \pi} Q  = Q
+        \end{align*}
+        \begin{enumerate}
+          \item
+            If $F$ were globally exact, the integral would vanish, which it does not, contradicting $F$ begin globally exact.
+          \item
+            ...
+        \end{enumerate}
+      \item
+        An attempt at constructing such a potential is:
+        \begin{equation*}
+          A = Q \cos \theta \e \phi
+        \end{equation*}
+        But this potential is not well defined on the $\theta = 0$ or $z$ axis, because $\e \phi$ does not make sense there.
+        Thus the ponetial must vanish at the poles $\theta = 0$ and $\theta = \pi$.
+        \begin{equation*}
+          A_+ = Q (1 - \cos \theta) \e \phi
+        \end{equation*}
+        A 1-form such that $F^{(4)} = \e A^{(2)}$ is:
+        \begin{equation*}
+          A_+ = Q (1 - \cos \theta) \e \phi
+        \end{equation*}
+        and:
+        \begin{equation*}
+          A_- = -Q (1 + \cos \theta) \e \phi
+        \end{equation*}
+      \item
+        \begin{align*}
+                      & -Q (1 + \cos \theta) \e \phi =  Q (1 - \cos \theta) \e \phi + \frac{1}{ie} \gamma^{-1} \e \gamma\\
+          \Rightarrow &  \gamma^{-1} \e \gamma = - 2Q i e \e \phi
+        \end{align*}
+        Say $\gamma = e^{i g \phi}$ then:
+        \begin{align*}
+                      &  \gamma^{-1} \e \gamma = - 2Q i e \e \phi\\
+          \Rightarrow &  i  g \e \phi= - 2Q i e \e \phi\\
+          \Rightarrow &  i( g + 2 Q e)  \e \phi = 0\\
+          \Rightarrow &  g + 2 Q e = 0\\
+          \Rightarrow &  Q = - \frac{g}{2 e}
+        \end{align*}
+
+        
+    \end{enumerate}
   \item
-    \begin{align*}
-      g &= \frac{1}{4 \pi } \int_{S^2} F^{(2)} \\
-        &= \frac{1}{4 \pi } \int_{S^2} \e A^{(1)} \\
-        &= \frac{1}{4 \pi } \int_{\partial S^2} A^{(1)} \\
-        &= 0 
-    \end{align*}
-    Since the sphere has not boundary.
-  \item
-    \begin{align*}
-      \e F^{(4)} &= \e (Q \sin \theta \e \theta \wedge \e \phi)\\
-                 &= Q \cos \theta \e \theta \wedge \e \theta \wedge \e \phi\\
-                 &= 0 
-    \end{align*}
-    And for the other term, note the metric is $\e t^2 - \e r^2 - r^2 \e \theta - r^2 \sin^2 \theta \e \phi$
-    \begin{align*}
-      \e * F^{(4)} &= \e (* (Q \sin \theta \e \theta \wedge \e \phi))\\
-                   &= \e \left(\frac{1}{(4 - 2)!}\frac{1}{2} \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu + \tensor{\epsilon}{^\phi^\theta _\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu\right)\right)\\
-                   &= \frac{1}{4}\e \left(Q \sin \theta \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu}  \e x^\mu \wedge \e x^\nu + \tensor{\epsilon}{^\phi^\theta _\mu_\nu} \e x^\mu \wedge \e x^\nu\right)\right)\\
-                   &= \frac{1}{4}\e \left(Q \sin \theta \left( \tensor{\epsilon}{^\theta ^\phi_t_r} \e t \wedge \e r + \tensor{\epsilon}{^\theta ^\phi_r_t} \e r \wedge \e t + \tensor{\epsilon}{^\phi^\theta _t_r} \e t \wedge \e r + \tensor{\epsilon}{^\phi^\theta _r_t} \e r \wedge \e t\right)\right)
-%                   &= \e \left(\tensor{\epsilon}{^\theta ^\phi_\mu_\nu} Q \sin \theta \e x^\mu \wedge \e x^\nu \right)\\
-%                   &= \e \left(\tensor{\epsilon}{^\theta ^\phi_t_r} Q \sin \theta \e t \wedge \e r - \tensor{\epsilon}{^\theta ^\phi_r_t} Q \sin \theta \e r \wedge \e t\right)\\
-%                   &= Q \cos \theta \e \theta \wedge \e \theta \wedge \e \phi\\
-%                   &= 0 
-    \end{align*}
-    Now $\sqrt{g} = r^2 \sin \theta$ and $g^{\theta \theta} = -\frac{1}{r^2}$ and $g^{\phi\phi} = -\frac{1}{r^2 \sin^2\theta }$
-    Therefore $\tensor{\epsilon}{^\theta ^\phi_t_r} = \sqrt{g} g^{\theta\theta} g^{\phi\phi} \sigma_{\theta\phi t r}$ and:
-    \begin{align*}
-      \e * F^{(4)} &= \e \left(Q \frac{Q}{r^2} \e t \wedge \e r\right)\\
-                   &= 0 
-    \end{align*}
-  \item
-    Here:
-    \begin{equation*}
-      \e \theta = \frac{\partial \theta }{ \partial x} \e x
-    \end{equation*}
-    \begin{equation*}
-      x =  r \sin \theta \cos \phi \Rightarrow \e x = \sin \theta \cos \phi \e r + r \cos \theta \cos \phi \e \theta -  r \sin \theta \sin \phi \e \phi
-    \end{equation*}
-  \item
-    The inverse Jacobian matrix is:
-    \href{https://en.wikipedia.org/wiki/Spherical_coordinate_system}{Something Linky}
-    \begin{equation*}
-      J = \frac{\partial(r, \theta, \phi)}{\partial (x, y, z)} =
-      \left(
-      \begin{matrix}
-        \dfrac{x}{r}&\dfrac{y}{r}&\dfrac{z}{r}\\
-        \dfrac{xz}{r^2\sqrt{x^2+y^2}}&\dfrac{yz}{r^2\sqrt{x^2+y^2}}&\dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}}\\
-        \dfrac{-y}{x^2+y^2}&\dfrac{x}{x^2+y^2}&0
-      \end{matrix}
-      \right)
-    \end{equation*}
-    Therefore:
-    \begin{equation*}
-      \e \theta = \dfrac{xz}{r^2\sqrt{x^2+y^2}} \e x + \dfrac{yz}{r^2\sqrt{x^2+y^2}} \e y + \dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}} \e z
-    \end{equation*}
-    and:
-    \begin{equation*}
-      \e \phi = \dfrac{-y}{x^2+y^2} \e x + \dfrac{x}{x^2+y^2} \e y
-    \end{equation*}
-    And obviously:
-    \begin{equation*}
-      \sin \theta = \frac{\sqrt{x^2 + y^2}}{r}
-    \end{equation*}
-    From which, calculating $F$ is straight forward:
-    \begin{align*}
-      F &= Q \frac{\sqrt{x^2 + y^2}}{r} \left(\dfrac{xz}{r^2\sqrt{x^2+y^2}} \e x + \dfrac{yz}{r^2\sqrt{x^2+y^2}} \e y + \dfrac{-\left(x^2 + y^2\right)}{r^2\sqrt{x^2+y^2}} \e z\right) \wedge \left(\dfrac{-y}{x^2+y^2} \e x + \dfrac{x}{x^2+y^2} \e y\right)\\
-        &= Q \left(\dfrac{z}{r^3} \e x \wedge \e y + \dfrac{y}{r^3} \e z \wedge \e x + \dfrac{x}{r^3} \e y \wedge \e z\right)
-    \end{align*}
-    
+    \begin{enumerate}
+      \item
+        When $n = 0$, $A_\sigma = 0$ and $f = \frac{r^2 - 2 m r}{r^2} = 1 - \frac{2 m}{r}$ so that:
+        \begin{align*}
+          \e s^2 = \left(1 - \frac{2 m}{r}\right)\e t \otimes \e t - \left(1 - \frac{2 m}{r}\right)^{-1}\e r \otimes \e r - r^2 (\e \theta \otimes \e \theta + \sin^2 \theta \e \phi \otimes \e \phi)
+        \end{align*}
+        Which is the Schartzschild solution for a body with mass $m$.
+      \item
+        With $\sigma = \pm 1$, the potential is $A_\sigma = n(\cos \theta \pm 1) \e \phi$
+        And the time component of the metric becomes (the radial and angular part has not $\sigma$ dependence, and so its regulartiy will not be affected by the value of 
+        $\sigma$):
+        \begin{align*}
+          f(\e t + 2 A_\sigma)^2 &= f(\e t + 2 n (\cos\theta \pm 1) \e \phi)^2\\
+                                 &= f(\e t \otimes \e t + 2 n (\cos\theta \pm 1) \e t \otimes \e \phi + 2 n (\cos\theta \pm \sigma) \e \phi \otimes \e t\\
+                                 &\qquad + 4 n^2 (\cos\theta \pm 1)^2 \e \phi \otimes \e \phi)
+        \end{align*}
+        The problem here is that again, $\e \phi$ is not well defined at $\theta = 0$, the north pole, and $\theta = \pi$, the south pole.
+    \end{enumerate}
 \end{enumerate}
 \end{document}
