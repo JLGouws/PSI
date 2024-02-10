@@ -1,0 +1,187 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+\DeclareMathOperator{\Div}{div}
+\newcommand{\e}{\mathrm{d}}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+
+\title{
+\textsc{Mathematical Physics Homework 2}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+\begin{enumerate}
+  \item
+    Using the definition of the canonical 1-form and properties of the pullback:
+    \begin{align*}
+      \mathbf{F} L^* \theta 
+        &= \mathbf{F} L^* (p_i \e q^i) \\
+        &= \mathbf{F} L^* (p_i) \mathbf{F} L^* (\e q^i) \\
+        &= \mathbf{F} L^* (p_i) \e \mathbf{F} L^* q^i \\
+        &= (p_i\circ \mathbf{F} L)   \e  (q^i \circ \mathbf{F} L) 
+    \end{align*}
+    Now using the definition of the $p$ coodinate functions and looking at their pullback:
+    \begin{equation*}
+      p_i( \mathbf{F} L(\mathbf{q}, \mathbf{v})) = p_i\left(\mathbf{q}, \frac{\partial \hat L}{\partial v_i} \e q^i\right) = \frac{\partial \hat L}{\partial v_i}(\hat{\mathbf{q}}, \hat{\mathbf{v}})
+    \end{equation*}
+    And:
+    \begin{equation*}
+      q^i( \mathbf{F} L(\mathbf{q}, \mathbf{v})) = q^i\left(\mathbf{q}, \frac{\partial \hat L}{\partial v_i} \e q^i\right) = q^i
+    \end{equation*}
+    From this it can be concluded that:
+    \begin{align*}
+      \mathbf{F} L^* \theta 
+        &= \frac{\partial \hat L}{\partial v_i} \e q^i 
+    \end{align*}
+  \item
+    Since $\omega = - \e \theta$ the calculation is straightforward since the exterior derivative commutes with the pullback:
+    \begin{align*}
+      \omega_L = 
+        \mathbf{F} L^* \omega
+        &= \mathbf{F} L^*(- \e \theta) \\
+        &= - \e \left(\frac{\partial \hat L}{\partial v^i}(\hat q, \hat v) \e q^i \right) \\
+        &= - \frac{\partial^2 \hat L}{\partial q^j \partial v^i} \e q^j \wedge \e q^i - \frac{\partial^2 \hat L}{\partial v^j \partial v^i} \e q^j \wedge \e q^i  \\
+        &= \frac{\partial^2 \hat L}{\partial q^j \partial v^i} \e q^i \wedge \e q^j + \frac{\partial^2 \hat L}{\partial v^j \partial v^i} \e q^i \wedge \e v^j 
+    \end{align*}
+  \item
+    Now to find the matrix of $\omega_L$:
+    \begin{align*}
+      \omega_L
+        &= \frac{\partial^2 \hat L}{\partial q^j \partial v^i} \e q^i \wedge \e q^j + \frac{\partial^2 \hat L}{\partial v^j \partial v^i} \e q^i \wedge \e v^j \\
+        &= \frac{\partial^2 \hat L}{\partial q^j \partial v^i} (\e q^i \otimes \e q^j - \e q^j \otimes \e q^ji + \frac{\partial^2 \hat L}{\partial v^j \partial v^i} (\e q^i \otimes \e v^j - \e v^j \otimes \e q^i) \\
+        &= \frac{\partial^2 \hat L}{\partial q^{[j} \partial v^{i]}} \e q^i \otimes \e q^j + \frac{\partial^2 \hat L}{\partial v^j \partial v^i} \e q^i \otimes \e v^j - \frac{\partial^2 \hat L}{\partial v^j \partial v^i}\e v^j \otimes \e q^i \\
+    \end{align*}
+    Therefore the matrix in block diagonal form is:
+    \begin{equation*}
+      \omega_{ij} = 
+        \left(
+          \begin{matrix}
+            \frac{\partial^2 \hat L}{\partial q^j \partial v^i} & \frac{\partial^2 \hat L}{\partial v^j \partial v^i} \\
+            - \frac{\partial^2 \hat L}{\partial v^j \partial v^i} & 0 
+          \end{matrix}
+        \right) 
+    \end{equation*}
+    Which has determinant:
+    \begin{equation*}
+      \det \omega_{ij} = 
+            \left(\frac{\partial^2 \hat L}{\partial v^j \partial v^i} \right)^2
+    \end{equation*}
+    And since $\omega_L$ is non-degenerate iff the matrix is non-singular, in this case it is non degenerate iff:
+    \begin{equation*}
+      \left(\frac{\partial^2 \hat L}{\partial v^j \partial v^i} \right)^2 \neq 0 \Leftrightarrow \frac{\partial^2 \hat L}{\partial v^j \partial v^i}  \neq 0
+    \end{equation*}
+  \item
+    This is just putting in the definitions:
+    \begin{equation*}
+      E(\mathbf{q}, \mathbf{v}) = \frac{\partial \hat L}{\partial v^i} \e q^i (\mathbf{v}) - L(\mathbf{q}, \mathbf{v}) = \frac{\partial \hat L}{\partial v^i} v^i - L(\mathbf{q}, \mathbf{v})
+    \end{equation*}
+  \item
+    First working out the right hand side of the definiton of $X_E$ gives:
+    \begin{align*}
+      \e E(\mathbf{q}, \mathbf{v}) &= \e \left(\frac{\partial \hat L}{\partial v^i} v^i - L(\mathbf{q}, \mathbf{v})\right)\\
+                                   &= \frac{\partial^2 \hat L}{\partial q^i\partial v^j} v^j \e q^i + \frac{\partial^2 \hat L}{\partial v^i\partial v^j} v^j \e v^i + \frac{\partial \hat L}{\partial v^i} \e v^i - \frac{\partial \hat L}{\partial q^i} \e q^i - \frac{\partial \hat L}{\partial v^i} \e v^i\\
+                                   &= \left(\frac{\partial^2 \hat L}{\partial q^i\partial v^j} v^j - \frac{\partial \hat L}{\partial q^i} \right)\e q^i + \frac{\partial^2 \hat L}{\partial v^i\partial v^j} v^j \e v^i
+    \end{align*}
+    And for the right hand side let:
+    \begin{equation*}
+      X_E = A^i \frac{\partial}{\partial q^i} + B^j \frac{\partial}{\partial v^j}
+    \end{equation*}
+    So that:
+    \begin{align*}
+      i_{X_E}\omega  %= A^i \frac{\partial^2 \hat L}{\partial q^j \partial v^i} \e q^i \wedge \e q^j + \frac{\partial^2 \hat L}{\partial v^j \partial v^i} \e q^i \wedge \e v^j
+                    &= A^i \frac{\partial^2 \hat L}{\partial q^{[j} \partial v^{i]}} \e q^j  + A^i \frac{\partial^2 \hat L}{\partial v^j \partial v^i} \e v^j - B^j \frac{\partial^2 \hat L}{\partial v^j \partial v^i} \e q^i
+    \end{align*}
+    It follows immediately that $A^i = v^i$, and relating the terms with the $\e q^i$ differentials gives:
+    \begin{align*}
+                      & v^j \frac{\partial^2 \hat L}{\partial q^{[i} \partial v^{j]}} - B^j \frac{\partial^2 \hat L}{\partial v^j \partial v^i} = \frac{\partial^2 \hat L}{\partial q^i\partial v^j} v^j - \frac{\partial \hat L}{\partial q^i} \\
+      \Leftrightarrow & - v^j \frac{\partial^2 \hat L}{\partial q^j \partial v^i} - B^j \frac{\partial^2 \hat L}{\partial v^j \partial v^i} = - \frac{\partial \hat L}{\partial q^i} \\
+      \Leftrightarrow &  B^j  = \left(\frac{\partial^2 \hat L}{\partial v^j \partial v^i}\right)^{-1}\left[\frac{\partial \hat L}{\partial q^i} - v^j \frac{\partial^2 \hat L}{\partial q^j \partial v^i}\right] 
+    \end{align*}
+    Since the matrix $\frac{\partial^2 \hat L}{\partial v^j \partial v^i}$ is non singular.
+    And the integral cuves satisfy:
+    \begin{equation*}
+      \dot{\gamma} = X_E \Rightarrow 
+      \begin{matrix}
+        \dot{q}^i \frac{\partial}{\partial q^i} = A^i \frac{\partial}{\partial q^i}\\
+        \dot{v}^i \frac{\partial}{\partial v^i} = B^i \frac{\partial}{\partial v^i}
+      \end{matrix}
+    \end{equation*}
+    And hence:
+    \begin{equation*}
+      \dot{q}^i = v^i
+    \end{equation*}
+    and the velocity component:
+    \begin{align*}
+                      & \dot{v}^j  = \left(\frac{\partial^2 \hat L}{\partial v^j \partial v^i}\right)^{-1}\left[\frac{\partial \hat L}{\partial q^i} - v^j \frac{\partial^2 \hat L}{\partial q^j \partial v^i}\right]\\
+      \Leftrightarrow & \frac{\partial^2 \hat L}{\partial v^j \partial v^i}\dot{v}^j  = \frac{\partial \hat L}{\partial q^i} - v^j \frac{\partial^2 \hat L}{\partial q^j \partial v^i}\\
+      \Leftrightarrow & \dot{v}^j \frac{\partial}{ \partial v^j}\frac{\partial \hat L}{ \partial v^i} + \dot q^j \frac{\partial}{\partial q^j}\frac{\partial \hat L}{\partial v^i} =  \frac{\partial \hat L}{\partial q^i}\\
+      \Leftrightarrow & \frac{\partial}{ \partial t}\left[\frac{\partial \hat L}{ \partial v^i}(q(t), v(t)) \right] =  \frac{\partial \hat L}{\partial q^i}\\
+    \end{align*}
+
+\end{enumerate}
+\end{document}

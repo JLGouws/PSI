@@ -4,3 +4,6 @@
 [submodule "numericalMethods/PSI-Numerical-Methods-2024-MCMC-Homework1"]
 	path = numericalMethods/PSI-Numerical-Methods-2024-MCMC-Homework1
 	url = https://github.com/JLGouws/PSI-Numerical-Methods-2024-MCMC-Homework1
+[submodule "numericalMethods/PSINumericalMethodsHomework2"]
+	path = numericalMethods/PSINumericalMethodsHomework2
+	url = https://github.com/JLGouws/PSINumericalMethodsHomework2

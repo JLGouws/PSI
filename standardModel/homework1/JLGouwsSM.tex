@@ -95,7 +95,7 @@
   \item
     \begin{enumerate}
       \item
-        This is more orless a straight forward derivation of expanding and matching terms, first take the derivative and look at the parts separately:
+        This is more or less a straight forward derivation of expanding and matching terms, first take the derivative and look at the parts separately:
         \begin{align*}
           D_\mu &= \partial_\mu - ig_2 \frac{1}{2} W^i_\mu \sigma^i - i g_1 Y B_\mu
         \end{align*}
@@ -112,7 +112,7 @@
                                               &= - \frac{ig_2}{2} (\sqrt{2}W^+_\mu T^+ + \sqrt{2}W^-_\mu T^-)  - ig_2  W^3_\mu T^3\\
                                               &= - \frac{ig_2}{\sqrt{2}} (W^+_\mu T^+ + W^-_\mu T^-)  - ig_2  W^3_\mu T^3
         \end{align*}
-        Now for the remaining terms in the covariant derivative:
+        Now for the remaining terms in the covariant derivative, keeping the $W^3$ term from the last calculation:
         \begin{align*}
           - ig_2  W^3_\mu T^3 - i g_1 Y B_\mu &= -ig_2 \frac{1}{\cos \theta_W }\cos \theta_W W^3T^3 - ig_1 Y B_\mu\\
                                               &= -ig_2 \frac{1}{\cos \theta_W }Z_\mu T^3 - i g_1 B_\mu T^3- ig_1 Y B_\mu\\
@@ -136,12 +136,13 @@
         \begin{align*}
           D_\mu &= \partial_\mu - \frac{ig_2}{\sqrt{2}} (W^+_\mu T^+ + W^-_\mu T^-) -ig_2 \frac{1}{\cos \theta_W }Z_\mu (T^3 - Q \sin^2 \theta_W) - i e A_\mu Q
         \end{align*}
+        I don't think the calculation was too instructive, but correct me if I am wrong.
       \item
-        Keeping only the $Z$ boson part:
+        Keeping only the $Z$ boson part of the covariant derivative yields:
         \begin{align*}
           D_\mu &= - ig_2 \frac{1}{\cos \theta_W }Z_\mu (T^3 - Q \sin^2 \theta_W)
         \end{align*}
-        And calculating:
+        And applying this to the quark doublet gives:
         \begin{align*}
           D_\mu(Q_L) &= - ig_Z Z_\mu (T^3 - Q \sin^2 \theta_W) (Q_L)\\
                      &= - ig_Z Z_\mu \left(\left[\begin{matrix} 1/2 & 0 \\ 0 & -1/2\end{matrix}\right] - \left(\left[\begin{matrix} 1/2 & 0 \\ 0 & -1/2\end{matrix}\right] + \left[\begin{matrix} Y_B & 0 \\ 0 & Y_B\end{matrix}\right]\right) \sin^2 \theta_W\right) \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]\\
@@ -151,7 +152,9 @@
                      &= - ig_Z Z_\mu \left[\begin{matrix} (1/2 - (2 / 3)\sin^2 \theta_W) u_L \\ (-1/2 - (-1/3) \sin^2 \theta_W) d_L \end{matrix}  \right] 
         \end{align*}
         From which it can be seen $Q_u = 2 / 3$ and $Q_d = - 1 / 3$.
+        Which is indeed the electric charge of the quarks.
       \item
+        Applying the Dirac conjugate of the left quark doublet to the covariant derivative gives:
         \begin{align*}
           \bar{Q_L} i \slashed{D} Q_L &= \left[\begin{matrix} u_L \\ d_L\end{matrix}\right]^\dagger \gamma^0 g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
                                       &= \left[\begin{matrix} u_L^\dagger\gamma^5 & d_L^\dagger \gamma^0 \end{matrix}\right]  g_Z \slashed{Z} \left[\begin{matrix} (1/2 - Q_u\sin^2 \theta_W) u_L \\ (-1/2 - Q_d \sin^2 \theta_W) d_L \end{matrix}  \right] \\
@@ -169,26 +172,25 @@
 %          D_\mu\psi_R = \partial_\mu\psi_R - i g_1 Y B_\mu \psi_R
 %        \end{equation*}
       \item
-        For this question, 
+        Here is an instructive mistake that I made, maybe you, the marker, should ignore this part for your sanity.
+        In this case, $W$ is in the Trivial representation, so:
+        \begin{equation*}
+          Z_\mu = - \sin \theta_W B_\mu
+        \end{equation*}
+        And the covariant derivative is:
+        \begin{align*}
+          D_\mu &= \partial_\mu + i g_1 Y \frac{Z_\mu}{\sin \theta_W } \\
+                &= \partial_\mu + i g_Z \frac{\cos \theta_W}{g^2} g_1 Y \frac{Z_\mu}{\sin \theta_W } 
+        \end{align*}
+        But, just because the representation is trivial does not mean the $W^3$ term can be ignored.
+        Hence, an expression for the other terms eliminating the $W^3$ is required:
         \begin{align*}
                           & \frac{Z_\mu}{\cos \theta_W} + \frac{\sin \theta_W}{\cos \theta_W} B_\mu=  \frac{A_\mu}{\sin \theta_W} - \frac{\cos \theta_W}{\sin \theta_W} B_\mu\\
           \Leftrightarrow & \frac{\cos \theta_W}{\sin \theta_W} B_\mu + \frac{\sin \theta_W}{\cos \theta_W} B_\mu =  \frac{A_\mu}{\sin \theta_W} - \frac{Z_\mu}{\cos \theta_W}\\
           \Leftrightarrow & \frac{g_2^2 + g_1^2}{g_1 g_2} B_\mu =  \frac{A_\mu}{\sin \theta_W} - \frac{Z_\mu}{\cos \theta_W}\\
           \Leftrightarrow & B_\mu  =  \frac{g_2}{g_1}\sin^2 \theta_W A_\mu - \frac{g_Z}{g_1} \sin^2 Z_\mu
         \end{align*}
-        \begin{equation*}
-          D_\mu = \partial_\mu - i g_1 Y ()
-        \end{equation*}
-%        In this case, $W$ is in the Trivial representation, so:
-%        \begin{equation*}
-%          Z_\mu = - \sin \theta_W B_\mu
-%        \end{equation*}
-%        And the covariant derivative is:
-%        \begin{align*}
-%          D_\mu &= \partial_\mu + i g_1 Y \frac{Z_\mu}{\sin \theta_W } \\
-%                &= \partial_\mu + i g_Z \frac{\cos \theta_W}{g^2} g_1 Y \frac{Z_\mu}{\sin \theta_W } 
-%        \end{align*}
-        The covariant derivative here becomes:
+        And substituting this in gives the covariant derivative:
         \begin{align*}
           D_\mu %&= \partial_\mu - i g_1 Y (g_2\sin^2 \theta_W A_\mu - g_Z \sin^2 Z_\mu)\\
                 &= \partial_\mu - i g_1 Y \left(\frac{g_2}{g_1}\sin^2 \theta_W A_\mu - \frac{g_Z}{g_1} \sin^2\theta_W Z_\mu\right)\\
@@ -196,30 +198,30 @@
         \end{align*}
         Ignoring other terms gives the desired result.
       \item
-        Determining the interaction between the $u_R$ quarks and the $Z$ boson gives, remembering that these quarks are scalars as far as the derivative goes:
+        Determining the interaction between the $u_R$ quarks and the $Z$ boson gives, remembering that these quarks are scalars as far as the derivative is concerned:
         \begin{align*}
           \bar{u}_R i\slashed{D}  \bar{u}_R
-                &= \bar{u}_R  g_Z \slashed{Z} (-\frac{2}{3} \sin^2\theta_W) ) \bar{u}_R
+                &= \bar{u}_R  g_Z \slashed{Z} \left(-\frac{2}{3} \sin^2\theta_W\right)  \bar{u}_R
         \end{align*}
         For the down quark $Y = -\frac{1}{3} = Q$ from the holy table.
-        Generalizing this the interaction term for right handed fermions:
+        Generalizing this interaction term for right handed fermions gives:
         \begin{align*}
           \bar{\psi}_R i\slashed{D}  \bar{\psi}_R
                 &= \bar{\psi}_R  g_Z \slashed{Z} (-Q \sin^2\theta_W) ) \bar{\psi}_R
         \end{align*}
-        Here the physical charge is the actual charge because the right handed fermions do not interact with the Weak field which changes the physical charge in the case of left handed fermions.
+        Here the physical charge is the actual charge because the right handed fermions do not interact with the Weak field which changes the physical charge (gives an effective charge) in the case of left handed fermions.
       \item
         We have the following interactions:
         \begin{align*}
           g_Z \overline{\left(P_L \psi\right)} \slashed{Z}  (T_{3, \psi} - Q \sin^2 \theta_W)P_L\psi \qquad \text{ and } \qquad \overline{\left(P_R \psi\right)}  g_Z \slashed{Z} (-Q \sin^2\theta_W) ) P_R\bar{\psi} 
         \end{align*}
-        If, these are added together:
+        If, these are added together we get:
         \begin{align*}
                           & g_Z \overline{\left(P_L \psi\right)} \slashed{Z}  T_{3, \psi} P_L\psi + g_Z \overline{\left(P_L \psi\right)} \slashed{Z}( - Q \sin^2 \theta_W )P_L\psi + \overline{\left(P_R \psi\right)}  g_Z \slashed{Z} (-Q \sin^2\theta_W) ) P_R\bar{\psi}\\
           =               & g_Z \overline{\left(P_L \psi\right)} \slashed{Z}  T_{3, \psi} P_L\psi + g_Z \overline{\left((P_R + P_L) \psi\right)} \slashed{Z}( - Q \sin^2 \theta_W )(P_R + P_L)\psi \\
           =               & g_Z \overline{\left(P_L \psi\right)} \slashed{Z}  T_{3, \psi} P_L\psi + g_Z \overline{\psi} \slashed{Z}( - Q \sin^2 \theta_W ) \psi 
         \end{align*}
-        Now focus on the first term:
+        Now focussing on the first term:
         \begin{align*}
                           & g_Z \overline{\left(\frac{1 - \gamma^5}{2} \psi\right)} \slashed{Z}  T_{3, \psi} \left(\frac{1 - \gamma^5}{2}\right)\psi \\
           =               & \frac{1}{4} g_Z \overline{\left((1 - \gamma^5 )\psi\right)} \slashed{Z}  T_{3, \psi} \left(1 - \gamma^5\right)\psi \\
@@ -228,13 +230,13 @@
           =               & \frac{1}{4} g_Z \bar{\psi} \slashed{Z} \left(1 - \gamma^5 \right) T_{3, \psi} \left(1 - \gamma^5\right)\psi \\
           =               & \frac{1}{4} g_Z \bar{\psi} \slashed{Z}  T_{3, \psi} \left(1 - \gamma^5 \right) \left(1 - \gamma^5\right)\psi \\
           =               & \frac{1}{4} g_Z \bar{\psi} \slashed{Z}  T_{3, \psi} \left(1 - 2 \gamma^5  + 1\right) \psi \\
-          =               & g_Z \bar{\psi} \slashed{Z}  \left(\frac{T_{3, \psi}}{2}  -  \frac{T_{3, \psi}}{2} \gamma^5 \right) \psi \\
+          =               & g_Z \bar{\psi} \slashed{Z}  \left(\frac{T_{3, \psi}}{2}  -  \frac{T_{3, \psi}}{2} \gamma^5 \right) \psi 
         \end{align*}
         Finally combining this with the previous term:
         \begin{align*}
           =               & g_Z \bar{\psi} \slashed{Z}  \left(\frac{T_{3, \psi}}{2}  -  \frac{T_{3, \psi}}{2} \gamma^5 \right) \psi  + g_Z \overline{\psi} \slashed{Z}( - Q \sin^2 \theta_W ) \psi \\
           =               & g_Z \bar{\psi} \slashed{Z}  \left(\frac{T_{3, \psi}}{2} - Q \sin^2 \theta_W -  \frac{T_{3, \psi}}{2} \gamma^5 \right) \psi \\
-          =               & g_Z \bar{\psi} \slashed{Z}  \left(g_V -  g_A \gamma^5 \right) \psi \\
+          =               & g_Z \bar{\psi} \slashed{Z}  \left(g_V -  g_A \gamma^5 \right) \psi
         \end{align*}
     \end{enumerate}
   \item
@@ -248,35 +250,37 @@
         \begin{figure}[!ht]
           \centering
           \feynmandiagram [horizontal=a to b] {
-            i1 -- [fermion] a -- [fermion] i2,
-            a -- [boson] b
+            i1 [particle = $\bar{\psi}$] -- [fermion] a -- [fermion] i2 [particle = $\psi$],
+            a -- [boson] b [particle = $Z$]
           };
         \end{figure}
+
         And the rule is to associate a factor of:
         \begin{equation*}
           - i g_Z \gamma^\mu g_{V A}
         \end{equation*}
-        The fermion propagator gets the term:
-        \begin{equation*}
-          -\frac{i (\slashed{p} + m)}{p^2 - m^2+ i \epsilon}
-        \end{equation*}
-        \begin{figure}[!ht]
-          \centering
-          \feynmandiagram [horizontal=a to b] {
-            a -- [fermion] b 
-          };
-        \end{figure}
-        The boson gets the term:
-        \begin{equation*}
-          -\frac{i \eta_{\mu\nu}}{p^2 + i \epsilon}
-        \end{equation*}
+        with the vertex.
+%        The fermion propagator gets the term:
+%        \begin{equation*}
+%          -\frac{i (\slashed{p} + m)}{p^2 - m^2+ i \epsilon}
+%        \end{equation*}
+%        \begin{figure}[!ht]
+%          \centering
+%          \feynmandiagram [horizontal=a to b] {
+%            a -- [fermion] b 
+%          };
+%        \end{figure}
+%        The boson gets the term:
+%        \begin{equation*}
+%          -\frac{i \eta_{\mu\nu}}{p^2 + i \epsilon}
+%        \end{equation*}
       \item
-        The leading order Feynman diagram is:
+        The leading order Feynman diagram is the simple decay:
         \begin{figure}[!ht]
           \centering
           \feynmandiagram [vertical=a to b] {
-            i1 -- [fermion] a -- [fermion] i2,
-            a -- [boson] b
+            i1 [particle = $\bar{f}$] -- [fermion] a -- [fermion] i2 [particle = $f$],
+            a -- [boson] b [particle = $Z$]
           };
         \end{figure}
       \item
@@ -284,24 +288,36 @@
         \begin{equation*}
           \mathcal{M}(Z_0 \to f \bar{f}) = - i g_Z \epsilon_\mu^\lambda \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p)
         \end{equation*}
+        Just using the usual rules of sandwiching the interaction term between the two fermion.
       \item
+        Here, we just times the amplitute by its complex conjugate or equivalently its hermitian conjugate.
         \begin{align*}
-          |\mathcal{M}|^2 &= - i g_Z \epsilon_\mu^\lambda \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) (- i g_Z \epsilon_\nu^\lambda \bar{u}^r(p) \gamma^\nu g_{V A} v^s(p))^*\\
-                                   &= g_Z^2 \epsilon_\mu^\lambda \epsilon_\nu^{\lambda *} \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) ( \bar{u}^r(p) \gamma^\nu g_{V A} v^s(p))^*
+          |\mathcal{M}|^2 &= - i g_Z \epsilon_\mu^\lambda \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) (- i g_Z \epsilon_\nu^\lambda \bar{u}^r(p) \gamma^\nu g_{V A} v^s(q))^*\\
+                                   &= g_Z^2 \epsilon_\mu^\lambda \epsilon_\nu^{\lambda *} \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) ( \bar{u}^r(p) \gamma^\nu g_{V A} v^s(q))^\dagger
         \end{align*}
-        Averaging over the polarizations, thens spins gives:
+        Averaging over the polarizations, and addin the spins gives:
         \begin{align*}
           \overline{|\mathcal{M}|}^2 
-                                   &= \frac{1}{3}\sum_{s}\sum_{r}\sum_{\lambda = 1}^{3} g_Z^2 \epsilon_\mu^\lambda \epsilon_\nu^{\lambda *} \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) ( \bar{u}^r(p) \gamma^\nu g_{V A} v^s(p))^\dagger\\
-                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) v^s(p)^\dagger g_{V A} (\gamma^\nu)^\dagger \gamma_0 u^r(p)   \\
-                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) \bar{v}^s(p)(-1)\gamma_0 g_{V A} (\gamma^\nu)^\dagger \gamma_0 u^r(p)   \\
-                                   &= \frac{1}{3}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} (\gamma^\alpha q_\alpha - m)(-1)\gamma_0 g_{V A} \gamma_0\gamma^\nu  u^r(p)   \\
-                                   &= \frac{1}{3}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \sum_{r}\bar{u}^r(p) \gamma^\mu g_{V A} (\gamma^\alpha q_\alpha - m)(-1)\gamma_0 g_{V A} \gamma_0 \gamma^\nu u^r(p)   \\
-                                   &= \frac{1}{3}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \Tr\left[\gamma^\mu g_{V A} (\gamma^\alpha q_\alpha - m)(-1)\gamma_0 g_{V A} \gamma_0 \gamma^\nu(\gamma^\beta p_\beta - m) \right]  \\
+                                   &= \frac{1}{3}\sum_{s}\sum_{r}\sum_{\lambda = 1}^{3} g_Z^2 \epsilon_\mu^\lambda \epsilon_\nu^{\lambda *} \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) ( \bar{u}^r(p) \gamma^\nu g_{V A} v^s(q))^\dagger\\
+                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) v^s(q)^\dagger g_{V A} (\gamma^\nu)^\dagger \gamma_0 u^r(p)   \\
+                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) v^s(q)^\dagger g_{V A} \gamma_0 \gamma^\nu  u^r(p)   \\
+                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) v^s(q)^\dagger (g_{V } - g_A \gamma^5) \gamma_0 \gamma^\nu  u^r(p)   \\
+                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) v^s(q)^\dagger\gamma_0 (g_{V } + g_A \gamma^5)  \gamma^\nu  u^r(p)   \\
+                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) \bar{v}^s(q) (g_{V } + g_A \gamma^5)  \gamma^\nu  u^r(p)   \\
+                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) \bar{v}^s(q) \gamma^\nu (g_{V } - g_A \gamma^5)    u^r(p)   \\
+                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(q) \bar{v}^s(q) \gamma^\nu g_{V A}   u^r(p)   \\
+                                   &= \frac{1}{3}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} (\gamma^\alpha q_\alpha - m) \gamma^\nu g_{V A}   u^r(p)   \\
+                                   &= \frac{1}{3}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \Tr\left[ \gamma^\mu g_{V A} (\gamma^\alpha q_\alpha - m) \gamma^\nu g_{V A}   (\gamma^\beta p_\beta +m)\right] 
+%                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) \bar{v}^s(p)(-1)\gamma_0 g_{V A} (\gamma^\nu)^\dagger \gamma_0 u^r(p)   \\
+%                                   &= \frac{1}{3}\sum_{s}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} v^s(p) \bar{v}^s(p)(-1)\gamma_0 g_{V A} (\gamma^\nu)^\dagger \gamma_0 u^r(p)   \\
+%                                   &= \frac{1}{3}\sum_{r}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \bar{u}^r(p) \gamma^\mu g_{V A} (\gamma^\alpha q_\alpha - m)(-1)\gamma_0 g_{V A} \gamma_0\gamma^\nu  u^r(p)   \\
+%                                   &= \frac{1}{3}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \sum_{r}\bar{u}^r(p) \gamma^\mu g_{V A} (\gamma^\alpha q_\alpha - m)(-1)\gamma_0 g_{V A} \gamma_0 \gamma^\nu u^r(p)   \\
+%                                   &= \frac{1}{3}g_Z^2 \left(- \eta_{\mu \nu} + \frac{k_\mu k_\nu}{M_Z^2}\right) \Tr\left[\gamma^\mu g_{V A} (\gamma^\alpha q_\alpha - m)(-1)\gamma_0 g_{V A} \gamma_0 \gamma^\nu(\gamma^\beta p_\beta - m) \right]  \\
         \end{align*}
         The $Z$ boson has a mass of $\SI{91.18}{\giga \eV}$ and the electron has mass $\SI{0.510}{\mega \eV}$. 
-        The heaviest fermion is the bottom quark with mass $~ \SI{5}{\giga \eV}$.
-        The $Z$ boson has a much higher mass meaning, that upon decay, the fermions will have high momentum which will dominate the mass terms in the above expression.
+        The heaviest fermion, other than the top quark, is the bottom quark with mass $~ \SI{5}{\giga \eV}$.
+        The $Z$ boson has a much higher mass, meaning, that upon decay, the fermions will have high momentum which will dominate the mass terms in the above expression, hence the fermion mass can be ignored.
+        Now for calculating the trace part gives:
         \begin{align*}
           T^{\mu\nu}  =& \Tr\left[\gamma^\mu g_{VA} (\gamma^\alpha q_\alpha - m) g_{VA} \gamma^\nu (\gamma^\beta p_\beta + m) \right]\\
                    \to & \Tr\left[\gamma^\mu (g_V - g_A \gamma^5) \gamma^\alpha q_\alpha \gamma^\nu (g_V - g_A \gamma^5) \gamma^\beta p_\beta \right]\\
@@ -314,15 +330,15 @@
                       =& g_V^2 \Tr\left[\gamma^\mu  \gamma^\alpha \gamma^\nu \gamma^\beta \right]q_\alpha p_\beta + g_A^2 \Tr\left[\gamma^\mu \gamma^\alpha \gamma^\nu \gamma^\beta  \right]q_\alpha  p_\beta - 8 i g_A g_V q_\alpha p_\beta \epsilon^{\beta \mu \alpha \nu} \\
                       =& (g_V^2 + g_A^2)\Tr\left[\gamma^\mu  \gamma^\alpha \gamma^\nu \gamma^\beta \right]q_\alpha p_\beta  - 8 i g_A g_V q_\alpha p_\beta \epsilon^{\beta \mu \alpha \nu} \\
                       =& 4 (g_V^2 + g_A^2)\left(\eta^{\mu \alpha} \eta^{\nu \beta} + \eta^{\mu\beta}  \eta^{\alpha \nu} - \eta^{\mu\nu}  \eta^{\alpha\beta}\right) q_\alpha p_\beta  - 8 i g_A g_V q_\alpha p_\beta \epsilon^{\beta \mu \alpha \nu} \\
-                      =& 4 (g_V^2 + g_A^2)\left( q_\mu p_\nu +  q_\nu p_\mu - \eta^{\mu\nu}  q_\alpha p^\alpha\right)   - 8 i g_A g_V q_\alpha p_\beta \epsilon^{\beta \mu \alpha \nu} \\
+                      =& 4 (g_V^2 + g_A^2)\left( q_\mu p_\nu +  q_\nu p_\mu - \eta^{\mu\nu}  q_\alpha p^\alpha\right)   - 8 i g_A g_V q_\alpha p_\beta \epsilon^{\beta \mu \alpha \nu}
         \end{align*}
         Note the identity given in the question seems to be missing a factor of $4$.
-        The second term in $T^{\mu \nu}$ is antisymmetric in $\mu$ and $\nu$, but the bracketed terms in $|\bar{\mathcal{M}}|$ are symmetric in $\mu$ and $\nu$, therefore the $\epsilon$ term in $T^{\mu\nu}$ can be ignored.
+        The second term in $T^{\mu \nu}$ is antisymmetric in $\mu$ and $\nu$, but the bracketed terms in $|\bar{\mathcal{M}}|^2$ are symmetric in $\mu$ and $\nu$, therefore the $\epsilon$ term in $T^{\mu\nu}$ can be ignored.
         \begin{align*}
           |\bar{\mathcal{M}}|^2 = \frac{1}{3} g_Z^2 \left(\eta_{\mu} + \frac{k_\mu k_\nu }{M_Z^2}\right) (g_V^2 + g_A^2)\left( q_\mu p_\nu +  q_\nu p_\mu - \eta^{\mu\nu}  q_\alpha p^\alpha\right)
         \end{align*}
       \item
-        The folowing table contains the data:
+        The folowing table contains the data.
         \begin{table}[!h]
           \centering
           \begin{tabular}{l c c c c}
@@ -336,7 +352,7 @@
             \bottomrule
           \end{tabular}
         \end{table}
-        The top quark has a mass ~$\SI{170}{\giga \eV}$ while the $Z$ boson's mass is only around $\SI{90}{\giga \eV}$ making the decay impossible.
+        The top quark has a mass ~$\SI{170}{\giga \eV}$ while the $Z$ boson's mass is only around $\SI{90}{\giga \eV}$ making the decay impossible--mass/energy will not be conserved.
       \item
         First the constant $g_Z$ is required:
         \begin{equation*}
@@ -362,6 +378,7 @@
                                 &= \frac{M_Z}{4 \pi } g_Z^2 (g_V^2 + g_A^2) \\
                                 &= \SI{0.2892457556}{\giga \eV}
         \end{align*}
+        And similarly for the down quarks.
         \begin{align*}
           \Gamma(Z \to d \bar{d}) 
                                 &= 3 \times \frac{1}{2 M_Z}\int \frac{1}{32 \pi^2} d\Omega \frac{4 g_Z^2 M_Z^2}{3} (g_V^2 + g_A^2) \\
@@ -369,17 +386,18 @@
                                 &= \SI{0.372583}{\giga \eV}
         \end{align*}
       \item
-        The total decay width is:
+        The total decay width is, taking into account the generations, but ignoring the top quark:
         \begin{equation*}
-          \Gamma_\text{total} = 3 \Gamma(Z \to e^+ e^-) + 3 \Gamma(Z \to \nu \bar{\nu}) + \Gamma(Z \to u \bar{u}) + 2 / 3 \Gamma(Z \to d \bar{d}) = \SI{2.45}{\giga \eV}
+          \Gamma_\text{total} = 3 \Gamma(Z \to e^+ e^-) + 3 \Gamma(Z \to \nu \bar{\nu}) + 2 \Gamma(Z \to u \bar{u}) +  3 \Gamma(Z \to d \bar{d}) = \SI{2.45}{\giga \eV}
         \end{equation*}
       \item
-        The lifetime of the $Z_0$ boson will be:
+        The lifetime of the $Z_0$ boson will inversely proportional to the decay width or:
         \begin{equation*}
           \frac{\hbar}{\Gamma_{\text{total}}} = \SI{2.6833e-25}{\second}
         \end{equation*}
+        Which comes from the Heisenberg uncertainty principle.
       \item
-        The branching ratios are:
+        The branching ratios are, blindly plugging in numbers:
         \begin{equation*}
           B(Z \to e^+ e^-) = 3.44 \%
         \end{equation*}
@@ -392,6 +410,8 @@
         \begin{equation*}
           B(Z \to d \bar{d}) =  15.19\%
         \end{equation*}
+        Which are all pretty close to the experimental values.
+        For example $B(Z \to e^+ e^-) = 3.3632$.
     \end{enumerate}
 \end{enumerate}
 \end{document}

@@ -82,8 +82,6 @@
 \usepackage{array}
 
 
-
-
 \begin{document}
 \thispagestyle{empty}
 
@@ -93,13 +91,49 @@
   \item
     \begin{enumerate}
       \item
+        This is a straight-forward and rather mindless not very insightful calculation as far as I can tell, but please correct me if I am wrong.
+        Expanding the sum of correlation functions:
         \begin{align*}
           & C(a, b) + C(a', b) + C(a, b') - C(a', b')\\
         = & p(\text{agree}|a, b) - p(\text{disagree}|a, b) + p(\text{agree}|a', b) - p(\text{disagree}|a', b)\\
           & \qquad + p(\text{agree}|a, b') - p(\text{disagree}|a, b') - p(\text{agree}|a', b') + p(\text{disagree}|a', b')\\
         = & p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b')  + p(\text{disagree}|a', b')\\
-          & \qquad  - (p(\text{disagree}|a, b) + p(\text{disagree}|a', b)+ p(\text{disagree}|a, b') + p(\text{agree}|a', b'))\\
+          & \qquad  - (p(\text{disagree}|a, b) + p(\text{disagree}|a, b') + p(\text{disagree}|a', b) + p(\text{agree}|a', b'))
+%        = & 2 p(\text{agree}|a, b) + 2 p(\text{agree}|a', b) + 2 p(\text{agree}|a, b')  + 2 p(\text{disagree}|a', b') - 4\\
+%        = & 2 p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b') + \\
+%          & \qquad  - (p(\text{disagree}|a, b') + p(\text{disagree}|a', b) + 2 p(\text{agree}|a', b')) \\
+%        = & 2 p(\text{agree}|a', b) + 2 p(\text{agree}|a, b') + \\
+%          & \qquad  - (2 p(\text{disagree}|a, b) + 2 p(\text{agree}|a', b')) \\
+%        = & 2 p(\text{agree}|a, b) + 2 p(\text{agree}|a, b') + \\
+%          & \qquad  - (2 p(\text{disagree}|a', b) + 2 p(\text{agree}|a', b')) \\
+%        = & 2 p(\text{agree}|a, b')  + 2 p(\text{disagree}|a', b')\\
+%          & \qquad  - (2 p(\text{disagree}|a, b) + 2 p(\text{disagree}|a', b))\\
+%        = & 2 p(\text{agree}|a, b')  - 2 p(\text{agree}|a', b')\\
+%          & \qquad  - (2 p(\text{disagree}|a, b) + 2 p(\text{disagree}|a', b))\\
         \end{align*}
+        %Circular? arguments for days.
+%        \begin{align*}
+%            - p(\text{agree}|a', b) -  p(\text{agree}|a, b') + p(\text{disagree}|a, b) +  p(\text{agree}|a', b')) \le 1\\
+%             p(\text{disagree}|a', b) -  p(\text{agree}|a, b') - p(\text{agree}|a, b) +  p(\text{agree}|a', b')) \le 1
+%        \end{align*}
+%        \begin{align*}
+%          & p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 3\\
+%          & p(\text{agree}|a, b) - p(\text{agree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 3\\
+%          \\
+%          & p(\text{agree}|a, b) + p(\text{agree}|a', b) - p(\text{disagree}|a, b') - p(\text{agree}|a', b') \le 1\\
+%          & - p(\text{agree}|a, b) - p(\text{agree}|a', b) + p(\text{disagree}|a, b') + p(\text{agree}|a', b') \ge -1\\
+%          & - p(\text{agree}|a', b') - p(\text{agree}|a, b') + p(\text{disagree}|a', b) + p(\text{agree}|a, b) \ge -1\\
+%          & p(\text{disagree}|a', b') - p(\text{agree}|a, b') + p(\text{disagree}|a', b) -  p(\text{diagree}|a, b) \ge -1\\
+%          & p(\text{disagree}|a, b') - p(\text{agree}|a', b') + p(\text{disagree}|a, b) -  p(\text{diagree}|a', b) \ge -1\\
+%          & p(\text{disagree}|a', b') + p(\text{disagree}|a, b') - p(\text{agree}|a', b) - p(\text{disagree}|a, b) \ge -1\\
+%          \\
+%          & -p(\text{agree}|a, b) - p(\text{agree}|a', b) + p(\text{disagree}|a, b') + p(\text{agree}|a', b') \ge -1\\
+%          & p(\text{disagree}|a, b) + p(\text{disagree}|a', b) - p(\text{agree}|a, b') - p(\text{disagree}|a', b') \ge -1\\
+%        \end{align*}
+%        \begin{align*}
+%          &- p(\text{agree}|a, b) - p(\text{agree}|a', b) + p(\text{disagree}|a, b') + p(\text{agree}|a', b') \ge - 1\\
+%          &- p(\text{agree}|a', b) - p(\text{agree}|a, b) + p(\text{disagree}|a', b') + p(\text{agree}|a, b') \ge - 1\\
+%        \end{align*}
         Now, notice:
         \begin{align*}
           1 &= \frac{1}{4} (1) + \frac{1}{4} (1) + \frac{1}{4} (1)  + \frac{1}{4}(1)  \\
@@ -115,31 +149,222 @@
         \end{equation*}
         Or:
         \begin{equation*}
-          - 1 \ge - p(\text{disagree}|a, b) - p(\text{disagree}|a', b) - p(\text{disagree}|a, b') - p(\text{agree}|a', b')
+          - p(\text{disagree}|a, b) - p(\text{disagree}|a', b) - p(\text{disagree}|a, b') - p(\text{agree}|a', b') \le -1
         \end{equation*}
         And also:
-
         \begin{align*}
-%         p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 3
-          1 \le p(\text{disagree}|a, b) + p(\text{disagree}|a', b) + p(\text{disagree}|a, b') + p(\text{agree}|a', b') \le 4
+         p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 3
         \end{align*}
-        Clearly:
+        And adding these two inequalities clearly gives:
         \begin{align*}
           & C(a, b) + C(a', b) + C(a, b') - C(a', b')\\
         = & p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b')  + p(\text{disagree}|a', b')\\
-          & \qquad  - (p(\text{disagree}|a, b) + p(\text{disagree}|a', b)+ p(\text{disagree}|a, b') + p(\text{agree}|a', b')\\
+          & \qquad  - (p(\text{disagree}|a, b) + p(\text{disagree}|a, b') + p(\text{disagree}|a', b) + p(\text{agree}|a', b')\\
       \le & 2
         \end{align*}
-        For the lower bound:
-        The 
+%        For the lower bound, the only way I can think (after a very short period of thought) of is putting a lower bound on the inequality Bell inequality.
+%        We have:
+%        \begin{align*}
+%                          & p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 3\\
+%          \Leftrightarrow & (1 - p(\text{disagree}|a, b)) + (1 - p(\text{disagree}|a', b)) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 3\\
+%          \Leftrightarrow & -p(\text{disagree}|a, b)  - p(\text{disagree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 1 \\
+%          \Leftrightarrow & -p(\text{disagree}|a', b')  - p(\text{disagree}|a, b') + p(\text{agree}|a', b) + p(\text{disagree}|a, b) \le 1 \\
+%          \Leftrightarrow & p(\text{disagree}|a', b') + p(\text{disagree}|a, b') - p(\text{agree}|a', b) - p(\text{disagree}|a, b) \ge -1
+%        \end{align*}
+%        And:
+%        \begin{align*}
+%          \Leftrightarrow & p(\text{disagree}|a', b') + p(\text{disagree}|a, b') - p(\text{agree}|a', b) - p(\text{disagree}|a, b) \ge -1
+%        \end{align*}
+%        \begin{align*}
+%          & C(a, b) + C(a', b) + C(a, b') - C(a', b')\\
+%        = & (1 - p(\text{disagree}|a, b)) + (1 - p(\text{disagree}|a', b)) + (1 - p(\text{disagree}|a, b'))  + (1 - p(\text{agree}|a', b'))\\
+%          & \qquad  - ((1 - p(\text{agree}|a, b)) + (1 - p(\text{agree}|a', b)) + (1 - p(\text{agree}|a, b')) + (1 - p(\text{disagree}|a', b')))
+%        \end{align*}
+%        \begin{align*}
+%          & C(a, b) + C(a', b) + C(a, b') - C(a', b')\\
+%        = & p(\text{agree}|a, b) - p(\text{disagree}|a, b) + p(\text{agree}|a', b) - p(\text{disagree}|a', b)\\
+%          & \qquad + p(\text{agree}|a, b') - p(\text{disagree}|a, b') - p(\text{agree}|a', b') + p(\text{disagree}|a', b')\\
+%        = & p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b')  + p(\text{disagree}|a', b')\\
+%          & \qquad  - (p(\text{disagree}|a, b) + p(\text{disagree}|a, b') + p(\text{disagree}|a', b) + p(\text{agree}|a', b'))
+%        \end{align*}
+%        Notice that:
+%        \begin{align*}
+%          & -2 \le C(a, b) + C(a', b) + C(a, b') - C(a', b') = 
+%              2 p(\text{agree}|a, b) + 2 p(\text{agree}|a', b) + 2 p(\text{agree}|a, b')  + 2 p(\text{disagree}|a', b') - 4\\
+%              \Leftrightarrow &
+%          2 \le 2 p(\text{agree}|a, b) + 2 p(\text{agree}|a', b) + 2 p(\text{agree}|a, b')  + 2 p(\text{disagree}|a', b') \\
+%              \Leftrightarrow &
+%           1 \le p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b')  + p(\text{disagree}|a', b') \\
+%        \end{align*}
+%        \begin{align*}
+%          \frac{p(\text{agree},a, b')}{p(a, b')} + \frac{p(\text{disagree},a', b')}{p(a', b')}
+%        \end{align*}
+%        \begin{align}
+%                          & p(\text{agree}|a', b') + p(\text{agree}|a, b') + p(\text{agree}|a', b) + p(\text{disagree}|a, b) \le 3\nonumber\\
+%          \Leftrightarrow & (1 - p(\text{disagree}|a', b')) + p(\text{agree}|a, b') + p(\text{agree}|a', b) + (1 - p(\text{agree}|a, b)) \le 3\\
+%          \Leftrightarrow & - p(\text{disagree}|a', b') + p(\text{agree}|a, b') + p(\text{agree}|a', b) - p(\text{agree}|a, b) \le 1\nonumber\\
+%          \Leftrightarrow & p(\text{disagree}|a', b') - p(\text{agree}|a, b') - p(\text{agree}|a', b) + p(\text{agree}|a, b) \ge - 1 \nonumber\\
+%          \Leftrightarrow & (1 - p(\text{agree}|a', b')) - (1 - p(\text{disagree}|a, b')) \nonumber\\
+%                          & \qquad - (1 - p(\text{disagree}|a', b)) + (1 - p(\text{disagree}|a, b)) \ge - 1 \nonumber\\
+%          \Leftrightarrow & - p(\text{agree}|a', b') +  p(\text{disagree}|a, b')) + p(\text{disagree}|a', b)) - p(\text{disagree}|a, b) \ge - 1 
+%        \end{align}
+%        \begin{align*}
+%          & p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 3\\
+%          & p(\text{agree}|a, b) + p(\text{agree}|a', b) - p(\text{disagree}|a, b') - p(\text{agree}|a', b') \le 1\\
+%          & - p(\text{agree}|a, b)  - p(\text{agree}|a', b) - p(\text{agree}|a, b') - p(\text{disagree}|a', b') \ge -3
+%        \end{align*}
+%        \begin{align*}
+%          & p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \le 3\\
+%          & p(\text{agree}|a', b) + p(\text{agree}|a, b) + p(\text{agree}|a', b') + p(\text{disagree}|a, b') \le 3\\
+%%          & p(\text{agree}|a, b') + p(\text{agree}|a', b') + p(\text{agree}|a, b) + p(\text{disagree}|a', b) \le 3\\
+%        \end{align*}
+%      \item
+%        And:
+%        \begin{align}
+%          - p(\text{disagree}|a, b) - p(\text{disagree}|a', b) - p(\text{disagree}|a, b') - p(\text{agree}|a', b') \le -1
+%        \end{align}
+%        \begin{align*}
+%          &p(\text{agree}|a', b) + p(\text{agree}|a, b) + p(\text{agree}|a', b') + p(\text{disagree}|a, b') \le 3\\
+%          &- p(\text{agree}|a', b) - p(\text{agree}|a, b) - p(\text{agree}|a', b') - p(\text{disagree}|a, b') \ge - 3
+%        \end{align*}
+%        Taking inspiration from the next case:
+%        \begin{align*}
+%          C(a, b) &= p(\text{agree}| a, b) - p(\text{disagree}|a , b)
+%                  &= p(\text{agree}| a, b) - p(\text{disagree}|a , b)
+%        \end{align*}
+        For the other inequality, notice that we are free to rename the labels $+$ and $-$, and in particular only for $B$, therefore:
+        \begin{equation*}
+          p(\text{agree}|a , b) = p(++|a,b) + p(--|a,b) \to  p(+-|a,b) + p(-+|a,b) = p(\text{disagree}|a , b)
+        \end{equation*}
+        And similarly:
+        \begin{equation*}
+          p(\text{disagree}|a , b) \to p(\text{agree}|a , b)
+        \end{equation*}
+        Therefore:
+        \begin{equation*}
+          p(\text{agree}|a, b) + p(\text{agree}|a', b) + p(\text{agree}|a, b') + p(\text{disagree}|a', b') \ge 1
+        \end{equation*}
+        And also:
+        \begin{align*}
+         - p(\text{disagree}|a, b) - p(\text{disagree}|a', b) - p(\text{disagree}|a, b') - p(\text{agree}|a', b') \ge -2 
+        \end{align*}
+        And adding these gives:
+        And adding these two inequalities clearly gives:
+        \begin{align*}
+           C(a, b) + C(a', b) + C(a, b') - C(a', b')
+      \ge  -2
+        \end{align*}
+        so that:
+        \begin{align*}
+           | C(a, b) + C(a', b) + C(a, b') - C(a', b')| \le 2
+        \end{align*}
+      \item
+        Imagine that $A$ and $B$ share a maximally entangeled state:
+        \begin{equation*}
+          \left| \psi \right\rangle = \frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)
+        \end{equation*}
+        Say that for $a$, A measures the state in the $\left\{\left|0\right\rangle, \left|1\right\rangle\right\}$ basis, and if the $a'$ measurement is selected $A$ measures in the basis $\left\{\left|+\right\rangle, \left|-\right\rangle\right\}$.
+        And B measures in the basis $\left\{\left|b_0\right\rangle, \left|b_1\right\rangle\right\}$ if performing measurement $b$ and in the basis $\left\{\left|b'_0\right\rangle, \left|b'_1\right\rangle\right\}$ for the measurement $b'$.
+        Without loss of generality take B's bases to be:
+        \begin{align*}
+          \left|b_0\right\rangle = \cos \theta \left|0\right\rangle + \sin \theta \left|1\right\rangle\\
+          \left|b_1\right\rangle = -\sin \theta \left|0\right\rangle + \cos \theta \left|1\right\rangle
+        \end{align*}
+        and the basis rotated in the opposite direction.
+        \begin{align*}
+          \left|b'_0\right\rangle = \cos \theta \left|0\right\rangle - \sin \theta \left|1\right\rangle\\
+          \left|b'_1\right\rangle = \sin \theta \left|0\right\rangle + \cos \theta \left|1\right\rangle
+        \end{align*}
+        From here we can calculate the probablilties that they agree and disagre:
+        \begin{align*}
+          p(\text{agree} | a, b) &= |(\left\langle 0 \right| \otimes \left\langle b_0 \right|)\left|\psi\right\rangle|^2\\
+                                 &\qquad + |(\left\langle 1 \right| \otimes \left\langle b_1 \right|)\left|\psi\right\rangle|^2\\
+                                 &= |(\left\langle 0 \right| \otimes (\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|))\frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+                                 &\qquad + |(\left\langle 1 \right| \otimes (-\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|))\frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+                                 &= \frac{1}{2}|(\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|)\left(\left| 0 \right \rangle\right)|^2\\
+                                 &\qquad + \frac{1}{2}|(-\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|)\left(\left|1\right \rangle\right)|^2\\
+                                 &= \frac{1}{2}\cos^2 \theta + \frac{1}{2}\cos^2 \theta \\
+                                 &= \cos^2 \theta
+        \end{align*}
+        And:
+        \begin{align*}
+          p(\text{disagree} | a, b) 
+%                                 &= |(\left\langle 0 \right| \otimes \left\langle b_1 \right|)\left|\psi\right\rangle|^2\\
+%                                 &\qquad + |(\left\langle 1 \right| \otimes \left\langle b_0 \right|)\left|\psi\right\rangle|^2\\
+%                                 &= |(\left\langle 0 \right| \otimes (-\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|))\frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+%                                 &\qquad + |(\left\langle 1 \right| \otimes (\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|))\frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+%                                 &= \frac{1}{2}|(-\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|)\left(\left| 0 \right \rangle\right)|^2\\
+%                                 &\qquad + \frac{1}{2}|(\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|)\left(\left|1\right \rangle\right)|^2\\
+%                                 &= \frac{1}{2}\sin^2 \theta + \frac{1}{2}\sin^2 \theta \\
+%                                 &= \sin^2 \theta
+                                  = 1 - \cos^2 \theta= \sin^2 \theta
+        \end{align*}
+        Similarly for:
+        \begin{align*}
+          p(\text{agree} | a, b') 
+%                                 &= |(\left\langle 0 \right| \otimes \left\langle b_0 \right|)\left|\psi\right\rangle|^2\\
+%                                 &\qquad + |(\left\langle 1 \right| \otimes \left\langle b_1 \right|)\left|\psi\right\rangle|^2\\
+%                                 &= |(\left\langle 0 \right| \otimes (\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|))\frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+%                                 &\qquad + |(\left\langle 1 \right| \otimes (-\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|))\frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+%                                 &= \frac{1}{2}|(\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|)\left(\left| 0 \right \rangle\right)|^2\\
+%                                 &\qquad + \frac{1}{2}|(-\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|)\left(\left|1\right \rangle\right)|^2\\
+%                                 &= \frac{1}{2}\cos^2 \theta + \frac{1}{2}\cos^2 \theta \\
+                                 &= \cos^2 \theta
+        \end{align*}
+        since the states have the same $\sin$ and $\cos$ dependence, and only differ by minus signs in front.
+        \begin{align*}
+          p(\text{agree} | a', b) &= |(\left\langle + \right| \otimes \left\langle b_0 \right|)\left|\psi\right\rangle|^2\\
+                                 &\qquad + |(\left\langle - \right| \otimes \left\langle b_1 \right|)\left|\psi\right\rangle|^2\\
+%                                 &= |(\left\langle - \right| \otimes (\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|))\frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+                                 &= |(\frac{1}{\sqrt{2}}(\left\langle 0 \right| + \left\langle 1 \right|)\otimes \left\langle b_0 \right|)\left|\psi\right\rangle|^2\\
+                                 &\qquad + |(\frac{1}{\sqrt{2}}(\left\langle 0 \right| - \left\langle 1 \right|)\otimes \left\langle b_1 \right|)\left|\psi\right\rangle|^2\\
+                                 &= \frac{1}{4}|( (\left\langle 0 \right| + \left\langle 1 \right|)\otimes (\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|))\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+                                 &\qquad + \frac{1}{4} |((\left\langle 0 \right| - \left\langle 1 \right|) \otimes (-\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|))\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+                                 &= \frac{1}{4}|( (\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|))\left(\left| 0 \right \rangle + \left|1\right \rangle\right)|^2\\
+                                 &\qquad + \frac{1}{4} |((-\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|))\left(\left| 0 \right \rangle - \left|1\right \rangle\right)|^2\\
+                                 &= \frac{1}{4}(\cos \theta + \sin \theta )^2 + \frac{1}{4}(- \cos \theta - \sin \theta)^2\\
+                                 &= \frac{1}{2}(1 + \sin \theta \cos \theta)
+        \end{align*}
+        And also:
+        \begin{align*}
+          p(\text{disagree} | a', b) = p(\text{agree} | a', b)
+                                 = \frac{1}{2}(1 - \sin \theta \cos \theta)
+        \end{align*}
+        And for the last term:
+        \begin{align*}
+          p(\text{agree} | a', b') 
+                                 &= |(\left\langle + \right| \otimes \left\langle b'_0 \right|)\left|\psi\right\rangle|^2\\
+                                 &\qquad + |(\left\langle - \right| \otimes \left\langle b'_1 \right|)\left|\psi\right\rangle|^2\\
+%                                 &= |(\left\langle - \right| \otimes (\cos \theta \left\langle 0\right| + \sin \theta \left\langle1\right|))\frac{1}{\sqrt{2}}\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+                                 &= |(\frac{1}{\sqrt{2}}(\left\langle 0 \right| + \left\langle 1 \right|)\otimes \left\langle b_0' \right|)\left|\psi\right\rangle|^2\\
+                                 &\qquad + |(\frac{1}{\sqrt{2}}(\left\langle 0 \right| - \left\langle 1 \right|)\otimes \left\langle b_1' \right|)\left|\psi\right\rangle|^2\\
+                                 &= \frac{1}{4}|( (\left\langle 0 \right| + \left\langle 1 \right|)\otimes (\cos \theta \left\langle 0\right| - \sin \theta \left\langle1\right|))\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+                                 &\qquad + \frac{1}{4} |((\left\langle 0 \right| - \left\langle 1 \right|) \otimes (\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|))\left(\left| 00 \right \rangle + \left|11\right \rangle\right)|^2\\
+                                 &= \frac{1}{4}|( (\cos \theta \left\langle 0\right| - \sin \theta \left\langle1\right|))\left(\left| 0 \right \rangle + \left|1\right \rangle\right)|^2\\
+                                 &\qquad + \frac{1}{4} |((\sin\theta \left\langle 0\right| + \cos\theta \left\langle1\right|))\left(\left| 0 \right \rangle - \left|1\right \rangle\right)|^2\\
+                                 &= \frac{1}{4}(\cos \theta - \sin \theta )^2 + \frac{1}{4}(\cos \theta - \sin \theta)^2\\
+                                 &= \frac{1}{2}(1 - 2 \sin \theta \cos\theta)
+        \end{align*}
+        Therefore:
+        \begin{equation*}
+          C(a, b) = \cos^2\theta - \sin^2\theta
+        \end{equation*}
+        And combining the other terms give:
+        \begin{align*}
+          C(a,b) + C('a,b) + C(a,b') - C(a',b') &= 2(\cos^2\theta - \sin^2 \theta) + 4 \sin \theta \cos \theta\\
+                                                &= 2 (\cos (2 \theta) + \sin (2\theta)) \\
+                                                &= 2 \sqrt{2} \sin(2 \theta)
+        \end{align*}
+        Which clearly takes a maximum value of $2 \sqrt{2}$.
       \item
         By definition of conditional probablility:
         \begin{align*}
                            & P(A | a, b, B, \lambda) =\frac{ P(A, B | a, b , \lambda)}{P(B | a, b, \lambda)} \\
-           \Leftrightarrow & P(A | a, \lambda) = \frac{ P(A, B | a, b \lambda)}{P(B |b, \lambda)} \\
-           \Leftrightarrow & P(A | a, \lambda) P(B |b, \lambda) = P(A, B | a, b \lambda)
+           \Leftrightarrow & P(A | a, \lambda) = \frac{ P(A, B | a, b, \lambda)}{P(B |b, \lambda)} \\
+           \Leftrightarrow & P(A | a, \lambda) P(B |b, \lambda) = P(A, B | a, b, \lambda)
         \end{align*}
       \item
+        And using this to determine the correlation function gives:
         \begin{align*}
           C(a,b) &= \int d\lambda p(\lambda) (p(\text{agree} | a, b, \lambda) - p(\text{disagree} | a, b, \lambda))\\
                  &= \int d\lambda p(\lambda) (p(+, + | a, b, \lambda) + p(-, - | a, b, \lambda) - p(+, -| a, b, \lambda) - p(-, +| a, b, \lambda))\\
@@ -188,6 +413,7 @@
           0 \le \left|\bar{A}(a, \lambda)\right| \le 1
         \end{equation*}
       \item
+        Now we add the two and hence get:
         \begin{align*}
           & |C(a,b) + C(a,b')| + |C(a',b) - C(a',b')|\\
           \leq & \int d\lambda p(\lambda) \left|\bar{B}(b, \lambda) + \bar{B}(b', \lambda)\right| + \int d\lambda p(\lambda) \left|\bar{B}(b, \lambda) - \bar{B}(b', \lambda)\right|\\
@@ -226,6 +452,44 @@
     \end{enumerate}
   \item
     \begin{enumerate}
+      \item
+        The defnition of realists and operationalists is a bit blurred and varies amongst realists and operationalists.
+        Infact realists and operationalists tend to define the other camp in a way that benefits their own viewpoint.
+        Realists believe that the state of the system and the wave function or real and physical.
+        This can run into problems of interpretation like an electron both having up and down spin at the same time.
+        The realist way around this is that a measurement actually alters the physical system and the state that it is in.
+        In this way, the only way to actually tell what state a system is in is by performing a measurement to make the state into a definite state, thus the world that we observe only has definite values.
+        However, realists still believe that before the measurement the particle actually was in a superposition, whereas an operationalist would not even consider anything about the particle before the measurement.
+        An example of an interpretation that leans more to realist philosophies is De-Broglie Bohm mechanics where the position of the particle is real and completely deterministic.
+        The problem with the De-Broglie Bohm model is that it results in a non-local theory which is problematic.
+
+        The main concept about operationalism is that the world only exists through our observations of it.
+        Thus an operationalist does not care about what is going on behind the scenes and is only concerned with fitting patterns/a curve to make a model for predictions.
+        The Copenhagen interpretation is one that falls more in the operationalist camp, although it is a bit blurred between the camps.
+        The key to the Copenhagen interpretation is purely that it assigns probabilities to measurements and check that these proababilities agree with measurements.
+        The Copenhagen interpretation views qunatum mechanics as intrinscally non-deterministic theory, which is desirable is some senses.
+
+        In typical operationalist interpretations there is some wave function or some mathematical object that describes the state of the system from which we can extract information about measurements, but there is no sense in which the system is in all of the states of measurement outcomes--such a question makes no sense to an operationalist.
+        These interpretations say that the measurment is what realizes the system.
+        Operationalist interpretations can make one feel uncomfortable, it makes no sense to talk about the spin of an electron until a measurement is made, there is no sense for a direction of the electron's spin until one has actually observed.
+        This goes deeper in the fact it makes no sense to talk about the presence an electron until it is actually measured so one has the natural question of where did the electron come from?
+        This argument might be able to be pushed further back to what started an observation that made the universe present? 
+        And if there is no answer to this, why did the universe exist in its early stages when there was no sense of an observer and hence how did the universe get to its present state.
+        Operationalist views do not try to answer these questions in a deep way, but just say that the measurement actualized the electron, which is a pure fact that one cannot argue about.
+
+        Personally, I lie in the realist camp.
+        I believe there is definitely real stuff behind the scenes and to progress further in science we should understand the real stuff going on in the backgroud.
+        Something that came up in our tutorial discussion was whether realists or operationalists made more progress.
+        This is a difficult question to answer, but looking at history, whenever there has been a block in progress of science, it has typically been realists that have triumphed.
+        A great example of this is the breakthrough by Nicolaus Copernicus viewing the sun as the center of the solar system.
+        Before Copericus, astronomers had amazingly complicated models of the motion of planets in the solar system that predicted the motion of planets correctly.
+        Making progress based on these models was close to impossible and it took a realist to see this.
+        However, people who are more inclined to operationalists ideaologies seem to make progress faster because their progress is more quantifiable.
+
+        I do not have a model that I am really comfortable with.
+        Quantum theory is inherently a theory about measurement, but there has been no proper way to describe measurements in an interpretation to my knowledge.
+        As far as an ideal interpretation for Quantum Mechanics, I am not particularly happy with any and I do not believe that a bigger theory like quantum gravity will solve the problems of QM, like the measurement problem. 
+        I think the solution has to be found purely at the more restricted case of pure quantum mechanics.
     \end{enumerate}
 \end{enumerate}
 \end{document}

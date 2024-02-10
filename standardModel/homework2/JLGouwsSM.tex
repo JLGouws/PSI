@@ -1,0 +1,280 @@
+\documentclass[12pt,a4]{article}
+\usepackage{physics, amsmath,amsfonts,amsthm,amssymb, mathtools,steinmetz, gensymb, siunitx}	% LOADS USEFUL MATH STUFF
+\usepackage{xcolor,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=45pt, top=20pt, right=45pt, bottom=45pt ,a4paper]{geometry} 				% ADJUSTS PAGE
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots,wrapfig}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs,multirow}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{listings}
+\usepackage{slashed}
+\usepackage{tikz-feynman}
+ \lstset{
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{$\rho$}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+\DeclareMathOperator{\sign}{sgn}
+
+\usetikzlibrary{decorations.text, calc}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usepgfplotslibrary{fillbetween}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\usepackage{hyperref}
+
+%\usepackage[style= ACM-Reference-Format, maxbibnames=6, minnames=1,maxnames = 1]{biblatex}
+%\addbibresource{references.bib}
+
+
+\hypersetup{pdfborder={0 0 0},colorlinks=true,linkcolor=black,urlcolor=cyan,}
+\allowdisplaybreaks
+%\hypersetup{
+%
+%    colorlinks=true,
+%
+%    linkcolor=blue,
+%
+%    filecolor=magenta,      
+%
+%    urlcolor=cyan,
+%
+%    pdftitle={An Example},
+%
+%    pdfpagemode=FullScreen,
+%
+%    }
+%}
+
+\title{
+\textsc{Standard Model Homework 2}
+}
+\author{\textsc{J L Gouws}
+}
+\date{\today
+\\[1cm]}
+
+
+
+\usepackage{graphicx}
+\usepackage{array}
+
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle
+
+This homework is a bit rough, but I am submitting it anyway for feedback.
+\begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        The kinteic term is simply the covariant derivative sandwiched between the field and its dirac conjugate.
+        \begin{equation*}
+          \mathcal{L}_{\nu_R, \text{kin}} = i\bar{\nu}_R \slashed{D} \nu_R
+        \end{equation*}
+      \item
+        The right handed neutrino must mix with a left handed lepton.
+        Thus, there will be a $\bar{l}_L$ factor which brings with it a hypercharge of $+\frac{1}{2}$.
+        And the neutrino has no charge, so the higgs part needs a charge of $-1/2$ or equivalently a $\tilde{h}$ is required.
+        \begin{equation*}
+          \bar{l}_L Y_\nu \tilde \nu_R
+        \end{equation*}
+      \item
+        The term $\bar{f}^i_{c}$ would have the same hypercharge as the normal fermion $f$, and so the term would not be gauge invariant.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item
+        This is just simply expanding out the definitions:
+        \begin{equation*}
+          \bar{\nu}_{R, c} = \left(C \nu_R^*\right)^\dagger \gamma^0 =  \nu_R^T C^\dagger \gamma^0
+        \end{equation*}
+      \item
+        This is some simple algebra:
+        \begin{align*}
+          \frac{\partial}{\partial x^i} \frac{1}{2} x_k \tensor{A}{^k_j} x^j &= \frac{1}{2} \left(\frac{\partial}{\partial x^i}  x_k \right) \tensor{A}{^k_j} x^j + \frac{1}{2}  x^j \tensor{A}{^k_j} \left(\frac{\partial}{\partial x^i} x^j \right)\\
+                                                                             &= \frac{1}{2} \delta_{ik} \tensor{A}{^k_j} x^j + \frac{1}{2}  x_k \tensor{A}{^k_j} \delta^{j}_{i}\\
+                                                                             &= \frac{1}{2} \tensor{A}{^i_j} x^j + \frac{1}{2}  x_k \tensor{A}{^k_i} \\
+                                                                             &= \frac{1}{2} x_j \tensor{A}{^j_i}  + \frac{1}{2}  x_k \tensor{A}{^k_i} \\
+%                                                                             &= \frac{1}{2} \tensor{A}{^i_j} x^j + \frac{1}{2}  x_k \tensor{A}{^k_i} \\
+%                                                                             &= \frac{1}{2} \tensor{A}{^i_j} x^j + \frac{1}{2}  \tensor{A}{^i_k}x^k  \\
+                                                                             &= x_j\tensor{A}{^i_j} 
+        \end{align*}
+        Where in the second last line the fact that $A$ is symmetric was used.
+        And in matrix form this is:
+        \begin{equation*}
+          \nabla \frac{1}{2} x^T A x = x^TA
+        \end{equation*}
+      \item
+        Here I derive the Euler Lagrange equations for the $\nu_R$ field in the usual way done in classical mechanics.
+        \begin{align*}
+           &   \frac{\partial}{\partial \nu_R} \left(-\bar{l}_L Y_\nu \tilde{h}\nu_R - \frac{1}{2} \bar{\nu}_{R, c} M_m \nu_R\right) \\
+          =& -\bar{l}_L Y_\nu \tilde{h} - \frac{\partial}{\partial \nu_R} \left( \frac{1}{2} \nu_R^T C^\dagger \gamma^0 M_m \nu_R\right)\\
+          =& -\bar{l}_L Y_\nu \tilde{h} - \nu_R^T C^\dagger \gamma^0 M_m\\
+          =& -\bar{l}_L Y_\nu \tilde{h} - \bar{\nu}_{R,C} M_m
+        \end{align*}
+        Since $C^\dagger \gamma^0 M_m$ is a symmetrix matrix.
+        And:
+        \begin{equation*}
+          \frac{\partial}{\partial \partial_\mu{\nu_R}} \left(-\bar{l}_L Y_\nu \tilde{h}\nu_R - \frac{1}{2} \bar{\nu}_{R, c} M_m \nu_R\right)
+        \end{equation*}
+        Therefore:
+        \begin{align*}
+           \bar{l}_L Y_\nu \tilde{h} + \bar{\nu}_{R,C} M_m =0
+        \end{align*}
+        Is the desired Euler-Lagrange equation.
+      \item
+        It follows imidiately from the above equation that:
+        \begin{align*}
+          \bar{\nu}_{R,C} = -\bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1}
+        \end{align*}
+        And similarly:
+        \begin{align*}
+                          & \bar{\nu}_{R,C} = -\bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1}\\
+          \Leftrightarrow & \nu_R^T C^\dagger \gamma^0 = -\bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1}\\
+%          \Leftrightarrow & -\nu_R^T C^\dagger = -\bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1}\gamma^0\\
+%          \Leftrightarrow & \nu_R^T C^\dagger = \bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1}\gamma^0\\
+%          \Leftrightarrow & C^\dagger \nu_R^T  = \bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1}\gamma^0\\
+          \Leftrightarrow & \gamma^0 C \nu_R = -  [M_m ]^{-1} \tilde{h}^T Y_\nu^T \gamma^0 l_L^*\\
+          \Leftrightarrow &  - C \nu_R = - \gamma^0 [M_m ]^{-1} \tilde{h}^T Y_\nu^T \gamma^0 l_L^*\\
+          \Leftrightarrow &  - C \nu_R = -  [M_m ]^{-1} \tilde{h}^T Y_\nu^T \gamma^0 \gamma^0 l_L^*\\
+          \Leftrightarrow &   C \nu_R =  - [M_m ]^{-1} \tilde{h}^T Y_\nu^T  l_L^*\\
+          \Leftrightarrow &    \nu_R =  - C [M_m ]^{-1} \tilde{h}^T Y_\nu^T  l_L^*\\
+          \Leftrightarrow &    \nu_R =  -  [M_m ]^{-1} \tilde{h}^T Y_\nu^T  C l_L^*\\
+          \Leftrightarrow &    \nu_R =  -  [M_m ]^{-1} \tilde{h}^T Y_\nu^T  l_{L, c}
+%          \Leftrightarrow &  - C \nu_R =  [M_m ]^{-1} \tilde{h}^T Y_\nu^T  l_L^*\\
+%          \Leftrightarrow & - C \gamma^0 \nu_R = -  [M_m ]^{-1} \tilde{h}^T Y_\nu^T l_L^*\\
+%          \Leftrightarrow & C \gamma^0 \nu_R =  [M_m ]^{-1} \tilde{h}^T Y_\nu^T l_L^*\\
+%          \Leftrightarrow &  \gamma^0 \nu_R =  C[M_m ]^{-1} \tilde{h}^T Y_\nu^T l_L^*\\
+%          \Leftrightarrow &  - \nu_R =  \gamma^0C[M_m ]^{-1} \tilde{h}^T Y_\nu^T l_L^*\\
+%          \Leftrightarrow &   \nu_R =  -\gamma^0[M_m ]^{-1} \tilde{h}^T Y_\nu^T C l_L^*\\
+%          \Leftrightarrow &   \nu_R =  -\gamma^0[M_m ]^{-1} \tilde{h}^T Y_\nu^T l_{L,c}
+%          \Leftrightarrow & C \nu_R \gamma^0 =  [M_m ]^{-1} \tilde{h}^T Y_\nu^T l_L^*\\
+%          \Leftrightarrow & -\nu_R  =  C[M_m ]^{-1} \tilde{h}^T Y_\nu^T l_L^*\gamma^0\\
+%          \Leftrightarrow & \nu_R  =  -[M_m ]^{-1} \tilde{h}^T Y_\nu^T C l_L^*\gamma^0\\
+%          \Leftrightarrow & \nu_R  =  -[M_m ]^{-1} \tilde{h}^T Y_\nu^T l_{L, c} \gamma^0\\
+%          \Leftrightarrow & \nu_R^T C^\dagger  = \bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} \gamma^0\\
+%          \Leftrightarrow & \nu_R^T = \bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} \gamma^0 C\\
+%          \Leftrightarrow & \nu_R = \left(\bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} \gamma^0 C\right)^T\\
+%          \Leftrightarrow & \nu_R = C \gamma^0 [M_m ]^{-1} \tilde{h}^{T} Y_\nu^T l_L^*     \\
+        \end{align*}
+        Since in the Weyl basis where $C$ has all the nice properties mentioned in the question.
+      \item 
+        Putting the previous results back in the Lagrangian yields:
+        \begin{align*}
+          \mathcal{L} &= - \bar{l}_L Y_\nu \tilde{h} \nu_R - \frac{1}{2} \bar{\nu}_{R,c} M_m \nu_R\\
+                      &= \bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} \tilde{h}^T Y_\nu^T l_{L,c} - \frac{1}{2} \bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} M_m [M_m ]^{-1} \tilde{h}^T Y_\nu^T l_{L,c}\\
+                      &= - \bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} \tilde{h}^T Y_\nu^T l_{L,c} + \frac{1}{2} \bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} \tilde{h}^T Y_\nu^T l_{L,c}\\
+                      &= - \frac{1}{2}\bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} \tilde{h}^T Y_\nu^T l_{L,c} \\
+                      &= - \frac{1}{2}\bar{l}_L Y_\nu \tilde{h} [M_m ]^{-1} \tilde{h}^{\dagger*} Y_\nu^{\dagger*} l_{L,c} \\
+                      &= - \frac{1}{2}\bar{l}_L Y_\nu \tilde{h}  [M_m ]^{-1} \tilde{h}^{\dagger*} Y_\nu^{\dagger*} C l_{L}^* \\
+                      &= - \frac{1}{2}\bar{l}_L Y_\nu \tilde{h}  [M_m ]^{-1} C\left(\tilde{h}^{\dagger} Y_\nu^{\dagger}  l_{L}\right)^* \\
+                      &= - \frac{1}{2}l_L^\dagger\gamma_0 Y_\nu \tilde{h}  [M_m ]^{-1} C\left(\tilde{h}^{\dagger} Y_\nu^{\dagger}  l_{L}\right)^* \\
+                      &= - \frac{1}{2}(l_L Y_\nu^\dagger \tilde{h}^\dagger)^\dagger \gamma^0  [M_m ]^{-1} C\left(\tilde{h}^{\dagger} Y_\nu^{\dagger}  l_{L}\right)^* 
+        \end{align*}
+        Which looks more or less like:
+        \begin{equation*}
+          \mathcal{L} = \bar{\psi} \psi^{C} + h.c.
+        \end{equation*}
+        With:
+        \begin{equation*}
+          \psi = \tilde{h}^\dagger Y^\dagger_\nu l_L
+        \end{equation*}
+        And the mass term ignored.
+      \item
+        Here we take:
+        \begin{equation*}
+          \mathcal{L} = \bar{\psi}^c \psi + h.c.
+        \end{equation*}
+        and set $\tilde{h} = \frac{1}{\sqrt{2}}\left(\begin{matrix} v\\ 0\end{matrix}\right) \Rightarrow \tilde{h}^\dagger = \frac{1}{\sqrt{2}}\left(\begin{matrix} v & 0\end{matrix}\right)$ and $l_L = \left(\begin{matrix} \nu_L\\ e_L\end{matrix}\right)$
+        And carrying out the matrix mulitplication gives:
+        \begin{align*}
+          \tilde{h}^\dagger Y^\dagger_\nu l_L
+               &=  \frac{1}{\sqrt{2}}\left(\begin{matrix} v & 0\end{matrix}\right) Y^\dagger_\nu \left(\begin{matrix} \nu_L\\ e_L\end{matrix}\right)\\
+               &=  \frac{Y^\dagger_\nu v}{\sqrt{2}} \nu_L\\
+               &=  M_\nu \nu_L
+        \end{align*}
+        And similarly:
+        \begin{align*}
+          C \left(\tilde{h}^\dagger Y^\dagger_\nu l_L\right)^*
+               &=  M_\nu^\dagger \nu_{L, c}
+        \end{align*}
+        And puting this in the Lagrangian term corresponding to $\bar{\psi}^{c} \psi$
+        \begin{align*}
+          \mathcal{L} &= - \frac{1}{2} \left(M_\nu^\dagger \nu_{L, c}\right)^\dagger \gamma_0 [M_m ]^{-1} M_\nu \nu_L\\
+                      &= - \frac{1}{2} \left(M_\nu^\dagger\nu_{L, c}\right)^\dagger \gamma_0 [M_m ]^{-1} M_\nu \nu_L\\
+                      &= - \frac{1}{2} \nu_{L, c}^\dagger M_\nu \gamma_0 [M_m ]^{-1} M_\nu \nu_L\\
+                      &= - \frac{1}{2} \nu_{L, c}^\dagger \gamma_0  M_\nu [M_m ]^{-1} M_\nu \nu_L\\
+                      &= - \frac{1}{2} \bar{\nu_{L, c}} M_\nu [M_m ]^{-1} M_\nu \nu_L
+        \end{align*}
+        It therefore follows that:
+        \begin{align*}
+          M= M_\nu [M_m ]^{-1} M_\nu 
+        \end{align*}
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+        Here I simply diagonalize the matrix, noticing that here $M_\nu$ is a pure number:
+        \begin{equation*}
+          \left(
+          \begin{matrix}
+            0 & M_\nu\\
+            M_\nu & M_m
+          \end{matrix}
+          \right)
+        \end{equation*}
+        For which I determine the charachteristic polynomial:
+        \begin{align*}
+          \det
+          \left(
+          \begin{matrix}
+            -\lambda  & M_\nu\\
+            M_\nu & M_m -\lambda
+          \end{matrix}
+          \right) = -\lambda(M_m - \lambda) - M_\nu^2 = \lambda^2 - \lambda M_m - M_\nu^2
+        \end{align*}
+        Which can be solved as a quadratic equation:
+        \begin{align*}
+          M_{\pm} &= \frac{1}{2} \left(M_m \pm \sqrt{M_m^2 - 4 M_\nu^2}\right)\\
+                  &\approx \frac{1}{2} \left(M_m \pm \sqrt{M_m^2} -\frac{1}{2} \frac{4 M_\nu^2}{\sqrt{M_m^2}}\right)\\
+                  &= \frac{1}{2} \left(M_m \pm M_m - 2 \frac{ M_\nu^2}{M_m}\right)\\
+        \end{align*}
+        And hence the heavy neutrino mass is:
+        \begin{equation*}
+          M_+ \approx \frac{1}{2} \left(M_m + M_m - 2 \frac{ M_\nu^2}{M_m}\right) = M_m - \frac{ M_\nu^2}{M_m} \approx M_m
+        \end{equation*}
+        And the light neutrino mass is:
+        \begin{equation*}
+          M_- \approx \frac{1}{2} \left(M_m - M_m + 2 \frac{ M_\nu^2}{M_m}\right) = \frac{ M_\nu^2}{M_m}
+        \end{equation*}
+    \end{enumerate}
+\end{enumerate}
+\end{document}
